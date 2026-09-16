@@ -13,7 +13,6 @@
 * [ Giới thiệu môn học](#gioithieumonhoc)
 * [ Giảng viên hướng dẫn](#giangvien)
 * [ Thành viên nhóm](#thanhvien)
-* [ Bài tập quá trình](#baitapquatrinh)
 * [ Bài tập đồ án](#doan)
 
 
@@ -27,7 +26,7 @@
 
 ## GIẢNG VIÊN HƯỚNG DẪN
 <a name="giangvien"></a>
-* ThS. **Hà Lê Hoài Trung** - *trunghlh@uit.edu.vn*
+* ThS. **Trần Hưng Nghiệp** - *nghiepth@uit.edu.vn*
 
 
 ## THÀNH VIÊN NHÓM
@@ -38,12 +37,8 @@
 | 2      |               |                        |                                                      |                         |
 | 3      |               |                        |                                                      |                         |
 | 4      | 23520588      | Nguyễn Lan Hương       | [Hinno](https://github.com/HinnoNguyen)              | 23520588@gm.uit.edu.vn  |
+| 5      |               |                        |                                                      |                         |
 
-
-## BÀI TẬP QUÁ TRÌNH
-<a name="baitapquatrinh"></a>
-
-*(Đang cập nhật)*
 
 
 ## BÀI TẬP ĐỒ ÁN
