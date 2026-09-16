@@ -33,7 +33,7 @@
 <a name="thanhvien"></a>
 | STT    | MSSV          | Họ và Tên              | Github                                               | Email                   |
 |:------:|:-------------:|:-----------------------|:-----------------------------------------------------|:------------------------|
-| 1      |               |                        |                                                      |                         |
+| 1      | 23520003      | Đặng Thiên Ân          | [ThienAn](https://github.com/pentakll4002)           | 23520003@gm.uit.edu.vn  |
 | 2      |               |                        |                                                      |                         |
 | 3      |               |                        |                                                      |                         |
 | 4      | 23520588      | Nguyễn Lan Hương       | [Hinno](https://github.com/HinnoNguyen)              | 23520588@gm.uit.edu.vn  |
