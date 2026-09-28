@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-09-28">
+    <creator>NetworkX 3.7</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <nodes>
+      <node id="Alice" label="Alice" />
+      <node id="Bob" label="Bob" />
+      <node id="Carol" label="Carol" />
+      <node id="Dave" label="Dave" />
+      <node id="Eve" label="Eve" />
+      <node id="Frank" label="Frank" />
+      <node id="Grace" label="Grace" />
+      <node id="Heidi" label="Heidi" />
+      <node id="Ivan" label="Ivan" />
+      <node id="Judy" label="Judy" />
+    </nodes>
+    <edges>
+      <edge source="Alice" target="Bob" id="0" />
+      <edge source="Alice" target="Carol" id="1" />
+      <edge source="Alice" target="Ivan" id="2" />
+      <edge source="Bob" target="Carol" id="3" />
+      <edge source="Bob" target="Dave" id="4" />
+      <edge source="Carol" target="Dave" id="5" />
+      <edge source="Carol" target="Eve" id="6" />
+      <edge source="Dave" target="Frank" id="7" />
+      <edge source="Eve" target="Frank" id="8" />
+      <edge source="Eve" target="Grace" id="9" />
+      <edge source="Frank" target="Grace" id="10" />
+      <edge source="Frank" target="Heidi" id="11" />
+      <edge source="Grace" target="Heidi" id="12" />
+      <edge source="Grace" target="Judy" id="13" />
+      <edge source="Heidi" target="Ivan" id="14" />
+      <edge source="Ivan" target="Judy" id="15" />
+    </edges>
+  </graph>
+</gexf>

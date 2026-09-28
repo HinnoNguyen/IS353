@@ -1,0 +1,74 @@
+Given the 2 datasets:
+
+The toy networks in the attached file toy_edges.txt.
+The Facebook Social Circles (ego-Facebook) dataset
+https://snap.stanford.edu/data/ego-Facebook.html
+Download file: facebook_combined.txt.gz → unzip → facebook_combined.txt
+
+Answer the following questions (see the activity instructions below): 
+
+A. NetworkX:
+
+Basic stats
+Clustering and paths
+Degree-based analysis
+B. Gephi:
+
+Visualize the network and take 2 screenshots (one with full network layout, one zoomed in showing local dense clusters)
+- Submission: 
+
+Zip file with: 
+source code and/or jupyter notebook.
+pdf and/or screenshot of visualization with matplotlib and gephi.
+---
+
+Instruction:
+Part A. Load & Explore (NetworkX)
+Load the graph
+
+import networkx as nx G = nx.read_edgelist("toy_edges.txt", create_using=nx.Graph)
+Basic stats
+
+Number of nodes
+
+Number of edges
+
+Average degree
+
+Density
+
+Number of connected components
+
+Clustering and paths
+
+Average clustering coefficient (nx.average_clustering)
+
+Diameter and average shortest path length (on the largest connected component)
+
+Degree-based analysis
+
+Top 10 nodes by degree
+
+Degree distribution plot (histogram)
+
+Part B. Visualization (Gephi)
+Export your NetworkX graph:
+
+nx.write_gexf(G, "toy_edges.gexf")
+Open the .gexf file in Gephi.
+
+Do the following in Gephi:
+
+Run ForceAtlas2 or Fruchterman–Reingold layout
+
+Color nodes by degree (Partition → degree)
+
+Scale node size by degree or betweenness centrality (Ranking)
+
+(Optional: filter to show largest connected component only)
+
+Take at least 2 clear screenshots of your network visualization:
+
+One with full network layout
+
+One zoomed in showing local dense clusters

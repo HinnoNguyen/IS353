@@ -1,0 +1,19 @@
+# toy_edges.txt -- undirected edge list (one edge per line)
+# Nodes: Alice, Bob, Carol, Dave, Eve, Frank, Grace, Heidi, Ivan, Judy
+# Example structure: two dense clusters bridged by a few ties
+Alice Bob
+Alice Carol
+Bob Carol
+Carol Dave
+Bob Dave
+Eve Frank
+Eve Grace
+Frank Grace
+Grace Heidi
+Frank Heidi
+Carol Eve
+Dave Frank
+Heidi Ivan
+Ivan Judy
+Judy Grace
+Alice Ivan
