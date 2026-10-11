@@ -44,7 +44,9 @@
 ## BÀI TẬP ĐỒ ÁN
 <a name="doan"></a>
 
-### 📌 Đề tài: *(Đang cập nhật)*
+### 📌 Đề tài: A.22 – Building a Simple Graph-Based Question Answering Tool
 
 #### 📖 Giới thiệu đề tài
-*(Đang cập nhật)*
+Công cụ hỏi đáp trên đồ thị mạng xã hội LDBC SNB lưu trong Neo4j: câu hỏi tiếng Anh được LLM mã nguồn mở chuyển thành truy vấn Cypher, chạy trên đồ thị và trả lời bằng văn bản; đánh giá bằng execution accuracy trên bộ câu hỏi tự xây dựng.
+
+Mã nguồn, hướng dẫn chạy và tài liệu: [`DoAn/`](DoAn/README.md)
