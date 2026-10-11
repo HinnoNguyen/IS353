@@ -1,0 +1,12 @@
+# Dữ liệu LDBC tải về (~89 MB) – xem README để tải lại
+data/
+*.tar.zst
+
+# Bí mật
+.env
+
+# Cache và kết quả chạy tạm của LLM
+results/pilot_cache_*.json
+
+# File khóa của Office
+~$*
