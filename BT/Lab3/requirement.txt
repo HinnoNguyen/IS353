@@ -1,0 +1,20 @@
+Use:
+
+Facebook Social Circles (ego-Facebook) dataset:
+https://snap.stanford.edu/data/ego-Facebook.html
+Download file: facebook_combined.txt.gz → unzip → facebook_combined.txt
+Tutorial code: https://colab.research.google.com/drive/1HMGMOxq74rtMhXFC7Y3rhzooqYQUTGb2?usp=sharing
+Answer the following questions: 
+
+Compute degree distribution, clustering, path length, diameter, connected components of the ego-Facebook networks.
+Generate and measure the Gn,p and WS graphs that has similar number of nodes and edges to the ego-Facebook networks.
+Compare the measurements of the ego-Facebook networks and the corresponding Gn,p and WS graphs:
+Present in a table format
+Plot using linear-linear plot and log-log plot
+What models best fit the ego-Facebook networks?
+What can we conclude from the measurements?
+Submission: 
+
+Zip file with: 
+source code and/or jupyter notebook.
+pdf with answers and/or screenshot visualization (if any).
