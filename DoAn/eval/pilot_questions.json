@@ -1,0 +1,62 @@
+[
+  {
+    "id": "Q01",
+    "type": "lookup",
+    "question": "Which city does Alfred Hoffmann live in?",
+    "gold": "MATCH (:Person {firstName:'Alfred', lastName:'Hoffmann'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name"
+  },
+  {
+    "id": "Q02",
+    "type": "lookup",
+    "question": "Which companies does Mahinda Perera work at?",
+    "gold": "MATCH (:Person {firstName:'Mahinda', lastName:'Perera'})-[:WORK_AT]->(c:Company) RETURN c.name"
+  },
+  {
+    "id": "Q03",
+    "type": "aggregation",
+    "question": "Which country has the most people living in it?",
+    "gold": "MATCH (:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name, count(*) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "id": "Q04",
+    "type": "aggregation",
+    "question": "How many people live in the United States?",
+    "gold": "MATCH (:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name:'United_States'}) RETURN count(*)"
+  },
+  {
+    "id": "Q05",
+    "type": "aggregation",
+    "question": "Which forum has the most members?",
+    "gold": "MATCH (f:Forum)-[:HAS_MEMBER]->(:Person) RETURN f.title, count(*) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "id": "Q06",
+    "type": "multi_hop",
+    "question": "At which university do the largest number of Alfred Hoffmann's friends study?",
+    "gold": "MATCH (:Person {firstName:'Alfred', lastName:'Hoffmann'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "id": "Q07",
+    "type": "multi_hop",
+    "question": "How many people are friends of friends of Mahinda Perera, not counting Mahinda Perera or Mahinda Perera's direct friends?",
+    "gold": "MATCH (p:Person {firstName:'Mahinda', lastName:'Perera'})-[:KNOWS*2]-(x:Person) WHERE x <> p AND NOT (p)-[:KNOWS]-(x) RETURN count(DISTINCT x)"
+  },
+  {
+    "id": "Q08",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Alfred Hoffmann and Mahinda Perera?",
+    "gold": "MATCH (a:Person {firstName:'Alfred', lastName:'Hoffmann'}), (b:Person {firstName:'Mahinda', lastName:'Perera'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)"
+  },
+  {
+    "id": "Q09",
+    "type": "temporal",
+    "question": "How many posts did Anupam Reddy create in 2011?",
+    "gold": "MATCH (:Person {firstName:'Anupam', lastName:'Reddy'})<-[:HAS_CREATOR]-(m:Post) WHERE m.creationDate.year = 2011 RETURN count(m)"
+  },
+  {
+    "id": "Q10",
+    "type": "temporal",
+    "question": "Who created the most posts tagged with Muammar Gaddafi in 2011?",
+    "gold": "MATCH (:Tag {name:'Muammar_Gaddafi'})<-[:HAS_TAG]-(m:Post)-[:HAS_CREATOR]->(p:Person) WHERE m.creationDate.year = 2011 RETURN p.firstName, p.lastName, count(m) AS n ORDER BY n DESC LIMIT 1"
+  }
+]
