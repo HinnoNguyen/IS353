@@ -1,0 +1,28 @@
+Use:
+
+Facebook Social Circles (ego-Facebook) dataset:
+https://snap.stanford.edu/data/ego-Facebook.html
+Download file: facebook_combined.txt.gz → unzip → facebook_combined.txt
+Tutorial code: https://colab.research.google.com/drive/1G2xFlIrxwZfxTEqFwl30v4qLGBiXomhA?usp=sharing
+Answer the following questions (at the end of the notebook): 
+
+Compare rankings: What are the top-5 nodes by degree, betweenness, eigenvector, and PageRank? Why do they differ?
+Also answer for the Karate Club graph. Which measure makes the most sense for this social context?
+
+Bridges: Which nodes have high betweenness but not high degree? What role do they play?
+
+Random surfer model: How does teleportation probability alpha (0.50 → 0.95) affect PageRank on the Karate Club graph?
+
+PageRank: In what real-world scenario would you prefer PageRank over eigenvector centrality?
+
+Export the Karate Club graph to Gephi, run PageRank and betweenness there, and take a screenshot of the visualization.
+
+(Optional) Run and answer the above questions on a large real-world dataset, such as the the ego-Facebook graph.
+
+ 
+
+Submission: 
+
+Zip file with: 
+source code and/or jupyter notebook.
+pdf with answers and/or screenshot visualization (if any).
