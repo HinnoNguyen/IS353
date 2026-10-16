@@ -1,0 +1,969 @@
+[
+  {
+    "id": "LK-01-01",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Which city does Djelaludin Zaland live in?",
+    "gold": "MATCH (:Person {firstName: 'Djelaludin', lastName: 'Zaland'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Djelaludin",
+      "lastName": "Zaland"
+    },
+    "answer_preview": [
+      [
+        "Herat"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-02",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "In which city is Chen Zhu located?",
+    "gold": "MATCH (:Person {firstName: 'Chen', lastName: 'Zhu'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Chen",
+      "lastName": "Zhu"
+    },
+    "answer_preview": [
+      [
+        "Guilin"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-03",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Where does Marcelo Dom Pedro II live? Give the city.",
+    "gold": "MATCH (:Person {firstName: 'Marcelo', lastName: 'Dom Pedro II'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Marcelo",
+      "lastName": "Dom Pedro II"
+    },
+    "answer_preview": [
+      [
+        "Campinas"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-04",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Which city does Faisal Qureshi live in?",
+    "gold": "MATCH (:Person {firstName: 'Faisal', lastName: 'Qureshi'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Faisal",
+      "lastName": "Qureshi"
+    },
+    "answer_preview": [
+      [
+        "New_Muslim_Town"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-05",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "In which city is Karthik Khan located?",
+    "gold": "MATCH (:Person {firstName: 'Karthik', lastName: 'Khan'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Karthik",
+      "lastName": "Khan"
+    },
+    "answer_preview": [
+      [
+        "Vadodara"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-06",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Where does Gyula Kovacs live? Give the city.",
+    "gold": "MATCH (:Person {firstName: 'Gyula', lastName: 'Kovacs'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Gyula",
+      "lastName": "Kovacs"
+    },
+    "answer_preview": [
+      [
+        "Veszprém"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-07",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Which city does Kieu Cong Do live in?",
+    "gold": "MATCH (:Person {firstName: 'Kieu Cong', lastName: 'Do'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Kieu Cong",
+      "lastName": "Do"
+    },
+    "answer_preview": [
+      [
+        "Đà_Lạt"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-08",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "In which city is David Murray located?",
+    "gold": "MATCH (:Person {firstName: 'David', lastName: 'Murray'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "David",
+      "lastName": "Murray"
+    },
+    "answer_preview": [
+      [
+        "Bellville"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-09",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Where does Carlos Amenábar live? Give the city.",
+    "gold": "MATCH (:Person {firstName: 'Carlos', lastName: 'Amenábar'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Carlos",
+      "lastName": "Amenábar"
+    },
+    "answer_preview": [
+      [
+        "Temuco"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-01-10",
+    "template_id": "LK-01",
+    "type": "lookup",
+    "question": "Which city does Ayesha Iqbal live in?",
+    "gold": "MATCH (:Person {firstName: 'Ayesha', lastName: 'Iqbal'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "params": {
+      "firstName": "Ayesha",
+      "lastName": "Iqbal"
+    },
+    "answer_preview": [
+      [
+        "Larkana_District"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-01",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Which companies does Emperor of Brazil Machado work at?",
+    "gold": "MATCH (:Person {firstName: 'Emperor of Brazil', lastName: 'Machado'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Emperor of Brazil",
+      "lastName": "Machado"
+    },
+    "answer_preview": [
+      [
+        "Nordeste_Linhas_Aéreas_Regionais"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-02",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "List the companies where Marcelo Santos works.",
+    "gold": "MATCH (:Person {firstName: 'Marcelo', lastName: 'Santos'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Marcelo",
+      "lastName": "Santos"
+    },
+    "answer_preview": [
+      [
+        "Abaeté_Linhas_Aéreas"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-03",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Who are the employers of Esti Mamo Dego?",
+    "gold": "MATCH (:Person {firstName: 'Esti Mamo', lastName: 'Dego'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Esti Mamo",
+      "lastName": "Dego"
+    },
+    "answer_preview": [
+      [
+        "TransAsia_Airways"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-04",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Which companies does Ge Hu work at?",
+    "gold": "MATCH (:Person {firstName: 'Ge', lastName: 'Hu'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Ge",
+      "lastName": "Hu"
+    },
+    "answer_preview": [
+      [
+        "China_Yunnan_Airlines"
+      ],
+      [
+        "Tianjin_Airlines"
+      ],
+      [
+        "China_Cargo_Airlines"
+      ],
+      [
+        "Chongqing_Airlines"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-05",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "List the companies where Jun Kato works.",
+    "gold": "MATCH (:Person {firstName: 'Jun', lastName: 'Kato'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Jun",
+      "lastName": "Kato"
+    },
+    "answer_preview": [
+      [
+        "Air_Next"
+      ],
+      [
+        "Air_Hokkaido"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-06",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Who are the employers of Chau Nguyen?",
+    "gold": "MATCH (:Person {firstName: 'Chau', lastName: 'Nguyen'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Chau",
+      "lastName": "Nguyen"
+    },
+    "answer_preview": [
+      [
+        "Jetstar_Pacific_Airlines"
+      ],
+      [
+        "Vietnam_Airlines"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-07",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Which companies does Burak Koksal work at?",
+    "gold": "MATCH (:Person {firstName: 'Burak', lastName: 'Koksal'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Burak",
+      "lastName": "Koksal"
+    },
+    "answer_preview": [
+      [
+        "Air_Anatolia"
+      ],
+      [
+        "Ankair"
+      ],
+      [
+        "ACT_Airlines"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-08",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "List the companies where Rahul Kapoor works.",
+    "gold": "MATCH (:Person {firstName: 'Rahul', lastName: 'Kapoor'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Rahul",
+      "lastName": "Kapoor"
+    },
+    "answer_preview": [
+      [
+        "TajAir"
+      ],
+      [
+        "Deccan_Aviation"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-09",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Who are the employers of Abby Hassan?",
+    "gold": "MATCH (:Person {firstName: 'Abby', lastName: 'Hassan'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "Abby",
+      "lastName": "Hassan"
+    },
+    "answer_preview": [
+      [
+        "Silverfly_(airline)"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-02-10",
+    "template_id": "LK-02",
+    "type": "lookup",
+    "question": "Which companies does János Mészáros work at?",
+    "gold": "MATCH (:Person {firstName: 'János', lastName: 'Mészáros'})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "params": {
+      "firstName": "János",
+      "lastName": "Mészáros"
+    },
+    "answer_preview": [
+      [
+        "Malév_Hungarian_Airlines"
+      ],
+      [
+        "ABC_Air_Hungary"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-01",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Howard Nguyen study at?",
+    "gold": "MATCH (:Person {firstName: 'Howard', lastName: 'Nguyen'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Howard",
+      "lastName": "Nguyen"
+    },
+    "answer_preview": [
+      [
+        "Ethiopian_Civil_Service_College"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-02",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "What university does John Ahmad attend?",
+    "gold": "MATCH (:Person {firstName: 'John', lastName: 'Ahmad'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "John",
+      "lastName": "Ahmad"
+    },
+    "answer_preview": [
+      [
+        "Rawalpindi_Medical_College"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-03",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "At which university is John Tembo a student?",
+    "gold": "MATCH (:Person {firstName: 'John', lastName: 'Tembo'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "John",
+      "lastName": "Tembo"
+    },
+    "answer_preview": [
+      [
+        "Copperbelt_University"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-04",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Fernanda Souza study at?",
+    "gold": "MATCH (:Person {firstName: 'Fernanda', lastName: 'Souza'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Fernanda",
+      "lastName": "Souza"
+    },
+    "answer_preview": [
+      [
+        "Instituto_Nacional_de_Matemática_Pura_e_Aplicada"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-05",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "What university does Faisal Qureshi attend?",
+    "gold": "MATCH (:Person {firstName: 'Faisal', lastName: 'Qureshi'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Faisal",
+      "lastName": "Qureshi"
+    },
+    "answer_preview": [
+      [
+        "Tameer-e-Nau_Public_College,_Quetta"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-06",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "At which university is Zsolt Kiss a student?",
+    "gold": "MATCH (:Person {firstName: 'Zsolt', lastName: 'Kiss'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Zsolt",
+      "lastName": "Kiss"
+    },
+    "answer_preview": [
+      [
+        "Károli_Gáspár_University_of_the_Reformed_Church_in_Hungary"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-07",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Karim Ambane study at?",
+    "gold": "MATCH (:Person {firstName: 'Karim', lastName: 'Ambane'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Karim",
+      "lastName": "Ambane"
+    },
+    "answer_preview": [
+      [
+        "University_of_Buea"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-08",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "What university does Alim Guliyev attend?",
+    "gold": "MATCH (:Person {firstName: 'Alim', lastName: 'Guliyev'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Alim",
+      "lastName": "Guliyev"
+    },
+    "answer_preview": [
+      [
+        "Azerbaijan_State_Marine_Academy"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-09",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "At which university is Lata Singh a student?",
+    "gold": "MATCH (:Person {firstName: 'Lata', lastName: 'Singh'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Lata",
+      "lastName": "Singh"
+    },
+    "answer_preview": [
+      [
+        "National_Institute_of_Business_Management"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-10",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Hossein Kamkar study at?",
+    "gold": "MATCH (:Person {firstName: 'Hossein', lastName: 'Kamkar'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Hossein",
+      "lastName": "Kamkar"
+    },
+    "answer_preview": [
+      [
+        "Shahrekord_University"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-01",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Luis Alonso born?",
+    "gold": "MATCH (p:Person {firstName: 'Luis', lastName: 'Alonso'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Luis",
+      "lastName": "Alonso"
+    },
+    "answer_preview": [
+      [
+        "1982-12-25"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-02",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Augusto Rodriguez?",
+    "gold": "MATCH (p:Person {firstName: 'Augusto', lastName: 'Rodriguez'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Augusto",
+      "lastName": "Rodriguez"
+    },
+    "answer_preview": [
+      [
+        "1983-08-02"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-03",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is Antonio Fuema's birthday?",
+    "gold": "MATCH (p:Person {firstName: 'Antonio', lastName: 'Fuema'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Antonio",
+      "lastName": "Fuema"
+    },
+    "answer_preview": [
+      [
+        "1986-03-06"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-04",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Michael Li born?",
+    "gold": "MATCH (p:Person {firstName: 'Michael', lastName: 'Li'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Michael",
+      "lastName": "Li"
+    },
+    "answer_preview": [
+      [
+        "1983-04-20"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-05",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Gregorio Manalo?",
+    "gold": "MATCH (p:Person {firstName: 'Gregorio', lastName: 'Manalo'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Gregorio",
+      "lastName": "Manalo"
+    },
+    "answer_preview": [
+      [
+        "1982-10-28"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-06",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is Mirza Kalich Ali's birthday?",
+    "gold": "MATCH (p:Person {firstName: 'Mirza Kalich', lastName: 'Ali'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Mirza Kalich",
+      "lastName": "Ali"
+    },
+    "answer_preview": [
+      [
+        "1989-11-03"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-07",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Akashambatwa Kalaba born?",
+    "gold": "MATCH (p:Person {firstName: 'Akashambatwa', lastName: 'Kalaba'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Akashambatwa",
+      "lastName": "Kalaba"
+    },
+    "answer_preview": [
+      [
+        "1988-03-07"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-08",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Aleksandr Dobrunov?",
+    "gold": "MATCH (p:Person {firstName: 'Aleksandr', lastName: 'Dobrunov'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Aleksandr",
+      "lastName": "Dobrunov"
+    },
+    "answer_preview": [
+      [
+        "1982-02-13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-09",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is Paul Smith's birthday?",
+    "gold": "MATCH (p:Person {firstName: 'Paul', lastName: 'Smith'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Paul",
+      "lastName": "Smith"
+    },
+    "answer_preview": [
+      [
+        "1987-06-16"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-10",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Zhang Chen born?",
+    "gold": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Chen'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Zhang",
+      "lastName": "Chen"
+    },
+    "answer_preview": [
+      [
+        "1983-04-22"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-01",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Which country is the city of Uzhhorod in?",
+    "gold": "MATCH (:City {name: 'Uzhhorod'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Uzhhorod"
+    },
+    "answer_preview": [
+      [
+        "Ukraine"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-02",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "In which country is Hachiōji located?",
+    "gold": "MATCH (:City {name: 'Hachiōji'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Hachiōji"
+    },
+    "answer_preview": [
+      [
+        "Japan"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-03",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Buea is a city of which country?",
+    "gold": "MATCH (:City {name: 'Buea'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Buea"
+    },
+    "answer_preview": [
+      [
+        "Cameroon"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-04",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Which country is the city of Yueyang in?",
+    "gold": "MATCH (:City {name: 'Yueyang'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Yueyang"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-05",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "In which country is Chaohu located?",
+    "gold": "MATCH (:City {name: 'Chaohu'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Chaohu"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-06",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Chernivtsi is a city of which country?",
+    "gold": "MATCH (:City {name: 'Chernivtsi'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Chernivtsi"
+    },
+    "answer_preview": [
+      [
+        "Ukraine"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-07",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Which country is the city of Loikaw in?",
+    "gold": "MATCH (:City {name: 'Loikaw'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Loikaw"
+    },
+    "answer_preview": [
+      [
+        "Burma"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-08",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "In which country is Dehradun located?",
+    "gold": "MATCH (:City {name: 'Dehradun'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Dehradun"
+    },
+    "answer_preview": [
+      [
+        "India"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-09",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Fushun is a city of which country?",
+    "gold": "MATCH (:City {name: 'Fushun'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Fushun"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-05-10",
+    "template_id": "LK-05",
+    "type": "lookup",
+    "question": "Which country is the city of Geelong in?",
+    "gold": "MATCH (:City {name: 'Geelong'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "city": "Geelong"
+    },
+    "answer_preview": [
+      [
+        "Australia"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  }
+]

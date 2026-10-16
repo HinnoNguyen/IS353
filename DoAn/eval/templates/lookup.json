@@ -1,0 +1,67 @@
+[
+  {
+    "template_id": "LK-01",
+    "type": "lookup",
+    "author": "Bảo",
+    "questions": [
+      "Which city does {firstName} {lastName} live in?",
+      "In which city is {firstName} {lastName} located?",
+      "Where does {firstName} {lastName} live? Give the city."
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, count(*) AS k WHERE k = 1 RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "Person -> City, 1 bước. Mỗi người sống ở đúng 1 thành phố."
+  },
+  {
+    "template_id": "LK-02",
+    "type": "lookup",
+    "author": "Bảo",
+    "questions": [
+      "Which companies does {firstName} {lastName} work at?",
+      "List the companies where {firstName} {lastName} works.",
+      "Who are the employers of {firstName} {lastName}?"
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:WORK_AT]->(c:Company) RETURN c.name",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE EXISTS { (p)-[:WORK_AT]->(:Company) } RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "Đáp án dạng danh sách (1–5 công ty). Chỉ chọn người có ít nhất 1 nơi làm."
+  },
+  {
+    "template_id": "LK-03",
+    "type": "lookup",
+    "author": "Bảo",
+    "questions": [
+      "Which university did {firstName} {lastName} study at?",
+      "What university does {firstName} {lastName} attend?",
+      "At which university is {firstName} {lastName} a student?"
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE EXISTS { (p)-[:STUDY_AT]->(:University) } RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "Mỗi người học tối đa 1 trường trong dữ liệu. Chỉ chọn người có STUDY_AT."
+  },
+  {
+    "template_id": "LK-04",
+    "type": "lookup",
+    "author": "Bảo",
+    "questions": [
+      "When was {firstName} {lastName} born?",
+      "What is the date of birth of {firstName} {lastName}?",
+      "What is {firstName} {lastName}'s birthday?"
+    ],
+    "gold": "MATCH (p:Person {firstName: $firstName, lastName: $lastName}) RETURN p.birthday",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, count(*) AS k WHERE k = 1 RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "Đọc thuộc tính của node (kiểu Date), không đi qua cạnh."
+  },
+  {
+    "template_id": "LK-05",
+    "type": "lookup",
+    "author": "Bảo",
+    "questions": [
+      "Which country is the city of {city} in?",
+      "In which country is {city} located?",
+      "{city} is a city of which country?"
+    ],
+    "gold": "MATCH (:City {name: $city})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "candidates": "MATCH (c:City) WHERE EXISTS { (:Person)-[:IS_LOCATED_IN]->(c) } RETURN c.name AS city ORDER BY city",
+    "note": "Bắt đầu từ City (không phải Person). Tên thành phố trong dữ liệu là duy nhất; câu hỏi hiển thị tên tự nhiên (dấu _ thành dấu cách), Cypher gold dùng giá trị thật."
+  }
+]

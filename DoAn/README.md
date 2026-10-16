@@ -68,7 +68,16 @@ python scripts/stats.py      # phải ra 327.588 node và 1.477.965 cạnh
 
 Xem đồ thị: <http://localhost:7474> (user `neo4j`).
 
-**5. Chạy thử baseline B1**
+**5. Sinh bộ câu hỏi từ template**
+
+```bash
+python eval/generate_questions.py                 # mọi loại trong eval/templates/
+python eval/generate_questions.py --type lookup   # chỉ một loại
+```
+
+Template của từng loại nằm trong `eval/templates/<loại>.json` (khuôn mẫu: `lookup.json`). Kết quả ghi vào `eval/questions/<loại>.json`, 10 câu mỗi template, seed cố định nên chạy lại ra đúng bộ câu cũ. Câu bị loại tự động: đáp án rỗng/0, quá 20 dòng, chạy quá 10 s, người trùng họ tên, câu trùng, thực thể đã dùng trong `pilot_questions.json`.
+
+**6. Chạy thử baseline B1**
 
 ```bash
 cp .env.example .env         # rồi điền key của bạn vào .env
