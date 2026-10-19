@@ -1,0 +1,1130 @@
+[
+  {
+    "id": "TM-01-01",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did Ali Lambo create in 2011?",
+    "gold": "MATCH (:Person {firstName: 'Ali', lastName: 'Lambo'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Ali",
+      "lastName": "Lambo",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "120"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-02",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did Ignacio Castillo publish during 2010?",
+    "gold": "MATCH (:Person {firstName: 'Ignacio', lastName: 'Castillo'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2010 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Ignacio",
+      "lastName": "Castillo",
+      "year": 2010
+    },
+    "answer_preview": [
+      [
+        "160"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-03",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "What is the number of posts written by Svetlana Bologan in 2011?",
+    "gold": "MATCH (:Person {firstName: 'Svetlana', lastName: 'Bologan'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Svetlana",
+      "lastName": "Bologan",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-04",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did John Chatterjee create in 2010?",
+    "gold": "MATCH (:Person {firstName: 'John', lastName: 'Chatterjee'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2010 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "John",
+      "lastName": "Chatterjee",
+      "year": 2010
+    },
+    "answer_preview": [
+      [
+        "90"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-05",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did Eugene Moke Bemba publish during 2010?",
+    "gold": "MATCH (:Person {firstName: 'Eugene Moke', lastName: 'Bemba'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2010 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Eugene Moke",
+      "lastName": "Bemba",
+      "year": 2010
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-06",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "What is the number of posts written by Albert Buysse in 2011?",
+    "gold": "MATCH (:Person {firstName: 'Albert', lastName: 'Buysse'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Albert",
+      "lastName": "Buysse",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-07",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did Salma Ahmed create in 2012?",
+    "gold": "MATCH (:Person {firstName: 'Salma', lastName: 'Ahmed'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2012 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Salma",
+      "lastName": "Ahmed",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-08",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did Takeshi Yamada publish during 2011?",
+    "gold": "MATCH (:Person {firstName: 'Takeshi', lastName: 'Yamada'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Takeshi",
+      "lastName": "Yamada",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-09",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "What is the number of posts written by Mirza Kalich Ali in 2012?",
+    "gold": "MATCH (:Person {firstName: 'Mirza Kalich', lastName: 'Ali'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2012 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Mirza Kalich",
+      "lastName": "Ali",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "87"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-01-10",
+    "template_id": "TM-01",
+    "type": "temporal",
+    "question": "How many posts did Ali Diori create in 2011?",
+    "gold": "MATCH (:Person {firstName: 'Ali', lastName: 'Diori'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+    "params": {
+      "firstName": "Ali",
+      "lastName": "Diori",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "96"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-01",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in March 2011?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 3 RETURN count(p)",
+    "params": {
+      "year": 2011,
+      "month": 3,
+      "monthName": "March"
+    },
+    "answer_preview": [
+      [
+        "51"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-02",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in February 2012?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 2 RETURN count(p)",
+    "params": {
+      "year": 2012,
+      "month": 2,
+      "monthName": "February"
+    },
+    "answer_preview": [
+      [
+        "60"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-03",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "What is the number of people who signed up in May 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 5,
+      "monthName": "May"
+    },
+    "answer_preview": [
+      [
+        "52"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-04",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in June 2012?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 6 RETURN count(p)",
+    "params": {
+      "year": 2012,
+      "month": 6,
+      "monthName": "June"
+    },
+    "answer_preview": [
+      [
+        "54"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-05",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in December 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 12 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 12,
+      "monthName": "December"
+    },
+    "answer_preview": [
+      [
+        "57"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-06",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "What is the number of people who signed up in June 2011?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 6 RETURN count(p)",
+    "params": {
+      "year": 2011,
+      "month": 6,
+      "monthName": "June"
+    },
+    "answer_preview": [
+      [
+        "45"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-07",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in April 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 4 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 4,
+      "monthName": "April"
+    },
+    "answer_preview": [
+      [
+        "51"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-08",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in February 2011?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 2 RETURN count(p)",
+    "params": {
+      "year": 2011,
+      "month": 2,
+      "monthName": "February"
+    },
+    "answer_preview": [
+      [
+        "31"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-09",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "What is the number of people who signed up in August 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 8 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 8,
+      "monthName": "August"
+    },
+    "answer_preview": [
+      [
+        "51"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-10",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in September 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 9 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 9,
+      "monthName": "September"
+    },
+    "answer_preview": [
+      [
+        "39"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-01",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum did Chito Reyes join first?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Chito', lastName: 'Reyes'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Chito",
+      "lastName": "Reyes"
+    },
+    "answer_preview": [
+      [
+        "Wall of Salim Ahmed Binalshibh"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-02",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "What was the first forum that Cedric Ako became a member of?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Cedric', lastName: 'Ako'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Cedric",
+      "lastName": "Ako"
+    },
+    "answer_preview": [
+      [
+        "Wall of Rafael Alves"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-03",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum has Otto Herzigová been a member of the longest?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Otto', lastName: 'Herzigová'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Otto",
+      "lastName": "Herzigová"
+    },
+    "answer_preview": [
+      [
+        "Wall of Kamal Aziz"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-04",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum did Anna Kofler join first?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Anna', lastName: 'Kofler'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Anna",
+      "lastName": "Kofler"
+    },
+    "answer_preview": [
+      [
+        "Wall of Rudolf Engel"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-05",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "What was the first forum that Takeshi Sato became a member of?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Takeshi', lastName: 'Sato'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Takeshi",
+      "lastName": "Sato"
+    },
+    "answer_preview": [
+      [
+        "Wall of Bangguo Hu"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-06",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum has Hideo Suzuki been a member of the longest?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Hideo', lastName: 'Suzuki'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Hideo",
+      "lastName": "Suzuki"
+    },
+    "answer_preview": [
+      [
+        "Wall of Ken Kato"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-07",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum did Gyula Laszlo join first?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Gyula', lastName: 'Laszlo'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Gyula",
+      "lastName": "Laszlo"
+    },
+    "answer_preview": [
+      [
+        "Wall of Karl Fischer"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-08",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "What was the first forum that Ayesha Iqbal became a member of?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Ayesha', lastName: 'Iqbal'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Ayesha",
+      "lastName": "Iqbal"
+    },
+    "answer_preview": [
+      [
+        "Wall of Ashok Singh"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-09",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum has Mohammad Ali Hosseini been a member of the longest?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Mohammad Ali', lastName: 'Hosseini'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Mohammad Ali",
+      "lastName": "Hosseini"
+    },
+    "answer_preview": [
+      [
+        "Wall of Alexander Popov"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-03-10",
+    "template_id": "TM-03",
+    "type": "temporal",
+    "question": "Which forum did Arturo Contreras join first?",
+    "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Arturo', lastName: 'Contreras'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+    "params": {
+      "firstName": "Arturo",
+      "lastName": "Contreras"
+    },
+    "answer_preview": [
+      [
+        "Wall of Jorge Arango"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-01",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Paul Breton write in the fourth quarter of 2011?",
+    "gold": "MATCH (:Person {firstName: 'Paul', lastName: 'Breton'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Paul",
+      "lastName": "Breton",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-02",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "In the second quarter of 2010, how many comments did Alexandre Pinzaru make?",
+    "gold": "MATCH (:Person {firstName: 'Alexandre', lastName: 'Pinzaru'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2010 AND c.creationDate.quarter = 2 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Alexandre",
+      "lastName": "Pinzaru",
+      "year": 2010,
+      "quarter": 2,
+      "quarterName": "second"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-03",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "What is the number of comments Karim Akhmadiyeva wrote during Q4 2011?",
+    "gold": "MATCH (:Person {firstName: 'Karim', lastName: 'Akhmadiyeva'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Karim",
+      "lastName": "Akhmadiyeva",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "30"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-04",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Abdul Hameed Sheikh write in the fourth quarter of 2011?",
+    "gold": "MATCH (:Person {firstName: 'Abdul Hameed', lastName: 'Sheikh'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Abdul Hameed",
+      "lastName": "Sheikh",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-05",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "In the first quarter of 2012, how many comments did Fritz Fischer make?",
+    "gold": "MATCH (:Person {firstName: 'Fritz', lastName: 'Fischer'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Fritz",
+      "lastName": "Fischer",
+      "year": 2012,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-06",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "What is the number of comments Ana Alves wrote during Q2 2012?",
+    "gold": "MATCH (:Person {firstName: 'Ana', lastName: 'Alves'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 2 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Ana",
+      "lastName": "Alves",
+      "year": 2012,
+      "quarter": 2,
+      "quarterName": "second"
+    },
+    "answer_preview": [
+      [
+        "31"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-07",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Victor Lim write in the third quarter of 2012?",
+    "gold": "MATCH (:Person {firstName: 'Victor', lastName: 'Lim'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 3 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Victor",
+      "lastName": "Lim",
+      "year": 2012,
+      "quarter": 3,
+      "quarterName": "third"
+    },
+    "answer_preview": [
+      [
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-08",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "In the first quarter of 2011, how many comments did Wei Yang make?",
+    "gold": "MATCH (:Person {firstName: 'Wei', lastName: 'Yang'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Wei",
+      "lastName": "Yang",
+      "year": 2011,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "9"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-09",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "What is the number of comments Antonio Garcia wrote during Q1 2011?",
+    "gold": "MATCH (:Person {firstName: 'Antonio', lastName: 'Garcia'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Antonio",
+      "lastName": "Garcia",
+      "year": 2011,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "19"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-10",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Abhishek Rao write in the first quarter of 2012?",
+    "gold": "MATCH (:Person {firstName: 'Abhishek', lastName: 'Rao'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Abhishek",
+      "lastName": "Rao",
+      "year": 2012,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "54"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-01",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Who did Jose Martinez become friends with in 2012?",
+    "gold": "MATCH (:Person {firstName: 'Jose', lastName: 'Martinez'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Jose",
+      "lastName": "Martinez",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "Francisco",
+        "Sanchez"
+      ],
+      [
+        "Avraham",
+        "Ben-Tzur"
+      ],
+      [
+        "Juan",
+        "Perez"
+      ],
+      [
+        "Angel",
+        "Melaku"
+      ],
+      [
+        "Joseph",
+        "Singh"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-02",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Which people became friends with Philibert Roindefo during 2010?",
+    "gold": "MATCH (:Person {firstName: 'Philibert', lastName: 'Roindefo'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2010 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Philibert",
+      "lastName": "Roindefo",
+      "year": 2010
+    },
+    "answer_preview": [
+      [
+        "Evangelos",
+        "Dionysiou"
+      ],
+      [
+        "Claude",
+        "Aly"
+      ],
+      [
+        "Salim Ahmed",
+        "Binalshibh"
+      ],
+      [
+        "Peter",
+        "Taylor"
+      ],
+      [
+        "Konstantinos",
+        "Antoniou"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-03",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "List the new friends Christos Angello made in 2012.",
+    "gold": "MATCH (:Person {firstName: 'Christos', lastName: 'Angello'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Christos",
+      "lastName": "Angello",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "Stanimir",
+        "Ivanov"
+      ],
+      [
+        "Giovanni",
+        "Bianchi"
+      ],
+      [
+        "Aisso",
+        "Gerima"
+      ],
+      [
+        "Angel",
+        "Melaku"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-04",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Who did Ching Do become friends with in 2012?",
+    "gold": "MATCH (:Person {firstName: 'Ching', lastName: 'Do'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Ching",
+      "lastName": "Do",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "John",
+        "Sheikh"
+      ],
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ],
+      [
+        "Madan Krishna",
+        "Koirala"
+      ],
+      [
+        "Muhammad",
+        "Qureshi"
+      ],
+      [
+        "Alfredo",
+        "Fernandez"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-05",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Which people became friends with Fritz Fischer during 2012?",
+    "gold": "MATCH (:Person {firstName: 'Fritz', lastName: 'Fischer'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Fritz",
+      "lastName": "Fischer",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "Jana",
+        "Kerndlova"
+      ],
+      [
+        "Shweta",
+        "Sharma"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-06",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "List the new friends Ali Lambo made in 2011.",
+    "gold": "MATCH (:Person {firstName: 'Ali', lastName: 'Lambo'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2011 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Ali",
+      "lastName": "Lambo",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "Michal",
+        "Kaminski"
+      ],
+      [
+        "Takeshi",
+        "Yamamoto"
+      ],
+      [
+        "Bruna",
+        "Costa"
+      ],
+      [
+        "Rafael",
+        "Alves"
+      ],
+      [
+        "Eduardo",
+        "Araya"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-07",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Who did Hamani Lambo become friends with in 2011?",
+    "gold": "MATCH (:Person {firstName: 'Hamani', lastName: 'Lambo'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2011 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Hamani",
+      "lastName": "Lambo",
+      "year": 2011
+    },
+    "answer_preview": [
+      [
+        "Jack",
+        "Wilson"
+      ],
+      [
+        "Ammar",
+        "David"
+      ],
+      [
+        "Mario",
+        "Santos"
+      ],
+      [
+        "John",
+        "Wilson"
+      ],
+      [
+        "Jose",
+        "Costa"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-08",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Which people became friends with Werner Muller during 2010?",
+    "gold": "MATCH (:Person {firstName: 'Werner', lastName: 'Muller'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2010 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Werner",
+      "lastName": "Muller",
+      "year": 2010
+    },
+    "answer_preview": [
+      [
+        "Maria",
+        "Alkaios"
+      ],
+      [
+        "David",
+        "Herzigová"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-09",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "List the new friends Gabriela Rodriguez made in 2012.",
+    "gold": "MATCH (:Person {firstName: 'Gabriela', lastName: 'Rodriguez'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Gabriela",
+      "lastName": "Rodriguez",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "Emperor of Brazil",
+        "Oliveira"
+      ],
+      [
+        "Ayesha",
+        "Butt"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-05-10",
+    "template_id": "TM-05",
+    "type": "temporal",
+    "question": "Who did Eugene Moke Bemba become friends with in 2012?",
+    "gold": "MATCH (:Person {firstName: 'Eugene Moke', lastName: 'Bemba'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+    "params": {
+      "firstName": "Eugene Moke",
+      "lastName": "Bemba",
+      "year": 2012
+    },
+    "answer_preview": [
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ],
+      [
+        "Andrei",
+        "Kahnovich"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  }
+]

@@ -5,10 +5,12 @@ Mỗi file eval/templates/<loại>.json là danh sách template gồm:
   questions   : 2–3 cách diễn đạt, chỗ trống {tên_tham_số}
   gold        : Cypher có tham số $tên_tham_số
   candidates  : Cypher trả về các bộ tham số hợp lệ (cột = tên tham số), có ORDER BY để ổn định
+  check       : (tùy chọn) Cypher trả về true khi câu hợp lệ, vd. không đồng hạng ở vị trí đầu
 
 Với mỗi template, script lấy ngẫu nhiên tham số (seed cố định), chạy gold và loại câu theo guideline:
-đáp án rỗng hoặc bằng 0, quá 20 dòng, chạy quá 10 s, người trùng họ tên, câu trùng lặp,
-và thực thể đã dùng trong eval/pilot_questions.json (tránh rò rỉ).
+đáp án rỗng hoặc bằng 0, quá 20 dòng, chạy quá 10 s, người trùng họ tên, đồng hạng (qua check),
+câu trùng lặp, và thực thể đã dùng trong eval/pilot_questions.json (tránh rò rỉ).
+Câu có hai người dùng tham số firstName1/lastName1 và firstName2/lastName2.
 
 Chạy:  python eval/generate_questions.py                 # mọi loại
        python eval/generate_questions.py --type lookup   # một loại
@@ -71,10 +73,14 @@ def run(session, cypher, params=None):
 
 
 def unique_person(session, params):
-    if "firstName" not in params or "lastName" not in params:
-        return True
-    rows = run(session, "MATCH (p:Person {firstName: $firstName, lastName: $lastName}) RETURN count(p)", params)
-    return rows[0][0] == 1
+    for suffix in ("", "1", "2"):
+        first, last = params.get("firstName" + suffix), params.get("lastName" + suffix)
+        if first is None or last is None:
+            continue
+        rows = run(session, "MATCH (p:Person {firstName: $f, lastName: $l}) RETURN count(p)", {"f": first, "l": last})
+        if rows[0][0] != 1:
+            return False
+    return True
 
 
 def reject_reason(rows):
@@ -104,6 +110,8 @@ def generate(session, tpl, banned):
             try:
                 rows = run(session, tpl["gold"], params)
                 reason = reject_reason(rows)
+                if reason is None and "check" in tpl and not run(session, tpl["check"], params)[0][0]:
+                    reason = "check_failed"
             except Exception as e:  # timeout hoặc lỗi Cypher
                 reason = "error_or_timeout"
                 print(f"  {tpl['template_id']} lỗi: {str(e).splitlines()[0][:120]}")

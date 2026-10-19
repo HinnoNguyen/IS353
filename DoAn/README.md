@@ -4,7 +4,7 @@ Nhóm 13 · IS353.R11 · GVHD: ThS. Trần Hưng Nghiệp
 
 Công cụ hỏi đáp trên đồ thị mạng xã hội **LDBC SNB (SF0.1)** lưu trong **Neo4j**: câu hỏi tiếng Anh được LLM mã nguồn mở chuyển thành truy vấn **Cypher**, chạy trên đồ thị và trả lời bằng văn bản. Bài toán được đánh giá như Text-to-Cypher (execution accuracy) với baseline từ đơn giản đến mạnh.
 
-Chi tiết: [proposal v2](docs/SNA-Group13-A.22-GraphQA-Proposal-v2.docx) · phân công & timeline: [Phan_cong_Nhom13_GraphQA.xlsx](docs/Phan_cong_Nhom13_GraphQA.xlsx)
+Chi tiết: [proposal v2](docs/SNA-Group13-A.22-GraphQA-Proposal-v2.docx)
 
 ## Cấu trúc thư mục
 
@@ -75,7 +75,7 @@ python eval/generate_questions.py                 # mọi loại trong eval/temp
 python eval/generate_questions.py --type lookup   # chỉ một loại
 ```
 
-Template của từng loại nằm trong `eval/templates/<loại>.json` (khuôn mẫu: `lookup.json`). Kết quả ghi vào `eval/questions/<loại>.json`, 10 câu mỗi template, seed cố định nên chạy lại ra đúng bộ câu cũ. Câu bị loại tự động: đáp án rỗng/0, quá 20 dòng, chạy quá 10 s, người trùng họ tên, câu trùng, thực thể đã dùng trong `pilot_questions.json`.
+Template của từng loại nằm trong `eval/templates/<loại>.json` (khuôn mẫu: `lookup.json`). Kết quả ghi vào `eval/questions/<loại>.json`, 10 câu mỗi template, seed cố định nên chạy lại ra đúng bộ câu cũ. Câu bị loại tự động: đáp án rỗng/0, quá 20 dòng, chạy quá 10 s, người trùng họ tên, đồng hạng ở vị trí đầu (trường `check` của template), câu trùng, thực thể đã dùng trong `pilot_questions.json`.
 
 **6. Chạy thử baseline B1**
 

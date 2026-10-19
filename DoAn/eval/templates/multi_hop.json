@@ -1,0 +1,69 @@
+[
+  {
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "author": "Bảo",
+    "questions": [
+      "Which country does {firstName} {lastName} live in?",
+      "In what country is {firstName} {lastName} based?",
+      "{firstName} {lastName} lives in which country?"
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, count(*) AS k WHERE k = 1 RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "2 bước Person -> City -> Country. Bẫy: Person không nối thẳng tới Country."
+  },
+  {
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "author": "Bảo",
+    "questions": [
+      "At which university do the largest number of {firstName} {lastName}'s friends study?",
+      "Which university do most of {firstName} {lastName}'s friends attend?",
+      "Among the friends of {firstName} {lastName}, which university has the most students?"
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "check": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) WITH u.name AS name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 2 WITH collect(n) AS top RETURN top[0] >= 2 AND (size(top) = 1 OR top[0] > top[1])",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE COUNT { (p)-[:KNOWS]-(:Person)-[:STUDY_AT]->(:University) } >= 2 RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "KNOWS không chiều + STUDY_AT, rồi lấy lớn nhất. Gom theo tên trường vì có 257 tên trường bị trùng. check: trường đứng đầu có >= 2 người bạn và không đồng hạng."
+  },
+  {
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "author": "Bảo",
+    "questions": [
+      "Which friends of {firstName} {lastName} live in the same city as {firstName} {lastName}?",
+      "Who among {firstName} {lastName}'s friends lives in the same city as them?",
+      "List the friends of {firstName} {lastName} who share their city of residence."
+    ],
+    "gold": "MATCH (p:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE EXISTS { (p)-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) } RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "Mẫu tam giác: bạn bè (KNOWS không chiều) và cùng City. Đáp án dạng danh sách người."
+  },
+  {
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "author": "Bảo",
+    "questions": [
+      "In which countries are the companies that {firstName} {lastName} works for located?",
+      "Which countries are {firstName} {lastName}'s employers based in?",
+      "{firstName} {lastName} works at companies located in which countries?"
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE EXISTS { (p)-[:WORK_AT]->(:Company) } RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "2 bước Person -> Company -> Country. Danh sách quốc gia không trùng (một người có thể làm nhiều công ty cùng nước)."
+  },
+  {
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "author": "Bảo",
+    "questions": [
+      "Which category do most of {firstName} {lastName}'s interests belong to?",
+      "Most of the topics {firstName} {lastName} is interested in fall into which category?",
+      "What is the most common category among {firstName} {lastName}'s interests?"
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "check": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) WITH tc, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 2 WITH collect(n) AS top RETURN top[0] >= 2 AND (size(top) = 1 OR top[0] > top[1])",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE COUNT { (p)-[:HAS_INTEREST]->(:Tag) } >= 2 RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "'Category' = TagClass trực tiếp của tag (HAS_TYPE), không đi lên lớp cha IS_SUBCLASS_OF. check: không đồng hạng."
+  }
+]

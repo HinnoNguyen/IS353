@@ -1,0 +1,1104 @@
+[
+  {
+    "id": "PA-01-01",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Ayesha Butt and Hồ Chí Loan?",
+    "gold": "MATCH (a:Person {firstName: 'Ayesha', lastName: 'Butt'}), (b:Person {firstName: 'Hồ Chí', lastName: 'Loan'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Ayesha",
+      "lastName1": "Butt",
+      "firstName2": "Hồ Chí",
+      "lastName2": "Loan"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-02",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Masao Yamada from Lin Zhu?",
+    "gold": "MATCH (a:Person {firstName: 'Masao', lastName: 'Yamada'}), (b:Person {firstName: 'Lin', lastName: 'Zhu'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Masao",
+      "lastName1": "Yamada",
+      "firstName2": "Lin",
+      "lastName2": "Zhu"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-03",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the minimum number of friendship links needed to connect Victor Antonescu and Wei Chen?",
+    "gold": "MATCH (a:Person {firstName: 'Victor', lastName: 'Antonescu'}), (b:Person {firstName: 'Wei', lastName: 'Chen'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Victor",
+      "lastName1": "Antonescu",
+      "firstName2": "Wei",
+      "lastName2": "Chen"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-04",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Jie Zhang and Ali Lambo?",
+    "gold": "MATCH (a:Person {firstName: 'Jie', lastName: 'Zhang'}), (b:Person {firstName: 'Ali', lastName: 'Lambo'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Jie",
+      "lastName1": "Zhang",
+      "firstName2": "Ali",
+      "lastName2": "Lambo"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-05",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Anura Abeywardena from Nedeljko Bajić Mikulic?",
+    "gold": "MATCH (a:Person {firstName: 'Anura', lastName: 'Abeywardena'}), (b:Person {firstName: 'Nedeljko Bajić', lastName: 'Mikulic'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Anura",
+      "lastName1": "Abeywardena",
+      "firstName2": "Nedeljko Bajić",
+      "lastName2": "Mikulic"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-06",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the minimum number of friendship links needed to connect Nikki Reyes and Nitin Khan?",
+    "gold": "MATCH (a:Person {firstName: 'Nikki', lastName: 'Reyes'}), (b:Person {firstName: 'Nitin', lastName: 'Khan'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Nikki",
+      "lastName1": "Reyes",
+      "firstName2": "Nitin",
+      "lastName2": "Khan"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-07",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Karim Ambane and Abdul Jamil Qureshi?",
+    "gold": "MATCH (a:Person {firstName: 'Karim', lastName: 'Ambane'}), (b:Person {firstName: 'Abdul Jamil', lastName: 'Qureshi'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Karim",
+      "lastName1": "Ambane",
+      "firstName2": "Abdul Jamil",
+      "lastName2": "Qureshi"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-08",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Ajuma Nasenyana Brar from Andrey Aab?",
+    "gold": "MATCH (a:Person {firstName: 'Ajuma Nasenyana', lastName: 'Brar'}), (b:Person {firstName: 'Andrey', lastName: 'Aab'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Ajuma Nasenyana",
+      "lastName1": "Brar",
+      "firstName2": "Andrey",
+      "lastName2": "Aab"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-09",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the minimum number of friendship links needed to connect Pierre Arnaud and Keith Habshush?",
+    "gold": "MATCH (a:Person {firstName: 'Pierre', lastName: 'Arnaud'}), (b:Person {firstName: 'Keith', lastName: 'Habshush'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Pierre",
+      "lastName1": "Arnaud",
+      "firstName2": "Keith",
+      "lastName2": "Habshush"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-10",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Hans Schmidt and Andrius Dukauskaite?",
+    "gold": "MATCH (a:Person {firstName: 'Hans', lastName: 'Schmidt'}), (b:Person {firstName: 'Andrius', lastName: 'Dukauskaite'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Hans",
+      "lastName1": "Schmidt",
+      "firstName2": "Andrius",
+      "lastName2": "Dukauskaite"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-01",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many different shortest friendship paths connect Paul Bologan and Taufik Rafiq?",
+    "gold": "MATCH (a:Person {firstName: 'Paul', lastName: 'Bologan'}), (b:Person {firstName: 'Taufik', lastName: 'Rafiq'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Paul",
+      "lastName1": "Bologan",
+      "firstName2": "Taufik",
+      "lastName2": "Rafiq"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-02",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many distinct shortest chains of friends link Chen Liu to Aurora Cruz?",
+    "gold": "MATCH (a:Person {firstName: 'Chen', lastName: 'Liu'}), (b:Person {firstName: 'Aurora', lastName: 'Cruz'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Chen",
+      "lastName1": "Liu",
+      "firstName2": "Aurora",
+      "lastName2": "Cruz"
+    },
+    "answer_preview": [
+      [
+        "17"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-03",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "Count the shortest friendship paths between Warwick Raymond Akerman and Akira Inoue.",
+    "gold": "MATCH (a:Person {firstName: 'Warwick Raymond', lastName: 'Akerman'}), (b:Person {firstName: 'Akira', lastName: 'Inoue'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Warwick Raymond",
+      "lastName1": "Akerman",
+      "firstName2": "Akira",
+      "lastName2": "Inoue"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-04",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many different shortest friendship paths connect David Agudelo and Mamoon Eshaq 0 Amin?",
+    "gold": "MATCH (a:Person {firstName: 'David', lastName: 'Agudelo'}), (b:Person {firstName: 'Mamoon Eshaq 0', lastName: 'Amin'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "David",
+      "lastName1": "Agudelo",
+      "firstName2": "Mamoon Eshaq 0",
+      "lastName2": "Amin"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-05",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many distinct shortest chains of friends link Jose Carvalho to Ali Koksal?",
+    "gold": "MATCH (a:Person {firstName: 'Jose', lastName: 'Carvalho'}), (b:Person {firstName: 'Ali', lastName: 'Koksal'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Jose",
+      "lastName1": "Carvalho",
+      "firstName2": "Ali",
+      "lastName2": "Koksal"
+    },
+    "answer_preview": [
+      [
+        "6"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-06",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "Count the shortest friendship paths between Alfonso Elizalde and Takeshi Yamada.",
+    "gold": "MATCH (a:Person {firstName: 'Alfonso', lastName: 'Elizalde'}), (b:Person {firstName: 'Takeshi', lastName: 'Yamada'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Alfonso",
+      "lastName1": "Elizalde",
+      "firstName2": "Takeshi",
+      "lastName2": "Yamada"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-07",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many different shortest friendship paths connect Dado Kesovija and Evangelos Alkaios?",
+    "gold": "MATCH (a:Person {firstName: 'Dado', lastName: 'Kesovija'}), (b:Person {firstName: 'Evangelos', lastName: 'Alkaios'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Dado",
+      "lastName1": "Kesovija",
+      "firstName2": "Evangelos",
+      "lastName2": "Alkaios"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-08",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many distinct shortest chains of friends link Bechir Cardinale to Ayesha Ahmed?",
+    "gold": "MATCH (a:Person {firstName: 'Bechir', lastName: 'Cardinale'}), (b:Person {firstName: 'Ayesha', lastName: 'Ahmed'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Bechir",
+      "lastName1": "Cardinale",
+      "firstName2": "Ayesha",
+      "lastName2": "Ahmed"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-09",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "Count the shortest friendship paths between A. C. Bos and Gustavo Arbelaez.",
+    "gold": "MATCH (a:Person {firstName: 'A. C.', lastName: 'Bos'}), (b:Person {firstName: 'Gustavo', lastName: 'Arbelaez'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "A. C.",
+      "lastName1": "Bos",
+      "firstName2": "Gustavo",
+      "lastName2": "Arbelaez"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-02-10",
+    "template_id": "PA-02",
+    "type": "path",
+    "question": "How many different shortest friendship paths connect Pedro Oliveira and Howard Nguyen?",
+    "gold": "MATCH (a:Person {firstName: 'Pedro', lastName: 'Oliveira'}), (b:Person {firstName: 'Howard', lastName: 'Nguyen'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "params": {
+      "firstName1": "Pedro",
+      "lastName1": "Oliveira",
+      "firstName2": "Howard",
+      "lastName2": "Nguyen"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-01",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of A. Budjana and Max Bauer?",
+    "gold": "MATCH (:Person {firstName: 'A.', lastName: 'Budjana'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Max', lastName: 'Bauer'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "A.",
+      "lastName1": "Budjana",
+      "firstName2": "Max",
+      "lastName2": "Bauer"
+    },
+    "answer_preview": [
+      [
+        "Peng",
+        "Zhang"
+      ],
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ],
+      [
+        "K.",
+        "Bose"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-02",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Which people are friends with both Batong Do and Cam Nguyen?",
+    "gold": "MATCH (:Person {firstName: 'Batong', lastName: 'Do'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Cam', lastName: 'Nguyen'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Batong",
+      "lastName1": "Do",
+      "firstName2": "Cam",
+      "lastName2": "Nguyen"
+    },
+    "answer_preview": [
+      [
+        "Anh",
+        "Ha"
+      ],
+      [
+        "Deepak",
+        "Bose"
+      ],
+      [
+        "Jun",
+        "Zhu"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-03",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "List the common friends of Aburizal Tobing and Aafia Khan.",
+    "gold": "MATCH (:Person {firstName: 'Aburizal', lastName: 'Tobing'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Aafia', lastName: 'Khan'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Aburizal",
+      "lastName1": "Tobing",
+      "firstName2": "Aafia",
+      "lastName2": "Khan"
+    },
+    "answer_preview": [
+      [
+        "Eko Maulana",
+        "Irama"
+      ],
+      [
+        "Alexander",
+        "Hleb"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-04",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of Eugene Moke Bemba and Benny Gallagher?",
+    "gold": "MATCH (:Person {firstName: 'Eugene Moke', lastName: 'Bemba'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Benny', lastName: 'Gallagher'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Eugene Moke",
+      "lastName1": "Bemba",
+      "firstName2": "Benny",
+      "lastName2": "Gallagher"
+    },
+    "answer_preview": [
+      [
+        "Andrei",
+        "Kahnovich"
+      ],
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-05",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Which people are friends with both Faisal Qureshi and Abdessalam Ali?",
+    "gold": "MATCH (:Person {firstName: 'Faisal', lastName: 'Qureshi'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Abdessalam', lastName: 'Ali'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Faisal",
+      "lastName1": "Qureshi",
+      "firstName2": "Abdessalam",
+      "lastName2": "Ali"
+    },
+    "answer_preview": [
+      [
+        "Benhalima",
+        "Ferrer"
+      ],
+      [
+        "Rafael",
+        "Magomaev"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-06",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "List the common friends of Bobby Sotto and Jie Zhu.",
+    "gold": "MATCH (:Person {firstName: 'Bobby', lastName: 'Sotto'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Jie', lastName: 'Zhu'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Bobby",
+      "lastName1": "Sotto",
+      "firstName2": "Jie",
+      "lastName2": "Zhu"
+    },
+    "answer_preview": [
+      [
+        "Yang",
+        "Chen"
+      ],
+      [
+        "Bing",
+        "Zheng"
+      ],
+      [
+        "Wei",
+        "Wang"
+      ],
+      [
+        "Li",
+        "Wang"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-07",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of Vinod Sharma and A. Kapoor?",
+    "gold": "MATCH (:Person {firstName: 'Vinod', lastName: 'Sharma'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'A.', lastName: 'Kapoor'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Vinod",
+      "lastName1": "Sharma",
+      "firstName2": "A.",
+      "lastName2": "Kapoor"
+    },
+    "answer_preview": [
+      [
+        "Kunal",
+        "Kapoor"
+      ],
+      [
+        "Arjun",
+        "Anand"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-08",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Which people are friends with both Karim Ambane and Carlos Amenábar?",
+    "gold": "MATCH (:Person {firstName: 'Karim', lastName: 'Ambane'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Carlos', lastName: 'Amenábar'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Karim",
+      "lastName1": "Ambane",
+      "firstName2": "Carlos",
+      "lastName2": "Amenábar"
+    },
+    "answer_preview": [
+      [
+        "Mathieu",
+        "Bemba"
+      ],
+      [
+        "Ali",
+        "Achiou"
+      ],
+      [
+        "Juan",
+        "Perez"
+      ],
+      [
+        "Chris",
+        "Hall"
+      ],
+      [
+        "Jana",
+        "Kerndlova"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-09",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "List the common friends of Asher Mamo and Jose Costa.",
+    "gold": "MATCH (:Person {firstName: 'Asher', lastName: 'Mamo'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Jose', lastName: 'Costa'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Asher",
+      "lastName1": "Mamo",
+      "firstName2": "Jose",
+      "lastName2": "Costa"
+    },
+    "answer_preview": [
+      [
+        "Chris",
+        "du Preez"
+      ],
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ],
+      [
+        "The",
+        "Kunda"
+      ],
+      [
+        "Lukwesa",
+        "Dogg"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-10",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of Priyanka Khan and Constantin Popescu?",
+    "gold": "MATCH (:Person {firstName: 'Priyanka', lastName: 'Khan'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Constantin', lastName: 'Popescu'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Priyanka",
+      "lastName1": "Khan",
+      "firstName2": "Constantin",
+      "lastName2": "Popescu"
+    },
+    "answer_preview": [
+      [
+        "The",
+        "Kunda"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-01",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people can Maria Onopka reach within two friendship steps?",
+    "gold": "MATCH (p:Person {firstName: 'Maria', lastName: 'Onopka'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Maria",
+      "lastName": "Onopka"
+    },
+    "answer_preview": [
+      [
+        "646"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-02",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people are at most two friendship links away from Alejandro Enriquez?",
+    "gold": "MATCH (p:Person {firstName: 'Alejandro', lastName: 'Enriquez'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Alejandro",
+      "lastName": "Enriquez"
+    },
+    "answer_preview": [
+      [
+        "410"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-03",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "Counting friends and friends of friends, how many people is Adriaen Jong connected to?",
+    "gold": "MATCH (p:Person {firstName: 'Adriaen', lastName: 'Jong'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Adriaen",
+      "lastName": "Jong"
+    },
+    "answer_preview": [
+      [
+        "779"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-04",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people can Zhang Zhang reach within two friendship steps?",
+    "gold": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Zhang'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Zhang",
+      "lastName": "Zhang"
+    },
+    "answer_preview": [
+      [
+        "120"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-05",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people are at most two friendship links away from Allu Khan?",
+    "gold": "MATCH (p:Person {firstName: 'Allu', lastName: 'Khan'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Allu",
+      "lastName": "Khan"
+    },
+    "answer_preview": [
+      [
+        "651"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-06",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "Counting friends and friends of friends, how many people is Dimitris Antoniou connected to?",
+    "gold": "MATCH (p:Person {firstName: 'Dimitris', lastName: 'Antoniou'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Dimitris",
+      "lastName": "Antoniou"
+    },
+    "answer_preview": [
+      [
+        "406"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-07",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people can Jose Alonso reach within two friendship steps?",
+    "gold": "MATCH (p:Person {firstName: 'Jose', lastName: 'Alonso'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Jose",
+      "lastName": "Alonso"
+    },
+    "answer_preview": [
+      [
+        "448"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-08",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people are at most two friendship links away from Jimmy Brown?",
+    "gold": "MATCH (p:Person {firstName: 'Jimmy', lastName: 'Brown'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Jimmy",
+      "lastName": "Brown"
+    },
+    "answer_preview": [
+      [
+        "327"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-09",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "Counting friends and friends of friends, how many people is Jun Yamada connected to?",
+    "gold": "MATCH (p:Person {firstName: 'Jun', lastName: 'Yamada'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Jun",
+      "lastName": "Yamada"
+    },
+    "answer_preview": [
+      [
+        "695"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-04-10",
+    "template_id": "PA-04",
+    "type": "path",
+    "question": "How many people can Celso Nascimento reach within two friendship steps?",
+    "gold": "MATCH (p:Person {firstName: 'Celso', lastName: 'Nascimento'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "params": {
+      "firstName": "Celso",
+      "lastName": "Nascimento"
+    },
+    "answer_preview": [
+      [
+        "309"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-01",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "How many friendship steps is Jun Kato from the nearest person living in Ambovombe?",
+    "gold": "MATCH (a:Person {firstName: 'Jun', lastName: 'Kato'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Ambovombe'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Jun",
+      "lastName": "Kato",
+      "city": "Ambovombe"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-02",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "What is the shortest friendship distance from Bacary Diop to anyone who lives in Dum Dum?",
+    "gold": "MATCH (a:Person {firstName: 'Bacary', lastName: 'Diop'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Dum_Dum'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Bacary",
+      "lastName": "Diop",
+      "city": "Dum_Dum"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-03",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "At least how many friendship links separate Chito Reyes from a resident of Fuquan?",
+    "gold": "MATCH (a:Person {firstName: 'Chito', lastName: 'Reyes'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Fuquan'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Chito",
+      "lastName": "Reyes",
+      "city": "Fuquan"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-04",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "How many friendship steps is Marek Kaczmarek from the nearest person living in Wah Cantonment?",
+    "gold": "MATCH (a:Person {firstName: 'Marek', lastName: 'Kaczmarek'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Wah_Cantonment'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Marek",
+      "lastName": "Kaczmarek",
+      "city": "Wah_Cantonment"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-05",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "What is the shortest friendship distance from Ge Hu to anyone who lives in Melbourne?",
+    "gold": "MATCH (a:Person {firstName: 'Ge', lastName: 'Hu'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Melbourne'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Ge",
+      "lastName": "Hu",
+      "city": "Melbourne"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-06",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "At least how many friendship links separate Guillermo Rodriguez from a resident of Pavlodar?",
+    "gold": "MATCH (a:Person {firstName: 'Guillermo', lastName: 'Rodriguez'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Pavlodar'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Guillermo",
+      "lastName": "Rodriguez",
+      "city": "Pavlodar"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-07",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "How many friendship steps is Joao Oliveira from the nearest person living in Kelaniya?",
+    "gold": "MATCH (a:Person {firstName: 'Joao', lastName: 'Oliveira'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Kelaniya'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Joao",
+      "lastName": "Oliveira",
+      "city": "Kelaniya"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-08",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "What is the shortest friendship distance from Shweta Kapoor to anyone who lives in Serang?",
+    "gold": "MATCH (a:Person {firstName: 'Shweta', lastName: 'Kapoor'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Serang'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Shweta",
+      "lastName": "Kapoor",
+      "city": "Serang"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-09",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "At least how many friendship links separate Jun He from a resident of Bender?",
+    "gold": "MATCH (a:Person {firstName: 'Jun', lastName: 'He'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Bender'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "Jun",
+      "lastName": "He",
+      "city": "Bender"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-05-10",
+    "template_id": "PA-05",
+    "type": "path",
+    "question": "How many friendship steps is John Murphy from the nearest person living in Agadez?",
+    "gold": "MATCH (a:Person {firstName: 'John', lastName: 'Murphy'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Agadez'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "params": {
+      "firstName": "John",
+      "lastName": "Murphy",
+      "city": "Agadez"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  }
+]

@@ -1,0 +1,993 @@
+[
+  {
+    "id": "MH-01-01",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Wilson Agudelo live in?",
+    "gold": "MATCH (:Person {firstName: 'Wilson', lastName: 'Agudelo'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Wilson",
+      "lastName": "Agudelo"
+    },
+    "answer_preview": [
+      [
+        "Colombia"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-02",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is Lin Yang based?",
+    "gold": "MATCH (:Person {firstName: 'Lin', lastName: 'Yang'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Lin",
+      "lastName": "Yang"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-03",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Jean-Pierre David lives in which country?",
+    "gold": "MATCH (:Person {firstName: 'Jean-Pierre', lastName: 'David'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Jean-Pierre",
+      "lastName": "David"
+    },
+    "answer_preview": [
+      [
+        "France"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-04",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does S. N. Hall live in?",
+    "gold": "MATCH (:Person {firstName: 'S. N.', lastName: 'Hall'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "S. N.",
+      "lastName": "Hall"
+    },
+    "answer_preview": [
+      [
+        "Burma"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-05",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is R. Joshi based?",
+    "gold": "MATCH (:Person {firstName: 'R.', lastName: 'Joshi'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "R.",
+      "lastName": "Joshi"
+    },
+    "answer_preview": [
+      [
+        "India"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-06",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Andrei Kahnovich lives in which country?",
+    "gold": "MATCH (:Person {firstName: 'Andrei', lastName: 'Kahnovich'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Andrei",
+      "lastName": "Kahnovich"
+    },
+    "answer_preview": [
+      [
+        "Russia"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-07",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Yang Lei live in?",
+    "gold": "MATCH (:Person {firstName: 'Yang', lastName: 'Lei'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Yang",
+      "lastName": "Lei"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-08",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is Anand Rao based?",
+    "gold": "MATCH (:Person {firstName: 'Anand', lastName: 'Rao'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Anand",
+      "lastName": "Rao"
+    },
+    "answer_preview": [
+      [
+        "India"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-09",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Eduardo Gutierrez lives in which country?",
+    "gold": "MATCH (:Person {firstName: 'Eduardo', lastName: 'Gutierrez'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Eduardo",
+      "lastName": "Gutierrez"
+    },
+    "answer_preview": [
+      [
+        "Cuba"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-10",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Pavel Kerndlova live in?",
+    "gold": "MATCH (:Person {firstName: 'Pavel', lastName: 'Kerndlova'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Pavel",
+      "lastName": "Kerndlova"
+    },
+    "answer_preview": [
+      [
+        "Czech_Republic"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-01",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "At which university do the largest number of Arjun Rao's friends study?",
+    "gold": "MATCH (:Person {firstName: 'Arjun', lastName: 'Rao'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Arjun",
+      "lastName": "Rao"
+    },
+    "answer_preview": [
+      [
+        "Sir_M._Visvesvaraya_Institute_of_Technology",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-02",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "Which university do most of Emperor of Brazil Machado's friends attend?",
+    "gold": "MATCH (:Person {firstName: 'Emperor of Brazil', lastName: 'Machado'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Emperor of Brazil",
+      "lastName": "Machado"
+    },
+    "answer_preview": [
+      [
+        "Rio_de_Janeiro_State_University",
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-03",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "Among the friends of Narong Boy, which university has the most students?",
+    "gold": "MATCH (:Person {firstName: 'Narong', lastName: 'Boy'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Narong",
+      "lastName": "Boy"
+    },
+    "answer_preview": [
+      [
+        "Hangzhou_International_School",
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-04",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "At which university do the largest number of Paulo Alves's friends study?",
+    "gold": "MATCH (:Person {firstName: 'Paulo', lastName: 'Alves'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Paulo",
+      "lastName": "Alves"
+    },
+    "answer_preview": [
+      [
+        "Rio_de_Janeiro_State_University",
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-05",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "Which university do most of Zhang Li's friends attend?",
+    "gold": "MATCH (:Person {firstName: 'Zhang', lastName: 'Li'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Zhang",
+      "lastName": "Li"
+    },
+    "answer_preview": [
+      [
+        "Shenyang_Pharmaceutical_University",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-06",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "Among the friends of Michel David, which university has the most students?",
+    "gold": "MATCH (:Person {firstName: 'Michel', lastName: 'David'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Michel",
+      "lastName": "David"
+    },
+    "answer_preview": [
+      [
+        "University_of_the_Basque_Country",
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-07",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "At which university do the largest number of Abhishek Kumar's friends study?",
+    "gold": "MATCH (:Person {firstName: 'Abhishek', lastName: 'Kumar'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Abhishek",
+      "lastName": "Kumar"
+    },
+    "answer_preview": [
+      [
+        "New_Horizon_College_of_Engineering",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-08",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "Which university do most of Arjun Kapoor's friends attend?",
+    "gold": "MATCH (:Person {firstName: 'Arjun', lastName: 'Kapoor'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Arjun",
+      "lastName": "Kapoor"
+    },
+    "answer_preview": [
+      [
+        "Rajiv_Gandhi_University_of_Health_Sciences",
+        "7"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-09",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "Among the friends of Marcelo Oliveira, which university has the most students?",
+    "gold": "MATCH (:Person {firstName: 'Marcelo', lastName: 'Oliveira'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Marcelo",
+      "lastName": "Oliveira"
+    },
+    "answer_preview": [
+      [
+        "Rio_de_Janeiro_State_University",
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-02-10",
+    "template_id": "MH-02",
+    "type": "multi_hop",
+    "question": "At which university do the largest number of János Mészáros's friends study?",
+    "gold": "MATCH (:Person {firstName: 'János', lastName: 'Mészáros'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "János",
+      "lastName": "Mészáros"
+    },
+    "answer_preview": [
+      [
+        "Fulda_University_of_Applied_Sciences",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-01",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Alfred Sorongo Leakey live in the same city as Alfred Sorongo Leakey?",
+    "gold": "MATCH (p:Person {firstName: 'Alfred Sorongo', lastName: 'Leakey'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Alfred Sorongo",
+      "lastName": "Leakey"
+    },
+    "answer_preview": [
+      [
+        "Edward",
+        "Ouma"
+      ],
+      [
+        "Ali",
+        "Brar"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-02",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Claude Radafison's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Claude', lastName: 'Radafison'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Claude",
+      "lastName": "Radafison"
+    },
+    "answer_preview": [
+      [
+        "Claude",
+        "Aly"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-03",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "List the friends of Alec Cheng who share their city of residence.",
+    "gold": "MATCH (p:Person {firstName: 'Alec', lastName: 'Cheng'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Alec",
+      "lastName": "Cheng"
+    },
+    "answer_preview": [
+      [
+        "Bangguo",
+        "Hu"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-04",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Ibrahim Bare Ousmane live in the same city as Ibrahim Bare Ousmane?",
+    "gold": "MATCH (p:Person {firstName: 'Ibrahim Bare', lastName: 'Ousmane'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Ibrahim Bare",
+      "lastName": "Ousmane"
+    },
+    "answer_preview": [
+      [
+        "Abdoulaye",
+        "Djibo"
+      ],
+      [
+        "Ali",
+        "Diori"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-05",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Michel Breton's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Michel', lastName: 'Breton'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Michel",
+      "lastName": "Breton"
+    },
+    "answer_preview": [
+      [
+        "Charles",
+        "David"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-06",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "List the friends of Ernest B Karat who share their city of residence.",
+    "gold": "MATCH (p:Person {firstName: 'Ernest B', lastName: 'Karat'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Ernest B",
+      "lastName": "Karat"
+    },
+    "answer_preview": [
+      [
+        "Chris",
+        "Hall"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-07",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Juan Carlos Alvarez live in the same city as Juan Carlos Alvarez?",
+    "gold": "MATCH (p:Person {firstName: 'Juan Carlos', lastName: 'Alvarez'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Juan Carlos",
+      "lastName": "Alvarez"
+    },
+    "answer_preview": [
+      [
+        "Cristian",
+        "Diaz"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-08",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Leandro Silva's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Leandro', lastName: 'Silva'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Leandro",
+      "lastName": "Silva"
+    },
+    "answer_preview": [
+      [
+        "Sergio",
+        "Machado"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-09",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "List the friends of Volodymyr Kofler who share their city of residence.",
+    "gold": "MATCH (p:Person {firstName: 'Volodymyr', lastName: 'Kofler'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Volodymyr",
+      "lastName": "Kofler"
+    },
+    "answer_preview": [
+      [
+        "Vladimir",
+        "Foxx"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-10",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Marco Agreda live in the same city as Marco Agreda?",
+    "gold": "MATCH (p:Person {firstName: 'Marco', lastName: 'Agreda'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Marco",
+      "lastName": "Agreda"
+    },
+    "answer_preview": [
+      [
+        "Alcides",
+        "Amador"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-01",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "In which countries are the companies that Alberto Alva works for located?",
+    "gold": "MATCH (:Person {firstName: 'Alberto', lastName: 'Alva'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Alberto",
+      "lastName": "Alva"
+    },
+    "answer_preview": [
+      [
+        "Peru"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-02",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "Which countries are Eduardo Araya's employers based in?",
+    "gold": "MATCH (:Person {firstName: 'Eduardo', lastName: 'Araya'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Eduardo",
+      "lastName": "Araya"
+    },
+    "answer_preview": [
+      [
+        "Chile"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-03",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "Jana Kerndlova works at companies located in which countries?",
+    "gold": "MATCH (:Person {firstName: 'Jana', lastName: 'Kerndlova'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Jana",
+      "lastName": "Kerndlova"
+    },
+    "answer_preview": [
+      [
+        "Republic_of_Ireland"
+      ],
+      [
+        "Czech_Republic"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-04",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "In which countries are the companies that Richard Miller works for located?",
+    "gold": "MATCH (:Person {firstName: 'Richard', lastName: 'Miller'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Richard",
+      "lastName": "Miller"
+    },
+    "answer_preview": [
+      [
+        "United_States"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-05",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "Which countries are Bjorn Andersson's employers based in?",
+    "gold": "MATCH (:Person {firstName: 'Bjorn', lastName: 'Andersson'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Bjorn",
+      "lastName": "Andersson"
+    },
+    "answer_preview": [
+      [
+        "Sweden"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-06",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "Priyanka Singh works at companies located in which countries?",
+    "gold": "MATCH (:Person {firstName: 'Priyanka', lastName: 'Singh'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Priyanka",
+      "lastName": "Singh"
+    },
+    "answer_preview": [
+      [
+        "India"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-07",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "In which countries are the companies that Carlos Abascal works for located?",
+    "gold": "MATCH (:Person {firstName: 'Carlos', lastName: 'Abascal'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Carlos",
+      "lastName": "Abascal"
+    },
+    "answer_preview": [
+      [
+        "Mexico"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-08",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "Which countries are Hideki Suzuki's employers based in?",
+    "gold": "MATCH (:Person {firstName: 'Hideki', lastName: 'Suzuki'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Hideki",
+      "lastName": "Suzuki"
+    },
+    "answer_preview": [
+      [
+        "Japan"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-09",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "Abby Hassan works at companies located in which countries?",
+    "gold": "MATCH (:Person {firstName: 'Abby', lastName: 'Hassan'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Abby",
+      "lastName": "Hassan"
+    },
+    "answer_preview": [
+      [
+        "Malaysia"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-04-10",
+    "template_id": "MH-04",
+    "type": "multi_hop",
+    "question": "In which countries are the companies that Eugenio Abascal works for located?",
+    "gold": "MATCH (:Person {firstName: 'Eugenio', lastName: 'Abascal'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+    "params": {
+      "firstName": "Eugenio",
+      "lastName": "Abascal"
+    },
+    "answer_preview": [
+      [
+        "Mexico"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-01",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Which category do most of Gheorghe Tanase's interests belong to?",
+    "gold": "MATCH (:Person {firstName: 'Gheorghe', lastName: 'Tanase'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Gheorghe",
+      "lastName": "Tanase"
+    },
+    "answer_preview": [
+      [
+        "OfficeHolder",
+        "10"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-02",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Most of the topics Sven Andersson is interested in fall into which category?",
+    "gold": "MATCH (:Person {firstName: 'Sven', lastName: 'Andersson'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Sven",
+      "lastName": "Andersson"
+    },
+    "answer_preview": [
+      [
+        "MusicalArtist",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-03",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "What is the most common category among Abraham Dego's interests?",
+    "gold": "MATCH (:Person {firstName: 'Abraham', lastName: 'Dego'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Abraham",
+      "lastName": "Dego"
+    },
+    "answer_preview": [
+      [
+        "Person",
+        "10"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-04",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Which category do most of Fali Sam Nariman's interests belong to?",
+    "gold": "MATCH (:Person {firstName: 'Fali Sam', lastName: 'Nariman'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Fali Sam",
+      "lastName": "Nariman"
+    },
+    "answer_preview": [
+      [
+        "Single",
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-05",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Most of the topics Roberto Rojas is interested in fall into which category?",
+    "gold": "MATCH (:Person {firstName: 'Roberto', lastName: 'Rojas'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Roberto",
+      "lastName": "Rojas"
+    },
+    "answer_preview": [
+      [
+        "OfficeHolder",
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-06",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "What is the most common category among Alexei Barbu's interests?",
+    "gold": "MATCH (:Person {firstName: 'Alexei', lastName: 'Barbu'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Alexei",
+      "lastName": "Barbu"
+    },
+    "answer_preview": [
+      [
+        "OfficeHolder",
+        "6"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-07",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Which category do most of Fritz Muller's interests belong to?",
+    "gold": "MATCH (:Person {firstName: 'Fritz', lastName: 'Muller'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Fritz",
+      "lastName": "Muller"
+    },
+    "answer_preview": [
+      [
+        "Single",
+        "33"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-08",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Most of the topics Carl Becker is interested in fall into which category?",
+    "gold": "MATCH (:Person {firstName: 'Carl', lastName: 'Becker'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Carl",
+      "lastName": "Becker"
+    },
+    "answer_preview": [
+      [
+        "OfficeHolder",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-09",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "What is the most common category among A. Kumar's interests?",
+    "gold": "MATCH (:Person {firstName: 'A.', lastName: 'Kumar'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "A.",
+      "lastName": "Kumar"
+    },
+    "answer_preview": [
+      [
+        "Person",
+        "6"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-05-10",
+    "template_id": "MH-05",
+    "type": "multi_hop",
+    "question": "Which category do most of Yuki Suzuki's interests belong to?",
+    "gold": "MATCH (:Person {firstName: 'Yuki', lastName: 'Suzuki'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "firstName": "Yuki",
+      "lastName": "Suzuki"
+    },
+    "answer_preview": [
+      [
+        "Person",
+        "8"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  }
+]
