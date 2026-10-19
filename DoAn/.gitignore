@@ -10,3 +10,7 @@ results/pilot_cache_*.json
 
 # File khóa của Office
 ~$*
+
+# Tài liệu nội bộ của nhóm (chia sẻ riêng, không đưa lên GitHub)
+docs/Phan_cong_Nhom13_GraphQA.xlsx
+docs/HUONG_DAN_CAI_DAT.md

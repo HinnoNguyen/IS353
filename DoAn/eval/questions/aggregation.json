@@ -1,0 +1,922 @@
+[
+  {
+    "id": "AG-01-01",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Hong Kong?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Hong_Kong'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Hong_Kong"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-02",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in France?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "France"
+    },
+    "answer_preview": [
+      [
+        "14"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-03",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many residents of Bolivia are there in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Bolivia"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-04",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Cuba?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Cuba"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-05",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in New Zealand?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'New_Zealand'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "New_Zealand"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-06",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many residents of Cameroon are there in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cameroon'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Cameroon"
+    },
+    "answer_preview": [
+      [
+        "11"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-07",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Niger?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Niger'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Niger"
+    },
+    "answer_preview": [
+      [
+        "12"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-08",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in Ethiopia?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Ethiopia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Ethiopia"
+    },
+    "answer_preview": [
+      [
+        "14"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-09",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many residents of Ukraine are there in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Ukraine'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Ukraine"
+    },
+    "answer_preview": [
+      [
+        "15"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-10",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Cambodia?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cambodia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Cambodia"
+    },
+    "answer_preview": [
+      [
+        "6"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-01",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "Which city in Afghanistan has the most residents?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Afghanistan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Afghanistan"
+    },
+    "answer_preview": [
+      [
+        "Herat",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-02",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "In United Kingdom, which city do the largest number of people live in?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'United_Kingdom'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "United_Kingdom"
+    },
+    "answer_preview": [
+      [
+        "Bristol",
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-03",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "What is the most populated city of Democratic Republic of the Congo in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Democratic_Republic_of_the_Congo'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Democratic_Republic_of_the_Congo"
+    },
+    "answer_preview": [
+      [
+        "Boma",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-04",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "Which city in Czech Republic has the most residents?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Czech_Republic'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Czech_Republic"
+    },
+    "answer_preview": [
+      [
+        "Hradec_Králové",
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-05",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "In Portugal, which city do the largest number of people live in?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Portugal'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Portugal"
+    },
+    "answer_preview": [
+      [
+        "Mesa",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-06",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "What is the most populated city of Germany in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Germany'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Germany"
+    },
+    "answer_preview": [
+      [
+        "Wedel",
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-07",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "Which city in Taiwan has the most residents?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Taiwan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Taiwan"
+    },
+    "answer_preview": [
+      [
+        "Hsinchu",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-08",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "In Kazakhstan, which city do the largest number of people live in?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Kazakhstan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Kazakhstan"
+    },
+    "answer_preview": [
+      [
+        "Astana",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-09",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "What is the most populated city of Iran in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Iran'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Iran"
+    },
+    "answer_preview": [
+      [
+        "Babol",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-02-10",
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "question": "Which city in Hungary has the most residents?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Hungary'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Hungary"
+    },
+    "answer_preview": [
+      [
+        "Esztergom",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-01",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Aung San Suu Kyi\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Aung_San_Suu_Kyi'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Aung_San_Suu_Kyi"
+    },
+    "answer_preview": [
+      [
+        "152"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-02",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"Islamic Courts Union\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Islamic_Courts_Union'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Islamic_Courts_Union"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-03",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts carry the tag \"Video Killed the Radio Star\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Video_Killed_the_Radio_Star'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Video_Killed_the_Radio_Star"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-04",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Apollo 100\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Apollo_100'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Apollo_100"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-05",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"Carry That Weight\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Carry_That_Weight'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Carry_That_Weight"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-06",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts carry the tag \"Federation of Malaya\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Federation_of_Malaya'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Federation_of_Malaya"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-07",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Big Ones\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Big_Ones'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Big_Ones"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-08",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"William IV of the United Kingdom\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'William_IV_of_the_United_Kingdom'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "William_IV_of_the_United_Kingdom"
+    },
+    "answer_preview": [
+      [
+        "9"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-09",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts carry the tag \"Samoa\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Samoa'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Samoa"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-10",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"The Hurdy Gurdy Man\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'The_Hurdy_Gurdy_Man'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "The_Hurdy_Gurdy_Man"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-01",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Which company in Algeria has the most employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Algeria'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Algeria"
+    },
+    "answer_preview": [
+      [
+        "Star_Aviation",
+        "7"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-02",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Among companies based in Czech Republic, which one employs the largest number of people?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Czech_Republic'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Czech_Republic"
+    },
+    "answer_preview": [
+      [
+        "Travel_Service_Airlines",
+        "10"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-03",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "What is the biggest employer in South Korea, by number of employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'South_Korea'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "South_Korea"
+    },
+    "answer_preview": [
+      [
+        "Eastar_Jet",
+        "6"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-04",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Which company in Liberia has the most employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Liberia'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Liberia"
+    },
+    "answer_preview": [
+      [
+        "Air_Liberia",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-05",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Among companies based in Malta, which one employs the largest number of people?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Malta'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Malta"
+    },
+    "answer_preview": [
+      [
+        "Medavia",
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-06",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "What is the biggest employer in Malaysia, by number of employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Malaysia'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Malaysia"
+    },
+    "answer_preview": [
+      [
+        "Firefly_(airline)",
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-07",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Which company in Sri Lanka has the most employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Sri_Lanka'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Sri_Lanka"
+    },
+    "answer_preview": [
+      [
+        "Aero_Lanka",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-08",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Among companies based in Canada, which one employs the largest number of people?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Canada'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Canada"
+    },
+    "answer_preview": [
+      [
+        "Regional_1",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-09",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "What is the biggest employer in Laos, by number of employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Laos'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Laos"
+    },
+    "answer_preview": [
+      [
+        "Lao_Air",
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-04-10",
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "question": "Which company in Azerbaijan has the most employees?",
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Azerbaijan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "params": {
+      "country": "Azerbaijan"
+    },
+    "answer_preview": [
+      [
+        "Imair_Airlines",
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-01",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people are interested in \"Phil Spector\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Phil_Spector'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Phil_Spector"
+    },
+    "answer_preview": [
+      [
+        "9"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-02",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people list \"Left Behind\" among their interests?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Left_Behind'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Left_Behind"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-03",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "What is the number of people with an interest in \"Color Me Barbra\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Color_Me_Barbra'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Color_Me_Barbra"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-04",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people are interested in \"William Randolph Hearst\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'William_Randolph_Hearst'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "William_Randolph_Hearst"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-05",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people list \"Christopher Lee\" among their interests?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Christopher_Lee'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Christopher_Lee"
+    },
+    "answer_preview": [
+      [
+        "22"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-06",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "What is the number of people with an interest in \"Kaia Kanepi\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Kaia_Kanepi'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Kaia_Kanepi"
+    },
+    "answer_preview": [
+      [
+        "9"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-07",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people are interested in \"Pierre Trudeau\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Pierre_Trudeau'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Pierre_Trudeau"
+    },
+    "answer_preview": [
+      [
+        "29"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-08",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people list \"I Walk the Line\" among their interests?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'I_Walk_the_Line'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "I_Walk_the_Line"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-09",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "What is the number of people with an interest in \"Good Vibrations\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Good_Vibrations'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Good_Vibrations"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-05-10",
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "question": "How many people are interested in \"Brian Eno\"?",
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Brian_Eno'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Brian_Eno"
+    },
+    "answer_preview": [
+      [
+        "8"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  }
+]

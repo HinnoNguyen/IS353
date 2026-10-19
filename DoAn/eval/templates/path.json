@@ -1,0 +1,67 @@
+[
+  {
+    "template_id": "PA-01",
+    "type": "path",
+    "author": "Bảo",
+    "questions": [
+      "What is the length of the shortest friendship path between {firstName1} {lastName1} and {firstName2} {lastName2}?",
+      "How many friendship steps separate {firstName1} {lastName1} from {firstName2} {lastName2}?",
+      "What is the minimum number of friendship links needed to connect {firstName1} {lastName1} and {firstName2} {lastName2}?"
+    ],
+    "gold": "MATCH (a:Person {firstName: $firstName1, lastName: $lastName1}), (b:Person {firstName: $firstName2, lastName: $lastName2}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "candidates": "MATCH (a:Person) WHERE EXISTS { (a)-[:KNOWS]-() } WITH a ORDER BY a.id WITH collect(a) AS people UNWIND range(0, size(people) - 1) AS i WITH people[i] AS a, people[(i * 7 + 13) % size(people)] AS b WHERE a <> b AND NOT EXISTS { (a)-[:KNOWS]-(b) } RETURN a.firstName AS firstName1, a.lastName AS lastName1, b.firstName AS firstName2, b.lastName AS lastName2 ORDER BY lastName1, firstName1",
+    "note": "Chỉ hỏi độ dài (đường ngắn nhất có thể không duy nhất). Cặp người không phải bạn trực tiếp nên đáp án >= 2; cặp không nối được bị loại vì đáp án rỗng."
+  },
+  {
+    "template_id": "PA-02",
+    "type": "path",
+    "author": "Bảo",
+    "questions": [
+      "How many different shortest friendship paths connect {firstName1} {lastName1} and {firstName2} {lastName2}?",
+      "How many distinct shortest chains of friends link {firstName1} {lastName1} to {firstName2} {lastName2}?",
+      "Count the shortest friendship paths between {firstName1} {lastName1} and {firstName2} {lastName2}."
+    ],
+    "gold": "MATCH (a:Person {firstName: $firstName1, lastName: $lastName1}), (b:Person {firstName: $firstName2, lastName: $lastName2}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+    "candidates": "MATCH (a:Person) WHERE EXISTS { (a)-[:KNOWS]-() } WITH a ORDER BY a.id WITH collect(a) AS people UNWIND range(0, size(people) - 1) AS i WITH people[i] AS a, people[(i * 11 + 29) % size(people)] AS b WHERE a <> b AND NOT EXISTS { (a)-[:KNOWS]-(b) } RETURN a.firstName AS firstName1, a.lastName AS lastName1, b.firstName AS firstName2, b.lastName AS lastName2 ORDER BY lastName1, firstName1",
+    "note": "Đếm mọi đường ngắn nhất (allShortestPaths). Ghép cặp khác PA-01 để không lặp thực thể."
+  },
+  {
+    "template_id": "PA-03",
+    "type": "path",
+    "author": "Bảo",
+    "questions": [
+      "Who are the mutual friends of {firstName1} {lastName1} and {firstName2} {lastName2}?",
+      "Which people are friends with both {firstName1} {lastName1} and {firstName2} {lastName2}?",
+      "List the common friends of {firstName1} {lastName1} and {firstName2} {lastName2}."
+    ],
+    "gold": "MATCH (:Person {firstName: $firstName1, lastName: $lastName1})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: $firstName2, lastName: $lastName2}) RETURN DISTINCT m.firstName, m.lastName",
+    "candidates": "MATCH (a:Person)-[:KNOWS]-(m:Person)-[:KNOWS]-(b:Person) WHERE a.id < b.id WITH a, b, count(DISTINCT m) AS k WHERE k <= 5 RETURN a.firstName AS firstName1, a.lastName AS lastName1, b.firstName AS firstName2, b.lastName AS lastName2 ORDER BY lastName1, firstName1, lastName2, firstName2",
+    "note": "Đường đi độ dài 2 qua người trung gian. Đáp án là danh sách 1–5 người trung gian."
+  },
+  {
+    "template_id": "PA-04",
+    "type": "path",
+    "author": "Bảo",
+    "questions": [
+      "How many people can {firstName} {lastName} reach within two friendship steps?",
+      "How many people are at most two friendship links away from {firstName} {lastName}?",
+      "Counting friends and friends of friends, how many people is {firstName} {lastName} connected to?"
+    ],
+    "gold": "MATCH (p:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+    "candidates": "MATCH (p:Person) WITH p.firstName AS firstName, p.lastName AS lastName, collect(p) AS ps WHERE size(ps) = 1 WITH firstName, lastName, ps[0] AS p WHERE EXISTS { (p)-[:KNOWS]-() } RETURN firstName, lastName ORDER BY lastName, firstName",
+    "note": "Tầm với trong 2 bước: gồm bạn trực tiếp và bạn của bạn, không đếm chính người đó, đếm không trùng."
+  },
+  {
+    "template_id": "PA-05",
+    "type": "path",
+    "author": "Bảo",
+    "questions": [
+      "How many friendship steps is {firstName} {lastName} from the nearest person living in {city}?",
+      "What is the shortest friendship distance from {firstName} {lastName} to anyone who lives in {city}?",
+      "At least how many friendship links separate {firstName} {lastName} from a resident of {city}?"
+    ],
+    "gold": "MATCH (a:Person {firstName: $firstName, lastName: $lastName}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: $city}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+    "candidates": "MATCH (a:Person) WHERE EXISTS { (a)-[:KNOWS]-() } WITH a ORDER BY a.id WITH collect(a) AS people MATCH (c:City) WHERE EXISTS { (c)<-[:IS_LOCATED_IN]-(:Person)-[:KNOWS]-() } WITH people, c ORDER BY c.name WITH people, collect(c) AS cities UNWIND range(0, size(people) - 1) AS i WITH people[i] AS a, cities[(i * 11 + 5) % size(cities)] AS c WHERE NOT EXISTS { (a)-[:IS_LOCATED_IN]->(c) } RETURN a.firstName AS firstName, a.lastName AS lastName, c.name AS city ORDER BY lastName, firstName",
+    "note": "Khoảng cách ngắn nhất từ một người tới tập người sống ở một thành phố (lấy min). Người hỏi không sống ở thành phố đó."
+  }
+]

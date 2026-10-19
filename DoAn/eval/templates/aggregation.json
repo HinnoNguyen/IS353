@@ -1,0 +1,69 @@
+[
+  {
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "author": "Bảo",
+    "questions": [
+      "How many people live in {country}?",
+      "What is the number of people living in {country}?",
+      "How many residents of {country} are there in the network?"
+    ],
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: $country}) RETURN count(DISTINCT p) AS total",
+    "candidates": "MATCH (:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) WHERE k.name <> 'Australia' RETURN DISTINCT k.name AS country ORDER BY country",
+    "note": "Đếm trong một nhóm (quốc gia). Person sống ở City nên phải đi City -> Country. Bỏ Australia vì trùng tên với châu lục."
+  },
+  {
+    "template_id": "AG-02",
+    "type": "aggregation",
+    "author": "Bảo",
+    "questions": [
+      "Which city in {country} has the most residents?",
+      "In {country}, which city do the largest number of people live in?",
+      "What is the most populated city of {country} in the network?"
+    ],
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: $country}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "check": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: $country}) WITH c, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 2 WITH collect(n) AS top RETURN size(top) = 2 AND top[0] > top[1]",
+    "candidates": "MATCH (:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) WHERE k.name <> 'Australia' RETURN DISTINCT k.name AS country ORDER BY country",
+    "note": "Lớn nhất trong nhóm. 'Residents' = số Person sống ở thành phố (không phải dân số thật). check: có ít nhất 2 thành phố và không đồng hạng."
+  },
+  {
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "author": "Bảo",
+    "questions": [
+      "How many posts are tagged with \"{tag}\"?",
+      "What is the number of posts that have the tag \"{tag}\"?",
+      "How many posts carry the tag \"{tag}\"?"
+    ],
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: $tag}) RETURN count(DISTINCT p) AS total",
+    "candidates": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag) WHERE t.name =~ '[A-Za-z][A-Za-z0-9_]*' WITH t, count(DISTINCT p) AS k WHERE k >= 2 RETURN t.name AS tag ORDER BY tag",
+    "note": "Chỉ đếm Post (không gồm Comment) theo quy ước 'post(s)'. Chỉ chọn tag có tên gồm chữ, số, dấu _ để câu hỏi hiển thị rõ ràng. Tên tag đặt trong ngoặc kép (nhiều tag là tên bài hát/tác phẩm); chỉ chọn tag có đáp án >= 2."
+  },
+  {
+    "template_id": "AG-04",
+    "type": "aggregation",
+    "author": "Bảo",
+    "questions": [
+      "Which company in {country} has the most employees?",
+      "Among companies based in {country}, which one employs the largest number of people?",
+      "What is the biggest employer in {country}, by number of employees?"
+    ],
+    "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: $country}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+    "check": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: $country}) WITH c, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 2 WITH collect(n) AS top RETURN size(top) = 2 AND top[0] > top[1]",
+    "candidates": "MATCH (:Person)-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) WHERE k.name <> 'Australia' RETURN DISTINCT k.name AS country ORDER BY country",
+    "note": "Company nằm trực tiếp ở Country (khác Person -> City). 'Employees' = số Person có WORK_AT tới công ty. check: ít nhất 2 công ty và không đồng hạng."
+  },
+  {
+    "template_id": "AG-05",
+    "type": "aggregation",
+    "author": "Bảo",
+    "questions": [
+      "How many people are interested in \"{tag}\"?",
+      "How many people list \"{tag}\" among their interests?",
+      "What is the number of people with an interest in \"{tag}\"?"
+    ],
+    "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: $tag}) RETURN count(DISTINCT p) AS total",
+    "candidates": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag) WHERE t.name =~ '[A-Za-z][A-Za-z0-9_]*' WITH t, count(DISTINCT p) AS k WHERE k >= 2 RETURN t.name AS tag ORDER BY tag",
+    "note": "Đếm Person có HAS_INTEREST tới tag (khác AG-03 đếm Post gắn tag). Tên tag đặt trong ngoặc kép (nhiều tag là tên bài hát/tác phẩm); chỉ chọn tag có đáp án >= 2."
+  }
+]
