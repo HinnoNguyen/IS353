@@ -1,0 +1,1872 @@
+[
+  {
+    "id": "LK-03-02",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "What university does John Ahmad attend?",
+    "gold": "MATCH (:Person {firstName: 'John', lastName: 'Ahmad'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "John",
+      "lastName": "Ahmad"
+    },
+    "answer_preview": [
+      [
+        "Rawalpindi_Medical_College"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-03",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "At which university is John Tembo a student?",
+    "gold": "MATCH (:Person {firstName: 'John', lastName: 'Tembo'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "John",
+      "lastName": "Tembo"
+    },
+    "answer_preview": [
+      [
+        "Copperbelt_University"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-04",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Fernanda Souza study at?",
+    "gold": "MATCH (:Person {firstName: 'Fernanda', lastName: 'Souza'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Fernanda",
+      "lastName": "Souza"
+    },
+    "answer_preview": [
+      [
+        "Instituto_Nacional_de_Matemática_Pura_e_Aplicada"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-06",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "At which university is Zsolt Kiss a student?",
+    "gold": "MATCH (:Person {firstName: 'Zsolt', lastName: 'Kiss'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Zsolt",
+      "lastName": "Kiss"
+    },
+    "answer_preview": [
+      [
+        "Károli_Gáspár_University_of_the_Reformed_Church_in_Hungary"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-07",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Karim Ambane study at?",
+    "gold": "MATCH (:Person {firstName: 'Karim', lastName: 'Ambane'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Karim",
+      "lastName": "Ambane"
+    },
+    "answer_preview": [
+      [
+        "University_of_Buea"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-08",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "What university does Alim Guliyev attend?",
+    "gold": "MATCH (:Person {firstName: 'Alim', lastName: 'Guliyev'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Alim",
+      "lastName": "Guliyev"
+    },
+    "answer_preview": [
+      [
+        "Azerbaijan_State_Marine_Academy"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-09",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "At which university is Lata Singh a student?",
+    "gold": "MATCH (:Person {firstName: 'Lata', lastName: 'Singh'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Lata",
+      "lastName": "Singh"
+    },
+    "answer_preview": [
+      [
+        "National_Institute_of_Business_Management"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-03-10",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Hossein Kamkar study at?",
+    "gold": "MATCH (:Person {firstName: 'Hossein', lastName: 'Kamkar'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Hossein",
+      "lastName": "Kamkar"
+    },
+    "answer_preview": [
+      [
+        "Shahrekord_University"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-01",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Luis Alonso born?",
+    "gold": "MATCH (p:Person {firstName: 'Luis', lastName: 'Alonso'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Luis",
+      "lastName": "Alonso"
+    },
+    "answer_preview": [
+      [
+        "1982-12-25"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-02",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Augusto Rodriguez?",
+    "gold": "MATCH (p:Person {firstName: 'Augusto', lastName: 'Rodriguez'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Augusto",
+      "lastName": "Rodriguez"
+    },
+    "answer_preview": [
+      [
+        "1983-08-02"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-03",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is Antonio Fuema's birthday?",
+    "gold": "MATCH (p:Person {firstName: 'Antonio', lastName: 'Fuema'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Antonio",
+      "lastName": "Fuema"
+    },
+    "answer_preview": [
+      [
+        "1986-03-06"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-04",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Michael Li born?",
+    "gold": "MATCH (p:Person {firstName: 'Michael', lastName: 'Li'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Michael",
+      "lastName": "Li"
+    },
+    "answer_preview": [
+      [
+        "1983-04-20"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-05",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Gregorio Manalo?",
+    "gold": "MATCH (p:Person {firstName: 'Gregorio', lastName: 'Manalo'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Gregorio",
+      "lastName": "Manalo"
+    },
+    "answer_preview": [
+      [
+        "1982-10-28"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-07",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Akashambatwa Kalaba born?",
+    "gold": "MATCH (p:Person {firstName: 'Akashambatwa', lastName: 'Kalaba'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Akashambatwa",
+      "lastName": "Kalaba"
+    },
+    "answer_preview": [
+      [
+        "1988-03-07"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-08",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Aleksandr Dobrunov?",
+    "gold": "MATCH (p:Person {firstName: 'Aleksandr', lastName: 'Dobrunov'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Aleksandr",
+      "lastName": "Dobrunov"
+    },
+    "answer_preview": [
+      [
+        "1982-02-13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-09",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is Paul Smith's birthday?",
+    "gold": "MATCH (p:Person {firstName: 'Paul', lastName: 'Smith'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Paul",
+      "lastName": "Smith"
+    },
+    "answer_preview": [
+      [
+        "1987-06-16"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "LK-04-10",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Zhang Chen born?",
+    "gold": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Chen'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Zhang",
+      "lastName": "Chen"
+    },
+    "answer_preview": [
+      [
+        "1983-04-22"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-01",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Hong Kong?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Hong_Kong'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Hong_Kong"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-02",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in France?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "France"
+    },
+    "answer_preview": [
+      [
+        "14"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-03",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many residents of Bolivia are there in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Bolivia"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-04",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Cuba?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Cuba"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-05",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in New Zealand?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'New_Zealand'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "New_Zealand"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-06",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many residents of Cameroon are there in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cameroon'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Cameroon"
+    },
+    "answer_preview": [
+      [
+        "11"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-07",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Niger?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Niger'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Niger"
+    },
+    "answer_preview": [
+      [
+        "12"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-08",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in Ethiopia?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Ethiopia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Ethiopia"
+    },
+    "answer_preview": [
+      [
+        "14"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-09",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many residents of Ukraine are there in the network?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Ukraine'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Ukraine"
+    },
+    "answer_preview": [
+      [
+        "15"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-01-10",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Cambodia?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cambodia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Cambodia"
+    },
+    "answer_preview": [
+      [
+        "6"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-01",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Aung San Suu Kyi\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Aung_San_Suu_Kyi'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Aung_San_Suu_Kyi"
+    },
+    "answer_preview": [
+      [
+        "152"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-02",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"Islamic Courts Union\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Islamic_Courts_Union'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Islamic_Courts_Union"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-03",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts carry the tag \"Video Killed the Radio Star\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Video_Killed_the_Radio_Star'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Video_Killed_the_Radio_Star"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-04",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Apollo 100\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Apollo_100'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Apollo_100"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-05",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"Carry That Weight\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Carry_That_Weight'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Carry_That_Weight"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-06",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts carry the tag \"Federation of Malaya\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Federation_of_Malaya'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Federation_of_Malaya"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-07",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Big Ones\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Big_Ones'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Big_Ones"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-08",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"William IV of the United Kingdom\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'William_IV_of_the_United_Kingdom'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "William_IV_of_the_United_Kingdom"
+    },
+    "answer_preview": [
+      [
+        "9"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-09",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts carry the tag \"Samoa\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Samoa'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Samoa"
+    },
+    "answer_preview": [
+      [
+        "13"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "AG-03-10",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"The Hurdy Gurdy Man\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'The_Hurdy_Gurdy_Man'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "The_Hurdy_Gurdy_Man"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-01",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Wilson Agudelo live in?",
+    "gold": "MATCH (:Person {firstName: 'Wilson', lastName: 'Agudelo'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Wilson",
+      "lastName": "Agudelo"
+    },
+    "answer_preview": [
+      [
+        "Colombia"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-02",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is Lin Yang based?",
+    "gold": "MATCH (:Person {firstName: 'Lin', lastName: 'Yang'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Lin",
+      "lastName": "Yang"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-03",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Jean-Pierre David lives in which country?",
+    "gold": "MATCH (:Person {firstName: 'Jean-Pierre', lastName: 'David'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Jean-Pierre",
+      "lastName": "David"
+    },
+    "answer_preview": [
+      [
+        "France"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-04",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does S. N. Hall live in?",
+    "gold": "MATCH (:Person {firstName: 'S. N.', lastName: 'Hall'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "S. N.",
+      "lastName": "Hall"
+    },
+    "answer_preview": [
+      [
+        "Burma"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-05",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is R. Joshi based?",
+    "gold": "MATCH (:Person {firstName: 'R.', lastName: 'Joshi'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "R.",
+      "lastName": "Joshi"
+    },
+    "answer_preview": [
+      [
+        "India"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-06",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Andrei Kahnovich lives in which country?",
+    "gold": "MATCH (:Person {firstName: 'Andrei', lastName: 'Kahnovich'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Andrei",
+      "lastName": "Kahnovich"
+    },
+    "answer_preview": [
+      [
+        "Russia"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-07",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Yang Lei live in?",
+    "gold": "MATCH (:Person {firstName: 'Yang', lastName: 'Lei'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Yang",
+      "lastName": "Lei"
+    },
+    "answer_preview": [
+      [
+        "China"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-08",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is Anand Rao based?",
+    "gold": "MATCH (:Person {firstName: 'Anand', lastName: 'Rao'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Anand",
+      "lastName": "Rao"
+    },
+    "answer_preview": [
+      [
+        "India"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-09",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Eduardo Gutierrez lives in which country?",
+    "gold": "MATCH (:Person {firstName: 'Eduardo', lastName: 'Gutierrez'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Eduardo",
+      "lastName": "Gutierrez"
+    },
+    "answer_preview": [
+      [
+        "Cuba"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-01-10",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Pavel Kerndlova live in?",
+    "gold": "MATCH (:Person {firstName: 'Pavel', lastName: 'Kerndlova'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Pavel",
+      "lastName": "Kerndlova"
+    },
+    "answer_preview": [
+      [
+        "Czech_Republic"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-01",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Alfred Sorongo Leakey live in the same city as Alfred Sorongo Leakey?",
+    "gold": "MATCH (p:Person {firstName: 'Alfred Sorongo', lastName: 'Leakey'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Alfred Sorongo",
+      "lastName": "Leakey"
+    },
+    "answer_preview": [
+      [
+        "Edward",
+        "Ouma"
+      ],
+      [
+        "Ali",
+        "Brar"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-02",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Claude Radafison's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Claude', lastName: 'Radafison'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Claude",
+      "lastName": "Radafison"
+    },
+    "answer_preview": [
+      [
+        "Claude",
+        "Aly"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-03",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "List the friends of Alec Cheng who share their city of residence.",
+    "gold": "MATCH (p:Person {firstName: 'Alec', lastName: 'Cheng'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Alec",
+      "lastName": "Cheng"
+    },
+    "answer_preview": [
+      [
+        "Bangguo",
+        "Hu"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-04",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Ibrahim Bare Ousmane live in the same city as Ibrahim Bare Ousmane?",
+    "gold": "MATCH (p:Person {firstName: 'Ibrahim Bare', lastName: 'Ousmane'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Ibrahim Bare",
+      "lastName": "Ousmane"
+    },
+    "answer_preview": [
+      [
+        "Abdoulaye",
+        "Djibo"
+      ],
+      [
+        "Ali",
+        "Diori"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-05",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Michel Breton's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Michel', lastName: 'Breton'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Michel",
+      "lastName": "Breton"
+    },
+    "answer_preview": [
+      [
+        "Charles",
+        "David"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-06",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "List the friends of Ernest B Karat who share their city of residence.",
+    "gold": "MATCH (p:Person {firstName: 'Ernest B', lastName: 'Karat'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Ernest B",
+      "lastName": "Karat"
+    },
+    "answer_preview": [
+      [
+        "Chris",
+        "Hall"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-07",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Juan Carlos Alvarez live in the same city as Juan Carlos Alvarez?",
+    "gold": "MATCH (p:Person {firstName: 'Juan Carlos', lastName: 'Alvarez'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Juan Carlos",
+      "lastName": "Alvarez"
+    },
+    "answer_preview": [
+      [
+        "Cristian",
+        "Diaz"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-08",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Leandro Silva's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Leandro', lastName: 'Silva'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Leandro",
+      "lastName": "Silva"
+    },
+    "answer_preview": [
+      [
+        "Sergio",
+        "Machado"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-09",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "List the friends of Volodymyr Kofler who share their city of residence.",
+    "gold": "MATCH (p:Person {firstName: 'Volodymyr', lastName: 'Kofler'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Volodymyr",
+      "lastName": "Kofler"
+    },
+    "answer_preview": [
+      [
+        "Vladimir",
+        "Foxx"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "MH-03-10",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Marco Agreda live in the same city as Marco Agreda?",
+    "gold": "MATCH (p:Person {firstName: 'Marco', lastName: 'Agreda'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Marco",
+      "lastName": "Agreda"
+    },
+    "answer_preview": [
+      [
+        "Alcides",
+        "Amador"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-01",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Ayesha Butt and Hồ Chí Loan?",
+    "gold": "MATCH (a:Person {firstName: 'Ayesha', lastName: 'Butt'}), (b:Person {firstName: 'Hồ Chí', lastName: 'Loan'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Ayesha",
+      "lastName1": "Butt",
+      "firstName2": "Hồ Chí",
+      "lastName2": "Loan"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-02",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Masao Yamada from Lin Zhu?",
+    "gold": "MATCH (a:Person {firstName: 'Masao', lastName: 'Yamada'}), (b:Person {firstName: 'Lin', lastName: 'Zhu'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Masao",
+      "lastName1": "Yamada",
+      "firstName2": "Lin",
+      "lastName2": "Zhu"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-03",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the minimum number of friendship links needed to connect Victor Antonescu and Wei Chen?",
+    "gold": "MATCH (a:Person {firstName: 'Victor', lastName: 'Antonescu'}), (b:Person {firstName: 'Wei', lastName: 'Chen'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Victor",
+      "lastName1": "Antonescu",
+      "firstName2": "Wei",
+      "lastName2": "Chen"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-05",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Anura Abeywardena from Nedeljko Bajić Mikulic?",
+    "gold": "MATCH (a:Person {firstName: 'Anura', lastName: 'Abeywardena'}), (b:Person {firstName: 'Nedeljko Bajić', lastName: 'Mikulic'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Anura",
+      "lastName1": "Abeywardena",
+      "firstName2": "Nedeljko Bajić",
+      "lastName2": "Mikulic"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-06",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the minimum number of friendship links needed to connect Nikki Reyes and Nitin Khan?",
+    "gold": "MATCH (a:Person {firstName: 'Nikki', lastName: 'Reyes'}), (b:Person {firstName: 'Nitin', lastName: 'Khan'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Nikki",
+      "lastName1": "Reyes",
+      "firstName2": "Nitin",
+      "lastName2": "Khan"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-07",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Karim Ambane and Abdul Jamil Qureshi?",
+    "gold": "MATCH (a:Person {firstName: 'Karim', lastName: 'Ambane'}), (b:Person {firstName: 'Abdul Jamil', lastName: 'Qureshi'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Karim",
+      "lastName1": "Ambane",
+      "firstName2": "Abdul Jamil",
+      "lastName2": "Qureshi"
+    },
+    "answer_preview": [
+      [
+        "2"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-08",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Ajuma Nasenyana Brar from Andrey Aab?",
+    "gold": "MATCH (a:Person {firstName: 'Ajuma Nasenyana', lastName: 'Brar'}), (b:Person {firstName: 'Andrey', lastName: 'Aab'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Ajuma Nasenyana",
+      "lastName1": "Brar",
+      "firstName2": "Andrey",
+      "lastName2": "Aab"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-09",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the minimum number of friendship links needed to connect Pierre Arnaud and Keith Habshush?",
+    "gold": "MATCH (a:Person {firstName: 'Pierre', lastName: 'Arnaud'}), (b:Person {firstName: 'Keith', lastName: 'Habshush'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Pierre",
+      "lastName1": "Arnaud",
+      "firstName2": "Keith",
+      "lastName2": "Habshush"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-01-10",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Hans Schmidt and Andrius Dukauskaite?",
+    "gold": "MATCH (a:Person {firstName: 'Hans', lastName: 'Schmidt'}), (b:Person {firstName: 'Andrius', lastName: 'Dukauskaite'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Hans",
+      "lastName1": "Schmidt",
+      "firstName2": "Andrius",
+      "lastName2": "Dukauskaite"
+    },
+    "answer_preview": [
+      [
+        "3"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-01",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of A. Budjana and Max Bauer?",
+    "gold": "MATCH (:Person {firstName: 'A.', lastName: 'Budjana'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Max', lastName: 'Bauer'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "A.",
+      "lastName1": "Budjana",
+      "firstName2": "Max",
+      "lastName2": "Bauer"
+    },
+    "answer_preview": [
+      [
+        "Peng",
+        "Zhang"
+      ],
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ],
+      [
+        "K.",
+        "Bose"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-02",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Which people are friends with both Batong Do and Cam Nguyen?",
+    "gold": "MATCH (:Person {firstName: 'Batong', lastName: 'Do'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Cam', lastName: 'Nguyen'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Batong",
+      "lastName1": "Do",
+      "firstName2": "Cam",
+      "lastName2": "Nguyen"
+    },
+    "answer_preview": [
+      [
+        "Anh",
+        "Ha"
+      ],
+      [
+        "Deepak",
+        "Bose"
+      ],
+      [
+        "Jun",
+        "Zhu"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-03",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "List the common friends of Aburizal Tobing and Aafia Khan.",
+    "gold": "MATCH (:Person {firstName: 'Aburizal', lastName: 'Tobing'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Aafia', lastName: 'Khan'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Aburizal",
+      "lastName1": "Tobing",
+      "firstName2": "Aafia",
+      "lastName2": "Khan"
+    },
+    "answer_preview": [
+      [
+        "Eko Maulana",
+        "Irama"
+      ],
+      [
+        "Alexander",
+        "Hleb"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-06",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "List the common friends of Bobby Sotto and Jie Zhu.",
+    "gold": "MATCH (:Person {firstName: 'Bobby', lastName: 'Sotto'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Jie', lastName: 'Zhu'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Bobby",
+      "lastName1": "Sotto",
+      "firstName2": "Jie",
+      "lastName2": "Zhu"
+    },
+    "answer_preview": [
+      [
+        "Yang",
+        "Chen"
+      ],
+      [
+        "Bing",
+        "Zheng"
+      ],
+      [
+        "Wei",
+        "Wang"
+      ],
+      [
+        "Li",
+        "Wang"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-07",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of Vinod Sharma and A. Kapoor?",
+    "gold": "MATCH (:Person {firstName: 'Vinod', lastName: 'Sharma'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'A.', lastName: 'Kapoor'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Vinod",
+      "lastName1": "Sharma",
+      "firstName2": "A.",
+      "lastName2": "Kapoor"
+    },
+    "answer_preview": [
+      [
+        "Kunal",
+        "Kapoor"
+      ],
+      [
+        "Arjun",
+        "Anand"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-09",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "List the common friends of Asher Mamo and Jose Costa.",
+    "gold": "MATCH (:Person {firstName: 'Asher', lastName: 'Mamo'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Jose', lastName: 'Costa'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Asher",
+      "lastName1": "Mamo",
+      "firstName2": "Jose",
+      "lastName2": "Costa"
+    },
+    "answer_preview": [
+      [
+        "Chris",
+        "du Preez"
+      ],
+      [
+        "Emperor of Brazil",
+        "Dom Pedro II"
+      ],
+      [
+        "The",
+        "Kunda"
+      ],
+      [
+        "Lukwesa",
+        "Dogg"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "PA-03-10",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of Priyanka Khan and Constantin Popescu?",
+    "gold": "MATCH (:Person {firstName: 'Priyanka', lastName: 'Khan'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Constantin', lastName: 'Popescu'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Priyanka",
+      "lastName1": "Khan",
+      "firstName2": "Constantin",
+      "lastName2": "Popescu"
+    },
+    "answer_preview": [
+      [
+        "The",
+        "Kunda"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-01",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in March 2011?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 3 RETURN count(p)",
+    "params": {
+      "year": 2011,
+      "month": 3,
+      "monthName": "March"
+    },
+    "answer_preview": [
+      [
+        "51"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-02",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in February 2012?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 2 RETURN count(p)",
+    "params": {
+      "year": 2012,
+      "month": 2,
+      "monthName": "February"
+    },
+    "answer_preview": [
+      [
+        "60"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-03",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "What is the number of people who signed up in May 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 5,
+      "monthName": "May"
+    },
+    "answer_preview": [
+      [
+        "52"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-04",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in June 2012?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 6 RETURN count(p)",
+    "params": {
+      "year": 2012,
+      "month": 6,
+      "monthName": "June"
+    },
+    "answer_preview": [
+      [
+        "54"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-05",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in December 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 12 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 12,
+      "monthName": "December"
+    },
+    "answer_preview": [
+      [
+        "57"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-06",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "What is the number of people who signed up in June 2011?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 6 RETURN count(p)",
+    "params": {
+      "year": 2011,
+      "month": 6,
+      "monthName": "June"
+    },
+    "answer_preview": [
+      [
+        "45"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-07",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in April 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 4 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 4,
+      "monthName": "April"
+    },
+    "answer_preview": [
+      [
+        "51"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-08",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in February 2011?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 2 RETURN count(p)",
+    "params": {
+      "year": 2011,
+      "month": 2,
+      "monthName": "February"
+    },
+    "answer_preview": [
+      [
+        "31"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-09",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "What is the number of people who signed up in August 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 8 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 8,
+      "monthName": "August"
+    },
+    "answer_preview": [
+      [
+        "51"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-02-10",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in September 2010?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 9 RETURN count(p)",
+    "params": {
+      "year": 2010,
+      "month": 9,
+      "monthName": "September"
+    },
+    "answer_preview": [
+      [
+        "39"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-01",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Paul Breton write in the fourth quarter of 2011?",
+    "gold": "MATCH (:Person {firstName: 'Paul', lastName: 'Breton'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Paul",
+      "lastName": "Breton",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-02",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "In the second quarter of 2010, how many comments did Alexandre Pinzaru make?",
+    "gold": "MATCH (:Person {firstName: 'Alexandre', lastName: 'Pinzaru'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2010 AND c.creationDate.quarter = 2 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Alexandre",
+      "lastName": "Pinzaru",
+      "year": 2010,
+      "quarter": 2,
+      "quarterName": "second"
+    },
+    "answer_preview": [
+      [
+        "1"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-03",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "What is the number of comments Karim Akhmadiyeva wrote during Q4 2011?",
+    "gold": "MATCH (:Person {firstName: 'Karim', lastName: 'Akhmadiyeva'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Karim",
+      "lastName": "Akhmadiyeva",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "30"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-04",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Abdul Hameed Sheikh write in the fourth quarter of 2011?",
+    "gold": "MATCH (:Person {firstName: 'Abdul Hameed', lastName: 'Sheikh'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Abdul Hameed",
+      "lastName": "Sheikh",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "5"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-06",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "What is the number of comments Ana Alves wrote during Q2 2012?",
+    "gold": "MATCH (:Person {firstName: 'Ana', lastName: 'Alves'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 2 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Ana",
+      "lastName": "Alves",
+      "year": 2012,
+      "quarter": 2,
+      "quarterName": "second"
+    },
+    "answer_preview": [
+      [
+        "31"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-07",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Victor Lim write in the third quarter of 2012?",
+    "gold": "MATCH (:Person {firstName: 'Victor', lastName: 'Lim'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 3 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Victor",
+      "lastName": "Lim",
+      "year": 2012,
+      "quarter": 3,
+      "quarterName": "third"
+    },
+    "answer_preview": [
+      [
+        "4"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-08",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "In the first quarter of 2011, how many comments did Wei Yang make?",
+    "gold": "MATCH (:Person {firstName: 'Wei', lastName: 'Yang'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Wei",
+      "lastName": "Yang",
+      "year": 2011,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "9"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-09",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "What is the number of comments Antonio Garcia wrote during Q1 2011?",
+    "gold": "MATCH (:Person {firstName: 'Antonio', lastName: 'Garcia'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Antonio",
+      "lastName": "Garcia",
+      "year": 2011,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "19"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  },
+  {
+    "id": "TM-04-10",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Abhishek Rao write in the first quarter of 2012?",
+    "gold": "MATCH (:Person {firstName: 'Abhishek', lastName: 'Rao'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Abhishek",
+      "lastName": "Rao",
+      "year": 2012,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "54"
+      ]
+    ],
+    "author": "Bảo",
+    "checked_by": "",
+    "note": ""
+  }
+]

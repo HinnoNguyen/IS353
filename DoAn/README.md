@@ -77,6 +77,14 @@ python eval/generate_questions.py --type lookup   # chỉ một loại
 
 Template của từng loại nằm trong `eval/templates/<loại>.json` (khuôn mẫu: `lookup.json`). Kết quả ghi vào `eval/questions/<loại>.json`, 10 câu mỗi template, seed cố định nên chạy lại ra đúng bộ câu cũ. Câu bị loại tự động: đáp án rỗng/0, quá 20 dòng, chạy quá 10 s, người trùng họ tên, đồng hạng ở vị trí đầu (trường `check` của template), câu trùng, thực thể đã dùng trong `pilot_questions.json`.
 
+**Chia dev/test**
+
+```bash
+python eval/split_dev_test.py
+```
+
+Chia theo template (mỗi loại 2 template dev, 3 template test) và bỏ câu dev có thực thể trùng với test. Kết quả: `eval/questions/dev.json`, `test.json` và `split_info.json` (danh sách template mỗi phía, số câu, mã SHA-256 của test). Dev dùng để viết luật B0, chỉnh prompt, lấy ví dụ few-shot; test chỉ dùng để chấm.
+
 **6. Chạy thử baseline B1**
 
 ```bash
