@@ -337,6 +337,8 @@ def main():
         out += [f"Chọn tay từ `errors_B1.md` (toàn bộ {sum(r['verdict'] != 'correct' for r in b1['results'])} "
                 "câu sai của B1 run 1).", ""]
         out += [example_block(by_id[p["id"]], p["reason"]) for p in picks] or ["(Chưa chọn ví dụ.)", ""]
+        if manual.get("error_notes"):
+            out += ["**Ghi chú thêm:**", ""] + [f"- {x}" for x in manual["error_notes"]] + [""]
     else:
         out += ["Chưa có B1 run 1 nên chưa có `errors_B1.md`.", ""]
 

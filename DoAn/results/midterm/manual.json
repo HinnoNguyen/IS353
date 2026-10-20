@@ -15,11 +15,27 @@
       "Đo trên 10 câu dev với gpt-oss-120b: trung bình khoảng 980 token/câu (792 token prompt + 186 token output, tính cả phần suy luận), nên một lượt test 150 câu cần khoảng 150K token, gần trọn hạn mức tokens/ngày của một model. Hạn mức tính riêng cho từng model."
     ]
   },
-  "error_picks": [],
+  "error_picks": [
+    {"id": "AG-02-02", "reason": "Viết tên quốc gia theo cách viết thường `'United Kingdom'`, trong khi dữ liệu lưu `United_Kingdom` (dấu `_` thay khoảng trắng), nên không khớp node nào và kết quả rỗng. Cùng lỗi này làm sai gần hết câu hỏi về tag (vd `\"Phil Spector\"` thay vì `Phil_Spector`)."},
+    {"id": "PA-04-01", "reason": "Dùng `-[:KNOWS*1..2]->` có chiều. Mỗi cặp bạn chỉ lưu một cạnh KNOWS theo một chiều, nên đi một chiều chỉ đếm được 10 người thay vì 646. Đây là lỗi chính khiến loại path gần như sai hết."},
+    {"id": "LK-01-07", "reason": "Tách sai họ tên nhiều chữ: \"Kieu Cong Do\" thành firstName `Kieu`, lastName `Cong Do`, trong khi dữ liệu là firstName `Kieu Cong`, lastName `Do`. Model không thể biết cách tách nếu không tra cứu đồ thị."},
+    {"id": "TM-03-04", "reason": "Đảo chiều quan hệ: viết `(Person)-[:HAS_MEMBER]->(Forum)` trong khi schema là `(Forum)-[:HAS_MEMBER]->(Person)`, nên không khớp cạnh nào và kết quả rỗng."},
+    {"id": "TM-01-04", "reason": "Dùng hàm `year()` không có trong Cypher (lỗi cú pháp). Phải lấy thành phần năm của thuộc tính ngày giờ: `post.creationDate.year`."},
+    {"id": "MH-04-05", "reason": "Trả về nguyên node Country (`RETURN DISTINCT country`) thay vì `country.name`. Node chứa đúng đáp án \"Sweden\" nhưng `judge` chỉ so giá trị nên chấm `wrong_result` (xem ghi chú về `judge` ở mục g)."}
+  ],
+  "error_notes": [
+    "Về `judge`: 5 câu `wrong_result` của B1 run 1 trả về nguyên node chứa đúng đáp án (LK-02-09, MH-02-01, MH-04-05, TM-03-02, TM-03-05); B3 có 1 câu ở run 1 (TM-03-02) và 0 câu ở run 2. Nếu tính các câu này là đúng thì B1 run 1 đạt 78/150 (52,0%) thay vì 73/150 (48,7%).",
+    "2 câu `no_cypher` của B1 run 1 (TM-05-06, TM-05-10): gpt-oss-20b suy luận đến hết giới hạn 2.048 token đầu ra mặc định của Groq (finish_reason = length) nên không kịp trả về Cypher. Giữ cấu hình mặc định, không tăng giới hạn.",
+    "5 câu `execution_error` của B1 run 1 do dùng hàm `year()` không tồn tại trong Cypher (phải dùng thuộc tính `.year` của giá trị ngày giờ)."
+  ],
   "answer_picks": [],
   "not_done": [
+    "Cần Bảo quyết: `judge` chấm `wrong_result` khi Cypher trả về nguyên node dù node chứa đúng đáp án (xem ghi chú ở mục e). Theo quy tắc mình giữ nguyên `judge`; nếu đổi cách chấm thì chạy lại `run_eval.py` sẽ chấm lại từ cache, không cần gọi LLM.",
+    "B2 (GraphCypherQAChain, P2): chưa làm. B2 dùng chung model gpt-oss-20b với B1 và tốn khoảng 2 lời gọi LLM mỗi câu, trong khi hạn mức 200K token/ngày của model này chỉ đủ cho các lượt B1. Để sau giữa kỳ.",
     "B3a (llama-3.3-70b-versatile): bỏ vì Groq đã gỡ model này (xem mục a).",
     "B0 (rule-based) và script run_all.ps1: để sau giữa kỳ theo kế hoạch."
   ],
-  "code_changes_after_test": []
+  "code_changes_after_test": [
+    "eval/summarize.py: thêm phần \"Ghi chú thêm\" (lấy từ error_notes trong manual.json) vào mục e. Chỉ đổi cách trình bày, không ảnh hưởng số liệu."
+  ]
 }
