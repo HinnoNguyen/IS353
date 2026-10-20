@@ -1,0 +1,14 @@
+{
+  "groq_limits": {
+    "source": "https://console.groq.com/settings/limits",
+    "checked_at": "",
+    "table": [],
+    "notes": []
+  },
+  "error_picks": [],
+  "answer_picks": [],
+  "not_done": [
+    "B0 (rule-based) và script run_all.ps1: để sau giữa kỳ theo kế hoạch."
+  ],
+  "code_changes_after_test": []
+}
