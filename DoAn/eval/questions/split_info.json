@@ -1,0 +1,80 @@
+{
+  "seed": 353,
+  "dev_templates": {
+    "lookup": [
+      "LK-03",
+      "LK-04"
+    ],
+    "aggregation": [
+      "AG-01",
+      "AG-03"
+    ],
+    "multi_hop": [
+      "MH-01",
+      "MH-03"
+    ],
+    "path": [
+      "PA-01",
+      "PA-03"
+    ],
+    "temporal": [
+      "TM-02",
+      "TM-04"
+    ]
+  },
+  "test_templates": {
+    "lookup": [
+      "LK-01",
+      "LK-02",
+      "LK-05"
+    ],
+    "aggregation": [
+      "AG-02",
+      "AG-04",
+      "AG-05"
+    ],
+    "multi_hop": [
+      "MH-02",
+      "MH-04",
+      "MH-05"
+    ],
+    "path": [
+      "PA-02",
+      "PA-04",
+      "PA-05"
+    ],
+    "temporal": [
+      "TM-01",
+      "TM-03",
+      "TM-05"
+    ]
+  },
+  "dev_count": {
+    "lookup": 17,
+    "aggregation": 20,
+    "multi_hop": 20,
+    "path": 16,
+    "temporal": 19,
+    "total": 92
+  },
+  "test_count": {
+    "lookup": 30,
+    "aggregation": 30,
+    "multi_hop": 30,
+    "path": 30,
+    "temporal": 30,
+    "total": 150
+  },
+  "dev_dropped_shared_entity": [
+    "LK-03-01",
+    "LK-03-05",
+    "LK-04-06",
+    "PA-01-04",
+    "PA-03-04",
+    "PA-03-05",
+    "PA-03-08",
+    "TM-04-05"
+  ],
+  "test_sha256": "d3377f4e1afd0dea4a6fc094abbe8f3836854efb4de8d868a0aa2d04416dd058",
+  "hash_note": "sha256 của json.dumps(test, ensure_ascii=False, sort_keys=True, separators=(',', ':'))"
+}
