@@ -7,6 +7,7 @@ data/
 
 # Cache và kết quả chạy tạm của LLM
 results/pilot_cache_*.json
+results/cache/
 
 # File khóa của Office
 ~$*
