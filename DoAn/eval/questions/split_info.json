@@ -75,6 +75,6 @@
     "PA-03-08",
     "TM-04-05"
   ],
-  "test_sha256": "2fbebe74f27864a811b36566dc57ac2a06573920f218ee11d2caec1804219778",
+  "test_sha256": "d3377f4e1afd0dea4a6fc094abbe8f3836854efb4de8d868a0aa2d04416dd058",
   "hash_note": "sha256 của json.dumps(test, ensure_ascii=False, sort_keys=True, separators=(',', ':'))"
 }
