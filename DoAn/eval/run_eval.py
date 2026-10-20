@@ -1,7 +1,7 @@
 """Khung đánh giá Text-to-Cypher: baseline sinh Cypher -> chạy trên Neo4j (chỉ đọc, timeout 30 s) -> chấm -> gán nhãn.
 
 Chạy:  python eval/run_eval.py --baseline oracle --split dev
-       python eval/run_eval.py --baseline b1_zeroshot --model llama-3.1-8b-instant --split test --run 1 [--answers]
+       python eval/run_eval.py --baseline b1_zeroshot --model openai/gpt-oss-20b --split test --run 1 [--answers]
 
 Baseline là module eval/baselines/<tên>.py có hàm build(model) -> (câu hỏi -> 1 câu Cypher).
 Cypher sinh ra được cache theo id câu hỏi ở results/cache/<baseline>__<model>__run<k>.json, ghi ngay sau mỗi câu:
@@ -38,7 +38,7 @@ TIMEOUT_S = 30
 MAX_ROWS = 1000           # gold có ≤ 20 dòng: đọc tối đa 1000 dòng kết quả dự đoán không làm đổi kết quả chấm
 PREVIEW_ROWS = 5
 MAX_LLM_ERRORS_IN_A_ROW = 5   # lỗi liên tiếp = sai key, mất mạng...: dừng thay vì gán llm_error cho cả bộ câu
-ANSWER_MODEL = "llama-3.1-8b-instant"
+ANSWER_MODEL = "openai/gpt-oss-20b"   # cùng model với B1 (Groq đã gỡ llama-3.1-8b-instant từ 16/08/2026)
 ANSWER_MAX_ROWS = 20
 ANSWER_PROMPT = """Answer the question in one or two sentences using only these query results.
 
@@ -140,11 +140,11 @@ def package_versions():
 def main():
     ap = argparse.ArgumentParser(description="Chạy một baseline trên dev/test và chấm execution accuracy.")
     ap.add_argument("--baseline", required=True, help="tên module trong eval/baselines/, vd. oracle, b1_zeroshot")
-    ap.add_argument("--model", default=None, help="ID model trên Groq, vd. llama-3.1-8b-instant (oracle: bỏ trống)")
+    ap.add_argument("--model", default=None, help="ID model trên Groq, vd. openai/gpt-oss-20b (oracle: bỏ trống)")
     ap.add_argument("--split", required=True, choices=["dev", "test"])
     ap.add_argument("--run", type=int, default=1, help="lần chạy thứ k (mỗi lần có cache riêng)")
     ap.add_argument("--answers", action="store_true",
-                    help=f"sinh câu trả lời văn bản bằng {ANSWER_MODEL} (chỉ dùng cho B1 test run 1)")
+                    help=f"sinh câu trả lời văn bản cho các câu correct bằng {ANSWER_MODEL} (chỉ dùng cho B1 test run 1)")
     ap.add_argument("--limit", type=int, default=None, help="chỉ chạy N câu đầu để thử; không ghi file kết quả")
     args = ap.parse_args()
 
@@ -186,7 +186,7 @@ def main():
                 save_json(cache_path, cache)
 
             r, pred = evaluate(session, q, entry)
-            if args.answers and r["verdict"] in ("correct", "wrong_result"):
+            if args.answers and r["verdict"] == "correct":  # chỉ cần câu đúng làm ví dụ demo, đỡ tốn hạn mức
                 if "answer" not in entry:
                     try:
                         entry["answer"] = make_answer(q["question"], pred)

@@ -1,4 +1,4 @@
-"""B1 (llama-3.1-8b-instant) và B3 (model lớn hơn, chỉ đổi --model): LLM zero-shot sinh Cypher qua Groq.
+"""B1 (openai/gpt-oss-20b) và B3 (openai/gpt-oss-120b, chỉ đổi --model): LLM zero-shot sinh Cypher qua Groq.
 
 Dùng nguyên PROMPT, build_schema, extract_cypher của pilot_text2cypher.py.
 """

@@ -27,11 +27,12 @@ from split_dev_test import TYPES, canonical_hash  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 QDIR = ROOT / "eval" / "questions"
 OUT_DIR = ROOT / "results" / "midterm"
-CONFIGS = [  # (tên, baseline, model) theo thứ tự trong bảng; màu gắn cố định với cấu hình
-    ("B1", "b1_zeroshot", "llama-3.1-8b-instant"),
-    ("B3a", "b1_zeroshot", "llama-3.3-70b-versatile"),
-    ("B3b", "b1_zeroshot", "openai/gpt-oss-120b"),
-    ("B2", "b2_langchain", "llama-3.1-8b-instant"),
+# (tên, baseline, model) theo thứ tự trong bảng; màu gắn cố định với cấu hình. Groq đã gỡ llama-3.1-8b-instant và
+# llama-3.3-70b-versatile (16/08/2026) nên B1 dùng gpt-oss-20b (model yếu), B3 dùng gpt-oss-120b (model mạnh).
+CONFIGS = [
+    ("B1", "b1_zeroshot", "openai/gpt-oss-20b"),
+    ("B3", "b1_zeroshot", "openai/gpt-oss-120b"),
+    ("B2", "b2_langchain", "openai/gpt-oss-20b"),
 ]
 PLANNED_RUNS = 3
 # Bảng màu phân loại (đã kiểm tra mù màu theo cặp kề nhau), dùng theo thứ tự cố định, không xoay vòng
@@ -230,6 +231,9 @@ def main():
     # a. Thông tin chạy
     all_runs = [(n, runs[(b, m)][k]) for n, b, m in configs for k in sorted(runs[(b, m)])]
     out += ["## a. Thông tin chạy", ""]
+    plan_changes = manual.get("changes_from_plan", [])
+    if plan_changes:
+        out += ["**Thay đổi so với kế hoạch:**", ""] + [f"- {x}" for x in plan_changes] + [""]
     if all_runs:
         out += ["| Cấu hình | Model (ID trên Groq) | Lần | Sinh Cypher (giờ gọi LLM) | Chấm điểm | Số câu |",
                 "|---|---|---|---|---|---|"]
@@ -267,13 +271,12 @@ def main():
     limits = manual.get("groq_limits", {})
     out += ["## b. Hạn mức Groq", ""]
     if limits.get("table"):
-        out += [f"Chép từ trang Limits của tài khoản Groq ({limits.get('source', '')}), "
-                f"ngày {limits.get('checked_at', '?')}.", "",
+        out += [f"Nguồn: {limits.get('source', '?')}; tra ngày {limits.get('checked_at', '?')}.", "",
                 "| Model | Requests/phút | Requests/ngày | Tokens/phút | Tokens/ngày |", "|---|---|---|---|---|"]
         out += [f"| `{r['model']}` | {r['rpm']} | {r['rpd']} | {r['tpm']} | {r['tpd']} |" for r in limits["table"]]
         out += [""] + [f"- {x}" for x in limits.get("notes", [])] + [""]
     else:
-        out += ["(Chưa điền – cần chép từ https://console.groq.com/settings/limits vào `manual.json`.)", ""]
+        out += ["(Chưa điền trong `manual.json`.)", ""]
 
     # c. Kiểm tra khung bằng oracle
     out += ["## c. Kiểm tra khung chấm bằng oracle", "",
@@ -325,7 +328,7 @@ def main():
         out += ["Chưa có lượt chạy nào hoàn tất.", ""]
 
     # e. Ví dụ lỗi + errors_B1.md
-    b1 = runs.get(("b1_zeroshot", "llama-3.1-8b-instant"), {}).get(1)
+    b1 = runs.get(next((b, m) for n, b, m in CONFIGS if n == "B1"), {}).get(1)
     out += ["## e. Ví dụ lỗi tiêu biểu (B1 run 1)", ""]
     if b1:
         write_errors(b1, OUT_DIR / "errors_B1.md")

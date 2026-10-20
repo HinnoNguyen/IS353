@@ -115,10 +115,11 @@ python eval/run_eval.py --baseline oracle --split test
 **2. Chạy baseline.** Thử và gỡ lỗi trên `--split dev`; chỉ chạy `--split test` sau khi prompt đã được commit (đóng băng).
 
 ```bash
-python eval/run_eval.py --baseline b1_zeroshot --model llama-3.1-8b-instant --split test --run 1 --answers  # B1
-python eval/run_eval.py --baseline b1_zeroshot --model llama-3.3-70b-versatile --split test --run 1         # B3a
-python eval/run_eval.py --baseline b1_zeroshot --model openai/gpt-oss-120b --split test --run 1             # B3b
+python eval/run_eval.py --baseline b1_zeroshot --model openai/gpt-oss-20b --split test --run 1 --answers  # B1
+python eval/run_eval.py --baseline b1_zeroshot --model openai/gpt-oss-120b --split test --run 1           # B3
 ```
+
+Groq đã gỡ `llama-3.1-8b-instant` và `llama-3.3-70b-versatile` từ 16/08/2026, nên B1 dùng `openai/gpt-oss-20b` (model yếu) và B3 dùng `openai/gpt-oss-120b` (model mạnh, cùng họ).
 
 Lần 2, 3: đổi thành `--run 2`, `--run 3` (không cần `--answers`). `--limit N` chạy thử N câu đầu, không ghi kết quả.
 

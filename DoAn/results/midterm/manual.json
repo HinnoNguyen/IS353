@@ -1,13 +1,24 @@
 {
+  "changes_from_plan": [
+    "Groq đã gỡ llama-3.1-8b-instant và llama-3.3-70b-versatile khỏi gói free/developer từ 16/08/2026 (thông báo ngày 17/06/2026, https://console.groq.com/docs/deprecations); ngày 20/10/2026 gọi API hai model này trả lỗi 404 model_not_found và danh sách model của tài khoản không còn chúng. Bảo đồng ý đổi model với yêu cầu có một model yếu và một model mạnh; chốt: B1 = openai/gpt-oss-20b (model yếu, Groq khuyến nghị thay Llama 3.1 8B), B3 = openai/gpt-oss-120b (model mạnh, cùng họ gpt-oss), bỏ B3a (Llama 3.3 70B) vì không còn model Production nào khác để thay.",
+    "Câu trả lời văn bản (cờ --answers) sinh bằng openai/gpt-oss-20b thay cho llama-3.1-8b-instant, và chỉ sinh cho các câu correct (đủ để làm ví dụ demo, đỡ tốn hạn mức).",
+    "gpt-oss là model có bước suy luận (reasoning) trước khi trả lời: dùng mức suy luận mặc định của Groq, temperature 0, giữ nguyên PROMPT zero-shot như kế hoạch."
+  ],
   "groq_limits": {
-    "source": "https://console.groq.com/settings/limits",
-    "checked_at": "",
-    "table": [],
-    "notes": []
+    "source": "requests/ngày và tokens/phút đọc từ header x-ratelimit-* khi gọi API bằng tài khoản của nhóm; requests/phút và tokens/ngày lấy từ bảng ở https://console.groq.com/docs/rate-limits (trang ghi đây là mức cơ bản của gói Developer)",
+    "checked_at": "2026-10-20",
+    "table": [
+      {"model": "openai/gpt-oss-20b", "rpm": "30 (tài liệu)", "rpd": "1.000 (header)", "tpm": "8.000 (header)", "tpd": "200K (tài liệu)"},
+      {"model": "openai/gpt-oss-120b", "rpm": "30 (tài liệu)", "rpd": "1.000 (header)", "tpm": "8.000 (header)", "tpd": "200K (tài liệu)"}
+    ],
+    "notes": [
+      "Đo trên 10 câu dev với gpt-oss-120b: trung bình khoảng 980 token/câu (792 token prompt + 186 token output, tính cả phần suy luận), nên một lượt test 150 câu cần khoảng 150K token, gần trọn hạn mức tokens/ngày của một model. Hạn mức tính riêng cho từng model."
+    ]
   },
   "error_picks": [],
   "answer_picks": [],
   "not_done": [
+    "B3a (llama-3.3-70b-versatile): bỏ vì Groq đã gỡ model này (xem mục a).",
     "B0 (rule-based) và script run_all.ps1: để sau giữa kỳ theo kế hoạch."
   ],
   "code_changes_after_test": []
