@@ -37,6 +37,7 @@
   ],
   "code_changes_after_test": [
     "eval/summarize.py: thêm phần \"Ghi chú thêm\" (lấy từ error_notes trong manual.json) vào mục e. Chỉ đổi cách trình bày, không ảnh hưởng số liệu.",
-    "eval/run_eval.py: thêm cờ --interleave (xếp câu xen kẽ theo loại) và lưu thông tin phụ của baseline (số lần gọi LLM, các lần tự sửa) để chạy proposed_v0 trên dev. Không đổi cách sinh Cypher, chạy truy vấn hay chấm điểm, nên không ảnh hưởng kết quả B1/B3."
+    "eval/run_eval.py: thêm cờ --interleave (xếp câu xen kẽ theo loại) và lưu thông tin phụ của baseline (số lần gọi LLM, các lần tự sửa) để chạy proposed_v0 trên dev. Không đổi cách sinh Cypher, chạy truy vấn hay chấm điểm, nên không ảnh hưởng kết quả B1/B3.",
+    "eval/run_eval.py: thêm cờ --cached-only (chỉ chấm các câu đã có Cypher, ghi .partial.json) để chấm phần proposed_v0 đã chạy kịp; eval/summarize.py: thêm mục h so sánh proposed v0 với B1 trên dev. Không ảnh hưởng kết quả B1/B3."
   ]
 }

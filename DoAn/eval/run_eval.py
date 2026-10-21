@@ -151,6 +151,8 @@ def main():
     ap.add_argument("--limit", type=int, default=None, help="chỉ chạy N câu đầu để thử; không ghi file kết quả")
     ap.add_argument("--interleave", action="store_true",
                     help="xếp câu xen kẽ theo loại, để phần đã chạy khi bị dừng giữa chừng vẫn đủ các loại")
+    ap.add_argument("--cached-only", action="store_true",
+                    help="chỉ chấm các câu đã có Cypher trong cache, không gọi LLM; ghi <tên>.partial.json")
     args = ap.parse_args()
 
     all_questions = json.loads((QDIR / f"{args.split}.json").read_text(encoding="utf-8"))
@@ -172,6 +174,8 @@ def main():
                                     "RETURN versions[0] + ' ' + edition AS v").single()["v"]
         for q in questions:
             entry = cache.get(q["id"])
+            if entry is None and args.cached_only:
+                continue
             if entry is None:
                 start = time.time()
                 try:
@@ -239,11 +243,11 @@ def main():
             "temperature": 0, "timeout_s": TIMEOUT_S, "max_rows_read": MAX_ROWS,
             "questions_file": f"eval/questions/{args.split}.json", "questions_sha256": canonical_hash(all_questions),
             "n_questions": len(results), "verdicts": {v: counts[v] for v in VERDICTS},
-            "neo4j": neo4j_version, "packages": package_versions(), "prompt": None,
+            "partial": args.cached_only, "neo4j": neo4j_version, "packages": package_versions(), "prompt": None,
             "answers": {"model": ANSWER_MODEL, "prompt": ANSWER_PROMPT, "max_rows": ANSWER_MAX_ROWS}
             if args.answers else None}
     meta |= getattr(generate, "meta", {})
-    out_path = RUNS_DIR / args.split / name
+    out_path = RUNS_DIR / args.split / (name.replace(".json", ".partial.json") if args.cached_only else name)
     save_json(out_path, {"meta": meta, "results": results})
     print(f"\nĐã lưu {out_path.relative_to(ROOT)}")
 

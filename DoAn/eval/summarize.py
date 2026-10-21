@@ -8,6 +8,8 @@ Chạy:  python eval/summarize.py --split test
   errors_B1.md     toàn bộ câu sai của B1 run 1
   ex_by_type.png   EX theo loại câu, mỗi cấu hình một màu, thanh lỗi = độ lệch chuẩn khi có ≥ 2 lần chạy
   verdicts.png     phân bố nhãn (run 1) theo cấu hình
+  mục h + proposed_vs_b1_dev.png: bản thử proposed v0 so với B1 trên cùng các câu dev (lấy từ results/runs/dev/,
+                   bản đầy đủ hoặc .partial.json do `run_eval.py --cached-only` ghi)
 Phần viết tay lấy từ results/midterm/manual.json: groq_limits (mục b), error_picks (mục e),
 answer_picks (mục f, bỏ trống thì tự chọn), not_done và code_changes_after_test (mục g).
 """
@@ -37,7 +39,8 @@ CONFIGS = [
 PLANNED_RUNS = 3
 # Bảng màu phân loại (đã kiểm tra mù màu theo cặp kề nhau), dùng theo thứ tự cố định, không xoay vòng
 SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6"]
-CONFIG_COLORS = {name: SERIES[i] for i, (name, _, _) in enumerate(CONFIGS)}
+PROPOSED = ("Proposed v0", "proposed_v0", "openai/gpt-oss-20b")  # bản thử A + D trên dev (mục h)
+CONFIG_COLORS = {name: SERIES[i] for i, (name, _, _) in enumerate(CONFIGS + [PROPOSED])}
 VERDICT_COLORS = dict(zip(VERDICTS, SERIES))
 INK, INK2, MUTED, GRID, AXIS, SURFACE = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7", "#ffffff"
 
@@ -119,7 +122,7 @@ def finish(fig, ax, path, title, legend_cols, note=None):
     plt.close(fig)
 
 
-def plot_ex(rows, path, n_per_type):
+def plot_ex(rows, path, title):
     """rows: [(tên, model, {loại: [EX từng lần chạy]})] -> cột nhóm theo loại câu."""
     fig, ax = plt.subplots(figsize=(8, 4.8), dpi=200, facecolor=SURFACE)
     style(ax)
@@ -139,7 +142,7 @@ def plot_ex(rows, path, n_per_type):
     ax.set_ylabel("EX (%)", color=INK2, fontsize=9)
     ax.yaxis.grid(True, color=GRID, linewidth=0.6)
     multi = any(len(v[TYPES[0]]) >= 2 for _, _, v in rows)
-    finish(fig, ax, path, f"Execution accuracy theo loại câu hỏi – tập test ({n_per_type} câu/loại)", 2,
+    finish(fig, ax, path, title, 2,
            "Cột = trung bình các lần chạy; thanh lỗi = độ lệch chuẩn (khi có ≥ 2 lần chạy)." if multi else None)
 
 
@@ -192,6 +195,52 @@ def write_errors(b1_run1, path):
         lines += [f"## {t} ({len(rs)} câu sai)", ""]
         lines += [example_block(r) for r in rs]
     path.write_text("\n".join(lines), encoding="utf-8")
+
+
+def proposed_section():
+    """Mục h: proposed v0 so với B1 trên đúng các câu dev mà proposed đã chạy (bản đầy đủ hoặc .partial.json)."""
+    name, baseline, model = PROPOSED
+    full = RUNS_DIR / "dev" / file_name(baseline, model, 1)
+    partial = full.with_name(full.name.replace(".json", ".partial.json"))
+    b1_file = RUNS_DIR / "dev" / file_name(CONFIGS[0][1], CONFIGS[0][2], 1)
+    out = ["## h. Kết quả sơ bộ của hệ thống đề xuất (proposed v0, tập dev)", ""]
+    src = full if full.exists() else partial if partial.exists() else None
+    if not src or not b1_file.exists():
+        return out + ["Chưa có.", ""], None
+    pr = json.loads(src.read_text(encoding="utf-8"))["results"]
+    ids = {r["id"] for r in pr}
+    b1 = [r for r in json.loads(b1_file.read_text(encoding="utf-8"))["results"] if r["id"] in ids]
+    n_dev = len(json.loads((QDIR / "dev.json").read_text(encoding="utf-8")))
+    coverage = (f"được {len(pr)}/{n_dev} câu (xếp xen kẽ theo loại) do hạn mức Groq" if src == partial
+                else f"đủ {len(pr)} câu")
+    out += [f"Bản thử proposed v0 = model của B1 (`{model}`) + (A) schema kèm quy ước + (D) tự sửa lỗi tối đa 2 lần; "
+            f"chưa có (B) liên kết thực thể và (C) few-shot. Chạy 1 lần trên tập dev, {coverage}; B1 (lượt chạy dev) "
+            "được so trên đúng các câu đó. Đây là kết quả sơ bộ: dev cũng là nơi chỉnh prompt, kết quả chính thức của "
+            "hệ thống đề xuất sẽ chạy trên test sau khi hoàn thiện A–D.", "",
+            "| Loại câu | Số câu | B1 EX (%) | Proposed v0 EX (%) | Chênh lệch (điểm %) |", "|---|---|---|---|---|"]
+    for t in TYPES + ["Tổng"]:
+        b = [r for r in b1 if t == "Tổng" or r["type"] == t]
+        p = [r for r in pr if t == "Tổng" or r["type"] == t]
+        if p:
+            out.append(f"| {t} | {len(p)} | {ex(b):.1f} | {ex(p):.1f} | {ex(p) - ex(b):+.1f} |")
+    out += ["", "| Nhãn | B1 | Proposed v0 |", "|---|---|---|"]
+    out += [f"| {v} | {sum(r['verdict'] == v for r in b1)} | {sum(r['verdict'] == v for r in pr)} |" for v in VERDICTS]
+    fixed = [r for r in pr if (r.get("info") or {}).get("problems")]
+    calls = [(r.get("info") or {}).get("llm_calls", 1) for r in pr]
+    b1_ok = {r["id"] for r in b1 if r["verdict"] == "correct"}
+    pr_ok = {r["id"] for r in pr if r["verdict"] == "correct"}
+    out += ["", f"- Tự sửa lỗi (D) được kích hoạt ở {len(fixed)}/{len(pr)} câu, trong đó "
+                f"{sum(r['verdict'] == 'correct' for r in fixed)} câu cuối cùng đúng; trung bình "
+                f"{statistics.mean(calls):.2f} lời gọi LLM mỗi câu (B1: 1).",
+            f"- {len(pr_ok - b1_ok)} câu B1 sai nhưng proposed v0 đúng; {len(b1_ok - pr_ok)} câu B1 đúng nhưng "
+            "proposed v0 sai.", ""]
+    rows = None
+    if all(any(r["type"] == t for r in pr) for t in TYPES):  # biểu đồ chỉ khi đủ 5 loại câu
+        rows = [(CONFIGS[0][0], model, {t: [ex(b1, t)] for t in TYPES}), (name, model, {t: [ex(pr, t)] for t in TYPES})]
+        plot_ex(rows, OUT_DIR / "proposed_vs_b1_dev.png",
+                f"Proposed v0 so với B1 trên cùng {len(pr)} câu dev (sơ bộ, 1 lần chạy)")
+        out += ["![Proposed v0 so với B1 trên dev](proposed_vs_b1_dev.png)", ""]
+    return out, rows
 
 
 def main():
@@ -321,7 +370,8 @@ def main():
             out.append(f"| {n} | `{m}` | " + " | ".join(str(counts[v]) for v in VERDICTS) + f" | {len(res)} |")
         out += ["", "Biểu đồ: `ex_by_type.png`, `verdicts.png`.", "",
                 "![EX theo loại câu](ex_by_type.png)", "", "![Phân bố nhãn](verdicts.png)", ""]
-        plot_ex(ex_rows, OUT_DIR / "ex_by_type.png", n_per_type[TYPES[0]])
+        plot_ex(ex_rows, OUT_DIR / "ex_by_type.png",
+                f"Execution accuracy theo loại câu hỏi – tập test ({n_per_type[TYPES[0]]} câu/loại)")
         if verdict_rows:
             plot_verdicts(verdict_rows, OUT_DIR / "verdicts.png", len(questions))
     else:
@@ -374,6 +424,7 @@ def main():
     changes = manual.get("code_changes_after_test", [])
     out += ["", "Sửa code sau khi đã chạy test (quy tắc 2): " + ("" if changes else "không có."), ""]
     out += [f"- {x}" for x in changes] + ([""] if changes else [])
+    out += proposed_section()[0]
 
     (OUT_DIR / "RESULTS.md").write_text("\n".join(out), encoding="utf-8")
     print(f"Đã ghi {(OUT_DIR / 'RESULTS.md').relative_to(ROOT)}"
