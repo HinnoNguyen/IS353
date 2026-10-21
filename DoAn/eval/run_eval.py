@@ -18,6 +18,7 @@ import time
 from collections import Counter
 from datetime import datetime
 from importlib.metadata import PackageNotFoundError, version
+from itertools import zip_longest
 from pathlib import Path
 
 from neo4j import READ_ACCESS, GraphDatabase, Query
@@ -98,6 +99,8 @@ def evaluate(session, q, entry):
     """Chạy Cypher (đã có trong cache) của một câu, chấm và gán nhãn. Trả về (kết quả, các dòng dự đoán | None)."""
     r = {"id": q["id"], "type": q["type"], "template_id": q["template_id"], "question": q["question"],
          "cypher": entry["cypher"], "gold": q["gold"], "seconds": entry["seconds"]}
+    if "info" in entry:
+        r["info"] = entry["info"]
     gold_rows = answer_rows(run_query(session, q["gold"]))
     r["gold_answer"] = plain(gold_rows)
     if not entry["cypher"]:
@@ -146,10 +149,16 @@ def main():
     ap.add_argument("--answers", action="store_true",
                     help=f"sinh câu trả lời văn bản cho các câu correct bằng {ANSWER_MODEL} (chỉ dùng cho B1 test run 1)")
     ap.add_argument("--limit", type=int, default=None, help="chỉ chạy N câu đầu để thử; không ghi file kết quả")
+    ap.add_argument("--interleave", action="store_true",
+                    help="xếp câu xen kẽ theo loại, để phần đã chạy khi bị dừng giữa chừng vẫn đủ các loại")
     args = ap.parse_args()
 
     all_questions = json.loads((QDIR / f"{args.split}.json").read_text(encoding="utf-8"))
-    questions = all_questions[:args.limit] if args.limit else all_questions
+    questions = all_questions
+    if args.interleave:
+        groups = [[q for q in questions if q["type"] == t] for t in TYPES]
+        questions = [q for row in zip_longest(*groups) for q in row if q]
+    questions = questions[:args.limit] if args.limit else questions
     name = file_name(args.baseline, args.model, args.run)
     cache_path = CACHE_DIR / name
     cache = json.loads(cache_path.read_text(encoding="utf-8")) if cache_path.exists() else {}
@@ -183,6 +192,8 @@ def main():
                         break
                     continue
                 entry = cache[q["id"]] = {"cypher": cypher, "seconds": round(time.time() - start, 1), "at": now()}
+                if getattr(generate, "last_info", None):  # thông tin phụ của baseline, vd số lần gọi LLM khi tự sửa lỗi
+                    entry["info"] = generate.last_info
                 save_json(cache_path, cache)
 
             r, pred = evaluate(session, q, entry)
