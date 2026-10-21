@@ -4,18 +4,18 @@
     "model": "openai/gpt-oss-20b",
     "split": "dev",
     "run": 1,
-    "started_at": "2026-10-21T11:42:37+07:00",
-    "finished_at": "2026-10-21T11:42:39+07:00",
+    "started_at": "2026-10-21T14:07:51+07:00",
+    "finished_at": "2026-10-21T14:07:53+07:00",
     "llm_first_call_at": "2026-10-21T09:44:15+07:00",
-    "llm_last_call_at": "2026-10-21T11:42:21+07:00",
+    "llm_last_call_at": "2026-10-21T14:07:36+07:00",
     "temperature": 0,
     "timeout_s": 30,
     "max_rows_read": 1000,
     "questions_file": "eval/questions/dev.json",
     "questions_sha256": "03a2e19f79ed1c58278f98cebce1f61427ab58a8aea7f90cef60576cc55aee26",
-    "n_questions": 14,
+    "n_questions": 28,
     "verdicts": {
-      "correct": 13,
+      "correct": 27,
       "wrong_result": 1,
       "empty_result": 0,
       "execution_error": 0,
@@ -93,7 +93,7 @@
           0
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.0
     },
     {
       "id": "MH-01-01",
@@ -119,7 +119,7 @@
           "Colombia"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.02
     },
     {
       "id": "PA-01-01",
@@ -145,7 +145,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.02
     },
     {
       "id": "TM-02-01",
@@ -171,7 +171,7 @@
           51
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "LK-03-03",
@@ -275,7 +275,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "TM-02-02",
@@ -301,7 +301,7 @@
           60
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "LK-03-04",
@@ -353,7 +353,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "MH-01-03",
@@ -403,6 +403,370 @@
       "pred_preview": [
         [
           3
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-02-03",
+      "type": "temporal",
+      "template_id": "TM-02",
+      "question": "What is the number of people who signed up in May 2010?",
+      "cypher": "MATCH (p:Person)\nWHERE p.creationDate.year = 2010 AND p.creationDate.month = 5\nRETURN count(p) AS numPeople",
+      "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)",
+      "seconds": 8.3,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          52
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          52
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-03-06",
+      "type": "lookup",
+      "template_id": "LK-03",
+      "question": "At which university is Zsolt Kiss a student?",
+      "cypher": "MATCH (p:Person)-[:STUDY_AT]->(u:Organisation:University)\nWHERE p.firstName + ' ' + p.lastName = 'Zsolt Kiss'\nRETURN u.name",
+      "gold": "MATCH (:Person {firstName: 'Zsolt', lastName: 'Kiss'})-[:STUDY_AT]->(u:University) RETURN u.name",
+      "seconds": 1.0,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Károli_Gáspár_University_of_the_Reformed_Church_in_Hungary"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Károli_Gáspár_University_of_the_Reformed_Church_in_Hungary"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-01-04",
+      "type": "aggregation",
+      "template_id": "AG-01",
+      "question": "How many people live in Cuba?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name: 'Cuba'})\nRETURN count(DISTINCT p) AS numPeople",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.5,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          13
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          13
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-01-04",
+      "type": "multi_hop",
+      "template_id": "MH-01",
+      "question": "Which country does S. N. Hall live in?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'S. N. Hall'\nMATCH (p)-[:IS_LOCATED_IN]->(city:City)-[:IS_PART_OF]->(country:Country)\nRETURN country.name",
+      "gold": "MATCH (:Person {firstName: 'S. N.', lastName: 'Hall'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 2.0,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Burma"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Burma"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "PA-01-05",
+      "type": "path",
+      "template_id": "PA-01",
+      "question": "How many friendship steps separate Anura Abeywardena from Nedeljko Bajić Mikulic?",
+      "cypher": "MATCH (a:Person),(b:Person)\nWHERE a.firstName + ' ' + a.lastName = 'Anura Abeywardena'\n  AND b.firstName + ' ' + b.lastName = 'Nedeljko Bajić Mikulic'\nMATCH p=shortestPath((a)-[:KNOWS*]-(b))\nRETURN length(p) AS friendshipSteps",
+      "gold": "MATCH (a:Person {firstName: 'Anura', lastName: 'Abeywardena'}), (b:Person {firstName: 'Nedeljko Bajić', lastName: 'Mikulic'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+      "seconds": 1.4,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-02-04",
+      "type": "temporal",
+      "template_id": "TM-02",
+      "question": "How many people joined the network in June 2012?",
+      "cypher": "MATCH (p:Person)\nWHERE p.creationDate.year = 2012 AND p.creationDate.month = 6\nRETURN count(p) AS numPeople",
+      "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 6 RETURN count(p)",
+      "seconds": 1.0,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          54
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          54
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-03-07",
+      "type": "lookup",
+      "template_id": "LK-03",
+      "question": "Which university did Karim Ambane study at?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Karim Ambane'\nMATCH (p)-[:STUDY_AT]->(u:Organisation:University)\nRETURN u.name",
+      "gold": "MATCH (:Person {firstName: 'Karim', lastName: 'Ambane'})-[:STUDY_AT]->(u:University) RETURN u.name",
+      "seconds": 6.2,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "University_of_Buea"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "University_of_Buea"
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "AG-01-05",
+      "type": "aggregation",
+      "template_id": "AG-01",
+      "question": "What is the number of people living in New Zealand?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name:'New_Zealand'})\nRETURN count(p) AS number_of_people",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'New_Zealand'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 12.4,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          1
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "MH-01-05",
+      "type": "multi_hop",
+      "template_id": "MH-01",
+      "question": "In what country is R. Joshi based?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:Place:City)-[:IS_PART_OF]->(co:Place:Country)\nWHERE p.firstName + ' ' + p.lastName = 'R. Joshi'\nRETURN co.name",
+      "gold": "MATCH (:Person {firstName: 'R.', lastName: 'Joshi'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 11.9,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "India"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "India"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "PA-01-06",
+      "type": "path",
+      "template_id": "PA-01",
+      "question": "What is the minimum number of friendship links needed to connect Nikki Reyes and Nitin Khan?",
+      "cypher": "MATCH (p1:Person), (p2:Person)\nWHERE p1.firstName + ' ' + p1.lastName = 'Nikki Reyes'\n  AND p2.firstName + ' ' + p2.lastName = 'Nitin Khan'\nMATCH path = shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(path) AS minFriendshipLinks",
+      "gold": "MATCH (a:Person {firstName: 'Nikki', lastName: 'Reyes'}), (b:Person {firstName: 'Nitin', lastName: 'Khan'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+      "seconds": 10.6,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "TM-02-05",
+      "type": "temporal",
+      "template_id": "TM-02",
+      "question": "How many accounts were created in December 2010?",
+      "cypher": "MATCH (p:Person)\nWHERE p.creationDate.year = 2010 AND p.creationDate.month = 12\nRETURN count(p) AS accountCount",
+      "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 12 RETURN count(p)",
+      "seconds": 11.3,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          57
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          57
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "LK-03-08",
+      "type": "lookup",
+      "template_id": "LK-03",
+      "question": "What university does Alim Guliyev attend?",
+      "cypher": "MATCH (p:Person)-[:STUDY_AT]->(u:Organisation:University)\nWHERE p.firstName + ' ' + p.lastName = 'Alim Guliyev'\nRETURN u.name",
+      "gold": "MATCH (:Person {firstName: 'Alim', lastName: 'Guliyev'})-[:STUDY_AT]->(u:University) RETURN u.name",
+      "seconds": 10.4,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Azerbaijan_State_Marine_Academy"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Azerbaijan_State_Marine_Academy"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-01-06",
+      "type": "aggregation",
+      "template_id": "AG-01",
+      "question": "How many residents of Cameroon are there in the network?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name:'Cameroon'})\nRETURN count(DISTINCT p) AS residentCount",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cameroon'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 10.6,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          11
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          11
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "MH-01-06",
+      "type": "multi_hop",
+      "template_id": "MH-01",
+      "question": "Andrei Kahnovich lives in which country?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country)\nWHERE p.firstName + ' ' + p.lastName = 'Andrei Kahnovich'\nRETURN co.name",
+      "gold": "MATCH (:Person {firstName: 'Andrei', lastName: 'Kahnovich'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 10.7,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Russia"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Russia"
         ]
       ],
       "exec_seconds": 0.01
