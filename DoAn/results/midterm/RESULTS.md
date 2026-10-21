@@ -292,28 +292,28 @@ Sửa code sau khi đã chạy test (quy tắc 2):
 
 ## h. Kết quả sơ bộ của hệ thống đề xuất (proposed v0, tập dev)
 
-Bản thử proposed v0 = model của B1 (`openai/gpt-oss-20b`) + (A) schema kèm quy ước + (D) tự sửa lỗi tối đa 2 lần; chưa có (B) liên kết thực thể và (C) few-shot. Chạy 1 lần trên tập dev, được 28/92 câu (xếp xen kẽ theo loại) do hạn mức Groq; B1 (lượt chạy dev) được so trên đúng các câu đó. Đây là kết quả sơ bộ: dev cũng là nơi chỉnh prompt, kết quả chính thức của hệ thống đề xuất sẽ chạy trên test sau khi hoàn thiện A–D.
+Bản thử proposed v0 = model của B1 (`openai/gpt-oss-20b`) + (A) schema kèm quy ước + (D) tự sửa lỗi tối đa 2 lần; chưa có (B) liên kết thực thể và (C) few-shot. Chạy 1 lần trên tập dev, được 70/92 câu (xếp xen kẽ theo loại) do hạn mức Groq; B1 (lượt chạy dev) được so trên đúng các câu đó. Đây là kết quả sơ bộ: dev cũng là nơi chỉnh prompt, kết quả chính thức của hệ thống đề xuất sẽ chạy trên test sau khi hoàn thiện A–D.
 
 | Loại câu | Số câu | B1 EX (%) | Proposed v0 EX (%) | Chênh lệch (điểm %) |
 |---|---|---|---|---|
-| lookup | 6 | 66.7 | 100.0 | +33.3 |
-| aggregation | 6 | 66.7 | 83.3 | +16.7 |
-| multi_hop | 6 | 83.3 | 100.0 | +16.7 |
-| path | 5 | 60.0 | 100.0 | +40.0 |
-| temporal | 5 | 60.0 | 100.0 | +40.0 |
-| Tổng | 28 | 67.9 | 96.4 | +28.6 |
+| lookup | 14 | 78.6 | 100.0 | +21.4 |
+| aggregation | 14 | 57.1 | 92.9 | +35.7 |
+| multi_hop | 14 | 78.6 | 100.0 | +21.4 |
+| path | 14 | 35.7 | 100.0 | +64.3 |
+| temporal | 14 | 57.1 | 100.0 | +42.9 |
+| Tổng | 70 | 61.4 | 98.6 | +37.1 |
 
 | Nhãn | B1 | Proposed v0 |
 |---|---|---|
-| correct | 19 | 27 |
-| wrong_result | 6 | 1 |
-| empty_result | 3 | 0 |
+| correct | 43 | 69 |
+| wrong_result | 16 | 1 |
+| empty_result | 10 | 0 |
 | execution_error | 0 | 0 |
 | timeout | 0 | 0 |
-| no_cypher | 0 | 0 |
+| no_cypher | 1 | 0 |
 | llm_error | 0 | 0 |
 
-- Tự sửa lỗi (D) được kích hoạt ở 1/28 câu, trong đó 0 câu cuối cùng đúng; trung bình 1.07 lời gọi LLM mỗi câu (B1: 1).
-- 8 câu B1 sai nhưng proposed v0 đúng; 0 câu B1 đúng nhưng proposed v0 sai.
+- Tự sửa lỗi (D) được kích hoạt ở 4/70 câu, trong đó 3 câu cuối cùng đúng; trung bình 1.07 lời gọi LLM mỗi câu (B1: 1).
+- 26 câu B1 sai nhưng proposed v0 đúng; 0 câu B1 đúng nhưng proposed v0 sai.
 
 ![Proposed v0 so với B1 trên dev](proposed_vs_b1_dev.png)
