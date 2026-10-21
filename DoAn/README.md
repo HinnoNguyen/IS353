@@ -4,7 +4,7 @@ Nhóm 13 · IS353.R11 · GVHD: ThS. Trần Hưng Nghiệp
 
 Công cụ hỏi đáp trên đồ thị mạng xã hội **LDBC SNB (SF0.1)** lưu trong **Neo4j**: câu hỏi tiếng Anh được LLM mã nguồn mở chuyển thành truy vấn **Cypher**, chạy trên đồ thị và trả lời bằng văn bản. Bài toán được đánh giá như Text-to-Cypher (execution accuracy) với baseline từ đơn giản đến mạnh.
 
-Chi tiết: [proposal v2](docs/SNA-Group13-A.22-GraphQA-Proposal-v2.docx)
+Chi tiết: [proposal v3](docs/SNA-Group13-A.22-GraphQA-Proposal-v3.docx) (bản 3, 21/10/2026: đổi model sang gpt-oss, cập nhật số liệu thật)
 
 ## Cấu trúc thư mục
 
