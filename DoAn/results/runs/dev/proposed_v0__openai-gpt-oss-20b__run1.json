@@ -4,18 +4,18 @@
     "model": "openai/gpt-oss-20b",
     "split": "dev",
     "run": 1,
-    "started_at": "2026-10-21T21:24:26+07:00",
-    "finished_at": "2026-10-21T21:24:28+07:00",
+    "started_at": "2026-10-22T08:40:27+07:00",
+    "finished_at": "2026-10-22T08:43:52+07:00",
     "llm_first_call_at": "2026-10-21T09:44:15+07:00",
-    "llm_last_call_at": "2026-10-21T21:24:23+07:00",
+    "llm_last_call_at": "2026-10-22T08:43:52+07:00",
     "temperature": 0,
     "timeout_s": 30,
     "max_rows_read": 1000,
     "questions_file": "eval/questions/dev.json",
     "questions_sha256": "03a2e19f79ed1c58278f98cebce1f61427ab58a8aea7f90cef60576cc55aee26",
-    "n_questions": 70,
+    "n_questions": 92,
     "verdicts": {
-      "correct": 69,
+      "correct": 91,
       "wrong_result": 1,
       "empty_result": 0,
       "execution_error": 0,
@@ -23,7 +23,7 @@
       "no_cypher": 0,
       "llm_error": 0
     },
-    "partial": true,
+    "partial": false,
     "neo4j": "5.26.31 community",
     "packages": {
       "python": "3.12.3",
@@ -64,7 +64,7 @@
           "Rawalpindi_Medical_College"
         ]
       ],
-      "exec_seconds": 0.02
+      "exec_seconds": 0.13
     },
     {
       "id": "AG-01-01",
@@ -93,7 +93,7 @@
           0
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.1
     },
     {
       "id": "MH-01-01",
@@ -119,7 +119,7 @@
           "Colombia"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.19
     },
     {
       "id": "PA-01-01",
@@ -145,7 +145,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.02
+      "exec_seconds": 0.13
     },
     {
       "id": "TM-02-01",
@@ -171,7 +171,7 @@
           51
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.05
     },
     {
       "id": "LK-03-03",
@@ -197,7 +197,7 @@
           "Copperbelt_University"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.09
     },
     {
       "id": "AG-01-02",
@@ -223,7 +223,7 @@
           14
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.12
     },
     {
       "id": "MH-01-02",
@@ -249,7 +249,7 @@
           "China"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.07
     },
     {
       "id": "PA-01-02",
@@ -275,7 +275,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.1
     },
     {
       "id": "TM-02-02",
@@ -301,7 +301,7 @@
           60
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.07
     },
     {
       "id": "LK-03-04",
@@ -327,7 +327,7 @@
           "Instituto_Nacional_de_Matemática_Pura_e_Aplicada"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.07
     },
     {
       "id": "AG-01-03",
@@ -353,7 +353,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.06
     },
     {
       "id": "MH-01-03",
@@ -379,7 +379,7 @@
           "France"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.06
     },
     {
       "id": "PA-01-03",
@@ -405,7 +405,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.06
     },
     {
       "id": "TM-02-03",
@@ -431,7 +431,7 @@
           52
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.04
     },
     {
       "id": "LK-03-06",
@@ -457,7 +457,7 @@
           "Károli_Gáspár_University_of_the_Reformed_Church_in_Hungary"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "AG-01-04",
@@ -483,7 +483,7 @@
           13
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.05
     },
     {
       "id": "MH-01-04",
@@ -509,7 +509,7 @@
           "Burma"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.07
     },
     {
       "id": "PA-01-05",
@@ -535,7 +535,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.07
     },
     {
       "id": "TM-02-04",
@@ -561,7 +561,7 @@
           54
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "LK-03-07",
@@ -587,7 +587,7 @@
           "University_of_Buea"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.05
     },
     {
       "id": "AG-01-05",
@@ -613,7 +613,7 @@
           1
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.05
     },
     {
       "id": "MH-01-05",
@@ -639,7 +639,7 @@
           "India"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.07
     },
     {
       "id": "PA-01-06",
@@ -665,7 +665,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.03
     },
     {
       "id": "TM-02-05",
@@ -691,7 +691,7 @@
           57
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "LK-03-08",
@@ -717,7 +717,7 @@
           "Azerbaijan_State_Marine_Academy"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "AG-01-06",
@@ -743,7 +743,7 @@
           11
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "MH-01-06",
@@ -769,7 +769,7 @@
           "Russia"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.05
     },
     {
       "id": "PA-01-07",
@@ -795,7 +795,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.06
     },
     {
       "id": "TM-02-06",
@@ -821,7 +821,7 @@
           45
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "LK-03-09",
@@ -847,7 +847,7 @@
           "National_Institute_of_Business_Management"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "AG-01-07",
@@ -873,7 +873,7 @@
           12
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.08
     },
     {
       "id": "MH-01-07",
@@ -899,7 +899,7 @@
           "China"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.05
     },
     {
       "id": "PA-01-08",
@@ -925,7 +925,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.08
     },
     {
       "id": "TM-02-07",
@@ -951,7 +951,7 @@
           51
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "LK-03-10",
@@ -1003,7 +1003,7 @@
           14
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.07
     },
     {
       "id": "MH-01-08",
@@ -1055,7 +1055,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.05
     },
     {
       "id": "TM-02-08",
@@ -1081,7 +1081,7 @@
           31
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "LK-04-01",
@@ -1107,7 +1107,7 @@
           "1982-12-25"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.03
     },
     {
       "id": "AG-01-09",
@@ -1133,7 +1133,7 @@
           15
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.08
     },
     {
       "id": "MH-01-09",
@@ -1159,7 +1159,7 @@
           "Cuba"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "PA-01-10",
@@ -1185,7 +1185,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "TM-02-09",
@@ -1211,7 +1211,7 @@
           51
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "LK-04-02",
@@ -1237,7 +1237,7 @@
           "1983-08-02"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "AG-01-10",
@@ -1263,7 +1263,7 @@
           6
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.03
     },
     {
       "id": "MH-01-10",
@@ -1289,7 +1289,7 @@
           "Czech_Republic"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "PA-03-01",
@@ -1333,7 +1333,7 @@
           "Bose"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.09
     },
     {
       "id": "TM-02-10",
@@ -1359,7 +1359,7 @@
           39
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "LK-04-03",
@@ -1411,7 +1411,7 @@
           152
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.05
     },
     {
       "id": "MH-03-01",
@@ -1447,7 +1447,7 @@
           "Brar"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.11
     },
     {
       "id": "PA-03-02",
@@ -1491,7 +1491,7 @@
           "Ha"
         ]
       ],
-      "exec_seconds": 0.05
+      "exec_seconds": 0.34
     },
     {
       "id": "TM-04-01",
@@ -1517,7 +1517,7 @@
           5
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.05
     },
     {
       "id": "LK-04-04",
@@ -1543,7 +1543,7 @@
           "1983-04-20"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.03
     },
     {
       "id": "AG-03-02",
@@ -1571,7 +1571,7 @@
           5
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.04
     },
     {
       "id": "MH-03-02",
@@ -1599,7 +1599,7 @@
           "Aly"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.06
     },
     {
       "id": "PA-03-03",
@@ -1635,7 +1635,7 @@
           "Hleb"
         ]
       ],
-      "exec_seconds": 0.03
+      "exec_seconds": 0.13
     },
     {
       "id": "TM-04-02",
@@ -1661,7 +1661,7 @@
           1
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.06
     },
     {
       "id": "LK-04-05",
@@ -1687,7 +1687,7 @@
           "1982-10-28"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "AG-03-03",
@@ -1715,7 +1715,7 @@
           3
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "MH-03-03",
@@ -1743,7 +1743,7 @@
           "Hu"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.07
     },
     {
       "id": "PA-03-06",
@@ -1795,7 +1795,7 @@
           "Wang"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.07
     },
     {
       "id": "TM-04-03",
@@ -1821,7 +1821,7 @@
           30
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.02
     },
     {
       "id": "LK-04-07",
@@ -1847,7 +1847,7 @@
           "1988-03-07"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.01
     },
     {
       "id": "AG-03-04",
@@ -1875,7 +1875,7 @@
           2
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.03
     },
     {
       "id": "MH-03-04",
@@ -1911,7 +1911,7 @@
           "Diori"
         ]
       ],
-      "exec_seconds": 0.0
+      "exec_seconds": 0.1
     },
     {
       "id": "PA-03-07",
@@ -1947,7 +1947,7 @@
           "Kapoor"
         ]
       ],
-      "exec_seconds": 0.01
+      "exec_seconds": 0.09
     },
     {
       "id": "TM-04-04",
@@ -1973,7 +1973,629 @@
           5
         ]
       ],
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "LK-04-08",
+      "type": "lookup",
+      "template_id": "LK-04",
+      "question": "What is the date of birth of Aleksandr Dobrunov?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Aleksandr Dobrunov'\nRETURN p.birthday",
+      "gold": "MATCH (p:Person {firstName: 'Aleksandr', lastName: 'Dobrunov'}) RETURN p.birthday",
+      "seconds": 6.6,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "1982-02-13"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "1982-02-13"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-03-05",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "What is the number of posts that have the tag \"Carry That Weight\"?",
+      "cypher": "MATCH (p:Post:Message)-[:HAS_TAG]->(t:Tag {name: \"Carry_That_Weight\"})\nRETURN count(p) AS postCount",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Carry_That_Weight'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 4.3,
+      "info": {
+        "llm_calls": 2,
+        "problems": [
+          "The query returned only 0 or null, which usually means a name, label or relationship direction did not match."
+        ]
+      },
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "MH-03-05",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "Who among Michel Breton's friends lives in the same city as them?",
+      "cypher": "MATCH (m:Person)\nWHERE m.firstName + ' ' + m.lastName = 'Michel Breton'\nMATCH (m)-[:IS_LOCATED_IN]->(c:Place:City)\nMATCH (m)-[:KNOWS]-(f:Person)-[:IS_LOCATED_IN]->(c)\nRETURN f.firstName, f.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Michel', lastName: 'Breton'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 1.9,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Charles",
+          "David"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Charles",
+          "David"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "PA-03-09",
+      "type": "path",
+      "template_id": "PA-03",
+      "question": "List the common friends of Asher Mamo and Jose Costa.",
+      "cypher": "MATCH (a:Person),(b:Person),(c:Person)\nWHERE a.firstName + ' ' + a.lastName = 'Asher Mamo'\n  AND b.firstName + ' ' + b.lastName = 'Jose Costa'\n  AND (a)-[:KNOWS]-(c)\n  AND (b)-[:KNOWS]-(c)\nRETURN DISTINCT c.firstName, c.lastName",
+      "gold": "MATCH (:Person {firstName: 'Asher', lastName: 'Mamo'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Jose', lastName: 'Costa'}) RETURN DISTINCT m.firstName, m.lastName",
+      "seconds": 1.7,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Chris",
+          "du Preez"
+        ],
+        [
+          "Emperor of Brazil",
+          "Dom Pedro II"
+        ],
+        [
+          "The",
+          "Kunda"
+        ],
+        [
+          "Lukwesa",
+          "Dogg"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 4,
+      "pred_preview": [
+        [
+          "Lukwesa",
+          "Dogg"
+        ],
+        [
+          "Emperor of Brazil",
+          "Dom Pedro II"
+        ],
+        [
+          "The",
+          "Kunda"
+        ],
+        [
+          "Chris",
+          "du Preez"
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "TM-04-06",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "What is the number of comments Ana Alves wrote during Q2 2012?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Ana Alves'\nMATCH (c:Comment:Message)-[:HAS_CREATOR]->(p)\nWHERE c.creationDate.year = 2012 AND c.creationDate.month >= 4 AND c.creationDate.month <= 6\nRETURN count(c) AS commentCount",
+      "gold": "MATCH (:Person {firstName: 'Ana', lastName: 'Alves'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 2 RETURN count(DISTINCT c)",
+      "seconds": 1.2,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          31
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          31
+        ]
+      ],
       "exec_seconds": 0.0
+    },
+    {
+      "id": "LK-04-09",
+      "type": "lookup",
+      "template_id": "LK-04",
+      "question": "What is Paul Smith's birthday?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Paul Smith'\nRETURN p.birthday",
+      "gold": "MATCH (p:Person {firstName: 'Paul', lastName: 'Smith'}) RETURN p.birthday",
+      "seconds": 0.7,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "1987-06-16"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "1987-06-16"
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "AG-03-06",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "How many posts carry the tag \"Federation of Malaya\"?",
+      "cypher": "MATCH (p:Message:Post)-[:HAS_TAG]->(t:Tag {name: \"Federation_of_Malaya\"})\nRETURN count(p) AS postCount",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Federation_of_Malaya'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.8,
+      "info": {
+        "llm_calls": 2,
+        "problems": [
+          "The query returned only 0 or null, which usually means a name, label or relationship direction did not match."
+        ]
+      },
+      "gold_answer": [
+        [
+          5
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          5
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-03-06",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "List the friends of Ernest B Karat who share their city of residence.",
+      "cypher": "MATCH (p1:Person)-[:KNOWS]-(p2:Person)\nWHERE p1.firstName + ' ' + p1.lastName = 'Ernest B Karat'\nMATCH (p1)-[:IS_LOCATED_IN]->(c:City)\nMATCH (p2)-[:IS_LOCATED_IN]->(c)\nRETURN DISTINCT p2.firstName, p2.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Ernest B', lastName: 'Karat'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 10.8,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Chris",
+          "Hall"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Chris",
+          "Hall"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "PA-03-10",
+      "type": "path",
+      "template_id": "PA-03",
+      "question": "Who are the mutual friends of Priyanka Khan and Constantin Popescu?",
+      "cypher": "MATCH (a:Person)-[:KNOWS]-(p:Person)-[:KNOWS]-(b:Person)\nWHERE a.firstName + ' ' + a.lastName = 'Priyanka Khan'\n  AND b.firstName + ' ' + b.lastName = 'Constantin Popescu'\nRETURN p.firstName, p.lastName",
+      "gold": "MATCH (:Person {firstName: 'Priyanka', lastName: 'Khan'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Constantin', lastName: 'Popescu'}) RETURN DISTINCT m.firstName, m.lastName",
+      "seconds": 10.4,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "The",
+          "Kunda"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "The",
+          "Kunda"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-04-07",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "How many comments did Victor Lim write in the third quarter of 2012?",
+      "cypher": "MATCH (c:Comment:Message)-[:HAS_CREATOR]->(p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Victor Lim'\n  AND c.creationDate.year = 2012\n  AND c.creationDate.quarter = 3\nRETURN count(c) AS commentCount",
+      "gold": "MATCH (:Person {firstName: 'Victor', lastName: 'Lim'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 3 RETURN count(DISTINCT c)",
+      "seconds": 12.5,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          4
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          4
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-04-10",
+      "type": "lookup",
+      "template_id": "LK-04",
+      "question": "When was Zhang Chen born?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Zhang Chen'\nRETURN p.birthday",
+      "gold": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Chen'}) RETURN p.birthday",
+      "seconds": 13.3,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "1983-04-22"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "1983-04-22"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-03-07",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "How many posts are tagged with \"Big Ones\"?",
+      "cypher": "MATCH (p:Message:Post)-[:HAS_TAG]->(t:Tag {name: \"Big_Ones\"})\nRETURN count(p) AS postCount",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Big_Ones'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 19.4,
+      "info": {
+        "llm_calls": 2,
+        "problems": [
+          "The query returned only 0 or null, which usually means a name, label or relationship direction did not match."
+        ]
+      },
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-03-07",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "Which friends of Juan Carlos Alvarez live in the same city as Juan Carlos Alvarez?",
+      "cypher": "MATCH (juan:Person)\nWHERE juan.firstName + ' ' + juan.lastName = 'Juan Carlos Alvarez'\nMATCH (juan)-[:IS_LOCATED_IN]->(city:City)\nMATCH (juan)-[:KNOWS]-(friend:Person)-[:IS_LOCATED_IN]->(city)\nRETURN friend.firstName, friend.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Juan Carlos', lastName: 'Alvarez'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 11.7,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Cristian",
+          "Diaz"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Cristian",
+          "Diaz"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-04-08",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "In the first quarter of 2011, how many comments did Wei Yang make?",
+      "cypher": "MATCH (c:Comment:Message)-[:HAS_CREATOR]->(p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Wei Yang'\n  AND c.creationDate.year = 2011\n  AND c.creationDate.quarter = 1\nRETURN count(c) AS commentCount",
+      "gold": "MATCH (:Person {firstName: 'Wei', lastName: 'Yang'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+      "seconds": 5.3,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          9
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          9
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-03-08",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "What is the number of posts that have the tag \"William IV of the United Kingdom\"?",
+      "cypher": "MATCH (p:Message:Post)-[:HAS_TAG]->(t:Tag {name: \"William_IV_of_the_United_Kingdom\"})\nRETURN count(p) AS postCount",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'William_IV_of_the_United_Kingdom'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 22.3,
+      "info": {
+        "llm_calls": 2,
+        "problems": [
+          "The query returned only 0 or null, which usually means a name, label or relationship direction did not match."
+        ]
+      },
+      "gold_answer": [
+        [
+          9
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          9
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "MH-03-08",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "Who among Leandro Silva's friends lives in the same city as them?",
+      "cypher": "MATCH (leandro:Person {firstName: 'Leandro', lastName: 'Silva'})-[:IS_LOCATED_IN]->(city:Place:City)\nMATCH (leandro)-[:KNOWS]-(friend:Person)-[:IS_LOCATED_IN]->(city)\nRETURN DISTINCT friend.firstName, friend.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Leandro', lastName: 'Silva'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 10.7,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Sergio",
+          "Machado"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Sergio",
+          "Machado"
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "TM-04-09",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "What is the number of comments Antonio Garcia wrote during Q1 2011?",
+      "cypher": "MATCH (c:Comment:Message)-[:HAS_CREATOR]->(p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Antonio Garcia'\n  AND c.creationDate.year = 2011\n  AND c.creationDate.quarter = 1\nRETURN count(c) AS commentCount",
+      "gold": "MATCH (:Person {firstName: 'Antonio', lastName: 'Garcia'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+      "seconds": 12.6,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          19
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          19
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-03-09",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "How many posts carry the tag \"Samoa\"?",
+      "cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: 'Samoa'})\nRETURN count(p) AS postCount",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Samoa'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 13.3,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          13
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          13
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-03-09",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "List the friends of Volodymyr Kofler who share their city of residence.",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Volodymyr Kofler'\nMATCH (p)-[:IS_LOCATED_IN]->(city:City)<-[:IS_LOCATED_IN]-(f:Person)\nWHERE (p)-[:KNOWS]-(f)\nRETURN DISTINCT f.firstName, f.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Volodymyr', lastName: 'Kofler'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 11.3,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Vladimir",
+          "Foxx"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Vladimir",
+          "Foxx"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-04-10",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "How many comments did Abhishek Rao write in the first quarter of 2012?",
+      "cypher": "MATCH (c:Comment:Message)-[:HAS_CREATOR]->(p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Abhishek Rao'\n  AND c.creationDate.year = 2012\n  AND c.creationDate.quarter = 1\nRETURN count(c) AS commentCount",
+      "gold": "MATCH (:Person {firstName: 'Abhishek', lastName: 'Rao'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+      "seconds": 17.1,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          54
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          54
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-03-10",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "How many posts are tagged with \"The Hurdy Gurdy Man\"?",
+      "cypher": "MATCH (p:Message:Post)-[:HAS_TAG]->(t:Tag {name:\"The_Hurdy_Gurdy_Man\"})\nRETURN count(DISTINCT p) AS postCount",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'The_Hurdy_Gurdy_Man'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 3.5,
+      "info": {
+        "llm_calls": 2,
+        "problems": [
+          "The query returned only 0 or null, which usually means a name, label or relationship direction did not match."
+        ]
+      },
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-03-10",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "Which friends of Marco Agreda live in the same city as Marco Agreda?",
+      "cypher": "MATCH (marco:Person)\nWHERE marco.firstName + ' ' + marco.lastName = 'Marco Agreda'\nMATCH (marco)-[:IS_LOCATED_IN]->(city:Place:City)\nMATCH (marco)-[:KNOWS]-(friend:Person)-[:IS_LOCATED_IN]->(city2:Place:City)\nWHERE city.id = city2.id\nRETURN friend.firstName, friend.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Marco', lastName: 'Agreda'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 13.6,
+      "info": {
+        "llm_calls": 1,
+        "problems": []
+      },
+      "gold_answer": [
+        [
+          "Alcides",
+          "Amador"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Alcides",
+          "Amador"
+        ]
+      ],
+      "exec_seconds": 0.01
     }
   ]
 }

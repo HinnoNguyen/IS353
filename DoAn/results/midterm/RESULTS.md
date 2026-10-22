@@ -13,12 +13,13 @@ Tạo tự động bằng `python eval/summarize.py --split test` từ các file
 | Cấu hình | Model (ID trên Groq) | Lần | Sinh Cypher (giờ gọi LLM) | Chấm điểm | Số câu |
 |---|---|---|---|---|---|
 | B1 | `openai/gpt-oss-20b` | 1 | 2026-10-20 16:25 → 2026-10-20 20:14 | 2026-10-20 20:14 | 150 |
+| B1 | `openai/gpt-oss-20b` | 2 | 2026-10-20 20:14 → 2026-10-22 08:45 | 2026-10-22 08:45 | 150 |
 | B3 | `openai/gpt-oss-120b` | 1 | 2026-10-20 16:25 → 2026-10-20 16:37 | 2026-10-20 16:37 | 150 |
 | B3 | `openai/gpt-oss-120b` | 2 | 2026-10-20 16:37 → 2026-10-20 17:04 | 2026-10-20 17:04 | 150 |
 | B3 | `openai/gpt-oss-120b` | 3 | 2026-10-20 17:04 → 2026-10-21 11:41 | 2026-10-21 11:41 | 150 |
 
 - Temperature: 0; timeout mỗi truy vấn: 30 s; chạy ở chế độ chỉ đọc; đọc tối đa 1000 dòng kết quả (gold ≤ 20 dòng nên không ảnh hưởng chấm).
-- Số lần chạy mỗi cấu hình: B1 = 1, B3 = 3.
+- Số lần chạy mỗi cấu hình: B1 = 2, B3 = 3.
 - Neo4j: 5.26.31 community. Thư viện: python 3.12.3, neo4j 6.4.1, groq 1.7.0, python-dotenv 1.2.4.
 - SHA-256 của `test.json` (chuẩn hóa như `split_info.json`): `d3377f4e1afd0dea4a6fc094abbe8f3836854efb4de8d868a0aa2d04416dd058` – **khớp** `split_info.json`.
 - Schema đưa vào prompt: giống nhau ở mọi lượt (SHA-256 `91fa02464f603bec…`).
@@ -73,7 +74,7 @@ EX = % câu `correct` (30 / 30 / 30 / 30 / 30 câu mỗi loại, 150 câu tổng
 
 | Cấu hình | Model | Số lần chạy | lookup | aggregation | multi_hop | path | temporal | Tổng |
 |---|---|---|---|---|---|---|---|---|
-| B1 | `openai/gpt-oss-20b` | 1 | 90.0 (1 lần) | 43.3 (1 lần) | 66.7 (1 lần) | 10.0 (1 lần) | 33.3 (1 lần) | 48.7 (1 lần) |
+| B1 | `openai/gpt-oss-20b` | 2 | 91.7 ± 2.4 | 45.0 ± 2.4 | 63.3 ± 4.7 | 11.7 ± 2.4 | 30.0 ± 4.7 | 48.3 ± 0.5 |
 | B3 | `openai/gpt-oss-120b` | 3 | 97.8 ± 1.9 | 46.7 ± 0.0 | 95.6 ± 1.9 | 84.4 ± 1.9 | 70.0 ± 8.8 | 78.9 ± 1.7 |
 
 ### Phân bố nhãn (run 1)
@@ -276,8 +277,7 @@ RETURN uni.name AS university, studentCount
 
 ## g. Những gì chưa làm hoặc chưa chạy
 
-- B1 (`openai/gpt-oss-20b`) run 2: chưa chạy xong (mới sinh Cypher cho 138/150 câu).
-- B1 (`openai/gpt-oss-20b`) run 3: chưa chạy.
+- B1 (`openai/gpt-oss-20b`) run 3: chưa chạy xong (mới sinh Cypher cho 69/150 câu).
 - B2 (`openai/gpt-oss-20b`): chưa chạy lần nào.
 - Cần Bảo quyết: `judge` chấm `wrong_result` khi Cypher trả về nguyên node dù node chứa đúng đáp án (xem ghi chú ở mục e). Theo quy tắc mình giữ nguyên `judge`; nếu đổi cách chấm thì chạy lại `run_eval.py` sẽ chấm lại từ cache, không cần gọi LLM.
 - B2 (GraphCypherQAChain, P2): chưa làm. B2 dùng chung model gpt-oss-20b với B1 và tốn khoảng 2 lời gọi LLM mỗi câu, trong khi hạn mức 200K token/ngày của model này chỉ đủ cho các lượt B1. Để sau giữa kỳ.
@@ -292,28 +292,28 @@ Sửa code sau khi đã chạy test (quy tắc 2):
 
 ## h. Kết quả sơ bộ của hệ thống đề xuất (proposed v0, tập dev)
 
-Bản thử proposed v0 = model của B1 (`openai/gpt-oss-20b`) + (A) schema kèm quy ước + (D) tự sửa lỗi tối đa 2 lần; chưa có (B) liên kết thực thể và (C) few-shot. Chạy 1 lần trên tập dev, được 70/92 câu (xếp xen kẽ theo loại) do hạn mức Groq; B1 (lượt chạy dev) được so trên đúng các câu đó. Đây là kết quả sơ bộ: dev cũng là nơi chỉnh prompt, kết quả chính thức của hệ thống đề xuất sẽ chạy trên test sau khi hoàn thiện A–D.
+Bản thử proposed v0 = model của B1 (`openai/gpt-oss-20b`) + (A) schema kèm quy ước + (D) tự sửa lỗi tối đa 2 lần; chưa có (B) liên kết thực thể và (C) few-shot. Chạy 1 lần trên tập dev, đủ 92 câu; B1 (lượt chạy dev) được so trên đúng các câu đó. Đây là kết quả sơ bộ: dev cũng là nơi chỉnh prompt, kết quả chính thức của hệ thống đề xuất sẽ chạy trên test sau khi hoàn thiện A–D.
 
 | Loại câu | Số câu | B1 EX (%) | Proposed v0 EX (%) | Chênh lệch (điểm %) |
 |---|---|---|---|---|
-| lookup | 14 | 78.6 | 100.0 | +21.4 |
-| aggregation | 14 | 57.1 | 92.9 | +35.7 |
-| multi_hop | 14 | 78.6 | 100.0 | +21.4 |
-| path | 14 | 35.7 | 100.0 | +64.3 |
-| temporal | 14 | 57.1 | 100.0 | +42.9 |
-| Tổng | 70 | 61.4 | 98.6 | +37.1 |
+| lookup | 17 | 82.4 | 100.0 | +17.6 |
+| aggregation | 20 | 45.0 | 95.0 | +50.0 |
+| multi_hop | 20 | 60.0 | 100.0 | +40.0 |
+| path | 16 | 31.2 | 100.0 | +68.8 |
+| temporal | 19 | 68.4 | 100.0 | +31.6 |
+| Tổng | 92 | 57.6 | 98.9 | +41.3 |
 
 | Nhãn | B1 | Proposed v0 |
 |---|---|---|
-| correct | 43 | 69 |
-| wrong_result | 16 | 1 |
-| empty_result | 10 | 0 |
+| correct | 53 | 91 |
+| wrong_result | 23 | 1 |
+| empty_result | 15 | 0 |
 | execution_error | 0 | 0 |
 | timeout | 0 | 0 |
 | no_cypher | 1 | 0 |
 | llm_error | 0 | 0 |
 
-- Tự sửa lỗi (D) được kích hoạt ở 4/70 câu, trong đó 3 câu cuối cùng đúng; trung bình 1.07 lời gọi LLM mỗi câu (B1: 1).
-- 26 câu B1 sai nhưng proposed v0 đúng; 0 câu B1 đúng nhưng proposed v0 sai.
+- Tự sửa lỗi (D) được kích hoạt ở 9/92 câu, trong đó 8 câu cuối cùng đúng; trung bình 1.11 lời gọi LLM mỗi câu (B1: 1).
+- 38 câu B1 sai nhưng proposed v0 đúng; 0 câu B1 đúng nhưng proposed v0 sai.
 
 ![Proposed v0 so với B1 trên dev](proposed_vs_b1_dev.png)
