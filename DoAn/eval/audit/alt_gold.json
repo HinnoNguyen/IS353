@@ -1,0 +1,212 @@
+[
+  {
+    "template_id": "LK-01",
+    "interpretation": "Trả về toàn bộ node City thay vì chỉ c.name",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(c:City) RETURN c"
+  },
+  {
+    "template_id": "LK-01",
+    "interpretation": "Trả về cả thành phố và quốc gia (City, Country)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(k:Country) RETURN c.name, k.name"
+  },
+  {
+    "template_id": "LK-02",
+    "interpretation": "Có sắp xếp theo tên công ty ORDER BY c.name",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:WORK_AT]->(c:Company) RETURN c.name ORDER BY c.name"
+  },
+  {
+    "template_id": "LK-02",
+    "interpretation": "Sử dụng RETURN DISTINCT c.name",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:WORK_AT]->(c:Company) RETURN DISTINCT c.name"
+  },
+  {
+    "template_id": "LK-03",
+    "interpretation": "Trả về toàn bộ node University thay vì u.name",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:STUDY_AT]->(u:University) RETURN u"
+  },
+  {
+    "template_id": "LK-04",
+    "interpretation": "Chỉ lấy năm sinh (p.birthday.year)",
+    "cypher": "MATCH (p:Person {firstName: $firstName, lastName: $lastName}) RETURN p.birthday.year"
+  },
+  {
+    "template_id": "LK-05",
+    "interpretation": "Đi qua đường đi độ dài bất kỳ thay vì IS_PART_OF trực tiếp",
+    "cypher": "MATCH (:City {name: $city})-[:IS_PART_OF*1..2]->(k:Country) RETURN k.name"
+  },
+  {
+    "template_id": "AG-01",
+    "interpretation": "Nối trực tiếp Person -> Country mà không đi qua City (bẫy schema)",
+    "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:Country {name: $country}) RETURN count(DISTINCT p) AS total"
+  },
+  {
+    "template_id": "AG-01",
+    "interpretation": "Đếm không có DISTINCT (count(p) thay vì count(DISTINCT p))",
+    "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: $country}) RETURN count(p) AS total"
+  },
+  {
+    "template_id": "AG-02",
+    "interpretation": "Chỉ trả về tên thành phố c.name, không kèm cột đếm n",
+    "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: $country}) RETURN c.name ORDER BY count(DISTINCT p) DESC LIMIT 1"
+  },
+  {
+    "template_id": "AG-02",
+    "interpretation": "Đếm không có DISTINCT trong hàm gộp",
+    "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: $country}) RETURN c.name, count(p) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "template_id": "AG-03",
+    "interpretation": "'posts' hiểu là mọi message (bao gồm cả Post và Comment)",
+    "cypher": "MATCH (m:Message)-[:HAS_TAG]->(:Tag {name: $tag}) RETURN count(DISTINCT m) AS total"
+  },
+  {
+    "template_id": "AG-03",
+    "interpretation": "Tên tag dùng dấu cách như trong câu hỏi (không thay dấu _)",
+    "cypher": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: replace($tag, '_', ' ')}) RETURN count(DISTINCT p) AS total"
+  },
+  {
+    "template_id": "AG-04",
+    "interpretation": "Chỉ trả về tên công ty c.name, không kèm cột đếm n",
+    "cypher": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: $country}) RETURN c.name ORDER BY count(DISTINCT p) DESC LIMIT 1"
+  },
+  {
+    "template_id": "AG-04",
+    "interpretation": "Nối Company qua City rồi mới tới Country (nghĩ rằng Company giống Person)",
+    "cypher": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: $country}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "template_id": "AG-05",
+    "interpretation": "Tên tag dùng dấu cách nguyên gốc như trong câu hỏi (không có dấu _)",
+    "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: replace($tag, '_', ' ')}) RETURN count(DISTINCT p) AS total"
+  },
+  {
+    "template_id": "AG-05",
+    "interpretation": "'interested in' hiểu là người like các bài Post có gắn tag đó",
+    "cypher": "MATCH (p:Person)-[:LIKES]->(:Post)-[:HAS_TAG]->(:Tag {name: $tag}) RETURN count(DISTINCT p) AS total"
+  },
+  {
+    "template_id": "MH-01",
+    "interpretation": "Nối trực tiếp Person -> Country không qua City (bẫy schema)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(k:Country) RETURN k.name"
+  },
+  {
+    "template_id": "MH-02",
+    "interpretation": "Chỉ trả về tên trường đại học u.name, không kèm cột đếm số bạn bè",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name ORDER BY count(DISTINCT f) DESC LIMIT 1"
+  },
+  {
+    "template_id": "MH-02",
+    "interpretation": "Quan hệ bạn bè KNOWS có chiều -> (bỏ sót các cạnh ngược)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS]->(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "template_id": "MH-03",
+    "interpretation": "Nối họ và tên thành một chuỗi họ tên duy nhất thay vì hai cột",
+    "cypher": "MATCH (p:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName + ' ' + f.lastName AS fullName"
+  },
+  {
+    "template_id": "MH-03",
+    "interpretation": "Quan hệ KNOWS có chiều ->",
+    "cypher": "MATCH (p:Person {firstName: $firstName, lastName: $lastName})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)<-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName"
+  },
+  {
+    "template_id": "MH-04",
+    "interpretation": "Đi qua City: Company -> City -> Country (nghĩ rằng Company nằm ở City)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN DISTINCT k.name"
+  },
+  {
+    "template_id": "MH-05",
+    "interpretation": "Chỉ trả về tên thể loại tc.name, không kèm cột đếm n",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name ORDER BY count(DISTINCT t) DESC LIMIT 1"
+  },
+  {
+    "template_id": "MH-05",
+    "interpretation": "Đi lên lớp cha IS_SUBCLASS_OF để tìm thể loại gốc (Root Category)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(:TagClass)-[:IS_SUBCLASS_OF*0..]->(root:TagClass) WHERE NOT (root)-[:IS_SUBCLASS_OF]->() RETURN root.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1"
+  },
+  {
+    "template_id": "PA-01",
+    "interpretation": "Độ dài đường đi tính theo số người trung gian (số đỉnh - 2 hoặc hops - 1)",
+    "cypher": "MATCH (a:Person {firstName: $firstName1, lastName: $lastName1}), (b:Person {firstName: $firstName2, lastName: $lastName2}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p) - 1"
+  },
+  {
+    "template_id": "PA-01",
+    "interpretation": "Quan hệ KNOWS có chiều -> trong shortestPath",
+    "cypher": "MATCH (a:Person {firstName: $firstName1, lastName: $lastName1}), (b:Person {firstName: $firstName2, lastName: $lastName2}) MATCH p = shortestPath((a)-[:KNOWS*]->(b)) RETURN length(p)"
+  },
+  {
+    "template_id": "PA-02",
+    "interpretation": "Quan hệ KNOWS có chiều -> trong allShortestPaths",
+    "cypher": "MATCH (a:Person {firstName: $firstName1, lastName: $lastName1}), (b:Person {firstName: $firstName2, lastName: $lastName2}) MATCH p = allShortestPaths((a)-[:KNOWS*]->(b)) RETURN count(p)"
+  },
+  {
+    "template_id": "PA-03",
+    "interpretation": "Nối họ và tên thành một chuỗi duy nhất thay vì 2 cột",
+    "cypher": "MATCH (:Person {firstName: $firstName1, lastName: $lastName1})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: $firstName2, lastName: $lastName2}) RETURN DISTINCT m.firstName + ' ' + m.lastName AS fullName"
+  },
+  {
+    "template_id": "PA-03",
+    "interpretation": "KNOWS có chiều từ hai đầu hướng vào người trung gian m",
+    "cypher": "MATCH (:Person {firstName: $firstName1, lastName: $lastName1})-[:KNOWS]->(m:Person)<-[:KNOWS]-(:Person {firstName: $firstName2, lastName: $lastName2}) RETURN DISTINCT m.firstName, m.lastName"
+  },
+  {
+    "template_id": "PA-04",
+    "interpretation": "Chỉ đếm bạn của bạn ở đúng khoảng cách 2 (loại trừ bạn trực tiếp khoảng cách 1)",
+    "cypher": "MATCH (p:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS*2]-(f:Person) WHERE f <> p AND NOT (p)-[:KNOWS]-(f) RETURN count(DISTINCT f)"
+  },
+  {
+    "template_id": "PA-04",
+    "interpretation": "Bao gồm cả chính người đó trong tập người có thể chạm tới",
+    "cypher": "MATCH (p:Person {firstName: $firstName, lastName: $lastName})-[:KNOWS*0..2]-(f:Person) RETURN count(DISTINCT f)"
+  },
+  {
+    "template_id": "PA-05",
+    "interpretation": "Dùng ORDER BY length(p) LIMIT 1 thay vì min(length(p))",
+    "cypher": "MATCH (a:Person {firstName: $firstName, lastName: $lastName}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: $city}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p) ORDER BY length(p) ASC LIMIT 1"
+  },
+  {
+    "template_id": "PA-05",
+    "interpretation": "Độ dài tính theo người trung gian: min(length(p)) - 1",
+    "cypher": "MATCH (a:Person {firstName: $firstName, lastName: $lastName}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: $city}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p)) - 1"
+  },
+  {
+    "template_id": "TM-01",
+    "interpretation": "'posts' hiểu là mọi message (bao gồm cả Comment)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})<-[:HAS_CREATOR]-(m:Message) WHERE m.creationDate.year = $year RETURN count(DISTINCT m)"
+  },
+  {
+    "template_id": "TM-02",
+    "interpretation": "So khớp chuỗi ngày tháng thay vì truy cập thuộc tính .year và .month",
+    "cypher": "MATCH (p:Person) WHERE toString(p.creationDate) STARTS WITH $year + '-' + (CASE WHEN $month < 10 THEN '0' + toString($month) ELSE toString($month) END) RETURN count(p)"
+  },
+  {
+    "template_id": "TM-03",
+    "interpretation": "Quan hệ ngược chiều hoặc MEMBER_OF thay vì HAS_MEMBER",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[m:MEMBER_OF]->(f:Forum) RETURN f.title ORDER BY m.joinDate LIMIT 1"
+  },
+  {
+    "template_id": "TM-03",
+    "interpretation": "Trả về f.name thay vì f.title (quy ước tên của nhiều thực thể khác)",
+    "cypher": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: $firstName, lastName: $lastName}) RETURN f.name ORDER BY m.joinDate LIMIT 1"
+  },
+  {
+    "template_id": "TM-04",
+    "interpretation": "Lọc quý theo khoảng tháng (c.creationDate.month) thay vì .quarter",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = $year AND c.creationDate.month >= ($quarter - 1) * 3 + 1 AND c.creationDate.month <= $quarter * 3 RETURN count(DISTINCT c)"
+  },
+  {
+    "template_id": "TM-04",
+    "interpretation": "'comments' hiểu là mọi message trong quý",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})<-[:HAS_CREATOR]-(m:Message) WHERE m.creationDate.year = $year AND m.creationDate.quarter = $quarter RETURN count(DISTINCT m)"
+  },
+  {
+    "template_id": "TM-05",
+    "interpretation": "Trả về họ tên nối thành một chuỗi f.firstName + ' ' + f.lastName",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = $year RETURN f.firstName + ' ' + f.lastName AS fullName"
+  },
+  {
+    "template_id": "TM-05",
+    "interpretation": "Quan hệ KNOWS có chiều -> (chỉ đếm bạn do người đó kết bạn)",
+    "cypher": "MATCH (:Person {firstName: $firstName, lastName: $lastName})-[k:KNOWS]->(f:Person) WHERE k.creationDate.year = $year RETURN f.firstName, f.lastName"
+  }
+]
