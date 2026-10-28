@@ -1,0 +1,179 @@
+{
+  "segments": [
+    "b1_zeroshot__openai-gpt-oss-20b__run1:prompt",
+    "b1_zeroshot__openai-gpt-oss-20b__run1:schema | proposed_v0__openai-gpt-oss-20b__run1:schema | b1:build_schema(live)",
+    "proposed_v0__openai-gpt-oss-20b__run1:prompt",
+    "proposed_v0__openai-gpt-oss-20b__run1:fix_prompt",
+    "proposed_v0__openai-gpt-oss-20b__run1:conventions"
+  ],
+  "splits": {
+    "dev": {
+      "n_questions": 92,
+      "n_hits": 25,
+      "n_questions_affected": 11,
+      "matches": [
+        {
+          "source": "answer",
+          "value": "the",
+          "segment": "b1_zeroshot__openai-gpt-oss-20b__run1:prompt",
+          "n_questions": 2,
+          "by_template": {
+            "PA-03": 2
+          },
+          "ids": [
+            "PA-03-09",
+            "PA-03-10"
+          ]
+        },
+        {
+          "source": "answer",
+          "value": "the",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 2,
+          "by_template": {
+            "PA-03": 2
+          },
+          "ids": [
+            "PA-03-09",
+            "PA-03-10"
+          ]
+        },
+        {
+          "source": "answer",
+          "value": "the",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:fix_prompt",
+          "n_questions": 2,
+          "by_template": {
+            "PA-03": 2
+          },
+          "ids": [
+            "PA-03-09",
+            "PA-03-10"
+          ]
+        },
+        {
+          "source": "answer",
+          "value": "the",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:prompt",
+          "n_questions": 2,
+          "by_template": {
+            "PA-03": 2
+          },
+          "ids": [
+            "PA-03-09",
+            "PA-03-10"
+          ]
+        },
+        {
+          "source": "gold_literal",
+          "value": "2011",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 8,
+          "by_template": {
+            "TM-02": 3,
+            "TM-04": 5
+          },
+          "ids": [
+            "TM-02-01",
+            "TM-02-06",
+            "TM-02-08",
+            "TM-04-01",
+            "TM-04-03",
+            "TM-04-04",
+            "TM-04-08",
+            "TM-04-09"
+          ]
+        },
+        {
+          "source": "params",
+          "value": "2011",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 8,
+          "by_template": {
+            "TM-02": 3,
+            "TM-04": 5
+          },
+          "ids": [
+            "TM-02-01",
+            "TM-02-06",
+            "TM-02-08",
+            "TM-04-01",
+            "TM-04-03",
+            "TM-04-04",
+            "TM-04-08",
+            "TM-04-09"
+          ]
+        },
+        {
+          "source": "params",
+          "value": "may",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 1,
+          "by_template": {
+            "TM-02": 1
+          },
+          "ids": [
+            "TM-02-03"
+          ]
+        }
+      ],
+      "years_in_prompt": {
+        "2011": {
+          "TM-02": 3,
+          "TM-04": 5
+        }
+      }
+    },
+    "test": {
+      "n_questions": 150,
+      "n_hits": 20,
+      "n_questions_affected": 10,
+      "matches": [
+        {
+          "source": "answer",
+          "value": "person",
+          "segment": "b1_zeroshot__openai-gpt-oss-20b__run1:schema | proposed_v0__openai-gpt-oss-20b__run1:schema | b1:build_schema(live)",
+          "n_questions": 3,
+          "by_template": {
+            "MH-05": 3
+          }
+        },
+        {
+          "source": "answer",
+          "value": "person",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 3,
+          "by_template": {
+            "MH-05": 3
+          }
+        },
+        {
+          "source": "gold_literal",
+          "value": "2011",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 7,
+          "by_template": {
+            "TM-01": 5,
+            "TM-05": 2
+          }
+        },
+        {
+          "source": "params",
+          "value": "2011",
+          "segment": "proposed_v0__openai-gpt-oss-20b__run1:conventions",
+          "n_questions": 7,
+          "by_template": {
+            "TM-01": 5,
+            "TM-05": 2
+          }
+        }
+      ],
+      "years_in_prompt": {
+        "2011": {
+          "TM-01": 5,
+          "TM-05": 2
+        }
+      }
+    }
+  }
+}

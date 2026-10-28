@@ -1,0 +1,37 @@
+{
+  "near_duplicates": {
+    "threshold": 0.8,
+    "n_test": 150,
+    "n_near_dup": 0,
+    "max_jaccard_hist": {
+      "0.1": 4,
+      "0.2": 17,
+      "0.3": 63,
+      "0.4": 33,
+      "0.5": 23,
+      "0.6": 7,
+      "0.7": 3
+    },
+    "template_pairs": {}
+  },
+  "gold_access": {
+    "eval\\baselines\\__init__.py": {
+      "lines": [],
+      "status": "sạch"
+    },
+    "eval\\baselines\\b1_zeroshot.py": {
+      "lines": [],
+      "status": "sạch"
+    },
+    "eval\\baselines\\oracle.py": {
+      "lines": [
+        9
+      ],
+      "status": "được phép"
+    },
+    "eval\\baselines\\proposed_v0.py": {
+      "lines": [],
+      "status": "sạch"
+    }
+  }
+}
