@@ -4,7 +4,7 @@ Nhóm 13 · IS353.R11 · GVHD: ThS. Trần Hưng Nghiệp
 
 Công cụ hỏi đáp trên đồ thị mạng xã hội **LDBC SNB (SF0.1)** lưu trong **Neo4j**: câu hỏi tiếng Anh được LLM mã nguồn mở chuyển thành truy vấn **Cypher**, chạy trên đồ thị và trả lời bằng văn bản. Bài toán được đánh giá như Text-to-Cypher (execution accuracy) với baseline từ đơn giản đến mạnh.
 
-Chi tiết: [proposal v2](docs/SNA-Group13-A.22-GraphQA-Proposal-v2.docx)
+Chi tiết: [proposal v3](docs/SNA-Group13-A.22-GraphQA-Proposal-v3.docx) (bản 3, 21/10/2026: đổi model sang gpt-oss, cập nhật số liệu thật)
 
 ## Cấu trúc thư mục
 
@@ -16,9 +16,16 @@ DoAn/
 ├── eval/
 │   ├── QA_GUIDELINE.md     # quy ước xây bộ câu hỏi QA (bắt buộc đọc trước khi viết câu hỏi)
 │   ├── pilot_questions.json# 10 câu hỏi thử nghiệm kèm Cypher gold
-│   └── pilot_text2cypher.py# baseline B1 (LLM zero-shot) + chấm execution accuracy
+│   ├── pilot_text2cypher.py# baseline B1 (LLM zero-shot) + chấm execution accuracy
+│   ├── questions/          # bộ câu hỏi: dev.json, test.json (đã đóng băng), split_info.json
+│   ├── baselines/          # oracle (kiểm tra khung), b1_zeroshot (B1/B3)
+│   ├── llm.py              # gọi LLM qua Groq
+│   ├── run_eval.py         # sinh Cypher -> chạy trên Neo4j -> chấm -> results/runs/
+│   └── summarize.py        # tổng hợp các lượt chạy -> results/midterm/
 ├── results/
-│   └── graph_stats.md      # thống kê đồ thị đã đếm trong Neo4j
+│   ├── graph_stats.md      # thống kê đồ thị đã đếm trong Neo4j
+│   ├── runs/               # kết quả từng lượt chạy (dev/test)
+│   └── midterm/            # gói kết quả giữa kỳ (RESULTS.md, errors_B1.md, biểu đồ)
 ├── docs/                   # proposal, file phân công
 ├── requirements.txt
 └── .env.example            # mẫu biến môi trường (copy thành .env)
@@ -92,7 +99,41 @@ cp .env.example .env         # rồi điền key của bạn vào .env
 python eval/pilot_text2cypher.py
 ```
 
-Kết quả lưu trong `results/pilot_<thời gian>.md|json`. Chọn LLM bằng `LLM_BACKEND` trong `.env` (`ollama` hoặc `gemini`; backend Groq đang được bổ sung).
+Kết quả lưu trong `results/pilot_<thời gian>.md|json`. Chọn LLM bằng `LLM_BACKEND` trong `.env` (`ollama` hoặc `gemini`). Đánh giá chính thức dùng Groq qua `eval/run_eval.py` (mục dưới).
+
+## Chạy đánh giá
+
+Cần Neo4j đang chạy (đã nạp dữ liệu) và `GROQ_API_KEY` trong `.env` (oracle không cần). Tạo key ở <https://console.groq.com/keys>.
+
+**1. Kiểm tra khung chấm bằng oracle** (trả về đúng Cypher gold, phải ra 100% `correct`):
+
+```bash
+python eval/run_eval.py --baseline oracle --split dev
+python eval/run_eval.py --baseline oracle --split test
+```
+
+**2. Chạy baseline.** Thử và gỡ lỗi trên `--split dev`; chỉ chạy `--split test` sau khi prompt đã được commit (đóng băng).
+
+```bash
+python eval/run_eval.py --baseline b1_zeroshot --model openai/gpt-oss-20b --split test --run 1 --answers  # B1
+python eval/run_eval.py --baseline b1_zeroshot --model openai/gpt-oss-120b --split test --run 1           # B3
+```
+
+Groq đã gỡ `llama-3.1-8b-instant` và `llama-3.3-70b-versatile` từ 16/08/2026, nên B1 dùng `openai/gpt-oss-20b` (model yếu) và B3 dùng `openai/gpt-oss-120b` (model mạnh, cùng họ).
+
+Lần 2, 3: đổi thành `--run 2`, `--run 3` (không cần `--answers`). `--limit N` chạy thử N câu đầu, không ghi kết quả.
+
+- Cypher sinh ra được cache ngay sau mỗi câu ở `results/cache/` (không commit). Bị dừng giữa chừng (hết hạn mức ngày của Groq, mất mạng) thì chạy lại đúng lệnh cũ là làm tiếp.
+- Mỗi câu Cypher chạy ở chế độ chỉ đọc, timeout 30 s, chấm bằng `judge` của `pilot_text2cypher.py`. Nhãn: `correct`, `wrong_result`, `empty_result`, `execution_error`, `timeout`, `no_cypher`, `llm_error`.
+- Kết quả: `results/runs/<split>/<baseline>__<model>__run<k>.json` (meta: model, giờ chạy, SHA-256 bộ câu hỏi, prompt, schema; từng câu: Cypher, nhãn, kết quả).
+
+**3. Tổng hợp** thành gói kết quả `results/midterm/` (`RESULTS.md`, `errors_B1.md`, `ex_by_type.png`, `verdicts.png`):
+
+```bash
+python eval/summarize.py --split test
+```
+
+Phần viết tay (hạn mức Groq, ví dụ lỗi chọn tay kèm giải thích, ghi chú việc chưa làm) nằm trong `results/midterm/manual.json`; chạy lại `summarize.py` sau khi sửa file này.
 
 ## Số liệu đồ thị (LDBC SNB SF0.1)
 

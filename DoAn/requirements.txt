@@ -1,4 +1,7 @@
-neo4j>=5.0
+neo4j>=5.7
 python-dotenv>=1.0
 # chỉ cần khi dùng LLM_BACKEND=gemini
 google-genai
+# eval/run_eval.py (LLM qua Groq) và eval/summarize.py (biểu đồ)
+groq
+matplotlib

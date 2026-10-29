@@ -1,0 +1,3598 @@
+{
+  "meta": {
+    "baseline": "b1_zeroshot",
+    "model": "openai/gpt-oss-120b",
+    "split": "test",
+    "run": 1,
+    "started_at": "2026-10-20T16:25:38+07:00",
+    "finished_at": "2026-10-20T16:37:24+07:00",
+    "llm_first_call_at": "2026-10-20T16:25:46+07:00",
+    "llm_last_call_at": "2026-10-20T16:37:24+07:00",
+    "temperature": 0,
+    "timeout_s": 30,
+    "max_rows_read": 1000,
+    "questions_file": "eval/questions/test.json",
+    "questions_sha256": "d3377f4e1afd0dea4a6fc094abbe8f3836854efb4de8d868a0aa2d04416dd058",
+    "n_questions": 150,
+    "verdicts": {
+      "correct": 116,
+      "wrong_result": 17,
+      "empty_result": 12,
+      "execution_error": 5,
+      "timeout": 0,
+      "no_cypher": 0,
+      "llm_error": 0
+    },
+    "neo4j": "5.26.31 community",
+    "packages": {
+      "python": "3.12.3",
+      "neo4j": "6.4.1",
+      "groq": "1.7.0",
+      "python-dotenv": "1.2.4"
+    },
+    "prompt": "You are an expert Neo4j developer. Write one Cypher query that answers the question\nusing only the graph schema below. Return only the Cypher query, with no explanation.\n\nSchema:\n{schema}\n\nQuestion: {question}\nCypher:",
+    "answers": null,
+    "schema": "Node labels and properties:\n  (:City:Place) {id: Long, name: String, url: String}\n  (:Comment:Message) {browserUsed: String, content: String, creationDate: DateTime, id: Long, length: Long, locationIP: String}\n  (:Company:Organisation) {id: Long, name: String, url: String}\n  (:Continent:Place) {id: Long, name: String, url: String}\n  (:Country:Place) {id: Long, name: String, url: String}\n  (:Forum) {creationDate: DateTime, id: Long, title: String}\n  (:Message:Post) {browserUsed: String, content: String, creationDate: DateTime, id: Long, imageFile: String, language: String, length: Long, locationIP: String}\n  (:Organisation:University) {id: Long, name: String, url: String}\n  (:Person) {birthday: Date, browserUsed: String, creationDate: DateTime, email: StringArray, firstName: String, gender: String, id: Long, lastName: String, locationIP: String, speaks: StringArray}\n  (:Tag) {id: Long, name: String, url: String}\n  (:TagClass) {id: Long, name: String, url: String}\nRelationships:\n  (:Place:Country)-[:IS_PART_OF]->(:Place:Continent)\n  (:Place:City)-[:IS_PART_OF]->(:Place:Country)\n  (:Organisation:Company)-[:IS_LOCATED_IN]->(:Place:Country)\n  (:Organisation:University)-[:IS_LOCATED_IN]->(:Place:City)\n  (:Tag)-[:HAS_TYPE]->(:TagClass)\n  (:TagClass)-[:IS_SUBCLASS_OF]->(:TagClass)\n  (:Person)-[:IS_LOCATED_IN]->(:Place:City)\n  (:Person)-[:KNOWS {creationDate}]->(:Person)\n  (:Person)-[:HAS_INTEREST]->(:Tag)\n  (:Person)-[:STUDY_AT {classYear}]->(:Organisation:University)\n  (:Person)-[:WORK_AT {workFrom}]->(:Organisation:Company)\n  (:Person)-[:LIKES {creationDate}]->(:Post:Message)\n  (:Person)-[:LIKES {creationDate}]->(:Comment:Message)\n  (:Forum)-[:HAS_MODERATOR]->(:Person)\n  (:Forum)-[:HAS_MEMBER {joinDate}]->(:Person)\n  (:Forum)-[:HAS_TAG]->(:Tag)\n  (:Forum)-[:CONTAINER_OF]->(:Post:Message)\n  (:Post:Message)-[:HAS_CREATOR]->(:Person)\n  (:Post:Message)-[:HAS_TAG]->(:Tag)\n  (:Post:Message)-[:IS_LOCATED_IN]->(:Place:Country)\n  (:Comment:Message)-[:HAS_CREATOR]->(:Person)\n  (:Comment:Message)-[:HAS_TAG]->(:Tag)\n  (:Comment:Message)-[:IS_LOCATED_IN]->(:Place:Country)\n  (:Comment:Message)-[:REPLY_OF]->(:Post:Message)\n  (:Comment:Message)-[:REPLY_OF]->(:Comment:Message)",
+    "schema_sha256": "91fa02464f603bec7d4d20f695858318822d5ab365212384fbc7744d003737dd"
+  },
+  "results": [
+    {
+      "id": "LK-01-01",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Which city does Djelaludin Zaland live in?",
+      "cypher": "MATCH (p:Person {firstName: 'Djelaludin', lastName: 'Zaland'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS cityName",
+      "gold": "MATCH (:Person {firstName: 'Djelaludin', lastName: 'Zaland'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 4.7,
+      "gold_answer": [
+        [
+          "Herat"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Herat"
+        ]
+      ],
+      "exec_seconds": 0.59
+    },
+    {
+      "id": "LK-01-02",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "In which city is Chen Zhu located?",
+      "cypher": "MATCH (p:Person {firstName: 'Chen', lastName: 'Zhu'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Chen', lastName: 'Zhu'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.1,
+      "gold_answer": [
+        [
+          "Guilin"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Guilin"
+        ]
+      ],
+      "exec_seconds": 0.19
+    },
+    {
+      "id": "LK-01-03",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Where does Marcelo Dom Pedro II live? Give the city.",
+      "cypher": "MATCH (p:Person {firstName: 'Marcelo', lastName: 'Dom Pedro II'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Marcelo', lastName: 'Dom Pedro II'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.0,
+      "gold_answer": [
+        [
+          "Campinas"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Campinas"
+        ]
+      ],
+      "exec_seconds": 0.29
+    },
+    {
+      "id": "LK-01-04",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Which city does Faisal Qureshi live in?",
+      "cypher": "MATCH (p:Person {firstName: 'Faisal', lastName: 'Qureshi'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Faisal', lastName: 'Qureshi'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.6,
+      "gold_answer": [
+        [
+          "New_Muslim_Town"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "New_Muslim_Town"
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "LK-01-05",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "In which city is Karthik Khan located?",
+      "cypher": "MATCH (p:Person {firstName: 'Karthik', lastName: 'Khan'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Karthik', lastName: 'Khan'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          "Vadodara"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Vadodara"
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "LK-01-06",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Where does Gyula Kovacs live? Give the city.",
+      "cypher": "MATCH (p:Person {firstName: 'Gyula', lastName: 'Kovacs'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Gyula', lastName: 'Kovacs'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.3,
+      "gold_answer": [
+        [
+          "Veszprém"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Veszprém"
+        ]
+      ],
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "LK-01-07",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Which city does Kieu Cong Do live in?",
+      "cypher": "MATCH (p:Person {firstName: 'Kieu Cong', lastName: 'Do'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Kieu Cong', lastName: 'Do'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.0,
+      "gold_answer": [
+        [
+          "Đà_Lạt"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Đà_Lạt"
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "LK-01-08",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "In which city is David Murray located?",
+      "cypher": "MATCH (p:Person {firstName: 'David', lastName: 'Murray'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'David', lastName: 'Murray'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 0.9,
+      "gold_answer": [
+        [
+          "Bellville"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Bellville"
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "LK-01-09",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Where does Carlos Amenábar live? Give the city.",
+      "cypher": "MATCH (p:Person {firstName: 'Carlos', lastName: 'Amenábar'})-[:IS_LOCATED_IN]->(c:City)\nRETURN c.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Carlos', lastName: 'Amenábar'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 0.9,
+      "gold_answer": [
+        [
+          "Temuco"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Temuco"
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "LK-01-10",
+      "type": "lookup",
+      "template_id": "LK-01",
+      "question": "Which city does Ayesha Iqbal live in?",
+      "cypher": "MATCH (p:Person {firstName: 'Ayesha', lastName: 'Iqbal'})-[:IS_LOCATED_IN]->(city:City)\nRETURN city.name AS city",
+      "gold": "MATCH (:Person {firstName: 'Ayesha', lastName: 'Iqbal'})-[:IS_LOCATED_IN]->(c:City) RETURN c.name",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          "Larkana_District"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Larkana_District"
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "LK-02-01",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Which companies does Emperor of Brazil Machado work at?",
+      "cypher": "MATCH (p:Person {firstName: 'Emperor of Brazil', lastName: 'Machado'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN c.name AS companyName, c.id AS companyId",
+      "gold": "MATCH (:Person {firstName: 'Emperor of Brazil', lastName: 'Machado'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          "Nordeste_Linhas_Aéreas_Regionais"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Nordeste_Linhas_Aéreas_Regionais",
+          146
+        ]
+      ],
+      "exec_seconds": 0.3
+    },
+    {
+      "id": "LK-02-02",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "List the companies where Marcelo Santos works.",
+      "cypher": "MATCH (p:Person {firstName: 'Marcelo', lastName: 'Santos'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN c.name AS companyName, c.id AS companyId",
+      "gold": "MATCH (:Person {firstName: 'Marcelo', lastName: 'Santos'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          "Abaeté_Linhas_Aéreas"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Abaeté_Linhas_Aéreas",
+          139
+        ]
+      ],
+      "exec_seconds": 0.16
+    },
+    {
+      "id": "LK-02-03",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Who are the employers of Esti Mamo Dego?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName CONTAINS 'Esti' AND p.lastName CONTAINS 'Dego'\nMATCH (p)-[:WORK_AT]->(c:Company)\nRETURN DISTINCT c.name AS employer",
+      "gold": "MATCH (:Person {firstName: 'Esti Mamo', lastName: 'Dego'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 1.4,
+      "gold_answer": [
+        [
+          "TransAsia_Airways"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "TransAsia_Airways"
+        ]
+      ],
+      "exec_seconds": 0.15
+    },
+    {
+      "id": "LK-02-04",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Which companies does Ge Hu work at?",
+      "cypher": "MATCH (p:Person {firstName: 'Ge', lastName: 'Hu'})-[:WORK_AT]->(c:Company)\nRETURN c.id AS companyId, c.name AS companyName",
+      "gold": "MATCH (:Person {firstName: 'Ge', lastName: 'Hu'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 7.7,
+      "gold_answer": [
+        [
+          "China_Yunnan_Airlines"
+        ],
+        [
+          "Tianjin_Airlines"
+        ],
+        [
+          "China_Cargo_Airlines"
+        ],
+        [
+          "Chongqing_Airlines"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 4,
+      "pred_preview": [
+        [
+          921,
+          "China_Yunnan_Airlines"
+        ],
+        [
+          934,
+          "Tianjin_Airlines"
+        ],
+        [
+          916,
+          "China_Cargo_Airlines"
+        ],
+        [
+          936,
+          "Chongqing_Airlines"
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "LK-02-05",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "List the companies where Jun Kato works.",
+      "cypher": "MATCH (p:Person {firstName: 'Jun', lastName: 'Kato'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN DISTINCT c.name AS companyName",
+      "gold": "MATCH (:Person {firstName: 'Jun', lastName: 'Kato'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 1.0,
+      "gold_answer": [
+        [
+          "Air_Next"
+        ],
+        [
+          "Air_Hokkaido"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 2,
+      "pred_preview": [
+        [
+          "Air_Next"
+        ],
+        [
+          "Air_Hokkaido"
+        ]
+      ],
+      "exec_seconds": 0.17
+    },
+    {
+      "id": "LK-02-06",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Who are the employers of Chau Nguyen?",
+      "cypher": "MATCH (p:Person {firstName: 'Chau', lastName: 'Nguyen'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN DISTINCT c.name AS employer",
+      "gold": "MATCH (:Person {firstName: 'Chau', lastName: 'Nguyen'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          "Jetstar_Pacific_Airlines"
+        ],
+        [
+          "Vietnam_Airlines"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 2,
+      "pred_preview": [
+        [
+          "Jetstar_Pacific_Airlines"
+        ],
+        [
+          "Vietnam_Airlines"
+        ]
+      ],
+      "exec_seconds": 0.13
+    },
+    {
+      "id": "LK-02-07",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Which companies does Burak Koksal work at?",
+      "cypher": "MATCH (p:Person {firstName: 'Burak', lastName: 'Koksal'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN c.name AS companyName",
+      "gold": "MATCH (:Person {firstName: 'Burak', lastName: 'Koksal'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 10.5,
+      "gold_answer": [
+        [
+          "Air_Anatolia"
+        ],
+        [
+          "Ankair"
+        ],
+        [
+          "ACT_Airlines"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 3,
+      "pred_preview": [
+        [
+          "Air_Anatolia"
+        ],
+        [
+          "Ankair"
+        ],
+        [
+          "ACT_Airlines"
+        ]
+      ],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "LK-02-08",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "List the companies where Rahul Kapoor works.",
+      "cypher": "MATCH (p:Person {firstName: 'Rahul', lastName: 'Kapoor'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN DISTINCT c.name AS companyName",
+      "gold": "MATCH (:Person {firstName: 'Rahul', lastName: 'Kapoor'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 1.0,
+      "gold_answer": [
+        [
+          "TajAir"
+        ],
+        [
+          "Deccan_Aviation"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 2,
+      "pred_preview": [
+        [
+          "TajAir"
+        ],
+        [
+          "Deccan_Aviation"
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "LK-02-09",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Who are the employers of Abby Hassan?",
+      "cypher": "MATCH (p:Person {firstName: 'Abby', lastName: 'Hassan'})-[:WORK_AT]->(c:Organisation:Company)\nRETURN DISTINCT c.name AS employer",
+      "gold": "MATCH (:Person {firstName: 'Abby', lastName: 'Hassan'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 2.2,
+      "gold_answer": [
+        [
+          "Silverfly_(airline)"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Silverfly_(airline)"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-02-10",
+      "type": "lookup",
+      "template_id": "LK-02",
+      "question": "Which companies does János Mészáros work at?",
+      "cypher": "MATCH (p:Person {firstName: 'János', lastName: 'Mészáros'})-[:WORK_AT]->(c:Company)\nRETURN DISTINCT c.name AS companyName",
+      "gold": "MATCH (:Person {firstName: 'János', lastName: 'Mészáros'})-[:WORK_AT]->(c:Company) RETURN c.name",
+      "seconds": 6.2,
+      "gold_answer": [
+        [
+          "Malév_Hungarian_Airlines"
+        ],
+        [
+          "ABC_Air_Hungary"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 2,
+      "pred_preview": [
+        [
+          "Malév_Hungarian_Airlines"
+        ],
+        [
+          "ABC_Air_Hungary"
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "LK-05-01",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Which country is the city of Uzhhorod in?",
+      "cypher": "MATCH (c:City {name: 'Uzhhorod'})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Uzhhorod'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 4.3,
+      "gold_answer": [
+        [
+          "Ukraine"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Ukraine"
+        ]
+      ],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "LK-05-02",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "In which country is Hachiōji located?",
+      "cypher": "MATCH (c:City {name: \"Hachiōji\"})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Hachiōji'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 7.9,
+      "gold_answer": [
+        [
+          "Japan"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Japan"
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "LK-05-03",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Buea is a city of which country?",
+      "cypher": "MATCH (c:City {name: 'Buea'})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Buea'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 7.6,
+      "gold_answer": [
+        [
+          "Cameroon"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Cameroon"
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "LK-05-04",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Which country is the city of Yueyang in?",
+      "cypher": "MATCH (c:City {name: 'Yueyang'})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Yueyang'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 1.4,
+      "gold_answer": [
+        [
+          "China"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "China"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-05-05",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "In which country is Chaohu located?",
+      "cypher": "MATCH (city:City {name: 'Chaohu'})-[:IS_PART_OF]->(country:Country)\nRETURN country.name AS country",
+      "gold": "MATCH (:City {name: 'Chaohu'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 12.2,
+      "gold_answer": [
+        [
+          "China"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "China"
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "LK-05-06",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Chernivtsi is a city of which country?",
+      "cypher": "MATCH (c:City {name: 'Chernivtsi'})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country_name",
+      "gold": "MATCH (:City {name: 'Chernivtsi'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 1.9,
+      "gold_answer": [
+        [
+          "Ukraine"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Ukraine"
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "LK-05-07",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Which country is the city of Loikaw in?",
+      "cypher": "MATCH (c:City {name: 'Loikaw'})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Loikaw'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 0.9,
+      "gold_answer": [
+        [
+          "Burma"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Burma"
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "LK-05-08",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "In which country is Dehradun located?",
+      "cypher": "MATCH (c:City:Place {name: 'Dehradun'})-[:IS_PART_OF]->(co:Country:Place)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Dehradun'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 5.3,
+      "gold_answer": [
+        [
+          "India"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "India"
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "LK-05-09",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Fushun is a city of which country?",
+      "cypher": "MATCH (c:City {name: 'Fushun'})-[:IS_PART_OF]->(co:Country)\nRETURN co.name AS country",
+      "gold": "MATCH (:City {name: 'Fushun'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 8.7,
+      "gold_answer": [
+        [
+          "China"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "China"
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "LK-05-10",
+      "type": "lookup",
+      "template_id": "LK-05",
+      "question": "Which country is the city of Geelong in?",
+      "cypher": "MATCH (city:City {name: 'Geelong'})-[:IS_PART_OF]->(country:Country)\nRETURN country.name AS country",
+      "gold": "MATCH (:City {name: 'Geelong'})-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 1.5,
+      "gold_answer": [
+        [
+          "Australia"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Australia"
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "AG-02-01",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "Which city in Afghanistan has the most residents?",
+      "cypher": "MATCH (c:City)-[:IS_PART_OF]->(co:Country {name: 'Afghanistan'})\nOPTIONAL MATCH (p:Person)-[:IS_LOCATED_IN]->(c)\nWITH c, count(p) AS residents\nORDER BY residents DESC\nLIMIT 1\nRETURN c.name AS city, residents",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Afghanistan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.9,
+      "gold_answer": [
+        [
+          "Herat"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Herat",
+          4
+        ]
+      ],
+      "exec_seconds": 0.3
+    },
+    {
+      "id": "AG-02-02",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "In United Kingdom, which city do the largest number of people live in?",
+      "cypher": "MATCH (city:City)-[:IS_PART_OF]->(country:Country {name: 'United Kingdom'})\nMATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nRETURN city.name AS city, count(person) AS residentCount\nORDER BY residentCount DESC\nLIMIT 1",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'United_Kingdom'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.3,
+      "gold_answer": [
+        [
+          "Bristol"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "AG-02-03",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "What is the most populated city of Democratic Republic of the Congo in the network?",
+      "cypher": "MATCH (city:City)-[:IS_PART_OF]->(country:Country {name: 'Democratic Republic of the Congo'})\nOPTIONAL MATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nWITH city, count(person) AS population\nORDER BY population DESC\nLIMIT 1\nRETURN city.id AS cityId, city.name AS cityName, population",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Democratic_Republic_of_the_Congo'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.5,
+      "gold_answer": [
+        [
+          "Boma"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "AG-02-04",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "Which city in Czech Republic has the most residents?",
+      "cypher": "MATCH (city:City:Place)-[:IS_PART_OF]->(country:Country:Place {name: 'Czech Republic'})\nOPTIONAL MATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nWITH city, count(person) AS residentCount\nORDER BY residentCount DESC\nLIMIT 1\nRETURN city.name AS city, residentCount",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Czech_Republic'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.8,
+      "gold_answer": [
+        [
+          "Hradec_Králové"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "AG-02-05",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "In Portugal, which city do the largest number of people live in?",
+      "cypher": "MATCH (city:City)-[:IS_PART_OF]->(c:Country {name: \"Portugal\"})\nMATCH (p:Person)-[:IS_LOCATED_IN]->(city)\nRETURN city.name AS city, count(p) AS residents\nORDER BY residents DESC\nLIMIT 1",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Portugal'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 7.6,
+      "gold_answer": [
+        [
+          "Mesa"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Mesa",
+          3
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "AG-02-06",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "What is the most populated city of Germany in the network?",
+      "cypher": "MATCH (city:City)-[:IS_PART_OF]->(country:Country {name: 'Germany'})\nOPTIONAL MATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nWITH city, count(person) AS population\nORDER BY population DESC\nLIMIT 1\nRETURN city.id AS id, city.name AS name, population",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Germany'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.9,
+      "gold_answer": [
+        [
+          "Wedel"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          599,
+          "Wedel",
+          5
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "AG-02-07",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "Which city in Taiwan has the most residents?",
+      "cypher": "MATCH (city:City)-[:IS_PART_OF]->(country:Country {name: 'Taiwan'})\nOPTIONAL MATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nWITH city, count(person) AS residentCount\nORDER BY residentCount DESC\nLIMIT 1\nRETURN city.name AS city, residentCount",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Taiwan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 6.8,
+      "gold_answer": [
+        [
+          "Hsinchu"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Hsinchu",
+          3
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "AG-02-08",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "In Kazakhstan, which city do the largest number of people live in?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name: 'Kazakhstan'})\nWITH c, count(p) AS residents\nRETURN c.name AS city, residents\nORDER BY residents DESC\nLIMIT 1",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Kazakhstan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.1,
+      "gold_answer": [
+        [
+          "Astana"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Astana",
+          4
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "AG-02-09",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "What is the most populated city of Iran in the network?",
+      "cypher": "MATCH (city:City:Place)-[:IS_PART_OF]->(country:Country:Place {name: 'Iran'})\nOPTIONAL MATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nWITH city, count(person) AS population\nORDER BY population DESC\nLIMIT 1\nRETURN city.id AS cityId, city.name AS cityName, population",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Iran'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.9,
+      "gold_answer": [
+        [
+          "Babol"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          1160,
+          "Babol",
+          3
+        ]
+      ],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "AG-02-10",
+      "type": "aggregation",
+      "template_id": "AG-02",
+      "question": "Which city in Hungary has the most residents?",
+      "cypher": "MATCH (c:Country {name: 'Hungary'})<-[:IS_PART_OF]-(city:City)\nOPTIONAL MATCH (person:Person)-[:IS_LOCATED_IN]->(city)\nWITH city, count(person) AS residents\nORDER BY residents DESC\nLIMIT 1\nRETURN city.name AS city, residents",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(:Country {name: 'Hungary'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.1,
+      "gold_answer": [
+        [
+          "Esztergom"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Esztergom",
+          3
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "AG-04-01",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Which company in Algeria has the most employees?",
+      "cypher": "MATCH (c:Company)-[:IS_LOCATED_IN]->(co:Country {name: 'Algeria'})\nOPTIONAL MATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Algeria'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.0,
+      "gold_answer": [
+        [
+          "Star_Aviation"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Star_Aviation",
+          7
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "AG-04-02",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Among companies based in Czech Republic, which one employs the largest number of people?",
+      "cypher": "MATCH (c:Company:Organisation)-[:IS_LOCATED_IN]->(country:Country)\nWHERE country.name = 'Czech Republic'\nOPTIONAL MATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Czech_Republic'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.7,
+      "gold_answer": [
+        [
+          "Travel_Service_Airlines"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.24
+    },
+    {
+      "id": "AG-04-03",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "What is the biggest employer in South Korea, by number of employees?",
+      "cypher": "MATCH (c:Company:Organisation)-[:IS_LOCATED_IN]->(co:Country:Place {name: 'South Korea'})\nMATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(DISTINCT p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.id AS companyId, c.name AS companyName, employeeCount AS numberOfEmployees",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'South_Korea'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.5,
+      "gold_answer": [
+        [
+          "Eastar_Jet"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "AG-04-04",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Which company in Liberia has the most employees?",
+      "cypher": "MATCH (c:Country {name: 'Liberia'})\nMATCH (comp:Company)-[:IS_LOCATED_IN]->(c)\nOPTIONAL MATCH (p:Person)-[:WORK_AT]->(comp)\nWITH comp, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN comp.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Liberia'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.3,
+      "gold_answer": [
+        [
+          "Air_Liberia"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Air_Liberia",
+          4
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "AG-04-05",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Among companies based in Malta, which one employs the largest number of people?",
+      "cypher": "MATCH (c:Company:Organisation)-[:IS_LOCATED_IN]->(co:Country {name: 'Malta'})\nOPTIONAL MATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Malta'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.6,
+      "gold_answer": [
+        [
+          "Medavia"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Medavia",
+          2
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "AG-04-06",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "What is the biggest employer in Malaysia, by number of employees?",
+      "cypher": "MATCH (c:Organisation:Company)-[:IS_LOCATED_IN]->(country:Place:Country {name: 'Malaysia'})\nMATCH (p:Person)-[:WORK_AT]->(c)\nRETURN c.name AS company, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Malaysia'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 3.4,
+      "gold_answer": [
+        [
+          "Firefly_(airline)"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Firefly_(airline)",
+          5
+        ]
+      ],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "AG-04-07",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Which company in Sri Lanka has the most employees?",
+      "cypher": "MATCH (c:Country {name: 'Sri Lanka'})\nMATCH (comp:Company)-[:IS_LOCATED_IN]->(c)\nOPTIONAL MATCH (p:Person)-[:WORK_AT]->(comp)\nWITH comp, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN comp.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Sri_Lanka'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 33.8,
+      "gold_answer": [
+        [
+          "Aero_Lanka"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "AG-04-08",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Among companies based in Canada, which one employs the largest number of people?",
+      "cypher": "MATCH (c:Company:Organisation)-[:IS_LOCATED_IN]->(country:Country {name: 'Canada'})\nOPTIONAL MATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Canada'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 19.2,
+      "gold_answer": [
+        [
+          "Regional_1"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Regional_1",
+          3
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "AG-04-09",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "What is the biggest employer in Laos, by number of employees?",
+      "cypher": "MATCH (c:Company)-[:IS_LOCATED_IN]->(co:Country {name: 'Laos'})\nMATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.name AS employer, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Laos'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 6.0,
+      "gold_answer": [
+        [
+          "Lao_Air"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Lao_Air",
+          3
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "AG-04-10",
+      "type": "aggregation",
+      "template_id": "AG-04",
+      "question": "Which company in Azerbaijan has the most employees?",
+      "cypher": "MATCH (c:Company)-[:IS_LOCATED_IN]->(country:Country {name: 'Azerbaijan'})\nMATCH (p:Person)-[:WORK_AT]->(c)\nWITH c, count(p) AS employeeCount\nORDER BY employeeCount DESC\nLIMIT 1\nRETURN c.name AS company, employeeCount",
+      "gold": "MATCH (p:Person)-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(:Country {name: 'Azerbaijan'}) RETURN c.name, count(DISTINCT p) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.5,
+      "gold_answer": [
+        [
+          "Imair_Airlines"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Imair_Airlines",
+          4
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "AG-05-01",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people are interested in \"Phil Spector\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Phil Spector\"})\nRETURN count(DISTINCT p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Phil_Spector'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 2.0,
+      "gold_answer": [
+        [
+          9
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "AG-05-02",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people list \"Left Behind\" among their interests?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Left Behind\"})\nRETURN count(DISTINCT p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Left_Behind'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.6,
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-05-03",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "What is the number of people with an interest in \"Color Me Barbra\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Color Me Barbra\"})\nRETURN count(p) AS numberOfPeople",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Color_Me_Barbra'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.8,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "AG-05-04",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people are interested in \"William Randolph Hearst\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"William Randolph Hearst\"})\nRETURN count(p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'William_Randolph_Hearst'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.6,
+      "gold_answer": [
+        [
+          13
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "AG-05-05",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people list \"Christopher Lee\" among their interests?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Christopher Lee\"})\nRETURN count(p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Christopher_Lee'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.4,
+      "gold_answer": [
+        [
+          22
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "AG-05-06",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "What is the number of people with an interest in \"Kaia Kanepi\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Kaia Kanepi\"})\nRETURN count(DISTINCT p) AS numPeople",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Kaia_Kanepi'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.1,
+      "gold_answer": [
+        [
+          9
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "AG-05-07",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people are interested in \"Pierre Trudeau\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Pierre Trudeau\"})\nRETURN count(p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Pierre_Trudeau'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.1,
+      "gold_answer": [
+        [
+          29
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "AG-05-08",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people list \"I Walk the Line\" among their interests?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"I Walk the Line\"})\nRETURN count(p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'I_Walk_the_Line'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 0.8,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "AG-05-09",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "What is the number of people with an interest in \"Good Vibrations\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Good Vibrations\"})\nRETURN count(DISTINCT p) AS numberOfPeople",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Good_Vibrations'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 0.8,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "AG-05-10",
+      "type": "aggregation",
+      "template_id": "AG-05",
+      "question": "How many people are interested in \"Brian Eno\"?",
+      "cypher": "MATCH (p:Person)-[:HAS_INTEREST]->(t:Tag {name: \"Brian Eno\"})\nRETURN count(DISTINCT p) AS interestCount",
+      "gold": "MATCH (p:Person)-[:HAS_INTEREST]->(:Tag {name: 'Brian_Eno'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 1.1,
+      "gold_answer": [
+        [
+          8
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "MH-02-01",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "At which university do the largest number of Arjun Rao's friends study?",
+      "cypher": "MATCH (p:Person {firstName: 'Arjun', lastName: 'Rao'})\nMATCH (p)-[:KNOWS]-(f:Person)-[s:STUDY_AT]->(u:Organisation:University)\nRETURN u.name AS university, count(DISTINCT f) AS friendCount\nORDER BY friendCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Arjun', lastName: 'Rao'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.1,
+      "gold_answer": [
+        [
+          "Sir_M._Visvesvaraya_Institute_of_Technology"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Sir_M._Visvesvaraya_Institute_of_Technology",
+          4
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "MH-02-02",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "Which university do most of Emperor of Brazil Machado's friends attend?",
+      "cypher": "MATCH (p:Person {firstName: 'Emperor of Brazil', lastName: 'Machado'})\nMATCH (p)-[:KNOWS]-(friend:Person)-[:STUDY_AT]->(u:Organisation:University)\nRETURN u.name AS university, count(*) AS friendCount\nORDER BY friendCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Emperor of Brazil', lastName: 'Machado'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.7,
+      "gold_answer": [
+        [
+          "Rio_de_Janeiro_State_University"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Rio_de_Janeiro_State_University",
+          2
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "MH-02-03",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "Among the friends of Narong Boy, which university has the most students?",
+      "cypher": "MATCH (narong:Person {firstName: 'Narong', lastName: 'Boy'})\nMATCH (narong)-[:KNOWS]-(friend:Person)\nMATCH (friend)-[:STUDY_AT]->(uni:Organisation:University)\nRETURN uni.name AS university, count(*) AS studentCount\nORDER BY studentCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Narong', lastName: 'Boy'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 3.4,
+      "gold_answer": [
+        [
+          "Hangzhou_International_School"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Hangzhou_International_School",
+          5
+        ]
+      ],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "MH-02-04",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "At which university do the largest number of Paulo Alves's friends study?",
+      "cypher": "MATCH (p:Person {firstName: 'Paulo', lastName: 'Alves'})\nMATCH (p)-[:KNOWS]-(f:Person)\nMATCH (f)-[:STUDY_AT]->(u:Organisation:University)\nRETURN u.name AS university, count(DISTINCT f) AS friendCount\nORDER BY friendCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Paulo', lastName: 'Alves'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.8,
+      "gold_answer": [
+        [
+          "Rio_de_Janeiro_State_University"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Rio_de_Janeiro_State_University",
+          2
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "MH-02-05",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "Which university do most of Zhang Li's friends attend?",
+      "cypher": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Li'})\nMATCH (p)-[:KNOWS]-(friend:Person)-[:STUDY_AT]->(u:Organisation:University)\nWITH u, count(DISTINCT friend) AS friendCount\nORDER BY friendCount DESC\nLIMIT 1\nRETURN u.name AS university, friendCount",
+      "gold": "MATCH (:Person {firstName: 'Zhang', lastName: 'Li'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.6,
+      "gold_answer": [
+        [
+          "Shenyang_Pharmaceutical_University"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Shenyang_Pharmaceutical_University",
+          4
+        ]
+      ],
+      "exec_seconds": 0.22
+    },
+    {
+      "id": "MH-02-06",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "Among the friends of Michel David, which university has the most students?",
+      "cypher": "MATCH (p:Person {firstName: 'Michel', lastName: 'David'})\nMATCH (p)-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:Organisation:University)\nWITH u, count(f) AS studentCount\nORDER BY studentCount DESC\nLIMIT 1\nRETURN u.name AS university, studentCount",
+      "gold": "MATCH (:Person {firstName: 'Michel', lastName: 'David'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 12.4,
+      "gold_answer": [
+        [
+          "University_of_the_Basque_Country"
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "University_of_Swaziland",
+          1
+        ]
+      ],
+      "exec_seconds": 0.13
+    },
+    {
+      "id": "MH-02-07",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "At which university do the largest number of Abhishek Kumar's friends study?",
+      "cypher": "MATCH (p:Person {firstName: 'Abhishek', lastName: 'Kumar'})\nMATCH (p)-[:KNOWS]-(friend:Person)-[:STUDY_AT]->(u:Organisation:University)\nRETURN u.name AS university, count(*) AS friendCount\nORDER BY friendCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Abhishek', lastName: 'Kumar'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 3.5,
+      "gold_answer": [
+        [
+          "New_Horizon_College_of_Engineering"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "New_Horizon_College_of_Engineering",
+          3
+        ]
+      ],
+      "exec_seconds": 0.13
+    },
+    {
+      "id": "MH-02-08",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "Which university do most of Arjun Kapoor's friends attend?",
+      "cypher": "MATCH (p:Person {firstName: 'Arjun', lastName: 'Kapoor'})\nMATCH (p)-[:KNOWS]-(friend:Person)\nMATCH (friend)-[:STUDY_AT]->(uni:Organisation:University)\nRETURN uni.name AS university, count(*) AS friendCount\nORDER BY friendCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Arjun', lastName: 'Kapoor'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 6.3,
+      "gold_answer": [
+        [
+          "Rajiv_Gandhi_University_of_Health_Sciences"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Rajiv_Gandhi_University_of_Health_Sciences",
+          7
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "MH-02-09",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "Among the friends of Marcelo Oliveira, which university has the most students?",
+      "cypher": "MATCH (m:Person {firstName: 'Marcelo', lastName: 'Oliveira'})\nMATCH (m)-[:KNOWS]-(friend:Person)-[:STUDY_AT]->(uni:Organisation:University)\nRETURN uni.name AS university, count(DISTINCT friend) AS studentCount\nORDER BY studentCount DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Marcelo', lastName: 'Oliveira'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 2.2,
+      "gold_answer": [
+        [
+          "Rio_de_Janeiro_State_University"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Rio_de_Janeiro_State_University",
+          2
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "MH-02-10",
+      "type": "multi_hop",
+      "template_id": "MH-02",
+      "question": "At which university do the largest number of János Mészáros's friends study?",
+      "cypher": "MATCH (p:Person {firstName: 'János', lastName: 'Mészáros'})\nMATCH (p)-[:KNOWS]-(friend:Person)\nMATCH (friend)-[:STUDY_AT]->(uni:Organisation:University)\nWITH uni, count(DISTINCT friend) AS friendCount\nORDER BY friendCount DESC, uni.name ASC\nRETURN uni.name AS university, friendCount\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'János', lastName: 'Mészáros'})-[:KNOWS]-(f:Person)-[:STUDY_AT]->(u:University) RETURN u.name, count(DISTINCT f) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 3.0,
+      "gold_answer": [
+        [
+          "Fulda_University_of_Applied_Sciences"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Fulda_University_of_Applied_Sciences",
+          3
+        ]
+      ],
+      "exec_seconds": 0.19
+    },
+    {
+      "id": "MH-04-01",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "In which countries are the companies that Alberto Alva works for located?",
+      "cypher": "MATCH (p:Person {firstName: 'Alberto', lastName: 'Alva'})-[:WORK_AT]->(c:Company)\nMATCH (c)-[:IS_LOCATED_IN]->(country:Country)\nRETURN DISTINCT country.name AS country_name",
+      "gold": "MATCH (:Person {firstName: 'Alberto', lastName: 'Alva'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 3.9,
+      "gold_answer": [
+        [
+          "Peru"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Peru"
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "MH-04-02",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "Which countries are Eduardo Araya's employers based in?",
+      "cypher": "MATCH (p:Person {firstName: 'Eduardo', lastName: 'Araya'})-[:WORK_AT]->(c:Company)\nMATCH (c)-[:IS_LOCATED_IN]->(country:Country:Place)\nRETURN DISTINCT country.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Eduardo', lastName: 'Araya'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 1.7,
+      "gold_answer": [
+        [
+          "Chile"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Chile"
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "MH-04-03",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "Jana Kerndlova works at companies located in which countries?",
+      "cypher": "MATCH (p:Person {firstName: 'Jana', lastName: 'Kerndlova'})-[:WORK_AT]->(c:Company)-[:IS_LOCATED_IN]->(co:Country)\nRETURN DISTINCT co.id AS countryId, co.name AS countryName",
+      "gold": "MATCH (:Person {firstName: 'Jana', lastName: 'Kerndlova'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 1.3,
+      "gold_answer": [
+        [
+          "Republic_of_Ireland"
+        ],
+        [
+          "Czech_Republic"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 2,
+      "pred_preview": [
+        [
+          37,
+          "Republic_of_Ireland"
+        ],
+        [
+          72,
+          "Czech_Republic"
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "MH-04-04",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "In which countries are the companies that Richard Miller works for located?",
+      "cypher": "MATCH (p:Person {firstName: 'Richard', lastName: 'Miller'})-[:WORK_AT]->(c:Organisation:Company)\nMATCH (c)-[:IS_LOCATED_IN]->(co:Place:Country)\nRETURN DISTINCT co.name AS countryName",
+      "gold": "MATCH (:Person {firstName: 'Richard', lastName: 'Miller'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 1.6,
+      "gold_answer": [
+        [
+          "United_States"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "United_States"
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "MH-04-05",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "Which countries are Bjorn Andersson's employers based in?",
+      "cypher": "MATCH (p:Person {firstName: 'Bjorn', lastName: 'Andersson'})\nMATCH (p)-[:WORK_AT]->(c:Organisation:Company)-[:IS_LOCATED_IN]->(co:Place:Country)\nRETURN DISTINCT co.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Bjorn', lastName: 'Andersson'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 2.5,
+      "gold_answer": [
+        [
+          "Sweden"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Sweden"
+        ]
+      ],
+      "exec_seconds": 0.15
+    },
+    {
+      "id": "MH-04-06",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "Priyanka Singh works at companies located in which countries?",
+      "cypher": "MATCH (p:Person {firstName: 'Priyanka', lastName: 'Singh'})-[:WORK_AT]->(c:Organisation:Company)-[:IS_LOCATED_IN]->(co:Place:Country)\nRETURN DISTINCT co.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Priyanka', lastName: 'Singh'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 2.1,
+      "gold_answer": [
+        [
+          "India"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "India"
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "MH-04-07",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "In which countries are the companies that Carlos Abascal works for located?",
+      "cypher": "MATCH (p:Person {firstName: 'Carlos', lastName: 'Abascal'})-[:WORK_AT]->(c:Organisation:Company)-[:IS_LOCATED_IN]->(co:Place:Country)\nRETURN DISTINCT co.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Carlos', lastName: 'Abascal'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 4.4,
+      "gold_answer": [
+        [
+          "Mexico"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Mexico"
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "MH-04-08",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "Which countries are Hideki Suzuki's employers based in?",
+      "cypher": "MATCH (p:Person {firstName: 'Hideki', lastName: 'Suzuki'})-[:WORK_AT]->(c:Organisation:Company)-[:IS_LOCATED_IN]->(co:Place:Country)\nRETURN DISTINCT co.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Hideki', lastName: 'Suzuki'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 1.4,
+      "gold_answer": [
+        [
+          "Japan"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Japan"
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "MH-04-09",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "Abby Hassan works at companies located in which countries?",
+      "cypher": "MATCH (p:Person {firstName: 'Abby', lastName: 'Hassan'})-[:WORK_AT]->(c:Organisation:Company)-[:IS_LOCATED_IN]->(country:Place:Country)\nRETURN DISTINCT country.id AS countryId, country.name AS countryName",
+      "gold": "MATCH (:Person {firstName: 'Abby', lastName: 'Hassan'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 8.7,
+      "gold_answer": [
+        [
+          "Malaysia"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          85,
+          "Malaysia"
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "MH-04-10",
+      "type": "multi_hop",
+      "template_id": "MH-04",
+      "question": "In which countries are the companies that Eugenio Abascal works for located?",
+      "cypher": "MATCH (p:Person {firstName: 'Eugenio', lastName: 'Abascal'})-[:WORK_AT]->(c:Organisation:Company)\nMATCH (c)-[:IS_LOCATED_IN]->(country:Country)\nRETURN DISTINCT country.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Eugenio', lastName: 'Abascal'})-[:WORK_AT]->(:Company)-[:IS_LOCATED_IN]->(k:Country) RETURN DISTINCT k.name",
+      "seconds": 7.8,
+      "gold_answer": [
+        [
+          "Mexico"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Mexico"
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "MH-05-01",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Which category do most of Gheorghe Tanase's interests belong to?",
+      "cypher": "MATCH (p:Person {firstName: 'Gheorghe', lastName: 'Tanase'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nRETURN c.name AS category, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Gheorghe', lastName: 'Tanase'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 7.5,
+      "gold_answer": [
+        [
+          "OfficeHolder"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "OfficeHolder",
+          10
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "MH-05-02",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Most of the topics Sven Andersson is interested in fall into which category?",
+      "cypher": "MATCH (p:Person {firstName: 'Sven', lastName: 'Andersson'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nWITH c, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1\nRETURN c.name AS mostCommonCategory",
+      "gold": "MATCH (:Person {firstName: 'Sven', lastName: 'Andersson'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.2,
+      "gold_answer": [
+        [
+          "MusicalArtist"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "MusicalArtist"
+        ]
+      ],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "MH-05-03",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "What is the most common category among Abraham Dego's interests?",
+      "cypher": "MATCH (p:Person {firstName: 'Abraham', lastName: 'Dego'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass)\nWITH tc, count(*) AS cnt\nORDER BY cnt DESC, tc.name ASC\nRETURN tc.name AS mostCommonCategory, cnt\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'Abraham', lastName: 'Dego'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.4,
+      "gold_answer": [
+        [
+          "Person"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Person",
+          10
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "MH-05-04",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Which category do most of Fali Sam Nariman's interests belong to?",
+      "cypher": "MATCH (p:Person {firstName: \"Fali Sam\", lastName: \"Nariman\"})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nWITH c, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1\nRETURN c.name AS category",
+      "gold": "MATCH (:Person {firstName: 'Fali Sam', lastName: 'Nariman'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 4.0,
+      "gold_answer": [
+        [
+          "Single"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Single"
+        ]
+      ],
+      "exec_seconds": 0.16
+    },
+    {
+      "id": "MH-05-05",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Most of the topics Roberto Rojas is interested in fall into which category?",
+      "cypher": "MATCH (p:Person {firstName: 'Roberto', lastName: 'Rojas'})\nMATCH (p)-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass)\nWITH tc, count(*) AS cnt\nORDER BY cnt DESC, tc.name\nLIMIT 1\nRETURN tc.name AS mostCommonCategory",
+      "gold": "MATCH (:Person {firstName: 'Roberto', lastName: 'Rojas'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 3.0,
+      "gold_answer": [
+        [
+          "OfficeHolder"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "OfficeHolder"
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "MH-05-06",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "What is the most common category among Alexei Barbu's interests?",
+      "cypher": "MATCH (p:Person {firstName: 'Alexei', lastName: 'Barbu'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nWITH c, count(*) AS cnt\nORDER BY cnt DESC, c.name\nLIMIT 1\nRETURN c.name AS mostCommonCategory, cnt",
+      "gold": "MATCH (:Person {firstName: 'Alexei', lastName: 'Barbu'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 10.1,
+      "gold_answer": [
+        [
+          "OfficeHolder"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "OfficeHolder",
+          6
+        ]
+      ],
+      "exec_seconds": 0.18
+    },
+    {
+      "id": "MH-05-07",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Which category do most of Fritz Muller's interests belong to?",
+      "cypher": "MATCH (p:Person {firstName: 'Fritz', lastName: 'Muller'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nWITH c, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1\nRETURN c.name AS category",
+      "gold": "MATCH (:Person {firstName: 'Fritz', lastName: 'Muller'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 1.7,
+      "gold_answer": [
+        [
+          "Single"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Single"
+        ]
+      ],
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "MH-05-08",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Most of the topics Carl Becker is interested in fall into which category?",
+      "cypher": "MATCH (p:Person {firstName: 'Carl', lastName: 'Becker'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass)\nWITH tc, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1\nRETURN tc.name AS category",
+      "gold": "MATCH (:Person {firstName: 'Carl', lastName: 'Becker'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 4.5,
+      "gold_answer": [
+        [
+          "OfficeHolder"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "OfficeHolder"
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "MH-05-09",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "What is the most common category among A. Kumar's interests?",
+      "cypher": "MATCH (p:Person {firstName: 'A.', lastName: 'Kumar'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nRETURN c.name AS category, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1",
+      "gold": "MATCH (:Person {firstName: 'A.', lastName: 'Kumar'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 5.9,
+      "gold_answer": [
+        [
+          "Person"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Person",
+          6
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "MH-05-10",
+      "type": "multi_hop",
+      "template_id": "MH-05",
+      "question": "Which category do most of Yuki Suzuki's interests belong to?",
+      "cypher": "MATCH (p:Person {firstName: 'Yuki', lastName: 'Suzuki'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(c:TagClass)\nWITH c, count(*) AS cnt\nORDER BY cnt DESC\nLIMIT 1\nRETURN c.name AS category",
+      "gold": "MATCH (:Person {firstName: 'Yuki', lastName: 'Suzuki'})-[:HAS_INTEREST]->(t:Tag)-[:HAS_TYPE]->(tc:TagClass) RETURN tc.name, count(DISTINCT t) AS n ORDER BY n DESC LIMIT 1",
+      "seconds": 8.5,
+      "gold_answer": [
+        [
+          "Person"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Person"
+        ]
+      ],
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "PA-02-01",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many different shortest friendship paths connect Paul Bologan and Taufik Rafiq?",
+      "cypher": "MATCH (p1:Person {firstName: 'Paul', lastName: 'Bologan'}), (p2:Person {firstName: 'Taufik', lastName: 'Rafiq'})\nMATCH paths = allShortestPaths((p1)-[:KNOWS*]-(p2))\nRETURN count(DISTINCT paths) AS shortestPathCount",
+      "gold": "MATCH (a:Person {firstName: 'Paul', lastName: 'Bologan'}), (b:Person {firstName: 'Taufik', lastName: 'Rafiq'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 6.2,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          1
+        ]
+      ],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "PA-02-02",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many distinct shortest chains of friends link Chen Liu to Aurora Cruz?",
+      "cypher": "MATCH (p1:Person {firstName: 'Chen', lastName: 'Liu'}), (p2:Person {firstName: 'Aurora', lastName: 'Cruz'})\nMATCH paths = allShortestPaths((p1)-[:KNOWS*]-(p2))\nRETURN count(paths) AS shortestChains",
+      "gold": "MATCH (a:Person {firstName: 'Chen', lastName: 'Liu'}), (b:Person {firstName: 'Aurora', lastName: 'Cruz'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 2.4,
+      "gold_answer": [
+        [
+          17
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          17
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "PA-02-03",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "Count the shortest friendship paths between Warwick Raymond Akerman and Akira Inoue.",
+      "cypher": "MATCH (a:Person {firstName: 'Warwick', lastName: 'Akerman'}), (b:Person {firstName: 'Akira', lastName: 'Inoue'})\nMATCH p = allShortestPaths((a)-[:KNOWS*]-(b))\nRETURN count(p) AS pathCount",
+      "gold": "MATCH (a:Person {firstName: 'Warwick Raymond', lastName: 'Akerman'}), (b:Person {firstName: 'Akira', lastName: 'Inoue'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 10.2,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "PA-02-04",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many different shortest friendship paths connect David Agudelo and Mamoon Eshaq 0 Amin?",
+      "cypher": "MATCH (a:Person {firstName: 'David', lastName: 'Agudelo'}), (b:Person {firstName: 'Mamoon', lastName: 'Eshaq 0 Amin'})\nMATCH p = allShortestPaths((a)-[:KNOWS*]-(b))\nRETURN count(DISTINCT p) AS numShortestPaths",
+      "gold": "MATCH (a:Person {firstName: 'David', lastName: 'Agudelo'}), (b:Person {firstName: 'Mamoon Eshaq 0', lastName: 'Amin'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 2.0,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "PA-02-05",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many distinct shortest chains of friends link Jose Carvalho to Ali Koksal?",
+      "cypher": "MATCH (a:Person {firstName: 'Jose', lastName: 'Carvalho'}), (b:Person {firstName: 'Ali', lastName: 'Koksal'})\nMATCH p = allShortestPaths((a)-[:KNOWS*]-(b))\nRETURN count(p) AS shortestChainCount",
+      "gold": "MATCH (a:Person {firstName: 'Jose', lastName: 'Carvalho'}), (b:Person {firstName: 'Ali', lastName: 'Koksal'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 3.1,
+      "gold_answer": [
+        [
+          6
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          6
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "PA-02-06",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "Count the shortest friendship paths between Alfonso Elizalde and Takeshi Yamada.",
+      "cypher": "MATCH (a:Person {firstName: 'Alfonso', lastName: 'Elizalde'}), (b:Person {firstName: 'Takeshi', lastName: 'Yamada'})\nWITH a, b\nMATCH p = allShortestPaths((a)-[:KNOWS*]-(b))\nRETURN count(p) AS shortestPathCount",
+      "gold": "MATCH (a:Person {firstName: 'Alfonso', lastName: 'Elizalde'}), (b:Person {firstName: 'Takeshi', lastName: 'Yamada'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 7.8,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          1
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "PA-02-07",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many different shortest friendship paths connect Dado Kesovija and Evangelos Alkaios?",
+      "cypher": "MATCH (a:Person {firstName: 'Dado', lastName: 'Kesovija'}), (b:Person {firstName: 'Evangelos', lastName: 'Alkaios'})\nMATCH p = shortestPath((a)-[:KNOWS*]-(b))\nWITH a, b, length(p) AS minLen\nMATCH p2 = (a)-[:KNOWS*minLen]-(b)\nWHERE length(p2) = minLen\nRETURN count(DISTINCT p2) AS numberOfShortestFriendshipPaths",
+      "gold": "MATCH (a:Person {firstName: 'Dado', lastName: 'Kesovija'}), (b:Person {firstName: 'Evangelos', lastName: 'Alkaios'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 2.1,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "execution_error",
+      "error": "Neo.ClientError.Statement.SyntaxError: Invalid input 'minLen': expected a parameter, '..', 'WHERE', ']', '{' or an integer value (line 4, column 24 (offset: 213))",
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "PA-02-08",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many distinct shortest chains of friends link Bechir Cardinale to Ayesha Ahmed?",
+      "cypher": "MATCH (a:Person {firstName: 'Bechir', lastName: 'Cardinale'}), (b:Person {firstName: 'Ayesha', lastName: 'Ahmed'})\nMATCH p = allShortestPaths((a)-[:KNOWS*]-(b))\nRETURN count(DISTINCT p) AS shortestFriendChains",
+      "gold": "MATCH (a:Person {firstName: 'Bechir', lastName: 'Cardinale'}), (b:Person {firstName: 'Ayesha', lastName: 'Ahmed'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 4.6,
+      "gold_answer": [
+        [
+          13
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          13
+        ]
+      ],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "PA-02-09",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "Count the shortest friendship paths between A. C. Bos and Gustavo Arbelaez.",
+      "cypher": "MATCH (a:Person {firstName: 'A. C.', lastName: 'Bos'}), (b:Person {firstName: 'Gustavo', lastName: 'Arbelaez'})\nMATCH p = allShortestPaths((a)-[:KNOWS*]-(b))\nRETURN count(p) AS shortestPathCount",
+      "gold": "MATCH (a:Person {firstName: 'A. C.', lastName: 'Bos'}), (b:Person {firstName: 'Gustavo', lastName: 'Arbelaez'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 2.3,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          1
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "PA-02-10",
+      "type": "path",
+      "template_id": "PA-02",
+      "question": "How many different shortest friendship paths connect Pedro Oliveira and Howard Nguyen?",
+      "cypher": "MATCH (p1:Person {firstName: 'Pedro', lastName: 'Oliveira'}), (p2:Person {firstName: 'Howard', lastName: 'Nguyen'})\nMATCH paths = allShortestPaths((p1)-[:KNOWS*]-(p2))\nRETURN count(paths) AS shortestFriendshipPathCount",
+      "gold": "MATCH (a:Person {firstName: 'Pedro', lastName: 'Oliveira'}), (b:Person {firstName: 'Howard', lastName: 'Nguyen'}) MATCH p = allShortestPaths((a)-[:KNOWS*]-(b)) RETURN count(p)",
+      "seconds": 3.9,
+      "gold_answer": [
+        [
+          5
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          5
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "PA-04-01",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people can Maria Onopka reach within two friendship steps?",
+      "cypher": "MATCH (p:Person {firstName: 'Maria', lastName: 'Onopka'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nWHERE friend <> p\nRETURN count(DISTINCT friend) AS reachableCount",
+      "gold": "MATCH (p:Person {firstName: 'Maria', lastName: 'Onopka'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 1.5,
+      "gold_answer": [
+        [
+          646
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          646
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "PA-04-02",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people are at most two friendship links away from Alejandro Enriquez?",
+      "cypher": "MATCH (p:Person {firstName: 'Alejandro', lastName: 'Enriquez'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nRETURN count(DISTINCT friend) AS count",
+      "gold": "MATCH (p:Person {firstName: 'Alejandro', lastName: 'Enriquez'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 6.2,
+      "gold_answer": [
+        [
+          410
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          410
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "PA-04-03",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "Counting friends and friends of friends, how many people is Adriaen Jong connected to?",
+      "cypher": "MATCH (p:Person {firstName: 'Adriaen', lastName: 'Jong'})\nMATCH (p)-[:KNOWS*1..2]-(c:Person)\nWHERE c <> p\nRETURN count(DISTINCT c) AS totalConnected",
+      "gold": "MATCH (p:Person {firstName: 'Adriaen', lastName: 'Jong'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 2.8,
+      "gold_answer": [
+        [
+          779
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          779
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "PA-04-04",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people can Zhang Zhang reach within two friendship steps?",
+      "cypher": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Zhang'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nWHERE friend <> p\nRETURN count(DISTINCT friend) AS reachableCount",
+      "gold": "MATCH (p:Person {firstName: 'Zhang', lastName: 'Zhang'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 8.7,
+      "gold_answer": [
+        [
+          120
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          120
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "PA-04-05",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people are at most two friendship links away from Allu Khan?",
+      "cypher": "MATCH (p:Person {firstName: 'Allu', lastName: 'Khan'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nWHERE friend <> p\nRETURN count(DISTINCT friend) AS numPeople",
+      "gold": "MATCH (p:Person {firstName: 'Allu', lastName: 'Khan'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 2.4,
+      "gold_answer": [
+        [
+          651
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          651
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "PA-04-06",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "Counting friends and friends of friends, how many people is Dimitris Antoniou connected to?",
+      "cypher": "MATCH (p:Person {firstName: 'Dimitris', lastName: 'Antoniou'})\nMATCH (p)-[:KNOWS*1..2]-(c:Person)\nWHERE c <> p\nRETURN count(DISTINCT c) AS connectedCount",
+      "gold": "MATCH (p:Person {firstName: 'Dimitris', lastName: 'Antoniou'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 9.6,
+      "gold_answer": [
+        [
+          406
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          406
+        ]
+      ],
+      "exec_seconds": 0.07
+    },
+    {
+      "id": "PA-04-07",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people can Jose Alonso reach within two friendship steps?",
+      "cypher": "MATCH (p:Person {firstName: 'Jose', lastName: 'Alonso'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nWHERE friend <> p\nRETURN count(DISTINCT friend) AS reachableCount",
+      "gold": "MATCH (p:Person {firstName: 'Jose', lastName: 'Alonso'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 2.5,
+      "gold_answer": [
+        [
+          448
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          448
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "PA-04-08",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people are at most two friendship links away from Jimmy Brown?",
+      "cypher": "MATCH (p:Person {firstName: 'Jimmy', lastName: 'Brown'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nRETURN count(DISTINCT friend) AS count",
+      "gold": "MATCH (p:Person {firstName: 'Jimmy', lastName: 'Brown'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 10.3,
+      "gold_answer": [
+        [
+          327
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          327
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "PA-04-09",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "Counting friends and friends of friends, how many people is Jun Yamada connected to?",
+      "cypher": "MATCH (p:Person {firstName: 'Jun', lastName: 'Yamada'})\nMATCH (p)-[:KNOWS*1..2]-(friend:Person)\nWHERE friend <> p\nRETURN count(DISTINCT friend) AS connections",
+      "gold": "MATCH (p:Person {firstName: 'Jun', lastName: 'Yamada'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 1.3,
+      "gold_answer": [
+        [
+          695
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          695
+        ]
+      ],
+      "exec_seconds": 0.15
+    },
+    {
+      "id": "PA-04-10",
+      "type": "path",
+      "template_id": "PA-04",
+      "question": "How many people can Celso Nascimento reach within two friendship steps?",
+      "cypher": "MATCH (p:Person {firstName: 'Celso', lastName: 'Nascimento'})\nMATCH (p)-[:KNOWS*1..2]-(friend)\nWHERE friend <> p\nRETURN count(DISTINCT friend) AS reachableCount",
+      "gold": "MATCH (p:Person {firstName: 'Celso', lastName: 'Nascimento'})-[:KNOWS*1..2]-(f:Person) WHERE f <> p RETURN count(DISTINCT f)",
+      "seconds": 1.0,
+      "gold_answer": [
+        [
+          309
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          309
+        ]
+      ],
+      "exec_seconds": 0.55
+    },
+    {
+      "id": "PA-05-01",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "How many friendship steps is Jun Kato from the nearest person living in Ambovombe?",
+      "cypher": "MATCH (p:Person {firstName: 'Jun', lastName: 'Kato'}), (city:City {name: 'Ambovombe'})<-[:IS_LOCATED_IN]-(resident:Person)\nMATCH path = shortestPath((p)-[:KNOWS*]-(resident))\nRETURN min(length(path)) AS friendshipSteps",
+      "gold": "MATCH (a:Person {firstName: 'Jun', lastName: 'Kato'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Ambovombe'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 3.0,
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.05
+    },
+    {
+      "id": "PA-05-02",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "What is the shortest friendship distance from Bacary Diop to anyone who lives in Dum Dum?",
+      "cypher": "MATCH (src:Person {firstName: 'Bacary', lastName: 'Diop'})\nMATCH (target:Person)-[:IS_LOCATED_IN]->(:City {name: 'Dum Dum'})\nMATCH p = shortestPath((src)-[:KNOWS*]-(target))\nRETURN min(length(p)) AS shortestDistance",
+      "gold": "MATCH (a:Person {firstName: 'Bacary', lastName: 'Diop'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Dum_Dum'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 3.8,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          null
+        ]
+      ],
+      "exec_seconds": 0.25
+    },
+    {
+      "id": "PA-05-03",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "At least how many friendship links separate Chito Reyes from a resident of Fuquan?",
+      "cypher": "MATCH (p1:Person {firstName: 'Chito', lastName: 'Reyes'}), (c:City {name: 'Fuquan'})<-[:IS_LOCATED_IN]-(p2:Person)\nMATCH p = shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(p) AS minFriendshipLinks",
+      "gold": "MATCH (a:Person {firstName: 'Chito', lastName: 'Reyes'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Fuquan'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 2.6,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.15
+    },
+    {
+      "id": "PA-05-04",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "How many friendship steps is Marek Kaczmarek from the nearest person living in Wah Cantonment?",
+      "cypher": "MATCH (p:Person {firstName: 'Marek', lastName: 'Kaczmarek'}), (c:City {name: 'Wah Cantonment'}), (t:Person)-[:IS_LOCATED_IN]->(c)\nMATCH path = shortestPath((p)-[:KNOWS*]-(t))\nRETURN min(length(path)) AS steps",
+      "gold": "MATCH (a:Person {firstName: 'Marek', lastName: 'Kaczmarek'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Wah_Cantonment'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 4.1,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          null
+        ]
+      ],
+      "exec_seconds": 0.21
+    },
+    {
+      "id": "PA-05-05",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "What is the shortest friendship distance from Ge Hu to anyone who lives in Melbourne?",
+      "cypher": "MATCH (p:Person {firstName: 'Ge', lastName: 'Hu'})\nMATCH (c:City {name: 'Melbourne'})\nMATCH (t:Person)-[:IS_LOCATED_IN]->(c)\nMATCH path = shortestPath((p)-[:KNOWS*]-(t))\nRETURN min(length(path)) AS shortestFriendshipDistance",
+      "gold": "MATCH (a:Person {firstName: 'Ge', lastName: 'Hu'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Melbourne'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 11.3,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "PA-05-06",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "At least how many friendship links separate Guillermo Rodriguez from a resident of Pavlodar?",
+      "cypher": "MATCH (g:Person {firstName: 'Guillermo', lastName: 'Rodriguez'}), (r:Person)-[:IS_LOCATED_IN]->(:City {name: 'Pavlodar'})\nMATCH p = shortestPath((g)-[:KNOWS*]-(r))\nRETURN min(length(p)) AS minFriendshipLinks",
+      "gold": "MATCH (a:Person {firstName: 'Guillermo', lastName: 'Rodriguez'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Pavlodar'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 6.7,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.15
+    },
+    {
+      "id": "PA-05-07",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "How many friendship steps is Joao Oliveira from the nearest person living in Kelaniya?",
+      "cypher": "MATCH (p:Person {firstName: 'Joao', lastName: 'Oliveira'})\nMATCH (t:Person)-[:IS_LOCATED_IN]->(:City {name: 'Kelaniya'})\nWITH p, t\nMATCH path = shortestPath((p)-[:KNOWS*]-(t))\nRETURN length(path) AS friendshipSteps",
+      "gold": "MATCH (a:Person {firstName: 'Joao', lastName: 'Oliveira'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Kelaniya'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 5.7,
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.13
+    },
+    {
+      "id": "PA-05-08",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "What is the shortest friendship distance from Shweta Kapoor to anyone who lives in Serang?",
+      "cypher": "MATCH (p:Person {firstName: 'Shweta', lastName: 'Kapoor'})\nMATCH (city:City {name: 'Serang'})\nMATCH (t:Person)-[:IS_LOCATED_IN]->(city)\nWITH p, t\nMATCH path = shortestPath((p)-[:KNOWS*..]-(t))\nRETURN min(length(path)) AS shortestFriendshipDistance",
+      "gold": "MATCH (a:Person {firstName: 'Shweta', lastName: 'Kapoor'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Serang'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 5.4,
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "PA-05-09",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "At least how many friendship links separate Jun He from a resident of Bender?",
+      "cypher": "MATCH (p1:Person {firstName: 'Jun', lastName: 'He'})\nMATCH (city:City {name: 'Bender'})\nMATCH (p2:Person)-[:IS_LOCATED_IN]->(city)\nMATCH p = shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(p) AS minFriendshipLinks\nORDER BY minFriendshipLinks ASC\nLIMIT 1",
+      "gold": "MATCH (a:Person {firstName: 'Jun', lastName: 'He'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Bender'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 2.3,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "PA-05-10",
+      "type": "path",
+      "template_id": "PA-05",
+      "question": "How many friendship steps is John Murphy from the nearest person living in Agadez?",
+      "cypher": "MATCH (john:Person {firstName: 'John', lastName: 'Murphy'})\nMATCH (city:City {name: 'Agadez'})\nMATCH (target:Person)-[:IS_LOCATED_IN]->(city)\nWHERE target <> john\nWITH john, target\nMATCH p = shortestPath((john)-[:KNOWS*]-(target))\nRETURN min(length(p)) AS friendshipSteps",
+      "gold": "MATCH (a:Person {firstName: 'John', lastName: 'Murphy'}), (b:Person)-[:IS_LOCATED_IN]->(:City {name: 'Agadez'}) WHERE a <> b MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN min(length(p))",
+      "seconds": 13.6,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "TM-01-01",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did Ali Lambo create in 2011?",
+      "cypher": "MATCH (p:Person {firstName: 'Ali', lastName: 'Lambo'})<-[:HAS_CREATOR]-(m:Post:Message)\nWHERE datetime(m.creationDate).year = 2011\nRETURN count(m) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Ali', lastName: 'Lambo'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+      "seconds": 2.2,
+      "gold_answer": [
+        [
+          120
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          120
+        ]
+      ],
+      "exec_seconds": 0.14
+    },
+    {
+      "id": "TM-01-02",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did Ignacio Castillo publish during 2010?",
+      "cypher": "MATCH (p:Person {firstName: 'Ignacio', lastName: 'Castillo'})\nMATCH (post:Post:Message)-[:HAS_CREATOR]->(p)\nWHERE post.creationDate >= datetime('2010-01-01T00:00:00')\n  AND post.creationDate < datetime('2011-01-01T00:00:00')\nRETURN count(post) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Ignacio', lastName: 'Castillo'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2010 RETURN count(DISTINCT p)",
+      "seconds": 1.3,
+      "gold_answer": [
+        [
+          160
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          160
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "TM-01-03",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "What is the number of posts written by Svetlana Bologan in 2011?",
+      "cypher": "MATCH (p:Person {firstName: 'Svetlana', lastName: 'Bologan'})<-[:HAS_CREATOR]-(m:Post:Message)\nWHERE date(m.creationDate).year = 2011\nRETURN count(m) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Svetlana', lastName: 'Bologan'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+      "seconds": 2.2,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          1
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "TM-01-04",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did John Chatterjee create in 2010?",
+      "cypher": "MATCH (p:Person {firstName: 'John', lastName: 'Chatterjee'})<-[:HAS_CREATOR]-(post:Post:Message)\nWHERE post.creationDate >= datetime('2010-01-01T00:00:00')\n  AND post.creationDate < datetime('2011-01-01T00:00:00')\nRETURN count(post) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'John', lastName: 'Chatterjee'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2010 RETURN count(DISTINCT p)",
+      "seconds": 1.5,
+      "gold_answer": [
+        [
+          90
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          90
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "TM-01-05",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did Eugene Moke Bemba publish during 2010?",
+      "cypher": "MATCH (p:Person {firstName: 'Eugene', lastName: 'Moke Bemba'})<-[:HAS_CREATOR]-(post:Post:Message)\nWHERE post.creationDate >= datetime('2010-01-01T00:00:00') \n  AND post.creationDate < datetime('2011-01-01T00:00:00')\nRETURN count(post) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Eugene Moke', lastName: 'Bemba'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2010 RETURN count(DISTINCT p)",
+      "seconds": 8.6,
+      "gold_answer": [
+        [
+          1
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "TM-01-06",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "What is the number of posts written by Albert Buysse in 2011?",
+      "cypher": "MATCH (p:Person {firstName: 'Albert', lastName: 'Buysse'})<-[:HAS_CREATOR]-(m:Post:Message)\nWHERE m.creationDate >= datetime({year:2011, month:1, day:1})\n  AND m.creationDate < datetime({year:2012, month:1, day:1})\nRETURN count(m) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Albert', lastName: 'Buysse'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+      "seconds": 8.9,
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "TM-01-07",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did Salma Ahmed create in 2012?",
+      "cypher": "MATCH (p:Person {firstName: 'Salma', lastName: 'Ahmed'})\nMATCH (post:Post:Message)-[:HAS_CREATOR]->(p)\nWHERE post.creationDate.year = 2012\nRETURN count(post) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Salma', lastName: 'Ahmed'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2012 RETURN count(DISTINCT p)",
+      "seconds": 1.4,
+      "gold_answer": [
+        [
+          3
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          3
+        ]
+      ],
+      "exec_seconds": 0.04
+    },
+    {
+      "id": "TM-01-08",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did Takeshi Yamada publish during 2011?",
+      "cypher": "MATCH (p:Person {firstName: 'Takeshi', lastName: 'Yamada'})<-[:HAS_CREATOR]-(m:Message:Post)\nWHERE m.creationDate >= datetime('2011-01-01T00:00:00')\n  AND m.creationDate < datetime('2012-01-01T00:00:00')\nRETURN count(m) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Takeshi', lastName: 'Yamada'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+      "seconds": 4.3,
+      "gold_answer": [
+        [
+          2
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          2
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "TM-01-09",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "What is the number of posts written by Mirza Kalich Ali in 2012?",
+      "cypher": "MATCH (p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Mirza Kalich Ali'\nMATCH (post:Post:Message)-[:HAS_CREATOR]->(p)\nWHERE post.creationDate >= datetime('2012-01-01T00:00:00')\n  AND post.creationDate < datetime('2013-01-01T00:00:00')\nRETURN count(post) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Mirza Kalich', lastName: 'Ali'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2012 RETURN count(DISTINCT p)",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          87
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          87
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "TM-01-10",
+      "type": "temporal",
+      "template_id": "TM-01",
+      "question": "How many posts did Ali Diori create in 2011?",
+      "cypher": "MATCH (p:Person {firstName: 'Ali', lastName: 'Diori'})\nMATCH (post:Post:Message)-[:HAS_CREATOR]->p\nWHERE post.creationDate >= datetime('2011-01-01T00:00:00')\n  AND post.creationDate < datetime('2012-01-01T00:00:00')\nRETURN count(post) AS postCount",
+      "gold": "MATCH (:Person {firstName: 'Ali', lastName: 'Diori'})<-[:HAS_CREATOR]-(p:Post) WHERE p.creationDate.year = 2011 RETURN count(DISTINCT p)",
+      "seconds": 1.6,
+      "gold_answer": [
+        [
+          96
+        ]
+      ],
+      "verdict": "execution_error",
+      "error": "Neo.ClientError.Statement.SyntaxError: Invalid input 'p': expected '(' (line 2, column 43 (offset: 97))",
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-03-01",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum did Chito Reyes join first?",
+      "cypher": "MATCH (p:Person {firstName: 'Chito', lastName: 'Reyes'})\nMATCH (f:Forum)-[hm:HAS_MEMBER]->(p)\nRETURN f.title AS forum, hm.joinDate AS joinDate\nORDER BY hm.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Chito', lastName: 'Reyes'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 10.0,
+      "gold_answer": [
+        [
+          "Wall of Salim Ahmed Binalshibh"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Wall of Salim Ahmed Binalshibh",
+          "2010-08-07T06:47:40.372000000+00:00"
+        ]
+      ],
+      "exec_seconds": 0.11
+    },
+    {
+      "id": "TM-03-02",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "What was the first forum that Cedric Ako became a member of?",
+      "cypher": "MATCH (f:Forum)-[hm:HAS_MEMBER]->(p:Person {firstName: 'Cedric', lastName: 'Ako'})\nRETURN f\nORDER BY hm.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Cedric', lastName: 'Ako'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 7.4,
+      "gold_answer": [
+        [
+          "Wall of Rafael Alves"
+        ]
+      ],
+      "verdict": "wrong_result",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          {
+            "_labels": [
+              "Forum"
+            ],
+            "id": 412316862802,
+            "title": "Wall of Rafael Alves",
+            "creationDate": "2011-02-04T07:42:43.320000000+00:00"
+          }
+        ]
+      ],
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "TM-03-03",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum has Otto Herzigová been a member of the longest?",
+      "cypher": "MATCH (p:Person {firstName: 'Otto', lastName: 'Herzigová'})- [rel:HAS_MEMBER]->(f:Forum)\nRETURN f.title AS forum, rel.joinDate AS joinDate\nORDER BY rel.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Otto', lastName: 'Herzigová'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 5.7,
+      "gold_answer": [
+        [
+          "Wall of Kamal Aziz"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "TM-03-04",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum did Anna Kofler join first?",
+      "cypher": "MATCH (p:Person {firstName: 'Anna', lastName: 'Kofler'})\nMATCH (f:Forum)-[r:HAS_MEMBER]->(p)\nRETURN f.title AS forum\nORDER BY r.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Anna', lastName: 'Kofler'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 10.5,
+      "gold_answer": [
+        [
+          "Wall of Rudolf Engel"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Wall of Rudolf Engel"
+        ]
+      ],
+      "exec_seconds": 0.13
+    },
+    {
+      "id": "TM-03-05",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "What was the first forum that Takeshi Sato became a member of?",
+      "cypher": "MATCH (p:Person {firstName: 'Takeshi', lastName: 'Sato'})\nMATCH (f:Forum)-[hm:HAS_MEMBER]->(p)\nRETURN f.title AS forumTitle\nORDER BY hm.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Takeshi', lastName: 'Sato'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 2.2,
+      "gold_answer": [
+        [
+          "Wall of Bangguo Hu"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Wall of Bangguo Hu"
+        ]
+      ],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "TM-03-06",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum has Hideo Suzuki been a member of the longest?",
+      "cypher": "MATCH (p:Person {firstName: 'Hideo', lastName: 'Suzuki'})-[r:HAS_MEMBER]->(f:Forum)\nRETURN f\nORDER BY r.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Hideo', lastName: 'Suzuki'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 10.3,
+      "gold_answer": [
+        [
+          "Wall of Ken Kato"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "TM-03-07",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum did Gyula Laszlo join first?",
+      "cypher": "MATCH (p:Person {firstName: 'Gyula', lastName: 'Laszlo'})\nMATCH (f:Forum)-[hm:HAS_MEMBER]->(p)\nRETURN f.title AS forum, hm.joinDate AS joinDate\nORDER BY hm.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Gyula', lastName: 'Laszlo'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 1.2,
+      "gold_answer": [
+        [
+          "Wall of Karl Fischer"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Wall of Karl Fischer",
+          "2010-08-12T04:22:40.618000000+00:00"
+        ]
+      ],
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "TM-03-08",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "What was the first forum that Ayesha Iqbal became a member of?",
+      "cypher": "MATCH (f:Forum)-[hm:HAS_MEMBER]->(p:Person {firstName: 'Ayesha', lastName: 'Iqbal'})\nRETURN f.title AS forumTitle\nORDER BY hm.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Ayesha', lastName: 'Iqbal'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 1.4,
+      "gold_answer": [
+        [
+          "Wall of Ashok Singh"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Wall of Ashok Singh"
+        ]
+      ],
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "TM-03-09",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum has Mohammad Ali Hosseini been a member of the longest?",
+      "cypher": "MATCH (p:Person)\nWHERE (p.firstName = 'Mohammad' AND p.lastName = 'Hosseini') OR p.firstName = 'Mohammad Ali'\nMATCH (f:Forum)-[hm:HAS_MEMBER]->(p)\nRETURN f.id AS forumId, f.title AS forumTitle, hm.joinDate\nORDER BY hm.joinDate ASC\nLIMIT 1",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Mohammad Ali', lastName: 'Hosseini'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 9.2,
+      "gold_answer": [
+        [
+          "Wall of Alexander Popov"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          137438968721,
+          "Wall of Alexander Popov",
+          "2011-03-31T22:32:29.018000000+00:00"
+        ]
+      ],
+      "exec_seconds": 0.3
+    },
+    {
+      "id": "TM-03-10",
+      "type": "temporal",
+      "template_id": "TM-03",
+      "question": "Which forum did Arturo Contreras join first?",
+      "cypher": "MATCH (p:Person {firstName: 'Arturo', lastName: 'Contreras'})\nMATCH (f:Forum)-[hm:HAS_MEMBER]->(p)\nWITH f, hm.joinDate AS joinDate\nORDER BY joinDate ASC\nLIMIT 1\nRETURN f.title AS forumTitle, f.id AS forumId, joinDate",
+      "gold": "MATCH (f:Forum)-[m:HAS_MEMBER]->(:Person {firstName: 'Arturo', lastName: 'Contreras'}) RETURN f.title ORDER BY m.joinDate LIMIT 1",
+      "seconds": 8.8,
+      "gold_answer": [
+        [
+          "Wall of Jorge Arango"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          "Wall of Jorge Arango",
+          137438956850,
+          "2011-08-16T03:34:56.261000000+00:00"
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "TM-05-01",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Who did Jose Martinez become friends with in 2012?",
+      "cypher": "MATCH (p:Person {firstName: 'Jose', lastName: 'Martinez'})- [k:KNOWS]-> (friend:Person)\nWHERE k.creationDate.year = 2012\nRETURN friend.id AS id, friend.firstName AS firstName, friend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Jose', lastName: 'Martinez'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+      "seconds": 2.5,
+      "gold_answer": [
+        [
+          "Francisco",
+          "Sanchez"
+        ],
+        [
+          "Avraham",
+          "Ben-Tzur"
+        ],
+        [
+          "Juan",
+          "Perez"
+        ],
+        [
+          "Angel",
+          "Melaku"
+        ],
+        [
+          "Joseph",
+          "Singh"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 5,
+      "pred_preview": [
+        [
+          24189255812295,
+          "Francisco",
+          "Sanchez"
+        ],
+        [
+          32985348833890,
+          "Avraham",
+          "Ben-Tzur"
+        ],
+        [
+          32985348834937,
+          "Juan",
+          "Perez"
+        ],
+        [
+          30786325578258,
+          "Angel",
+          "Melaku"
+        ],
+        [
+          30786325578383,
+          "Joseph",
+          "Singh"
+        ]
+      ],
+      "exec_seconds": 0.08
+    },
+    {
+      "id": "TM-05-02",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Which people became friends with Philibert Roindefo during 2010?",
+      "cypher": "MATCH (ph:Person {firstName: 'Philibert', lastName: 'Roindefo'})\nMATCH (ph)-[k:KNOWS]-(friend:Person)\nWHERE k.creationDate >= date('2010-01-01') AND k.creationDate < date('2011-01-01')\nRETURN DISTINCT friend.id AS id, friend.firstName AS firstName, friend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Philibert', lastName: 'Roindefo'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2010 RETURN f.firstName, f.lastName",
+      "seconds": 9.6,
+      "gold_answer": [
+        [
+          "Evangelos",
+          "Dionysiou"
+        ],
+        [
+          "Claude",
+          "Aly"
+        ],
+        [
+          "Salim Ahmed",
+          "Binalshibh"
+        ],
+        [
+          "Peter",
+          "Taylor"
+        ],
+        [
+          "Konstantinos",
+          "Antoniou"
+        ],
+        [
+          "Zaenal",
+          "Gallagher"
+        ],
+        [
+          "Claude",
+          "Radafison"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.09
+    },
+    {
+      "id": "TM-05-03",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "List the new friends Christos Angello made in 2012.",
+      "cypher": "MATCH (p:Person {firstName: 'Christos', lastName: 'Angello'})-[:KNOWS {creationDate: cd}]->(friend:Person)\nWHERE cd.year = 2012\nRETURN friend.id AS id, friend.firstName AS firstName, friend.lastName AS lastName\nORDER BY friend.id",
+      "gold": "MATCH (:Person {firstName: 'Christos', lastName: 'Angello'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+      "seconds": 5.6,
+      "gold_answer": [
+        [
+          "Stanimir",
+          "Ivanov"
+        ],
+        [
+          "Giovanni",
+          "Bianchi"
+        ],
+        [
+          "Aisso",
+          "Gerima"
+        ],
+        [
+          "Angel",
+          "Melaku"
+        ]
+      ],
+      "verdict": "execution_error",
+      "error": "Neo.ClientError.Statement.SyntaxError: Variable `cd` not defined (line 1, column 86 (offset: 85))",
+      "exec_seconds": 0.06
+    },
+    {
+      "id": "TM-05-04",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Who did Ching Do become friends with in 2012?",
+      "cypher": "MATCH (p:Person {firstName: 'Ching', lastName: 'Do'})- [k:KNOWS]-> (friend:Person)\nWHERE k.creationDate >= datetime('2012-01-01T00:00:00') \n  AND k.creationDate < datetime('2013-01-01T00:00:00')\nRETURN friend.firstName AS firstName, friend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Ching', lastName: 'Do'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+      "seconds": 1.7,
+      "gold_answer": [
+        [
+          "John",
+          "Sheikh"
+        ],
+        [
+          "Emperor of Brazil",
+          "Dom Pedro II"
+        ],
+        [
+          "Madan Krishna",
+          "Koirala"
+        ],
+        [
+          "Muhammad",
+          "Qureshi"
+        ],
+        [
+          "Alfredo",
+          "Fernandez"
+        ],
+        [
+          "Adam",
+          "Supinyo"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 6,
+      "pred_preview": [
+        [
+          "John",
+          "Sheikh"
+        ],
+        [
+          "Emperor of Brazil",
+          "Dom Pedro II"
+        ],
+        [
+          "Madan Krishna",
+          "Koirala"
+        ],
+        [
+          "Muhammad",
+          "Qureshi"
+        ],
+        [
+          "Alfredo",
+          "Fernandez"
+        ]
+      ],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "TM-05-05",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Which people became friends with Fritz Fischer during 2012?",
+      "cypher": "MATCH (f:Person {firstName: 'Fritz', lastName: 'Fischer'})\nMATCH (p:Person)-[k:KNOWS]-(f)\nWHERE k.creationDate >= date('2012-01-01') AND k.creationDate < date('2013-01-01')\nRETURN DISTINCT p.id AS id, p.firstName AS firstName, p.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Fritz', lastName: 'Fischer'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+      "seconds": 10.6,
+      "gold_answer": [
+        [
+          "Jana",
+          "Kerndlova"
+        ],
+        [
+          "Shweta",
+          "Sharma"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.19
+    },
+    {
+      "id": "TM-05-06",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "List the new friends Ali Lambo made in 2011.",
+      "cypher": "MATCH (p:Person {firstName: 'Ali', lastName: 'Lambo'})- [k:KNOWS]->(friend:Person)\nWHERE date(k.creationDate).year = 2011\nRETURN friend.id AS friendId, friend.firstName AS firstName, friend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Ali', lastName: 'Lambo'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2011 RETURN f.firstName, f.lastName",
+      "seconds": 6.3,
+      "gold_answer": [
+        [
+          "Michal",
+          "Kaminski"
+        ],
+        [
+          "Takeshi",
+          "Yamamoto"
+        ],
+        [
+          "Bruna",
+          "Costa"
+        ],
+        [
+          "Rafael",
+          "Alves"
+        ],
+        [
+          "Eduardo",
+          "Araya"
+        ],
+        [
+          "Chris",
+          "Hall"
+        ],
+        [
+          "Rafael",
+          "Santos"
+        ],
+        [
+          "Paul",
+          "Becker"
+        ],
+        [
+          "Mario",
+          "Santos"
+        ],
+        [
+          "Andre",
+          "Chihab"
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 10,
+      "pred_preview": [
+        [
+          19791209301592,
+          "Michal",
+          "Kaminski"
+        ],
+        [
+          24189255812607,
+          "Takeshi",
+          "Yamamoto"
+        ],
+        [
+          21990232556811,
+          "Bruna",
+          "Costa"
+        ],
+        [
+          13194139534982,
+          "Rafael",
+          "Alves"
+        ],
+        [
+          19791209300326,
+          "Eduardo",
+          "Araya"
+        ]
+      ],
+      "exec_seconds": 0.1
+    },
+    {
+      "id": "TM-05-07",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Who did Hamani Lambo become friends with in 2011?",
+      "cypher": "MATCH (p:Person {firstName: 'Hamani', lastName: 'Lambo'})-[:KNOWS {creationDate: cd}]->(friend:Person)\nWHERE cd.year = 2011\nRETURN friend.firstName AS firstName, friend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Hamani', lastName: 'Lambo'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2011 RETURN f.firstName, f.lastName",
+      "seconds": 1.8,
+      "gold_answer": [
+        [
+          "Jack",
+          "Wilson"
+        ],
+        [
+          "Ammar",
+          "David"
+        ],
+        [
+          "Mario",
+          "Santos"
+        ],
+        [
+          "John",
+          "Wilson"
+        ],
+        [
+          "Jose",
+          "Costa"
+        ],
+        [
+          "Arturo",
+          "Velázquez"
+        ],
+        [
+          "Sergio",
+          "Machado"
+        ]
+      ],
+      "verdict": "execution_error",
+      "error": "Neo.ClientError.Statement.SyntaxError: Variable `cd` not defined (line 1, column 82 (offset: 81))",
+      "exec_seconds": 0.03
+    },
+    {
+      "id": "TM-05-08",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Which people became friends with Werner Muller during 2010?",
+      "cypher": "MATCH (w:Person {firstName: 'Werner', lastName: 'Muller'})\nMATCH (p:Person)-[k:KNOWS]-(w)\nWHERE k.creationDate >= date('2010-01-01') AND k.creationDate < date('2011-01-01')\nRETURN p.id AS personId, p.firstName, p.lastName",
+      "gold": "MATCH (:Person {firstName: 'Werner', lastName: 'Muller'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2010 RETURN f.firstName, f.lastName",
+      "seconds": 2.2,
+      "gold_answer": [
+        [
+          "Maria",
+          "Alkaios"
+        ],
+        [
+          "David",
+          "Herzigová"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.12
+    },
+    {
+      "id": "TM-05-09",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "List the new friends Gabriela Rodriguez made in 2012.",
+      "cypher": "MATCH (p:Person {firstName: 'Gabriela', lastName: 'Rodriguez'})-[:KNOWS {creationDate: cd}]->(newFriend:Person)\nWHERE cd.year = 2012\nRETURN newFriend.id AS id, newFriend.firstName AS firstName, newFriend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Gabriela', lastName: 'Rodriguez'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+      "seconds": 4.0,
+      "gold_answer": [
+        [
+          "Emperor of Brazil",
+          "Oliveira"
+        ],
+        [
+          "Ayesha",
+          "Butt"
+        ]
+      ],
+      "verdict": "execution_error",
+      "error": "Neo.ClientError.Statement.SyntaxError: Variable `cd` not defined (line 1, column 88 (offset: 87))",
+      "exec_seconds": 0.02
+    },
+    {
+      "id": "TM-05-10",
+      "type": "temporal",
+      "template_id": "TM-05",
+      "question": "Who did Eugene Moke Bemba become friends with in 2012?",
+      "cypher": "MATCH (e:Person {firstName: 'Eugene', lastName: 'Moke Bemba'})-[k:KNOWS]->(friend:Person)\nWHERE k.creationDate.year = 2012\nRETURN friend.firstName AS firstName, friend.lastName AS lastName",
+      "gold": "MATCH (:Person {firstName: 'Eugene Moke', lastName: 'Bemba'})-[k:KNOWS]-(f:Person) WHERE k.creationDate.year = 2012 RETURN f.firstName, f.lastName",
+      "seconds": 4.6,
+      "gold_answer": [
+        [
+          "Emperor of Brazil",
+          "Dom Pedro II"
+        ],
+        [
+          "Andrei",
+          "Kahnovich"
+        ]
+      ],
+      "verdict": "empty_result",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.12
+    }
+  ]
+}
