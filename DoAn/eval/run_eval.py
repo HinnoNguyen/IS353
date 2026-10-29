@@ -144,7 +144,7 @@ def main():
     ap = argparse.ArgumentParser(description="Chạy một baseline trên dev/test và chấm execution accuracy.")
     ap.add_argument("--baseline", required=True, help="tên module trong eval/baselines/, vd. oracle, b1_zeroshot")
     ap.add_argument("--model", default=None, help="ID model trên Groq, vd. openai/gpt-oss-20b (oracle: bỏ trống)")
-    ap.add_argument("--split", required=True, choices=["dev", "test"])
+    ap.add_argument("--split", required=True, choices=["dev", "test", "dev_para"])
     ap.add_argument("--run", type=int, default=1, help="lần chạy thứ k (mỗi lần có cache riêng)")
     ap.add_argument("--answers", action="store_true",
                     help=f"sinh câu trả lời văn bản cho các câu correct bằng {ANSWER_MODEL} (chỉ dùng cho B1 test run 1)")
