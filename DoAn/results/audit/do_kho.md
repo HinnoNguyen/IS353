@@ -74,6 +74,7 @@ Cả hai lượt chạy đều dùng cùng model `openai/gpt-oss-20b` (Groq API,
 | Cấu hình | Trên 40 câu Dev gốc | Trên 40 câu Dev viết lại (`dev_para`) | Chênh lệch ($\Delta$) |
 |---|---|---|---|
 | **Oracle** | 40/40 (100.0%) | 40/40 (100.0%) | 0.0% |
+| **B0 (Rule-based Regex)** | 40/40 (100.0%) | **1/40 (2.5%)** | **-97.5%** |
 | **B1 (gpt-oss-20b zero-shot)** | 20/40 (50.0%) | **18/40 (45.0%)** | **-5.0%** |
 | **Proposed v0 (gpt-oss-20b + A + D)** | 39/40 (97.5%) | **38/40 (95.0%)** | **-2.5%** |
 
@@ -95,8 +96,13 @@ Cả hai lượt chạy đều dùng cùng model `openai/gpt-oss-20b` (Groq API,
 | `indirect` (hỏi gián tiếp) | 10 | 7/10 (70.0%) | **6/10 (60.0%)** (-10.0%) | 10/10 (100.0%) | 10/10 (100.0%) |
 
 ### Nhận xét Bước 2:
-1. **B1 zero-shot rất nhạy cảm với cách diễn đạt:** Khi câu hỏi trở nên tự nhiên hơn (thêm ngữ cảnh hoặc hỏi gián tiếp), độ chính xác của B1 sụt giảm từ 10% đến 20%. Đặc biệt ở nhóm `multi_hop`, việc thay đổi cấu trúc câu làm B1 giảm từ 62.5% xuống 37.5%. Điều này chứng minh **B1 có dựa dẫm vào khuôn câu chuẩn của template**.
-2. **Proposed v0 giữ độ bền rất cao (95.0% vs 97.5%):** Nhờ có các quy ước schema bao quát trong (A) và vòng tự sửa lỗi (D), Proposed v0 hầu như không bị ảnh hưởng bởi cách diễn đạt gián tiếp hay từ đồng nghĩa, chỉ bị sai 2 câu do bẫy giá trị ngày tháng và định dạng tên.
+1. **B0 (Rule-based Regex) sụp đổ hoàn toàn khi câu hỏi bị biến đổi (100.0% -> 2.5%):**
+   - Trên 40 câu dev gốc: B0 đạt **100.0% (40/40)** (và 92/92 trên toàn bộ tập `dev.json`) vì regex khớp chính xác 10 khuôn câu dev.
+   - Nhưng khi câu hỏi được viết lại theo cách tự nhiên (`dev_para`): B0 rơi xuống còn đúng duy nhất **1/40 câu (2.5%)** (chỉ còn đúng 1 câu `AG-03-01` do còn giữ từ khóa "posts are tagged with"). Toàn bộ 39 câu còn lại trả về rỗng (`no_cypher`).
+   - Trên tập kiểm thử độc lập (`test.json` gồm 15 templates mới): B0 đạt **0/150 (0.0%)** vì tuân thủ nghiêm ngặt nguyên tắc chống rò rỉ dữ liệu (không viết luật cho template chưa thấy trên dev).
+   - Đây là bằng chứng thực nghiệm rõ nhất cho thấy hệ thống rule-based truyền thống hoàn toàn thất bại trước sự phong phú của ngôn ngữ tự nhiên, khẳng định sự cần thiết của các phương pháp LLM.
+2. **B1 zero-shot rất nhạy cảm với cách diễn đạt:** Khi câu hỏi trở nên tự nhiên hơn (thêm ngữ cảnh hoặc hỏi gián tiếp), độ chính xác của B1 sụt giảm từ 10% đến 20%. Đặc biệt ở nhóm `multi_hop`, việc thay đổi cấu trúc câu làm B1 giảm từ 62.5% xuống 37.5%. Điều này chứng minh **B1 có dựa dẫm vào khuôn câu chuẩn của template**.
+3. **Proposed v0 giữ độ bền rất cao (95.0% vs 97.5%):** Nhờ có các quy ước schema bao quát trong (A) và vòng tự sửa lỗi (D), Proposed v0 hầu như không bị ảnh hưởng bởi cách diễn đạt gián tiếp hay từ đồng nghĩa, chỉ bị sai 2 câu do bẫy giá trị ngày tháng và định dạng tên.
 
 ---
 

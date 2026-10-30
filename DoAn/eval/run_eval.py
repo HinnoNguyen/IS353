@@ -162,7 +162,7 @@ def main():
         questions = [q for row in zip_longest(*groups) for q in row if q]
     questions = questions[:args.limit] if args.limit else questions
     name = file_name(args.baseline, args.model, args.run)
-    cache_path = CACHE_DIR / name
+    cache_path = CACHE_DIR / (f"{args.split}__{name}" if args.split == "dev_para" else name)
     cache = json.loads(cache_path.read_text(encoding="utf-8")) if cache_path.exists() else {}
     started = now()
     generate = importlib.import_module(f"baselines.{args.baseline}").build(args.model)
