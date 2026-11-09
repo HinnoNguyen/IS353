@@ -1,0 +1,61 @@
+{
+  "total_templates_audited": 25,
+  "total_alt_interpretations": 42,
+  "dev": {
+    "total": 92,
+    "ambiguous": 73,
+    "rate": 0.7935
+  },
+  "test": {
+    "total": 150,
+    "ambiguous": 120,
+    "rate": 0.8
+  },
+  "by_type": {
+    "lookup": {
+      "dev_total": 17,
+      "dev_ambiguous": 8,
+      "test_total": 30,
+      "test_ambiguous": 10,
+      "total": 47,
+      "ambiguous": 18,
+      "rate": 0.383
+    },
+    "aggregation": {
+      "dev_total": 20,
+      "dev_ambiguous": 20,
+      "test_total": 30,
+      "test_ambiguous": 30,
+      "total": 50,
+      "ambiguous": 50,
+      "rate": 1.0
+    },
+    "multi_hop": {
+      "dev_total": 20,
+      "dev_ambiguous": 10,
+      "test_total": 30,
+      "test_ambiguous": 30,
+      "total": 50,
+      "ambiguous": 40,
+      "rate": 0.8
+    },
+    "path": {
+      "dev_total": 16,
+      "dev_ambiguous": 16,
+      "test_total": 30,
+      "test_ambiguous": 30,
+      "total": 46,
+      "ambiguous": 46,
+      "rate": 1.0
+    },
+    "temporal": {
+      "dev_total": 19,
+      "dev_ambiguous": 19,
+      "test_total": 30,
+      "test_ambiguous": 20,
+      "total": 49,
+      "ambiguous": 39,
+      "rate": 0.7959
+    }
+  }
+}
