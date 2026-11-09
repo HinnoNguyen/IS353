@@ -1,0 +1,142 @@
+{
+  "dev": {
+    "lookup": {
+      "n": 17,
+      "avg_hops": 0.47,
+      "var_path_count": 0,
+      "agg_pct": 0.0,
+      "where_ge_1": 0,
+      "tiers": {
+        "Dễ": 17
+      }
+    },
+    "aggregation": {
+      "n": 20,
+      "avg_hops": 1.5,
+      "var_path_count": 0,
+      "agg_pct": 100.0,
+      "where_ge_1": 0,
+      "tiers": {
+        "Trung bình": 20
+      }
+    },
+    "multi_hop": {
+      "n": 20,
+      "avg_hops": 2.5,
+      "var_path_count": 0,
+      "agg_pct": 0.0,
+      "where_ge_1": 0,
+      "tiers": {
+        "Trung bình": 10,
+        "Khó": 10
+      }
+    },
+    "path": {
+      "n": 16,
+      "avg_hops": 1.44,
+      "var_path_count": 9,
+      "agg_pct": 0.0,
+      "where_ge_1": 0,
+      "tiers": {
+        "Khó": 9,
+        "Trung bình": 7
+      }
+    },
+    "temporal": {
+      "n": 19,
+      "avg_hops": 0.47,
+      "var_path_count": 0,
+      "agg_pct": 100.0,
+      "where_ge_1": 19,
+      "tiers": {
+        "Trung bình": 19
+      }
+    },
+    "TOTAL": {
+      "n": 92,
+      "avg_hops": 1.3,
+      "var_path_count": 9,
+      "agg_pct": 42.4,
+      "where_ge_1": 19,
+      "tiers": {
+        "Dễ": 17,
+        "Trung bình": 56,
+        "Khó": 19
+      },
+      "tier_pct": {
+        "Dễ": 18.5,
+        "Trung bình": 60.9,
+        "Khó": 20.7
+      }
+    }
+  },
+  "test": {
+    "lookup": {
+      "n": 30,
+      "avg_hops": 1.0,
+      "var_path_count": 0,
+      "agg_pct": 0.0,
+      "where_ge_1": 0,
+      "tiers": {
+        "Dễ": 30
+      }
+    },
+    "aggregation": {
+      "n": 30,
+      "avg_hops": 1.67,
+      "var_path_count": 0,
+      "agg_pct": 100.0,
+      "where_ge_1": 0,
+      "tiers": {
+        "Trung bình": 30
+      }
+    },
+    "multi_hop": {
+      "n": 30,
+      "avg_hops": 2.0,
+      "var_path_count": 0,
+      "agg_pct": 66.7,
+      "where_ge_1": 0,
+      "tiers": {
+        "Trung bình": 30
+      }
+    },
+    "path": {
+      "n": 30,
+      "avg_hops": 1.33,
+      "var_path_count": 30,
+      "agg_pct": 100.0,
+      "where_ge_1": 20,
+      "tiers": {
+        "Khó": 30
+      }
+    },
+    "temporal": {
+      "n": 30,
+      "avg_hops": 1.0,
+      "var_path_count": 0,
+      "agg_pct": 33.3,
+      "where_ge_1": 20,
+      "tiers": {
+        "Trung bình": 30
+      }
+    },
+    "TOTAL": {
+      "n": 150,
+      "avg_hops": 1.4,
+      "var_path_count": 30,
+      "agg_pct": 60.0,
+      "where_ge_1": 40,
+      "tiers": {
+        "Dễ": 30,
+        "Trung bình": 90,
+        "Khó": 30
+      },
+      "tier_pct": {
+        "Dễ": 20.0,
+        "Trung bình": 60.0,
+        "Khó": 20.0
+      }
+    }
+  }
+}
