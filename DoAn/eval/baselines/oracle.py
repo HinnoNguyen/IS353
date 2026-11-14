@@ -7,7 +7,7 @@ QDIR = Path(__file__).resolve().parent.parent / "questions"
 
 def build(model=None):
     gold = {q["question"]: q["gold"]
-            for split in ("dev", "test", "dev_para")
+            for split in ("dev", "test", "dev_para", "dev_zero", "test2")
             if (QDIR / f"{split}.json").exists()
             for q in json.loads((QDIR / f"{split}.json").read_text(encoding="utf-8"))}
     return lambda question: gold.get(question, "")
