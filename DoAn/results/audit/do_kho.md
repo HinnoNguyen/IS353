@@ -101,30 +101,31 @@ Cả hai lượt chạy đều dùng cùng model `openai/gpt-oss-20b` (Groq API,
    - Nhưng khi câu hỏi được viết lại theo cách tự nhiên (`dev_para`): B0 rơi xuống còn đúng duy nhất **1/40 câu (2.5%)** (chỉ còn đúng 1 câu `AG-03-01` do còn giữ từ khóa "posts are tagged with"). Toàn bộ 39 câu còn lại trả về rỗng (`no_cypher`).
    - Trên tập kiểm thử độc lập (`test.json` gồm 15 templates mới): B0 đạt **0/150 (0.0%)** vì tuân thủ nghiêm ngặt nguyên tắc chống rò rỉ dữ liệu (không viết luật cho template chưa thấy trên dev).
    - Đây là bằng chứng thực nghiệm rõ nhất cho thấy hệ thống rule-based truyền thống hoàn toàn thất bại trước sự phong phú của ngôn ngữ tự nhiên, khẳng định sự cần thiết của các phương pháp LLM.
-2. **B1 zero-shot rất nhạy cảm với cách diễn đạt:** Khi câu hỏi trở nên tự nhiên hơn (thêm ngữ cảnh hoặc hỏi gián tiếp), độ chính xác của B1 sụt giảm từ 10% đến 20%. Đặc biệt ở nhóm `multi_hop`, việc thay đổi cấu trúc câu làm B1 giảm từ 62.5% xuống 37.5%. Điều này chứng minh **B1 có dựa dẫm vào khuôn câu chuẩn của template**.
-3. **Proposed v0 giữ độ bền rất cao (95.0% vs 97.5%):** Nhờ có các quy ước schema bao quát trong (A) và vòng tự sửa lỗi (D), Proposed v0 hầu như không bị ảnh hưởng bởi cách diễn đạt gián tiếp hay từ đồng nghĩa, chỉ bị sai 2 câu do bẫy giá trị ngày tháng và định dạng tên.
+2. **B1 zero-shot có mức giảm nhẹ khi viết lại câu hỏi:** Khi câu hỏi trở nên tự nhiên hơn (thêm ngữ cảnh hoặc hỏi gián tiếp), EX của B1 giảm từ 20/40 (50.0%) xuống 18/40 (45.0%) (-5.0%, tức chỉ chênh lệch **2/40 câu**). Mức chênh 2 câu này chưa đủ lớn để khẳng định chắc chắn về sự phụ thuộc khuôn mẫu đối với B1, dù vẫn ghi nhận một số sai sót cục bộ ở nhóm `multi_hop` (-25.0%) và câu dài (`long`, -20.0%).
+3. **Proposed v0 giữ độ bền rất cao (95.0% vs 97.5%):** Nhờ có các quy ước schema bao quát trong (A) và vòng tự sửa lỗi (D), Proposed v0 hầu như không bị ảnh hưởng bởi cách diễn đạt gián tiếp hay từ đồng nghĩa, chỉ bị sai 2 câu (chênh 1/40 câu giữa 2 lượt).
 
 ---
 
 ## 4. Bước 3 – So sánh với các Benchmark Text-to-Cypher đã công bố
 
-Để trả lời câu hỏi: *"Con số B3 đạt 78,9% trên test và Proposed v0 đạt 98,9% trên dev là cao hay thấp?"*, nhóm đối soát với các công bố học thuật quốc tế:
+Để trả lời câu hỏi: *"Con số B3 đạt 78,9% trên test và Proposed v0 đạt 98,9% trên dev là cao hay thấp?"*, nhóm đối soát trực tiếp với các số liệu có trong bài báo gốc (không nội suy hay quy đổi chéo giữa các metric khác nhau):
 
-| Benchmark | Phạm vi (Domain) | Mô hình | Metric | Kết quả công bố | Đặc điểm độ phức tạp | Link nguồn |
+| Benchmark | Phạm vi (Domain) | Mô hình | Metric (theo bài gốc) | Kết quả công bố trong bài gốc | Đặc điểm độ phức tạp | Link nguồn |
 |---|---|---|---|---|---|---|
-| **Text2Cypher (Neo4j, 2024)** | Đa miền (16 đồ thị khác nhau) | GPT-4 / Llama-3-70B (zero-shot) | Execution Accuracy | **40% – 54%** | Schema lạ, đa dạng domain, nhiều câu hỏi trừu tượng | [arXiv:2412.10064](https://arxiv.org/abs/2412.10064) |
-| **Text2Cypher (Neo4j, 2024)** | Đa miền (16 đồ thị) | Gemma-2-9B (fine-tuned) | Execution Accuracy | **68% – 72%** | Đã qua fine-tune trên 44k mẫu đồ thị | [HuggingFace: neo4j/text2cypher](https://huggingface.co/datasets/neo4j/text2cypher-2024v1) |
-| **CypherBench (2024)** | Knowledge Graphs (Đồ thị tri thức) | GPT-4o / Claude 3.5 Sonnet | Execution Accuracy | **62% – 74%** | Đồ thị quy mô lớn, nhiều quan hệ đồng nghĩa | [CypherBench Benchmark](https://arxiv.org/) |
-| **Spider (Text-to-SQL)** | Cross-domain Relational DB | LLM 70B/120B (zero-shot) | Execution Accuracy | **65% – 75%** | JOIN nhiều bảng, lồng GROUP BY / HAVING | [Spider Leaderboard](https://yale-lily.github.io/spider) |
-| **Nhóm 13 (LDBC SNB)** | **Đơn miền (Single-domain LDBC)** | **B3 (gpt-oss-120b)** | **Execution Accuracy** | **78,9%** | Đồ thị mạng xã hội cố định, câu hỏi từ template | Đồ án IS353 |
-| **Nhóm 13 (LDBC SNB)** | **Đơn miền (Single-domain LDBC)** | **Proposed v0 (gpt-oss-20b)** | **Execution Accuracy** | **98,9% (dev)** | Có schema kèm quy ước chữa bẫy + tự sửa lỗi | Đồ án IS353 |
+| **CypherBench (2024)** *(Bảng 3, tập test 2.488 câu)* | Đa miền (7 đồ thị Wikidata quy mô lớn) | **Claude 3.5 Sonnet** (`20240620`, zero-shot) | **Execution Accuracy (EX)** | **61.58%** *(Exec: 96.34%)* | Đa đồ thị tri thức thật, schema lớn và phức tạp | [arXiv:2412.18702](https://arxiv.org/abs/2412.18702) |
+| **CypherBench (2024)** *(Bảng 3, tập test 2.488 câu)* | Đa miền (7 đồ thị Wikidata) | **GPT-4o** (`20240806`, zero-shot) | **Execution Accuracy (EX)** | **60.18%** *(Exec: 94.93%)* | Như trên | [arXiv:2412.18702](https://arxiv.org/abs/2412.18702) |
+| **CypherBench (2024)** *(Bảng 3, tập test 2.488 câu)* | Đa miền (7 đồ thị Wikidata) | **Qwen2.5-72B** / **Llama-3.1-70B** / `<10B` (zero-shot) | **Execution Accuracy (EX)** | **41.87%** / **38.84%** / **11.20%–18.82%** | Cho thấy chênh lệch lớn giữa mô hình mã nguồn mở và mô hình đóng trên đa đồ thị | [arXiv:2412.18702](https://arxiv.org/abs/2412.18702) |
+| **Text2Cypher (Neo4j, 2024)** *(Bảng 5, 4.833 câu test)* | Đa miền (nhiều nguồn đồ thị gộp từ 44.387 mẫu) | `Llama-3.1-8B-it`, `Gemma-2-9B-it`, `GPT-4o-mini`, `GPT-4o` | **Google-BLEU** & **Exact Match** *(chỉ công bố $\Delta$ sau fine-tune ở Bảng 5; điểm gốc vẽ ở Hình 4)* | Cải thiện sau fine-tune ($\Delta$ Exact Match): **+0.11** (`Llama-3.1-8B`), **+0.07** (`Gemma-2-9B`), **+0.06** (`GPT-4o-mini`), **+0.01** (`GPT-4o`) | Chấm Exact Match chuỗi đầu ra và Google-BLEU, **không** dùng cùng thang EX để so trực tiếp tỉ lệ % | [arXiv:2412.10064](https://arxiv.org/abs/2412.10064) |
+| **Nhóm 13 (LDBC SNB)** | **Đơn miền (Single-domain LDBC)** | **B3 (`gpt-oss-120b`, zero-shot)** | **Execution Accuracy (EX)** | **78.9%** *(tập test cũ)* | Đồ thị mạng xã hội cố định, câu hỏi sinh từ 25 template | Đồ án IS353 |
+| **Nhóm 13 (LDBC SNB)** | **Đơn miền (Single-domain LDBC)** | **Proposed v0 (`gpt-oss-20b` + A + D)** | **Execution Accuracy (EX)** | **98.9%** *(tập dev)* | Có schema kèm quy ước chữa bẫy + tự sửa lỗi | Đồ án IS353 |
 
 ### Phân tích so sánh:
-1. **Mức 78,9% của B3 là hợp lý nhưng ở nhóm cao:** Do đồ án đánh giá trên **single-domain** (duy nhất mạng xã hội LDBC SNB SF0.1). LLM không phải thích nghi với schema mới liên tục như benchmark đa miền Text2Cypher.
-2. **Mức 98,9% của Proposed v0 trên Dev là quá cao (bất thường):**
+1. **Mức 78.9% của B3 cao hơn các mô hình mạnh trên CypherBench (~60–62%):** Trên benchmark đa miền CypherBench (7 đồ thị Wikidata lạ chưa từng gặp khi huấn luyện), ngay cả hai mô hình đóng hàng đầu là **Claude 3.5 Sonnet (61.58%)** và **GPT-4o (60.18%)** cũng chỉ đạt quanh ngưỡng ~60%, còn mô hình mở 70B (`Llama-3.1-70B`, `Qwen2.5-72B`) đạt **38.84%–41.87%**. Lý do chính khiến B3 (`gpt-oss-120b`) đạt tới **78.9%** ở đồ án là vì bài toán của nhóm mang tính **đơn miền (single-domain LDBC SNB)** với cấu trúc schema gọn cố định và độ dài bước quan hệ ngắn.
+2. **Không đối chiếu số % trực tiếp với Text2Cypher (`arXiv:2412.10064`):** Bài báo Text2Cypher của Neo4j đánh giá bằng **Google-BLEU** và **Exact Match** (so sánh chuỗi đại diện kết quả/cú pháp, và phần bảng chỉ ghi chênh lệch $\Delta$ sau fine-tune ở Bảng 5), do đó chỉ tham khảo về mặt phương pháp luận chứ không dùng để so trực tiếp con số EX.
+3. **Mức 98.9% của Proposed v0 trên Dev là quá cao (không đại diện cho hiệu năng thật):**
    - Bộ Dev chỉ có 10 template mẫu câu với 2–3 cách diễn đạt cố định.
-   - Thành phần (A) của Proposed v0 đã cung cấp các quy ước viết Cypher bao quát hầu hết các lỗi điển hình (tên nước có dấu `_`, quan hệ `KNOWS` không chiều).
-   - Vòng tự sửa lỗi (D) nhận phản hồi rỗng/lỗi và chỉnh lại đúng ngay trên các khuôn mẫu quen thuộc.
+   - Thành phần (A) của Proposed v0 đã cung cấp các quy ước viết Cypher giải quyết hầu hết các lỗi điển hình trên dev.
+   - Cần đánh giá lại toàn bộ trên tập kiểm thử độc lập mới (`test2`) có độ khó cao hơn để kết luận khách quan.
 
 ---
 
@@ -148,9 +149,9 @@ Cả hai lượt chạy đều dùng cùng model `openai/gpt-oss-20b` (Groq API,
 
 ## 6. Kết luận tổng kết T55
 
-> **Kết luận:** Benchmark của nhóm **tương đối dễ đối với các mô hình ngôn ngữ lớn mạnh** và **bị phụ thuộc vào tính đồng nhất của template**. Mức điểm 78,9% (B3) và 98,9% (Proposed v0 trên dev) đạt được chủ yếu nhờ:
-> 1. Đồ thị đơn miền với cấu trúc truy vấn ngắn ($\le 2$ hops chiếm hơn 80%).
-> 2. Khuôn mẫu câu hỏi lặp lại theo template khiến mô hình zero-shot (B1) tụt 10–25% khi diễn đạt dài hoặc gián tiếp.
-> 3. Các quy ước đặc thù trong module (A) và cơ chế tự sửa (D) đã giải quyết trọn vẹn các bẫy dữ liệu cục bộ.
+> **Kết luận:** Benchmark của nhóm **tương đối dễ đối với các mô hình ngôn ngữ lớn mạnh** khi chạy trên phạm vi đơn miền, và có **tính đồng nhất cao theo khuôn mẫu template**. Cụ thể:
+> 1. Đồ thị đơn miền với cấu trúc truy vấn ngắn ($\le 2$ hops chiếm hơn 80%), khiến B3 (`gpt-oss-120b`) đạt 78.9% — cao hơn đáng kể mức ~60% của GPT-4o / Claude 3.5 Sonnet trên benchmark đa miền phức tạp như CypherBench.
+> 2. Tính đồng nhất theo template thể hiện rõ nhất ở hệ thống luật cứng B0 (tụt từ 40/40 xuống 1/40 trên `dev_para`), trong khi B1 (`gpt-oss-20b`) chỉ giảm nhẹ 2/40 câu (-5.0%) nên chưa đủ cơ sở để kết luận B1 phụ thuộc hoàn toàn vào khuôn chữ.
+> 3. Các quy ước đặc thù trong module (A) và cơ chế tự sửa (D) đã giải quyết trọn vẹn các bẫy dữ liệu cục bộ trên dev (98.9%).
 >
 > Nhóm cần công bố phát hiện này một cách trung thực trong mục **Threats to Validity** của báo cáo cuối kỳ, và cân nhắc đánh giá độ bền khi người dùng đặt câu hỏi tự do hoặc bổ sung các dạng câu hỏi lồng ghép đa bước.
