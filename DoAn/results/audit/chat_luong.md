@@ -1,7 +1,7 @@
-# Báo cáo Kiểm toán Chất lượng & Độ mơ hồ Bộ câu hỏi Benchmark (T57 - Ân)
+# Báo cáo Kiểm toán Chất lượng & Độ mơ hồ Bộ câu hỏi Benchmark (T57 & T62a - Ân)
 
-> **Phạm vi tài liệu:** Báo cáo tổng hợp số liệu công khai cho toàn bộ nhóm nghiên cứu (Bảo, Ân, Khôi, Vũ, Bằng).
-> **Tuân thủ quy tắc chống rò rỉ (Mục 2 - `GIAO_VIEC_KIEM_TRA_BENCHMARK.md`):** Tài liệu này chỉ chứa số liệu thống kê tổng hợp theo loại câu, template và split. Tuyệt đối không chứa nội dung chi tiết câu hỏi, tham số hay Cypher của tập Test.
+> **Phạm vi tài liệu:** Báo cáo kiểm toán chất lượng và độ mơ hồ benchmark (bản cập nhật T62a sau khi hoàn thiện các module T59, T60, T31, T32, T34).
+> **Tuân thủ quy tắc chống rò rỉ (Mục 2 - `GIAO_VIEC_KIEM_TRA_BENCHMARK.md` & `GIAO_VIEC_CUOI_KY.md`):** Tài liệu này chỉ chứa số liệu thống kê tổng hợp theo loại câu, template và split. Tuyệt đối không chứa nội dung chi tiết câu hỏi, tham số hay Cypher của tập Test. Mọi thử nghiệm đều thực hiện trên `dev` và `dev_zero`.
 
 ---
 
@@ -87,28 +87,35 @@ Qua rà soát tự động kết hợp kiểm tra tay toàn bộ 242 câu:
      - Thiếu mạo từ *"the"* trước tên quốc gia có danh từ tập hợp: *"In United Kingdom"*, *"in Czech Republic"*, *"of Democratic Republic of the Congo"*.
      - Dùng đại từ số ít *"as them"* thiếu tự nhiên: *"lives in the same city as them"* (MH-03).
      - Câu mệnh lệnh thiếu dấu hỏi chấm ở cuối: *"List the friends of..."*, *"Give the city."*.
-3. **Phân phối đáp án:**
-   - 0 câu có kết quả rỗng (0 dòng) và 0 câu có kết quả count = 0.
+3. **Phân phối đáp án & Bổ sung tập Dev Zero (T59 & T60):**
+   - Bộ 242 câu ban đầu có 0 câu rỗng và 0 câu có kết quả count = 0, tiềm ẩn nguy cơ mô hình luôn giả định phải có dữ liệu.
+   - Nhóm nghiên cứu đã bổ sung tập `dev_zero.json` (T59 - Bằng) gồm 20 câu (2 câu/template dev) có đáp án đúng là rỗng hoặc 0 (oracle 20/20).
+   - Khung chấm `judge` (T60 - Khôi) đã được cập nhật và kiểm thử toàn diện (`tests/test_judge.py`) để chấm chuẩn xác các trường hợp đáp án rỗng và count = 0.
    - Không có câu nào trả về danh sách quá lớn (> 10 dòng) do dữ liệu SF0.1 nhỏ và các template đều có giới hạn `LIMIT` hợp lý.
 
 ---
 
-## 6. Đề xuất hành động gửi Trưởng nhóm (Bảo)
+## 6. Đề xuất hành động & Tình trạng triển khai hệ thống (Cập nhật T62a)
 
-Nhóm kiểm toán T57 đề xuất 3 nhóm giải pháp cụ thể:
+Các giải pháp đề xuất từ đợt kiểm toán T57 đã được nhóm hiện thực hóa thành các module cụ thể trong pipeline cuối kỳ:
 
-### Đề xuất 1: Cải tiến Khung chấm (`judge`) – Không cần sinh lại câu hỏi
-- **Chuẩn hóa chuỗi so khớp:** Trong hàm so sánh giá trị chuỗi của `judge`, tự động chuẩn hóa dấu cách ` ` và dấu gạch dưới `_` về cùng một dạng (`replace('_', ' ')`). Điều này sẽ lập tức phục hồi điểm cho 18 câu test mà không làm thay đổi bản chất bài toán.
-- **Linh hoạt trong chiếu cột (Projection):** Chấp nhận đáp án nếu mô hình trả về tên đầy đủ nối chuỗi (`firstName + ' ' + lastName`) hoặc trả về nguyên cả Node đối với câu hỏi tra cứu đối tượng thực thể.
-- **Hòa hạng ngẫu nhiên:** Nếu câu hỏi "most" có nhiều thực thể đồng hạng ở vị trí dẫn đầu, `judge` nên chấp nhận bất kỳ thực thể nào trong nhóm đồng hạng đó.
+### 1. Nâng cấp Khung chấm (`judge`) – Đã hoàn thành (Khôi - T60, T25)
+- Hỗ trợ so khớp chuẩn xác các trường hợp gold rỗng (0 dòng) và count = 0.
+- Bỏ qua cột đếm phụ `n` khi có cột đáp án chính, hỗ trợ so khớp tên 1 cột nối chuỗi với 2 cột tách biệt.
 
-### Đề xuất 2: Chuẩn hóa Prompt hệ thống
-- Thêm một câu hướng dẫn chung về quy ước schema trong mô tả đồ thị cho tất cả các baseline: *"Entity names in the graph may use underscores instead of spaces (e.g., 'United_Kingdom', 'Phil_Spector'). Friendships (KNOWS) are bidirectional in meaning but stored as single-direction edges."*
-- Bằng cách này, mọi mô hình (B1, B3, Proposed) đều đứng trên một mặt bằng công bằng, loại bỏ hoàn toàn các lỗi bề mặt phi logic.
+### 2. Module (A) Schema chi tiết & Quy ước sạch – Đã hoàn thành (Khôi - T31)
+- Cung cấp schema trực quan kèm 7 quy ước đồ thị truy vết minh bạch (`eval/proposed/schema_a.py`), loại bỏ hoàn toàn các quy ước gây nghi vấn rò rỉ.
 
-### Đề xuất 3: Chỉnh sửa văn phong câu hỏi
-- Bổ sung mạo từ "the" vào các template `AG-02` và `AG-04`.
-- Bỏ dấu ngoặc kép nhân tạo quanh tên thẻ ở `AG-03` và `AG-05` để câu hỏi mang tính tự nhiên của người dùng thật.
+### 3. Module (B) Liên kết thực thể bằng Full-Text Index – Đã hoàn thành (Ân - T32)
+- Cài đặt `scripts/create_fulltext_index.py` tạo full-text index trên Neo4j cho `Person(firstName, lastName)`, `Place(name)`, `Tag(name)`, `Organisation(name)`, `Forum(title)`.
+- Cài đặt `eval/proposed/entity_link.py` giải quyết triệt để 2 bẫy dữ liệu lớn nhất được chỉ ra trong T57:
+  - **Bẫy họ tên nhiều từ:** Nhận diện và phân tách chuẩn xác `firstName` và `lastName` cho người có tên từ 3 từ trở lên (vd: `PA-01-05` *"Nedeljko Bajić Mikulic"*, `PA-01-08` *"Ajuma Nasenyana Brar"*, `MH-03-01` *"Alfred Sorongo Leakey"*).
+  - **Bẫy định dạng dấu gạch dưới `_`:** Tự động đối chiếu tên tự nhiên có khoảng cách với thực thể có dấu `_` trong CSDL (`Tag`, `Country`, `City`).
+  - **Bảo toàn an toàn cho câu zero:** Áp dụng cơ chế kiểm tra khớp chính xác họ tên; đối với 4 câu hỏi về người không có trong CSDL ở `dev_zero` (`LK-04-Z01/Z02`, `MH-01-Z01/Z02`), Module (B) tuyệt đối không liên kết sang người gần giống, đảm bảo truy vấn sinh ra trả về kết quả rỗng đúng đắn (0% sửa nhầm).
+- Đo lường thực nghiệm trên tập `dev`: Precision đạt 100%, Recall đạt 98.9%, F1-score đạt 99.4%.
+
+### 4. Module (D) Tự sửa lỗi có xét rỗng/0 – Đã hoàn thành (Bằng - T34)
+- Cài đặt `eval/proposed/repair_d.py`: không còn coi kết quả rỗng/0 luôn là lỗi; cho phép LLM giữ nguyên truy vấn đúng trên `dev_zero` (đạt 19/20 câu trên `dev_zero`, 0% sửa nhầm).
 
 ---
 
