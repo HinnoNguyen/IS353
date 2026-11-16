@@ -40,12 +40,15 @@ def retry_after(e):
         return None
 
 
-def groq_chat(model: str, prompt: str) -> str:
-    """Gửi prompt thành 1 tin nhắn user với temperature 0, trả về nội dung trả lời ("" nếu rỗng)."""
+def groq_chat(model: str, prompt: str, **options) -> str:
+    """Gửi prompt thành 1 tin nhắn user với temperature 0, trả về nội dung trả lời ("" nếu rỗng).
+
+    options: tham số thêm cho Groq, vd. reasoning_effort="low" (chỉ model suy luận như gpt-oss). Mặc định không có,
+    nên B1/B3 gọi đúng như trước."""
     for attempt in range(MAX_RETRIES + 1):
         try:
             raw = get_client().chat.completions.with_raw_response.create(
-                model=model, temperature=0, messages=[{"role": "user", "content": prompt}])
+                model=model, temperature=0, messages=[{"role": "user", "content": prompt}], **options)
             break
         except RETRYABLE as e:
             # vd. "Rate limit reached for model ... on tokens per day (TPD): Limit 500000, Used ..."
@@ -58,7 +61,7 @@ def groq_chat(model: str, prompt: str) -> str:
             time.sleep(wait)
     resp = raw.parse()
     msg = resp.choices[0].message
-    log = {"at": datetime.now().astimezone().isoformat(timespec="seconds"), "model": model,
+    log = {"at": datetime.now().astimezone().isoformat(timespec="seconds"), "model": model, "options": options,
            "model_returned": resp.model, "system_fingerprint": resp.system_fingerprint,
            "finish_reason": resp.choices[0].finish_reason, "prompt": prompt, "content": msg.content,
            "reasoning": getattr(msg, "reasoning", None),

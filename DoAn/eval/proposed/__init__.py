@@ -3,5 +3,7 @@
 - entity_link : (B) Liên kết thực thể bằng full-text index (Ân - T32)
 - fewshot_c   : (C) Chọn ví dụ động từ dev (Vũ - T33)
 - repair_d    : (D) Tự sửa lỗi truy vấn có xét rỗng/0 và sinh câu trả lời (Bằng - T34)
+- common      : Phần dùng chung, vd. banned_values() (Bằng - T34)
+Ghép các thành phần: eval/baselines/proposed.py (T35).
 """
 
