@@ -60,7 +60,7 @@ def fixed_texts(use_neo4j):
         from pilot_text2cypher import AUTH, URI, build_schema
         with GraphDatabase.driver(URI, auth=AUTH, notifications_min_severity="OFF") as driver:
             texts["b1:build_schema(live)"] = build_schema(driver)
-            for mod_name in ("baselines.module_a", "baselines.proposed", "module_a"):
+            for mod_name in ("proposed.schema_a", "baselines.module_a", "baselines.proposed", "module_a"):
                 try:
                     mod = importlib.import_module(mod_name)
                 except ImportError:
@@ -83,9 +83,10 @@ def question_values(q):
     p = q.get("params", {})
     if "firstName" in p and "lastName" in p:
         out.append(("params", f"{p['firstName']} {p['lastName']}"))
-    for m in LIT_RE.finditer(q["gold"]):
+    gold = q.get("gold") or ""
+    for m in LIT_RE.finditer(gold):
         out.append(("gold_literal", m.group(1) if m.group(1) is not None else m.group(2)))
-    for m in NUM_RE.finditer(q["gold"]):
+    for m in NUM_RE.finditer(gold):
         out.append(("gold_literal", m.group(1)))
     for row in q.get("answer_preview") or []:
         for v in row if isinstance(row, list) else [row]:
@@ -114,7 +115,8 @@ def scan(split, questions, texts):
                     if key not in seen:
                         seen.add(key)
                         hits.append({"split": split, "source": src, "value": str(value), "segment": name,
-                                     "template_id": q["template_id"], "type": q["type"], "id": q["id"]})
+                                     "template_id": q.get("template_id", "unknown"),
+                                     "type": q.get("type", "unknown"), "id": q.get("id", "unknown")})
     return hits
 
 
@@ -126,15 +128,29 @@ def year_check(questions, texts):
         tids = defaultdict(int)
         for q in questions:
             vals = {str(v) for _, v in question_values(q)}
-            if y in vals or re.search(rf"(?<!\d){y}(?!\d)", q["gold"]):
-                tids[q["template_id"]] += 1
+            gold = q.get("gold") or ""
+            if y in vals or re.search(rf"(?<!\d){y}(?!\d)", gold):
+                tids[q.get("template_id", "unknown")] += 1
         out[y] = dict(tids)
     return out
+
+
+def load_split_questions(split):
+    """Đọc danh sách câu hỏi từ tên split (trong eval/questions/ hoặc private/) hoặc đường dẫn file trực tiếp."""
+    p = Path(split)
+    if p.exists():
+        return json.loads(p.read_text(encoding="utf-8"))
+    for candidate in (QDIR / f"{split}.json", ROOT / "private" / f"{split}.json"):
+        if candidate.exists():
+            return json.loads(candidate.read_text(encoding="utf-8"))
+    raise FileNotFoundError(f"Không tìm thấy file câu hỏi cho split '{split}'")
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--no-neo4j", action="store_true", help="không lấy build_schema/detailed_schema trực tiếp")
+    ap.add_argument("--splits", nargs="+", default=["dev", "test"],
+                    help="các split hoặc đường dẫn file câu hỏi cần kiểm tra (vd: dev test, hoặc test2)")
     ap.add_argument("--out", default=str(ROOT / "results" / "audit" / "leak_values.json"))
     args = ap.parse_args()
 
@@ -144,8 +160,8 @@ def main():
         print(f"  - {name}  ({len(t)} ký tự)")
 
     report = {"segments": list(texts), "splits": {}}
-    for split in ("dev", "test"):
-        questions = json.loads((QDIR / f"{split}.json").read_text(encoding="utf-8"))
+    for split in args.splits:
+        questions = load_split_questions(split)
         hits = scan(split, questions, texts)
         n_q = len({h["id"] for h in hits})
         print(f"\n=== {split}: {len(questions)} câu, {len(hits)} lần trùng, {n_q} câu bị ảnh hưởng")
@@ -168,10 +184,11 @@ def main():
         report["splits"][split] = {"n_questions": len(questions), "n_hits": len(hits),
                                    "n_questions_affected": n_q, "matches": rows, "years_in_prompt": years}
 
-    out = Path(args.out)
+    out = Path(args.out).resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"\nĐã lưu {out.relative_to(ROOT)}")
+    rel = out.relative_to(ROOT) if out.is_relative_to(ROOT) else out
+    print(f"\nĐã lưu {rel}")
 
 
 if __name__ == "__main__":

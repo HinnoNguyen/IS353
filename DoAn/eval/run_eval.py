@@ -99,6 +99,8 @@ def evaluate(session, q, entry):
     """Chạy Cypher (đã có trong cache) của một câu, chấm và gán nhãn. Trả về (kết quả, các dòng dự đoán | None)."""
     r = {"id": q["id"], "type": q["type"], "template_id": q["template_id"], "question": q["question"],
          "cypher": entry["cypher"], "gold": q["gold"], "seconds": entry["seconds"]}
+    if "subset" in q:
+        r["subset"] = q["subset"]
     if "info" in entry:
         r["info"] = entry["info"]
     gold_rows = answer_rows(run_query(session, q["gold"]))
@@ -144,7 +146,7 @@ def main():
     ap = argparse.ArgumentParser(description="Chạy một baseline trên dev/test và chấm execution accuracy.")
     ap.add_argument("--baseline", required=True, help="tên module trong eval/baselines/, vd. oracle, b1_zeroshot")
     ap.add_argument("--model", default=None, help="ID model trên Groq, vd. openai/gpt-oss-20b (oracle: bỏ trống)")
-    ap.add_argument("--split", required=True, choices=["dev", "test", "dev_para"])
+    ap.add_argument("--split", required=True, choices=["dev", "test", "dev_para", "dev_zero", "test2"])
     ap.add_argument("--run", type=int, default=1, help="lần chạy thứ k (mỗi lần có cache riêng)")
     ap.add_argument("--answers", action="store_true",
                     help=f"sinh câu trả lời văn bản cho các câu correct bằng {ANSWER_MODEL} (chỉ dùng cho B1 test run 1)")
@@ -162,7 +164,7 @@ def main():
         questions = [q for row in zip_longest(*groups) for q in row if q]
     questions = questions[:args.limit] if args.limit else questions
     name = file_name(args.baseline, args.model, args.run)
-    cache_path = CACHE_DIR / (f"{args.split}__{name}" if args.split == "dev_para" else name)
+    cache_path = CACHE_DIR / (name if args.split in ("dev", "test") else f"{args.split}__{name}")
     cache = json.loads(cache_path.read_text(encoding="utf-8")) if cache_path.exists() else {}
     started = now()
     generate = importlib.import_module(f"baselines.{args.baseline}").build(args.model)
@@ -189,6 +191,8 @@ def main():
                     r = {"id": q["id"], "type": q["type"], "template_id": q["template_id"],
                          "question": q["question"], "cypher": "", "gold": q["gold"], "verdict": "llm_error",
                          "seconds": round(time.time() - start, 1), "error": f"{type(e).__name__}: {str(e)[:300]}"}
+                    if "subset" in q:
+                        r["subset"] = q["subset"]
                     results.append(r)
                     print(f"{q['id']:<10} {q['type']:<12} llm_error        {r['error'][:100]}")
                     if errors_in_a_row >= MAX_LLM_ERRORS_IN_A_ROW:

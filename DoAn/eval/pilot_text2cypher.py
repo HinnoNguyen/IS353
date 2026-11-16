@@ -141,9 +141,13 @@ def run(driver, cypher):
 
 
 def judge(gold_rows, pred_records):
-    """Đúng khi: số dòng bằng nhau và mọi dòng đáp án đều nằm trong một dòng kết quả dự đoán."""
+    """Đúng khi: cả hai cùng rỗng, hoặc số dòng bằng nhau và mọi dòng đáp án đều nằm trong một dòng kết quả dự đoán."""
+    if not gold_rows and not pred_records:
+        return "correct"
     if not pred_records:
         return "empty_result"
+    if not gold_rows:
+        return "wrong_result"
     pred_sets = [row_values(list(r.values())) for r in pred_records]
     covered = all(any(set(map(norm, g)) <= p or norm(" ".join(map(str, g))) in p for p in pred_sets)
                   for g in gold_rows)
