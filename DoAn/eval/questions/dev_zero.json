@@ -1,0 +1,366 @@
+[
+  {
+    "id": "LK-03-Z01",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "Which university did Frank Jones study at?",
+    "gold": "MATCH (:Person {firstName: 'Frank', lastName: 'Jones'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Frank",
+      "lastName": "Jones"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người có trong DB nhưng không học trường nào: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "LK-03-Z02",
+    "template_id": "LK-03",
+    "type": "lookup",
+    "question": "What university does Ashley Coetzee attend?",
+    "gold": "MATCH (:Person {firstName: 'Ashley', lastName: 'Coetzee'})-[:STUDY_AT]->(u:University) RETURN u.name",
+    "params": {
+      "firstName": "Ashley",
+      "lastName": "Coetzee"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người có trong DB nhưng không học trường nào: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "LK-04-Z01",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "When was Boris Sheik born?",
+    "gold": "MATCH (p:Person {firstName: 'Boris', lastName: 'Sheik'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Boris",
+      "lastName": "Sheik"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người không có trong DB (tên và họ lấy từ hai người khác nhau cùng quốc gia): đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "LK-04-Z02",
+    "template_id": "LK-04",
+    "type": "lookup",
+    "question": "What is the date of birth of Budi Balawan?",
+    "gold": "MATCH (p:Person {firstName: 'Budi', lastName: 'Balawan'}) RETURN p.birthday",
+    "params": {
+      "firstName": "Budi",
+      "lastName": "Balawan"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người không có trong DB (tên và họ lấy từ hai người khác nhau cùng quốc gia): đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "AG-01-Z01",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "How many people live in Uruguay?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Uruguay'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Uruguay"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Quốc gia có trong DB nhưng không ai sống ở đó: đáp án 0.",
+    "subset": "zero"
+  },
+  {
+    "id": "AG-01-Z02",
+    "template_id": "AG-01",
+    "type": "aggregation",
+    "question": "What is the number of people living in Slovakia?",
+    "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Slovakia'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "country": "Slovakia"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Quốc gia có trong DB nhưng không ai sống ở đó: đáp án 0.",
+    "subset": "zero"
+  },
+  {
+    "id": "AG-03-Z01",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "How many posts are tagged with \"Tilda Swinton\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Tilda_Swinton'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "Tilda_Swinton"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Tag có trong DB nhưng không gắn vào Post hay Comment nào: đáp án 0 dù hiểu 'posts' theo cách nào.",
+    "subset": "zero"
+  },
+  {
+    "id": "AG-03-Z02",
+    "template_id": "AG-03",
+    "type": "aggregation",
+    "question": "What is the number of posts that have the tag \"There Is No Beginning to the Story\"?",
+    "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'There_Is_No_Beginning_to_the_Story'}) RETURN count(DISTINCT p) AS total",
+    "params": {
+      "tag": "There_Is_No_Beginning_to_the_Story"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Tag có trong DB nhưng không gắn vào Post hay Comment nào: đáp án 0 dù hiểu 'posts' theo cách nào.",
+    "subset": "zero"
+  },
+  {
+    "id": "MH-01-Z01",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "Which country does Aisso Caveda live in?",
+    "gold": "MATCH (:Person {firstName: 'Aisso', lastName: 'Caveda'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Aisso",
+      "lastName": "Caveda"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người không có trong DB (tên và họ lấy từ hai người khác nhau cùng quốc gia): đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "MH-01-Z02",
+    "template_id": "MH-01",
+    "type": "multi_hop",
+    "question": "In what country is Abdullah Arikan based?",
+    "gold": "MATCH (:Person {firstName: 'Abdullah', lastName: 'Arikan'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+    "params": {
+      "firstName": "Abdullah",
+      "lastName": "Arikan"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người không có trong DB (tên và họ lấy từ hai người khác nhau cùng quốc gia): đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "MH-03-Z01",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Which friends of Wojciech Kowalski live in the same city as Wojciech Kowalski?",
+    "gold": "MATCH (p:Person {firstName: 'Wojciech', lastName: 'Kowalski'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Wojciech",
+      "lastName": "Kowalski"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người có bạn nhưng không người bạn nào sống cùng thành phố: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "MH-03-Z02",
+    "template_id": "MH-03",
+    "type": "multi_hop",
+    "question": "Who among Cesar Gonzales's friends lives in the same city as them?",
+    "gold": "MATCH (p:Person {firstName: 'Cesar', lastName: 'Gonzales'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+    "params": {
+      "firstName": "Cesar",
+      "lastName": "Gonzales"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người có bạn nhưng không người bạn nào sống cùng thành phố: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "PA-01-Z01",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "What is the length of the shortest friendship path between Hsin Chiang and Ganesh Bombo?",
+    "gold": "MATCH (a:Person {firstName: 'Hsin', lastName: 'Chiang'}), (b:Person {firstName: 'Ganesh', lastName: 'Bombo'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Hsin",
+      "lastName1": "Chiang",
+      "firstName2": "Ganesh",
+      "lastName2": "Bombo"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người thứ nhất không có bạn nào nên không có đường đi: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "PA-01-Z02",
+    "template_id": "PA-01",
+    "type": "path",
+    "question": "How many friendship steps separate Ferenc Nagy from Jae-Jin Park?",
+    "gold": "MATCH (a:Person {firstName: 'Ferenc', lastName: 'Nagy'}), (b:Person {firstName: 'Jae-Jin', lastName: 'Park'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+    "params": {
+      "firstName1": "Ferenc",
+      "lastName1": "Nagy",
+      "firstName2": "Jae-Jin",
+      "lastName2": "Park"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người thứ nhất không có bạn nào nên không có đường đi: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "PA-03-Z01",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Who are the mutual friends of Fernando Alarcón and Donald Munro?",
+    "gold": "MATCH (:Person {firstName: 'Fernando', lastName: 'Alarcón'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Donald', lastName: 'Munro'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Fernando",
+      "lastName1": "Alarcón",
+      "firstName2": "Donald",
+      "lastName2": "Munro"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Hai người đều có ít nhất 2 bạn, không là bạn của nhau và không có bạn chung: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "PA-03-Z02",
+    "template_id": "PA-03",
+    "type": "path",
+    "question": "Which people are friends with both Zdenek Balcar and Pablo Sanchez?",
+    "gold": "MATCH (:Person {firstName: 'Zdenek', lastName: 'Balcar'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Pablo', lastName: 'Sanchez'}) RETURN DISTINCT m.firstName, m.lastName",
+    "params": {
+      "firstName1": "Zdenek",
+      "lastName1": "Balcar",
+      "firstName2": "Pablo",
+      "lastName2": "Sanchez"
+    },
+    "answer_preview": [],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Hai người đều có ít nhất 2 bạn, không là bạn của nhau và không có bạn chung: đáp án rỗng.",
+    "subset": "zero"
+  },
+  {
+    "id": "TM-02-Z01",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many people joined the network in December 2009?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2009 AND p.creationDate.month = 12 RETURN count(p)",
+    "params": {
+      "year": 2009,
+      "month": 12,
+      "monthName": "December"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Tháng nằm ngoài khoảng dữ liệu (tài khoản được tạo từ 01/2010 đến 09/2012): đáp án 0.",
+    "subset": "zero"
+  },
+  {
+    "id": "TM-02-Z02",
+    "template_id": "TM-02",
+    "type": "temporal",
+    "question": "How many accounts were created in November 2012?",
+    "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 11 RETURN count(p)",
+    "params": {
+      "year": 2012,
+      "month": 11,
+      "monthName": "November"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Tháng nằm ngoài khoảng dữ liệu (tài khoản được tạo từ 01/2010 đến 09/2012): đáp án 0.",
+    "subset": "zero"
+  },
+  {
+    "id": "TM-04-Z01",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "How many comments did Ahmad Shah Aman write in the fourth quarter of 2011?",
+    "gold": "MATCH (:Person {firstName: 'Ahmad Shah', lastName: 'Aman'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Ahmad Shah",
+      "lastName": "Aman",
+      "year": 2011,
+      "quarter": 4,
+      "quarterName": "fourth"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người có viết comment trước và sau quý này nhưng không viết comment nào trong quý: đáp án 0.",
+    "subset": "zero"
+  },
+  {
+    "id": "TM-04-Z02",
+    "template_id": "TM-04",
+    "type": "temporal",
+    "question": "In the first quarter of 2012, how many comments did Mehmet Tekin make?",
+    "gold": "MATCH (:Person {firstName: 'Mehmet', lastName: 'Tekin'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+    "params": {
+      "firstName": "Mehmet",
+      "lastName": "Tekin",
+      "year": 2012,
+      "quarter": 1,
+      "quarterName": "first"
+    },
+    "answer_preview": [
+      [
+        "0"
+      ]
+    ],
+    "author": "Bằng",
+    "checked_by": "",
+    "note": "Người có viết comment trước và sau quý này nhưng không viết comment nào trong quý: đáp án 0.",
+    "subset": "zero"
+  }
+]
