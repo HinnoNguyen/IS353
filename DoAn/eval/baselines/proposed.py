@@ -2,12 +2,12 @@
 
 build(model, off=frozenset()): off ⊆ {"A", "B", "C", "D"} là các thành phần bị tắt (GIAO_VIEC_CUOI_KY.md mục 5.1).
 - (A) tắt: schema cơ bản của B1 (build_schema). Bật: proposed/schema_a.detailed_schema (Khôi, T31).
-- (B), (C): CHƯA tích hợp, chờ proposed/entity_link.py (Ân, T32) và proposed/fewshot_c.py (Vũ, T33) – việc của
-  T35. Bật chúng thì build báo NotImplementedError, để không ai chạy nhầm cấu hình "đầy đủ" khi còn thiếu.
+- (B) liên kết thực thể bằng full-text index: proposed/entity_link (Ân, T32).
+- (C): CHƯA tích hợp, chờ proposed/fewshot_c.py (Vũ, T33) – việc của T35. Bật C thì build báo NotImplementedError.
 - (D) tắt: không sửa. Bật: proposed/repair_d (Bằng, T34).
 
-Prompt sinh Cypher chỉ nằm ở file này: đúng khung PROMPT của B1, chỉ thay khối schema. Vì vậy khi tắt B, C, D,
-cấu hình chỉ khác B1 ở (A). Prompt sửa lỗi và prompt trả lời nằm trong proposed/repair_d.py.
+Prompt sinh Cypher chỉ nằm ở file này: đúng khung PROMPT của B1, chỉ thay khối schema và bổ sung gợi ý thực thể.
+Vì vậy khi tắt B, C, D, cấu hình chỉ khác B1 ở (A). Prompt sửa lỗi và prompt trả lời nằm trong proposed/repair_d.py.
 Mỗi cấu hình là một module mỏng có tên riêng (cache riêng), vd. baselines/proposed_ad.py = A + D.
 generate.last_info: llm_calls, first_cypher (Cypher trước khi sửa) và, khi bật (D), thông tin vòng sửa.
 """
@@ -20,12 +20,12 @@ from neo4j import READ_ACCESS, GraphDatabase
 from llm import groq_chat
 from pilot_text2cypher import AUTH, URI, build_schema, extract_cypher
 from pilot_text2cypher import PROMPT as B1_PROMPT
-from proposed import repair_d
+from proposed import entity_link, repair_d
 from proposed.schema_a import detailed_schema
 
 ROOT = Path(__file__).resolve().parents[2]
 COMPONENTS = frozenset("ABCD")
-NOT_INTEGRATED = {"B": "proposed/entity_link.py (Ân, T32)", "C": "proposed/fewshot_c.py (Vũ, T33)"}
+NOT_INTEGRATED = {"C": "proposed/fewshot_c.py (Vũ, T33)"}
 HEAD = B1_PROMPT.removesuffix("Cypher:")   # "...Schema:\n{schema}\n\nQuestion: {question}\n"
 assert HEAD != B1_PROMPT, "PROMPT của B1 phải kết thúc bằng 'Cypher:'"
 
@@ -53,13 +53,17 @@ def build(model, off=frozenset()):
     driver = GraphDatabase.driver(URI, auth=AUTH, notifications_min_severity="OFF")
     schema = build_schema(driver) if "A" in off else detailed_schema(driver)
     session = None
-    if "D" in off:
-        driver.close()
-    else:
+    if "D" not in off:
         session = driver.session(default_access_mode=READ_ACCESS)   # chạy thử khi sửa; đóng khi tiến trình kết thúc
+    elif "B" in off:
+        driver.close()
 
     def generate(question):
-        head = HEAD.format(schema=schema, question=question)
+        hints_b = ""
+        if "B" not in off:
+            hints_b = entity_link.format_hints(session if session is not None else driver, question)
+        schema_block = schema + ("\n\n" + hints_b.strip() if hints_b else "")
+        head = HEAD.format(schema=schema_block, question=question)
         cypher = extract_cypher(groq_chat(model, head + "Cypher:"))
         info = {"llm_calls": 1, "first_cypher": cypher}
         if session is not None:
