@@ -1,0 +1,358 @@
+{
+  "source_run": "results/audit/repair_d/dev_zero_v1_run.json",
+  "tag": "v2",
+  "model": "openai/gpt-oss-20b",
+  "d_options": {
+    "reasoning_effort": "low"
+  },
+  "summary": {
+    "tất cả": {
+      "n": 20,
+      "first_correct": 19,
+      "final_correct": 19,
+      "rescued": [],
+      "broken": [],
+      "misrepair_rate": 0.0,
+      "sent_to_d": 19,
+      "changed": 0,
+      "decisions": {
+        "same_result": 10,
+        "kept": 9
+      },
+      "avg_llm_calls": 1.95
+    },
+    "zero": {
+      "n": 20,
+      "first_correct": 19,
+      "final_correct": 19,
+      "rescued": [],
+      "broken": [],
+      "misrepair_rate": 0.0,
+      "sent_to_d": 19,
+      "changed": 0,
+      "decisions": {
+        "same_result": 10,
+        "kept": 9
+      },
+      "avg_llm_calls": 1.95
+    }
+  },
+  "rows": [
+    {
+      "id": "LK-03-Z01",
+      "type": "lookup",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person {firstName:\"Frank\", lastName:\"Jones\"})-[:STUDY_AT]->(u:Organisation:University)\nRETURN u.name"
+    },
+    {
+      "id": "AG-01-Z01",
+      "type": "aggregation",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name: 'Uruguay'})\nRETURN count(DISTINCT p) AS peopleCount"
+    },
+    {
+      "id": "MH-01-Z01",
+      "type": "multi_hop",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country)\nWHERE (p.firstName = 'Aisso' AND p.lastName = 'Caveda') OR (p.firstName + ' ' + p.lastName = 'Aisso Caveda')\nRETURN co.name"
+    },
+    {
+      "id": "PA-01-Z01",
+      "type": "path",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p1:Person {firstName:'Hsin', lastName:'Chiang'}), (p2:Person {firstName:'Ganesh', lastName:'Bombo'})\nMATCH p=shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(p) AS shortestFriendshipLength"
+    },
+    {
+      "id": "TM-02-Z01",
+      "type": "temporal",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person)\nWHERE p.creationDate.year = 2009 AND p.creationDate.month = 12\nRETURN count(DISTINCT p) AS numPeople"
+    },
+    {
+      "id": "LK-03-Z02",
+      "type": "lookup",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person {firstName:\"Ashley\", lastName:\"Coetzee\"})-[:STUDY_AT]->(u:Organisation:University)\nRETURN u.name"
+    },
+    {
+      "id": "AG-01-Z02",
+      "type": "aggregation",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name: 'Slovakia'})\nRETURN count(DISTINCT p) AS numPeople"
+    },
+    {
+      "id": "MH-01-Z02",
+      "type": "multi_hop",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person {firstName:'Abdullah', lastName:'Arikan'})-[:IS_LOCATED_IN]->(city:City)-[:IS_PART_OF]->(country:Country)\nRETURN country.name"
+    },
+    {
+      "id": "PA-01-Z02",
+      "type": "path",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p1:Person), (p2:Person)\nWHERE ((p1.firstName = 'Ferenc' AND p1.lastName = 'Nagy') OR (p1.firstName + ' ' + p1.lastName = 'Ferenc Nagy'))\n  AND ((p2.firstName = 'Jae-Jin' AND p2.lastName = 'Park') OR (p2.firstName + ' ' + p2.lastName = 'Jae-Jin Park'))\nWITH p1, p2\nMATCH path = shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(path) AS friendshipSteps"
+    },
+    {
+      "id": "TM-02-Z02",
+      "type": "temporal",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person)\nWHERE p.creationDate.year = 2012 AND p.creationDate.month = 11\nRETURN count(DISTINCT p) AS accountsCreatedInNov2012"
+    },
+    {
+      "id": "LK-04-Z01",
+      "type": "lookup",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person {firstName: 'Boris', lastName: 'Sheik'})\nRETURN p.birthday"
+    },
+    {
+      "id": "AG-03-Z01",
+      "type": "aggregation",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: \"Tilda_Swinton\"})\nRETURN count(DISTINCT p) AS postCount"
+    },
+    {
+      "id": "MH-03-Z01",
+      "type": "multi_hop",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person {firstName:'Wojciech', lastName:'Kowalski'})-[:IS_LOCATED_IN]->(c:City)\nMATCH (p)-[:KNOWS]-(f:Person)-[:IS_LOCATED_IN]->(c)\nWHERE f <> p\nRETURN DISTINCT f.firstName, f.lastName"
+    },
+    {
+      "id": "PA-03-Z01",
+      "type": "path",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (f:Person {firstName:'Fernando', lastName:'Alarcón'}), \n      (d:Person {firstName:'Donald', lastName:'Munro'}), \n      (m:Person)-[:KNOWS]-(f), \n      (m)-[:KNOWS]-(d)\nWHERE m <> f AND m <> d\nRETURN DISTINCT m.firstName, m.lastName"
+    },
+    {
+      "id": "TM-04-Z01",
+      "type": "temporal",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (c:Comment)-[:HAS_CREATOR]->(p:Person)\nWHERE p.firstName + ' ' + p.lastName = 'Ahmad Shah Aman'\n  AND c.creationDate.year = 2011\n  AND c.creationDate.quarter = 4\nRETURN count(DISTINCT c) AS commentCount"
+    },
+    {
+      "id": "LK-04-Z02",
+      "type": "lookup",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person {firstName: 'Budi', lastName: 'Balawan'})\nRETURN p.birthday"
+    },
+    {
+      "id": "AG-03-Z02",
+      "type": "aggregation",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "zero"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: \"There Is No Beginning to the Story\"})\nRETURN count(DISTINCT p) AS postCount"
+    },
+    {
+      "id": "MH-03-Z02",
+      "type": "multi_hop",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "same_result"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (c:Person {firstName:'Cesar', lastName:'Gonzales'})-[:IS_LOCATED_IN]->(city:City),\n      (c)-[:KNOWS]-(f:Person)-[:IS_LOCATED_IN]->(city)\nWHERE f <> c\nRETURN f.firstName, f.lastName\nORDER BY f.firstName, f.lastName"
+    },
+    {
+      "id": "PA-03-Z02",
+      "type": "path",
+      "subset": "zero",
+      "first": "correct",
+      "final": "correct",
+      "changed": false,
+      "decisions": [
+        "kept"
+      ],
+      "problems": [
+        "empty"
+      ],
+      "llm_calls": 2,
+      "cypher": "MATCH (p:Person)-[:KNOWS]-(z:Person {firstName:'Zdenek', lastName:'Balcar'}),\n      (p)-[:KNOWS]-(pa:Person {firstName:'Pablo', lastName:'Sanchez'})\nRETURN DISTINCT p.firstName, p.lastName"
+    },
+    {
+      "id": "TM-04-Z02",
+      "type": "temporal",
+      "subset": "zero",
+      "first": "wrong_result",
+      "final": "wrong_result",
+      "changed": false,
+      "decisions": [],
+      "problems": [],
+      "llm_calls": 1,
+      "cypher": "MATCH (c:Comment)-[:HAS_CREATOR]->(p:Person)\nWHERE (p.firstName = 'Mehmet' AND p.lastName = 'Tekin')\n   OR (p.firstName + ' ' + p.lastName = 'Mehmet Tekin')\n   AND c.creationDate.year = 2012\n   AND c.creationDate.quarter = 1\nRETURN count(DISTINCT c) AS commentCount"
+    }
+  ]
+}

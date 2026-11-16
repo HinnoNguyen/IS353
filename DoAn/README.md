@@ -17,8 +17,10 @@ DoAn/
 │   ├── QA_GUIDELINE.md     # quy ước xây bộ câu hỏi QA (bắt buộc đọc trước khi viết câu hỏi)
 │   ├── pilot_questions.json# 10 câu hỏi thử nghiệm kèm Cypher gold
 │   ├── pilot_text2cypher.py# baseline B1 (LLM zero-shot) + chấm execution accuracy
-│   ├── questions/          # bộ câu hỏi: dev.json, test.json (đã đóng băng), split_info.json
-│   ├── baselines/          # oracle (kiểm tra khung), b1_zeroshot (B1/B3)
+│   ├── questions/          # bộ câu hỏi: dev.json, dev_zero.json, test.json (đã đóng băng), split_info.json
+│   ├── baselines/          # oracle (kiểm tra khung), b1_zeroshot (B1/B3), b0, b2, proposed (+ module mỏng)
+│   ├── proposed/           # các thành phần (A) schema_a, (D) repair_d, common
+│   ├── audit/              # kiểm tra benchmark (T55–T57), misrepair/replay_d cho (D)
 │   ├── llm.py              # gọi LLM qua Groq
 │   ├── run_eval.py         # sinh Cypher -> chạy trên Neo4j -> chấm -> results/runs/
 │   └── summarize.py        # tổng hợp các lượt chạy -> results/midterm/
@@ -134,6 +136,19 @@ python eval/summarize.py --split test
 ```
 
 Phần viết tay (hạn mức Groq, ví dụ lỗi chọn tay kèm giải thích, ghi chú việc chưa làm) nằm trong `results/midterm/manual.json`; chạy lại `summarize.py` sau khi sửa file này.
+
+**4. Hệ thống đề xuất và (D) tự sửa lỗi** (chỉ chỉnh trên `dev`, `dev_zero`; xem `GIAO_VIEC_CUOI_KY.md` mục 5)
+
+- `eval/questions/dev_zero.json`: 20 câu dev có đáp án đúng là rỗng hoặc 0 (`"subset": "zero"`), 2 câu mỗi template dev. Sinh lại bằng `python eval/make_dev_zero.py`; oracle phải đúng 20/20.
+- `eval/baselines/proposed.py`: `build(model, off)` với `off` ⊆ {A, B, C, D}; (B), (C) chưa tích hợp. Module mỏng `proposed_ad` = A + D, chỉ để chỉnh (D) trên dev/dev_zero.
+- `eval/proposed/repair_d.py`: `check`, `repair` (tối đa 2 lần sửa; rỗng/0 được giữ nguyên nếu truy vấn đúng), `answer`.
+
+```bash
+python eval/run_eval.py --baseline proposed_ad --model openai/gpt-oss-20b --split dev_zero --run 1 --interleave
+python eval/audit/misrepair.py results/runs/dev_zero/proposed_ad__openai-gpt-oss-20b__run1.json  # EX trước/sau sửa, tỉ lệ sửa nhầm
+python eval/audit/replay_d.py results/runs/dev_zero/proposed_ad__openai-gpt-oss-20b__run1.json --tag v2  # chạy lại (D) trên truy vấn đầu
+python -m unittest discover -s tests -v
+```
 
 ## Số liệu đồ thị (LDBC SNB SF0.1)
 
