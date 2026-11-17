@@ -1,0 +1,14 @@
+Use:
+
+Facebook Social Circles (ego-Facebook) dataset:
+https://snap.stanford.edu/data/ego-Facebook.html
+Download file: facebook_combined.txt.gz → unzip → facebook_combined.txt
+Tutorial code: https://colab.research.google.com/drive/1wqTOq7jc1pahlIjFBaDHIPNjudzAbYb0
+Answer the questions at the end of the notebook. 
+(Trả lời các câu hỏi ở cuối notebook.)
+
+Submission: 
+
+Zip file with: 
+source code and/or jupyter notebook.
+pdf with answers and/or screenshot visualization (if any).
