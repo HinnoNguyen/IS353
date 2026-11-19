@@ -44,6 +44,18 @@ Năm câu còn sai, không câu nào do (D) làm sai đi:
 Trên dev mọi câu đều có đáp án khác rỗng/0, nên câu (D) giữ nguyên kết quả rỗng/0 là câu (D) không cứu được (AG-01-01,
 PA-01-05, PA-01-08, AG-03-03). Trên `dev_zero`, chính sách đó giữ được 19/19 câu vốn đúng.
 
+### Pipeline đầy đủ A + B + C + D trên `dev_zero` (T35, 19/11)
+
+`proposed` (gpt-oss-20b), lượt 1, `results/runs/dev_zero/proposed__openai-gpt-oss-20b__run1.json`:
+
+| | EX trước sửa | EX sau sửa | Được cứu | Sửa nhầm | LLM/câu | Quyết định của (D) |
+|---|---|---|---|---|---|---|
+| dev_zero, 20 câu | 18/20 | 20/20 | 2 (MH-01-Z02, LK-04-Z02) | 0/18 (0%) | 2,1 | giữ 12, `same_result` 8, đổi 2 |
+
+Hai câu được cứu đều hỏi về người không có trong DB. Gợi ý của (B) cho AG-01-Z01/Z02 ghi nhầm Uruguay, Slovakia là `Tag`
+(lỗi gán quốc gia thành Tag của (B)), nhưng model vẫn viết đúng đường đi Country nên hai câu này không sai.
+Lượt chạy trên code chưa commit (`meta.commit` = `66ab2cd…+dirty`); code đó được commit nguyên vẹn ngay sau trong PR T35.
+
 ### Vì sao có v2
 
 Ở v1, 7/24 lần gọi của (D) kết thúc với `finish_reason = length`: gpt-oss-20b lặp suy luận ("But maybe the issue is…
@@ -57,6 +69,7 @@ lại cho cùng loại kết quả (`same_result`) và giữ truy vấn cũ.
 
 - `dev_zero_v1.json`: số liệu từng câu của v1 (`misrepair.py --json`); `dev_zero_v1_run.json`: file kết quả của lượt v1.
 - `dev_zero_v2.json`: số liệu từng câu của v2 (`replay_d.py --tag v2`).
+- `dev_zero_full.json`: số liệu từng câu của pipeline đầy đủ A + B + C + D trên `dev_zero` (`misrepair.py --json`).
 - `dev_v2.json`: số liệu từng câu của lượt dev đầy đủ (`misrepair.py --json`), file kết quả
   `results/runs/dev/proposed_ad__openai-gpt-oss-20b__run1.json` (thay cho bản tạm `.partial.json` 46 câu đã xóa).
 
