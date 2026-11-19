@@ -43,6 +43,9 @@ def main():
         raise SystemExit("Chỉ chạy lại (D) trên dev hoặc dev_zero.")
     head_template = meta["prompt"].removesuffix("Cypher:")
     results = [r for r in data["results"] if "first_cypher" in (r.get("info") or {})][:args.limit]
+    uses_bc = {"B", "C"} & set(meta.get("components", []))
+    if uses_bc and any("prompt_extra" not in r["info"] for r in results):
+        raise SystemExit(f"Lượt chạy bật {sorted(uses_bc)} nhưng thiếu info.prompt_extra: không dựng lại được prompt.")
     cache_path = CACHE_DIR / f"replay_d__{args.tag}__{Path(args.run).name}"
     cache = json.loads(cache_path.read_text(encoding="utf-8")) if cache_path.exists() else {}
 
@@ -52,7 +55,8 @@ def main():
         for r in results:
             first = r["info"]["first_cypher"]
             if r["id"] not in cache:
-                head = head_template.format(schema=meta["schema"], question=r["question"])
+                extra = r["info"].get("prompt_extra") or ""   # ví dụ của (C) + gợi ý của (B), nếu có
+                head = head_template.format(schema=meta["schema"] + extra, question=r["question"])
                 try:
                     cypher, info = repair_d.repair(meta["model"], session, head, first)
                 except DailyLimitError as e:
