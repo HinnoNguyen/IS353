@@ -274,10 +274,8 @@ class TestCommonAndBuild(unittest.TestCase):
         from baselines import proposed
         self.assertEqual(proposed.HEAD + "Cypher:", PROMPT)
 
-    def test_build_rejects_missing_components(self):
+    def test_build_rejects_unknown_components(self):
         from baselines import proposed
-        with self.assertRaises(NotImplementedError):
-            proposed.build("model")                            # (B), (C) chưa tích hợp
         with self.assertRaises(ValueError):
             proposed.build("model", off={"E"})
 

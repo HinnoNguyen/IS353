@@ -1,0 +1,357 @@
+{
+  "results/runs/dev_zero/proposed__openai-gpt-oss-20b__run1.json": {
+    "meta": {
+      "baseline": "proposed",
+      "model": "openai/gpt-oss-20b",
+      "split": "dev_zero",
+      "run": 1,
+      "commit": "66ab2cda0df1fa3c04a743f858156d6d4926df90+dirty"
+    },
+    "summary": {
+      "tất cả": {
+        "n": 20,
+        "first_correct": 18,
+        "final_correct": 20,
+        "rescued": [
+          "MH-01-Z02",
+          "LK-04-Z02"
+        ],
+        "broken": [],
+        "misrepair_rate": 0.0,
+        "sent_to_d": 20,
+        "changed": 2,
+        "decisions": {
+          "kept": 12,
+          "same_result": 8,
+          "changed": 2
+        },
+        "avg_llm_calls": 2.1
+      },
+      "zero": {
+        "n": 20,
+        "first_correct": 18,
+        "final_correct": 20,
+        "rescued": [
+          "MH-01-Z02",
+          "LK-04-Z02"
+        ],
+        "broken": [],
+        "misrepair_rate": 0.0,
+        "sent_to_d": 20,
+        "changed": 2,
+        "decisions": {
+          "kept": 12,
+          "same_result": 8,
+          "changed": 2
+        },
+        "avg_llm_calls": 2.1
+      }
+    },
+    "rows": [
+      {
+        "id": "LK-03-Z01",
+        "type": "lookup",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "AG-01-Z01",
+        "type": "aggregation",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "MH-01-Z01",
+        "type": "multi_hop",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "PA-01-Z01",
+        "type": "path",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "TM-02-Z01",
+        "type": "temporal",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "LK-03-Z02",
+        "type": "lookup",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "AG-01-Z02",
+        "type": "aggregation",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "MH-01-Z02",
+        "type": "multi_hop",
+        "subset": "zero",
+        "first": "execution_error",
+        "final": "correct",
+        "changed": true,
+        "decisions": [
+          "changed",
+          "kept"
+        ],
+        "problems": [
+          "error",
+          "empty"
+        ],
+        "llm_calls": 3
+      },
+      {
+        "id": "PA-01-Z02",
+        "type": "path",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "TM-02-Z02",
+        "type": "temporal",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "LK-04-Z01",
+        "type": "lookup",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "AG-03-Z01",
+        "type": "aggregation",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "MH-03-Z01",
+        "type": "multi_hop",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "PA-03-Z01",
+        "type": "path",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "TM-04-Z01",
+        "type": "temporal",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "LK-04-Z02",
+        "type": "lookup",
+        "subset": "zero",
+        "first": "execution_error",
+        "final": "correct",
+        "changed": true,
+        "decisions": [
+          "changed",
+          "same_result"
+        ],
+        "problems": [
+          "error",
+          "empty"
+        ],
+        "llm_calls": 3
+      },
+      {
+        "id": "AG-03-Z02",
+        "type": "aggregation",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "MH-03-Z02",
+        "type": "multi_hop",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "same_result"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "PA-03-Z02",
+        "type": "path",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "llm_calls": 2
+      },
+      {
+        "id": "TM-04-Z02",
+        "type": "temporal",
+        "subset": "zero",
+        "first": "correct",
+        "final": "correct",
+        "changed": false,
+        "decisions": [
+          "kept"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "llm_calls": 2
+      }
+    ]
+  }
+}

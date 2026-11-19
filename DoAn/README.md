@@ -137,13 +137,17 @@ python eval/summarize.py --split test
 
 Phần viết tay (hạn mức Groq, ví dụ lỗi chọn tay kèm giải thích, ghi chú việc chưa làm) nằm trong `results/midterm/manual.json`; chạy lại `summarize.py` sau khi sửa file này.
 
-**4. Hệ thống đề xuất và (D) tự sửa lỗi** (chỉ chỉnh trên `dev`, `dev_zero`; xem `GIAO_VIEC_CUOI_KY.md` mục 5)
+**4. Hệ thống đề xuất** (chỉ chỉnh trên `dev`, `dev_zero`; xem `GIAO_VIEC_CUOI_KY.md` mục 3.2 và 5)
 
+- `eval/baselines/proposed.py`: `build(model, off)` với `off` ⊆ {A, B, C, D}. Prompt = khung prompt của B1, khối schema = (A) (hoặc schema cơ bản) + ví dụ của (C) + gợi ý thực thể của (B), rồi đến câu hỏi; (D) sửa lỗi sau khi sinh.
+- Mỗi cấu hình là một module mỏng (cache riêng). Mục 3.2: `proposed_a` (B1 + A), `proposed_ab`, `proposed_abc`, `proposed` (đầy đủ), `proposed_no_a` (B + C + D). Chỉ dùng trên dev: `proposed_ad` (A + D), `proposed_abd` (A + B + D).
+- (B) cần full-text index: chạy `python scripts/create_fulltext_index.py` một lần sau khi nạp dữ liệu.
 - `eval/questions/dev_zero.json`: 20 câu dev có đáp án đúng là rỗng hoặc 0 (`"subset": "zero"`), 2 câu mỗi template dev. Sinh lại bằng `python eval/make_dev_zero.py`; oracle phải đúng 20/20.
-- `eval/baselines/proposed.py`: `build(model, off)` với `off` ⊆ {A, B, C, D}; (B), (C) chưa tích hợp. Module mỏng `proposed_ad` = A + D, chỉ để chỉnh (D) trên dev/dev_zero.
 - `eval/proposed/repair_d.py`: `check`, `repair` (tối đa 2 lần sửa; rỗng/0 được giữ nguyên nếu truy vấn đúng), `answer`.
 
 ```bash
+python scripts/create_fulltext_index.py
+python eval/run_eval.py --baseline proposed --model openai/gpt-oss-20b --split dev_zero --run 1 --interleave
 python eval/run_eval.py --baseline proposed_ad --model openai/gpt-oss-20b --split dev_zero --run 1 --interleave
 python eval/audit/misrepair.py results/runs/dev_zero/proposed_ad__openai-gpt-oss-20b__run1.json  # EX trước/sau sửa, tỉ lệ sửa nhầm
 python eval/audit/replay_d.py results/runs/dev_zero/proposed_ad__openai-gpt-oss-20b__run1.json --tag v2  # chạy lại (D) trên truy vấn đầu

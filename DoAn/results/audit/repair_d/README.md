@@ -22,25 +22,39 @@ v2 được đo bằng `eval/audit/replay_d.py` trên **cùng** 20 truy vấn đ
 vấn cuối của cả 20 câu đúng bằng truy vấn đầu. Câu sai duy nhất (TM-04-Z02) sai ngay từ lần sinh đầu: kết quả khác 0
 nên không đi qua (D).
 
-### Trên dev (tạm: 46/92 câu, v2)
+### Trên dev (92 câu, v2)
 
-Lượt `proposed_ad` trên dev dừng ở 46/92 câu vì hết hạn mức token theo ngày của Groq (16/11). Nhờ `--interleave`, 46
-câu này trải đều 5 loại (9–10 câu mỗi loại). Chấm bằng `run_eval.py --cached-only` (file `.partial.json`).
+Lượt `proposed_ad` trên dev chạy 46 câu ngày 16/11 (dừng vì hết hạn mức token theo ngày của Groq) và 46 câu còn lại ngày
+19/11, cùng code (phần A + D không đổi giữa commit 3bb376c và 66ab2cd).
 
 | | EX chỉ (A) (`first_cypher`) | EX (A) + (D) | Được cứu | Sửa nhầm | Gửi (D) | LLM/câu |
 |---|---|---|---|---|---|---|
-| dev, 46/92 câu | 42/46 | 43/46 | 1 (PA-01-07) | 0 | 4 | 1,09 |
+| dev, 92 câu | 84/92 (91,3%) | 87/92 (94,6%) | 3 (PA-01-07, AG-03-02, AG-03-07) | 0/84 (0%) | 7 | 1,08 |
 
-Ba câu còn sai không do (D) gây ra:
+Năm câu còn sai, không câu nào do (D) làm sai đi:
 
 - **PA-01-05, PA-01-08:** họ tên nhiều chữ bị tách sai (`lastName: 'Bajić_Mikulic'` thay vì `firstName: 'Nedeljko Bajić'`,
   model còn áp dấu `_` của tên địa danh cho tên người). (D) xem lại nhưng giữ nguyên. Đây là phần việc của (B): tra
   tên trong DB thay vì viết thêm quy ước.
 - **AG-01-01:** "Hong Kong" vừa là City vừa là Country trong DB. Model đếm theo City (0 người), gold đếm theo Country
   (2 người). (D) viết lại vẫn theo City nên dừng `same_result`.
+- **AG-03-03:** ra 0 và (D) giữ nguyên (`kept`), trong khi đáp án thật khác 0: chỗ chính sách "được giữ rỗng/0" bỏ lỡ.
+- **TM-04-01:** sai nhưng kết quả khác 0 nên không đi qua (D).
 
-46 câu còn lại: chạy lại đúng lệnh `run_eval.py --baseline proposed_ad --model openai/gpt-oss-20b --split dev --run 1
---interleave` khi Groq hồi hạn mức (cache giữ tiến độ), rồi chạy lại `misrepair.py` trên file kết quả đầy đủ.
+Trên dev mọi câu đều có đáp án khác rỗng/0, nên câu (D) giữ nguyên kết quả rỗng/0 là câu (D) không cứu được (AG-01-01,
+PA-01-05, PA-01-08, AG-03-03). Trên `dev_zero`, chính sách đó giữ được 19/19 câu vốn đúng.
+
+### Pipeline đầy đủ A + B + C + D trên `dev_zero` (T35, 19/11)
+
+`proposed` (gpt-oss-20b), lượt 1, `results/runs/dev_zero/proposed__openai-gpt-oss-20b__run1.json`:
+
+| | EX trước sửa | EX sau sửa | Được cứu | Sửa nhầm | LLM/câu | Quyết định của (D) |
+|---|---|---|---|---|---|---|
+| dev_zero, 20 câu | 18/20 | 20/20 | 2 (MH-01-Z02, LK-04-Z02) | 0/18 (0%) | 2,1 | giữ 12, `same_result` 8, đổi 2 |
+
+Hai câu được cứu đều hỏi về người không có trong DB. Gợi ý của (B) cho AG-01-Z01/Z02 ghi nhầm Uruguay, Slovakia là `Tag`
+(lỗi gán quốc gia thành Tag của (B)), nhưng model vẫn viết đúng đường đi Country nên hai câu này không sai.
+Lượt chạy trên code chưa commit (`meta.commit` = `66ab2cd…+dirty`); code đó được commit nguyên vẹn ngay sau trong PR T35.
 
 ### Vì sao có v2
 
@@ -55,8 +69,9 @@ lại cho cùng loại kết quả (`same_result`) và giữ truy vấn cũ.
 
 - `dev_zero_v1.json`: số liệu từng câu của v1 (`misrepair.py --json`); `dev_zero_v1_run.json`: file kết quả của lượt v1.
 - `dev_zero_v2.json`: số liệu từng câu của v2 (`replay_d.py --tag v2`).
-- `dev_partial46.json`: số liệu từng câu của 46 câu dev đã chạy (`misrepair.py --json`); file kết quả tương ứng là
-  `results/runs/dev/proposed_ad__openai-gpt-oss-20b__run1.partial.json`.
+- `dev_zero_full.json`: số liệu từng câu của pipeline đầy đủ A + B + C + D trên `dev_zero` (`misrepair.py --json`).
+- `dev_v2.json`: số liệu từng câu của lượt dev đầy đủ (`misrepair.py --json`), file kết quả
+  `results/runs/dev/proposed_ad__openai-gpt-oss-20b__run1.json` (thay cho bản tạm `.partial.json` 46 câu đã xóa).
 
 ## Tái lập
 
