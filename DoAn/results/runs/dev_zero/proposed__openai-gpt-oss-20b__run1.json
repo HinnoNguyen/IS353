@@ -1,0 +1,789 @@
+{
+  "meta": {
+    "baseline": "proposed",
+    "model": "openai/gpt-oss-20b",
+    "split": "dev_zero",
+    "run": 1,
+    "started_at": "2026-11-19T10:39:45+07:00",
+    "finished_at": "2026-11-19T10:46:30+07:00",
+    "llm_first_call_at": "2026-11-19T10:39:56+07:00",
+    "llm_last_call_at": "2026-11-19T10:46:30+07:00",
+    "temperature": 0,
+    "timeout_s": 30,
+    "max_rows_read": 1000,
+    "questions_file": "eval/questions/dev_zero.json",
+    "questions_sha256": "e607128eb1767c64e0cac059fa317169b910fff514ab1a728d5f5b243ecce8e4",
+    "n_questions": 20,
+    "verdicts": {
+      "correct": 20,
+      "wrong_result": 0,
+      "empty_result": 0,
+      "execution_error": 0,
+      "timeout": 0,
+      "no_cypher": 0,
+      "llm_error": 0
+    },
+    "partial": false,
+    "neo4j": "5.26.31 community",
+    "packages": {
+      "python": "3.12.3",
+      "neo4j": "6.4.1",
+      "groq": "1.7.0",
+      "python-dotenv": "1.2.4"
+    },
+    "prompt": "You are an expert Neo4j developer. Write one Cypher query that answers the question\nusing only the graph schema below. Return only the Cypher query, with no explanation.\n\nSchema:\n{schema}\n\nQuestion: {question}\nCypher:",
+    "answers": null,
+    "schema": "Node labels and properties:\n  (:City:Place) {id: Long, name: String, url: String}\n  (:Comment:Message) {browserUsed: String, content: String, creationDate: DateTime, id: Long, length: Long, locationIP: String}\n  (:Company:Organisation) {id: Long, name: String, url: String}\n  (:Continent:Place) {id: Long, name: String, url: String}\n  (:Country:Place) {id: Long, name: String, url: String}\n  (:Forum) {creationDate: DateTime, id: Long, title: String}\n  (:Message:Post) {browserUsed: String, content: String, creationDate: DateTime, id: Long, imageFile: String, language: String, length: Long, locationIP: String}\n  (:Organisation:University) {id: Long, name: String, url: String}\n  (:Person) {birthday: Date, browserUsed: String, creationDate: DateTime, email: StringArray, firstName: String, gender: String, id: Long, lastName: String, locationIP: String, speaks: StringArray}\n  (:Tag) {id: Long, name: String, url: String}\n  (:TagClass) {id: Long, name: String, url: String}\nRelationships:\n  (:Place:Country)-[:IS_PART_OF]->(:Place:Continent)\n  (:Place:City)-[:IS_PART_OF]->(:Place:Country)\n  (:Organisation:Company)-[:IS_LOCATED_IN]->(:Place:Country)\n  (:Organisation:University)-[:IS_LOCATED_IN]->(:Place:City)\n  (:Tag)-[:HAS_TYPE]->(:TagClass)\n  (:TagClass)-[:IS_SUBCLASS_OF]->(:TagClass)\n  (:Person)-[:IS_LOCATED_IN]->(:Place:City)\n  (:Person)-[:KNOWS {creationDate}]->(:Person)\n  (:Person)-[:HAS_INTEREST]->(:Tag)\n  (:Person)-[:STUDY_AT {classYear}]->(:Organisation:University)\n  (:Person)-[:WORK_AT {workFrom}]->(:Organisation:Company)\n  (:Person)-[:LIKES {creationDate}]->(:Post:Message)\n  (:Person)-[:LIKES {creationDate}]->(:Comment:Message)\n  (:Forum)-[:HAS_MODERATOR]->(:Person)\n  (:Forum)-[:HAS_MEMBER {joinDate}]->(:Person)\n  (:Forum)-[:HAS_TAG]->(:Tag)\n  (:Forum)-[:CONTAINER_OF]->(:Post:Message)\n  (:Post:Message)-[:HAS_CREATOR]->(:Person)\n  (:Post:Message)-[:HAS_TAG]->(:Tag)\n  (:Post:Message)-[:IS_LOCATED_IN]->(:Place:Country)\n  (:Comment:Message)-[:HAS_CREATOR]->(:Person)\n  (:Comment:Message)-[:HAS_TAG]->(:Tag)\n  (:Comment:Message)-[:IS_LOCATED_IN]->(:Place:Country)\n  (:Comment:Message)-[:REPLY_OF]->(:Post:Message)\n  (:Comment:Message)-[:REPLY_OF]->(:Comment:Message)\n\nConventions of this graph:\n- KNOWS (friendship) is stored once per pair in an arbitrary direction: always match it without a direction, e.g. (a)-[:KNOWS]-(b), (a)-[:KNOWS*2]-(b), shortestPath((a)-[:KNOWS*]-(b)).\n- Use every other relationship in the exact direction shown in the schema, e.g. (:Forum)-[:HAS_MEMBER]->(:Person), (:Message)-[:HAS_CREATOR]->(:Person), (:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country). (:Post) and (:Comment) are subtypes of (:Message); use (:Post) for posts, (:Comment) for comments, and (:Message) when referring to messages in general.\n- Names of countries, cities, continents, companies, universities, tags and tag classes in the database use underscores (_) instead of spaces, e.g. 'Bosnia_and_Herzegovina' (:Country), 'Jiaganj_Azimganj' (:City), 'Hamid_Karzai' (:Tag), 'Kam_Air' (:Company), 'Paktia_University' (:University).\n- A person's firstName may contain spaces (multiple words). Match a person either by {firstName, lastName} or by comparing p.firstName + ' ' + p.lastName with the full name.\n- Date and datetime properties (creationDate, joinDate, birthday) expose UTC components .year, .month and .quarter directly as integers (e.g. m.creationDate.year, m.creationDate.month, m.creationDate.quarter).\n- Person.creationDate is when a person joined the social network (created an account); rel.joinDate on (:Forum)-[rel:HAS_MEMBER]->(:Person) is when a person joined a forum; rel.creationDate on (:Person)-[rel:KNOWS]-(:Person) is when two people became friends.\n- Always RETURN specific property values (e.g. u.name, p.firstName, p.lastName, f.title), never whole nodes or paths. When counting distinct entities across relationships, use count(DISTINCT x); for 'the most / the largest / the first', use ORDER BY ... LIMIT 1.",
+    "schema_sha256": "52ec2ac658402759d0e562ca6408a3bd8aa54eb020609b483adca4aa30a9a83f",
+    "off": [],
+    "components": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "commit": "66ab2cda0df1fa3c04a743f858156d6d4926df90+dirty",
+    "fewshot_k": 3,
+    "fewshot_strategy": "bm25, diverse",
+    "fewshot_bank": "eval/questions/dev.json",
+    "fix_prompt_tail": "\nPrevious query:\n{cypher}\nResult of running it: {message}\n{instruction}\nReturn only the Cypher query, with no explanation.\nCypher:",
+    "fix_instructions": {
+      "fix": "Write a corrected query.",
+      "review": "An empty or zero result can be the true answer, or a sign of a mistake such as a name, label, property or relationship direction that does not match the schema. Check the query against the question and the schema above. If the query is correct and the true answer is empty or zero, return the same query unchanged. Otherwise, return a corrected query."
+    },
+    "max_fixes": 2,
+    "fix_llm_options": {
+      "reasoning_effort": "low"
+    }
+  },
+  "results": [
+    {
+      "id": "LK-03-Z01",
+      "type": "lookup",
+      "template_id": "LK-03",
+      "question": "Which university did Frank Jones study at?",
+      "cypher": "MATCH (p:Person {firstName: 'Frank', lastName: 'Jones'})-[:STUDY_AT]->(u:Organisation:University) RETURN u.name",
+      "gold": "MATCH (:Person {firstName: 'Frank', lastName: 'Jones'})-[:STUDY_AT]->(u:University) RETURN u.name",
+      "seconds": 9.2,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person {firstName: 'Frank', lastName: 'Jones'})-[:STUDY_AT]->(u:Organisation:University) RETURN u.name",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many comments did Paul Breton write in the fourth quarter of 2011?\nCypher: MATCH (:Person {firstName: 'Paul', lastName: 'Breton'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)\n\nQuestion: Andrei Kahnovich lives in which country?\nCypher: MATCH (:Person {firstName: 'Andrei', lastName: 'Kahnovich'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name\n\nQuestion: Which people are friends with both Batong Do and Cam Nguyen?\nCypher: MATCH (:Person {firstName: 'Batong', lastName: 'Do'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Cam', lastName: 'Nguyen'}) RETURN DISTINCT m.firstName, m.lastName\n\nRelevant entities in the graph:\n- Person: firstName='Frank', lastName='Jones'",
+        "examples_c": [
+          "TM-04-01",
+          "MH-01-06",
+          "PA-03-02"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "AG-01-Z01",
+      "type": "aggregation",
+      "template_id": "AG-01",
+      "question": "How many people live in Uruguay?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(c:Country {name: 'Uruguay'})\nRETURN count(DISTINCT p)",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Uruguay'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 26.3,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(c:Country {name: 'Uruguay'})\nRETURN count(DISTINCT p)",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many people joined the network in March 2011?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 3 RETURN count(p)\n\nQuestion: Which country does Wilson Agudelo live in?\nCypher: MATCH (:Person {firstName: 'Wilson', lastName: 'Agudelo'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name\n\nQuestion: How many comments did Paul Breton write in the fourth quarter of 2011?\nCypher: MATCH (:Person {firstName: 'Paul', lastName: 'Breton'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)\n\nRelevant entities in the graph:\n- Tag: name='Uruguay'",
+        "examples_c": [
+          "TM-02-01",
+          "MH-01-01",
+          "TM-04-01"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "MH-01-Z01",
+      "type": "multi_hop",
+      "template_id": "MH-01",
+      "question": "Which country does Aisso Caveda live in?",
+      "cypher": "MATCH (p:Person {firstName: 'Aisso', lastName: 'Caveda'})-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country) RETURN co.name",
+      "gold": "MATCH (:Person {firstName: 'Aisso', lastName: 'Caveda'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 18.1,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person {firstName: 'Aisso', lastName: 'Caveda'})-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country) RETURN co.name",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: Which friends of Marco Agreda live in the same city as Marco Agreda?\nCypher: MATCH (p:Person {firstName: 'Marco', lastName: 'Agreda'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName\n\nQuestion: How many people live in Cuba?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What university does John Ahmad attend?\nCypher: MATCH (:Person {firstName: 'John', lastName: 'Ahmad'})-[:STUDY_AT]->(u:University) RETURN u.name",
+        "examples_c": [
+          "MH-03-10",
+          "AG-01-04",
+          "LK-03-02"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "PA-01-Z01",
+      "type": "path",
+      "template_id": "PA-01",
+      "question": "What is the length of the shortest friendship path between Hsin Chiang and Ganesh Bombo?",
+      "cypher": "MATCH (a:Person {firstName:'Hsin', lastName:'Chiang'}), (b:Person {firstName:'Ganesh', lastName:'Bombo'})\nMATCH p=shortestPath((a)-[:KNOWS*]-(b))\nRETURN length(p) AS shortestFriendshipLength",
+      "gold": "MATCH (a:Person {firstName: 'Hsin', lastName: 'Chiang'}), (b:Person {firstName: 'Ganesh', lastName: 'Bombo'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+      "seconds": 21.0,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (a:Person {firstName:'Hsin', lastName:'Chiang'}), (b:Person {firstName:'Ganesh', lastName:'Bombo'})\nMATCH p=shortestPath((a)-[:KNOWS*]-(b))\nRETURN length(p) AS shortestFriendshipLength",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: What is the date of birth of Augusto Rodriguez?\nCypher: MATCH (p:Person {firstName: 'Augusto', lastName: 'Rodriguez'}) RETURN p.birthday\n\nQuestion: What is the number of people living in France?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What is the number of posts that have the tag \"William IV of the United Kingdom\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'William_IV_of_the_United_Kingdom'}) RETURN count(DISTINCT p) AS total\n\nRelevant entities in the graph:\n- Person: firstName='Ganesh', lastName='Bombo'\n- Person: firstName='Hsin', lastName='Chiang'",
+        "examples_c": [
+          "LK-04-02",
+          "AG-01-02",
+          "AG-03-08"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-02-Z01",
+      "type": "temporal",
+      "template_id": "TM-02",
+      "question": "How many people joined the network in December 2009?",
+      "cypher": "MATCH (p:Person) WHERE p.creationDate.year = 2009 AND p.creationDate.month = 12 RETURN count(DISTINCT p) AS total",
+      "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2009 AND p.creationDate.month = 12 RETURN count(p)",
+      "seconds": 24.1,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person) WHERE p.creationDate.year = 2009 AND p.creationDate.month = 12 RETURN count(DISTINCT p) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many residents of Bolivia are there in the network?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many posts carry the tag \"Samoa\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Samoa'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many comments did Paul Breton write in the fourth quarter of 2011?\nCypher: MATCH (:Person {firstName: 'Paul', lastName: 'Breton'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+        "examples_c": [
+          "AG-01-03",
+          "AG-03-09",
+          "TM-04-01"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "LK-03-Z02",
+      "type": "lookup",
+      "template_id": "LK-03",
+      "question": "What university does Ashley Coetzee attend?",
+      "cypher": "MATCH (p:Person {firstName:'Ashley', lastName:'Coetzee'})-[:STUDY_AT]->(u:Organisation:University) RETURN u.name",
+      "gold": "MATCH (:Person {firstName: 'Ashley', lastName: 'Coetzee'})-[:STUDY_AT]->(u:University) RETURN u.name",
+      "seconds": 25.2,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person {firstName:'Ashley', lastName:'Coetzee'})-[:STUDY_AT]->(u:Organisation:University) RETURN u.name",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: Which country does Wilson Agudelo live in?\nCypher: MATCH (:Person {firstName: 'Wilson', lastName: 'Agudelo'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name\n\nQuestion: What is Antonio Fuema's birthday?\nCypher: MATCH (p:Person {firstName: 'Antonio', lastName: 'Fuema'}) RETURN p.birthday\n\nQuestion: What is the number of people living in France?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total\n\nRelevant entities in the graph:\n- Person: firstName='Ashley', lastName='Coetzee'",
+        "examples_c": [
+          "MH-01-01",
+          "LK-04-03",
+          "AG-01-02"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "AG-01-Z02",
+      "type": "aggregation",
+      "template_id": "AG-01",
+      "question": "What is the number of people living in Slovakia?",
+      "cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name: 'Slovakia'})\nRETURN count(DISTINCT p) AS total",
+      "gold": "MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Slovakia'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 21.3,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person)-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country {name: 'Slovakia'})\nRETURN count(DISTINCT p) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: What is the number of people who signed up in May 2010?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)\n\nQuestion: What is the number of posts that have the tag \"Islamic Courts Union\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Islamic_Courts_Union'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What is the number of comments Karim Akhmadiyeva wrote during Q4 2011?\nCypher: MATCH (:Person {firstName: 'Karim', lastName: 'Akhmadiyeva'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)\n\nRelevant entities in the graph:\n- Tag: name='Slovakia'",
+        "examples_c": [
+          "TM-02-03",
+          "AG-03-02",
+          "TM-04-03"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-01-Z02",
+      "type": "multi_hop",
+      "template_id": "MH-01",
+      "question": "In what country is Abdullah Arikan based?",
+      "cypher": "MATCH (p:Person {firstName: 'Abdullah', lastName: 'Arikan'})-[:IS_LOCATED_IN]->(c:City)-[:IS_PART_OF]->(co:Country) RETURN co.name AS country",
+      "gold": "MATCH (:Person {firstName: 'Abdullah', lastName: 'Arikan'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name",
+      "seconds": 36.2,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 3,
+        "first_cypher": "Could you please provide the specific question you’d like the Cypher query to answer?",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: What is the number of people living in France?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What is Antonio Fuema's birthday?\nCypher: MATCH (p:Person {firstName: 'Antonio', lastName: 'Fuema'}) RETURN p.birthday\n\nQuestion: What is the number of people who signed up in May 2010?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)",
+        "examples_c": [
+          "AG-01-02",
+          "LK-04-03",
+          "TM-02-03"
+        ],
+        "problems": [
+          "error",
+          "empty"
+        ],
+        "decisions": [
+          "changed",
+          "kept"
+        ],
+        "chosen": 1,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "PA-01-Z02",
+      "type": "path",
+      "template_id": "PA-01",
+      "question": "How many friendship steps separate Ferenc Nagy from Jae-Jin Park?",
+      "cypher": "MATCH (p1:Person {firstName:'Ferenc', lastName:'Nagy'}), (p2:Person {firstName:'Jae-Jin', lastName:'Park'})\nMATCH path = shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(path) AS steps",
+      "gold": "MATCH (a:Person {firstName: 'Ferenc', lastName: 'Nagy'}), (b:Person {firstName: 'Jae-Jin', lastName: 'Park'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)",
+      "seconds": 19.4,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p1:Person {firstName:'Ferenc', lastName:'Nagy'}), (p2:Person {firstName:'Jae-Jin', lastName:'Park'})\nMATCH path = shortestPath((p1)-[:KNOWS*]-(p2))\nRETURN length(path) AS steps",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many people live in Cuba?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many posts carry the tag \"Samoa\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Samoa'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many accounts were created in February 2012?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 2 RETURN count(p)\n\nRelevant entities in the graph:\n- Person: firstName='Jae-Jin', lastName='Park'\n- Person: firstName='Ferenc', lastName='Nagy'",
+        "examples_c": [
+          "AG-01-04",
+          "AG-03-09",
+          "TM-02-02"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-02-Z02",
+      "type": "temporal",
+      "template_id": "TM-02",
+      "question": "How many accounts were created in November 2012?",
+      "cypher": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 11 RETURN count(DISTINCT p) AS total",
+      "gold": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 11 RETURN count(p)",
+      "seconds": 19.1,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 11 RETURN count(DISTINCT p) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many comments did Victor Lim write in the third quarter of 2012?\nCypher: MATCH (:Person {firstName: 'Victor', lastName: 'Lim'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 3 RETURN count(DISTINCT c)\n\nQuestion: How many people live in Cuba?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many posts carry the tag \"Samoa\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Samoa'}) RETURN count(DISTINCT p) AS total",
+        "examples_c": [
+          "TM-04-07",
+          "AG-01-04",
+          "AG-03-09"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-04-Z01",
+      "type": "lookup",
+      "template_id": "LK-04",
+      "question": "When was Boris Sheik born?",
+      "cypher": "MATCH (p:Person {firstName: 'Boris', lastName: 'Sheik'})\nRETURN p.birthday AS birthday",
+      "gold": "MATCH (p:Person {firstName: 'Boris', lastName: 'Sheik'}) RETURN p.birthday",
+      "seconds": 18.8,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person {firstName: 'Boris', lastName: 'Sheik'})\nRETURN p.birthday AS birthday",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many people live in Hong Kong?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Hong_Kong'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many posts are tagged with \"Aung San Suu Kyi\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Aung_San_Suu_Kyi'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What university does John Ahmad attend?\nCypher: MATCH (:Person {firstName: 'John', lastName: 'Ahmad'})-[:STUDY_AT]->(u:University) RETURN u.name",
+        "examples_c": [
+          "AG-01-01",
+          "AG-03-01",
+          "LK-03-02"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "AG-03-Z01",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "How many posts are tagged with \"Tilda Swinton\"?",
+      "cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: 'Tilda_Swinton'})\nRETURN count(DISTINCT p) AS total",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Tilda_Swinton'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 18.3,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: 'Tilda_Swinton'})\nRETURN count(DISTINCT p) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: Which people are friends with both Batong Do and Cam Nguyen?\nCypher: MATCH (:Person {firstName: 'Batong', lastName: 'Do'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Cam', lastName: 'Nguyen'}) RETURN DISTINCT m.firstName, m.lastName\n\nQuestion: How many residents of Bolivia are there in the network?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many accounts were created in February 2012?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 2 RETURN count(p)\n\nRelevant entities in the graph:\n- Tag: name='Tilda_Swinton'",
+        "examples_c": [
+          "PA-03-02",
+          "AG-01-03",
+          "TM-02-02"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-03-Z01",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "Which friends of Wojciech Kowalski live in the same city as Wojciech Kowalski?",
+      "cypher": "MATCH (p:Person {firstName:'Wojciech', lastName:'Kowalski'})-[:IS_LOCATED_IN]->(city:City),\n      (p)-[:KNOWS]-(f:Person),\n      (f)-[:IS_LOCATED_IN]->(city)\nRETURN DISTINCT f.firstName, f.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Wojciech', lastName: 'Kowalski'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 20.8,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Person {firstName:'Wojciech', lastName:'Kowalski'})-[:IS_LOCATED_IN]->(city:City),\n      (p)-[:KNOWS]-(f:Person),\n      (f)-[:IS_LOCATED_IN]->(city)\nRETURN DISTINCT f.firstName, f.lastName",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: Which country does Wilson Agudelo live in?\nCypher: MATCH (:Person {firstName: 'Wilson', lastName: 'Agudelo'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name\n\nQuestion: How many people live in Cuba?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total\n\nQuestion: Which people are friends with both Batong Do and Cam Nguyen?\nCypher: MATCH (:Person {firstName: 'Batong', lastName: 'Do'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Cam', lastName: 'Nguyen'}) RETURN DISTINCT m.firstName, m.lastName\n\nRelevant entities in the graph:\n- Person: firstName='Wojciech', lastName='Kowalski'",
+        "examples_c": [
+          "MH-01-01",
+          "AG-01-04",
+          "PA-03-02"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "PA-03-Z01",
+      "type": "path",
+      "template_id": "PA-03",
+      "question": "Who are the mutual friends of Fernando Alarcón and Donald Munro?",
+      "cypher": "MATCH (f:Person {firstName: 'Fernando', lastName: 'Alarcón'}), \n      (d:Person {firstName: 'Donald', lastName: 'Munro'}), \n      (m:Person)-[:KNOWS]-(f), \n      (m)-[:KNOWS]-(d) \nRETURN DISTINCT m.firstName, m.lastName",
+      "gold": "MATCH (:Person {firstName: 'Fernando', lastName: 'Alarcón'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Donald', lastName: 'Munro'}) RETURN DISTINCT m.firstName, m.lastName",
+      "seconds": 20.6,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (f:Person {firstName: 'Fernando', lastName: 'Alarcón'}), \n      (d:Person {firstName: 'Donald', lastName: 'Munro'}), \n      (m:Person)-[:KNOWS]-(f), \n      (m)-[:KNOWS]-(d) \nRETURN DISTINCT m.firstName, m.lastName",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: List the friends of Alec Cheng who share their city of residence.\nCypher: MATCH (p:Person {firstName: 'Alec', lastName: 'Cheng'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName\n\nQuestion: Which country does S. N. Hall live in?\nCypher: MATCH (:Person {firstName: 'S. N.', lastName: 'Hall'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name\n\nQuestion: How many residents of Bolivia are there in the network?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total\n\nRelevant entities in the graph:\n- Person: firstName='Fernando', lastName='Alarcón'\n- Person: firstName='Donald', lastName='Munro'",
+        "examples_c": [
+          "MH-03-03",
+          "MH-01-04",
+          "AG-01-03"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "TM-04-Z01",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "How many comments did Ahmad Shah Aman write in the fourth quarter of 2011?",
+      "cypher": "MATCH (c:Comment)-[:HAS_CREATOR]->(p:Person {firstName: 'Ahmad Shah', lastName: 'Aman'})\nWHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4\nRETURN count(c) AS total",
+      "gold": "MATCH (:Person {firstName: 'Ahmad Shah', lastName: 'Aman'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4 RETURN count(DISTINCT c)",
+      "seconds": 11.1,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (c:Comment)-[:HAS_CREATOR]->(p:Person {firstName: 'Ahmad Shah', lastName: 'Aman'})\nWHERE c.creationDate.year = 2011 AND c.creationDate.quarter = 4\nRETURN count(c) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many people joined the network in March 2011?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2011 AND p.creationDate.month = 3 RETURN count(p)\n\nQuestion: What university does John Ahmad attend?\nCypher: MATCH (:Person {firstName: 'John', lastName: 'Ahmad'})-[:STUDY_AT]->(u:University) RETURN u.name\n\nQuestion: How many residents of Bolivia are there in the network?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total\n\nRelevant entities in the graph:\n- Person: firstName='Ahmad Shah', lastName='Aman'",
+        "examples_c": [
+          "TM-02-01",
+          "LK-03-02",
+          "AG-01-03"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.01
+    },
+    {
+      "id": "LK-04-Z02",
+      "type": "lookup",
+      "template_id": "LK-04",
+      "question": "What is the date of birth of Budi Balawan?",
+      "cypher": "MATCH (p:Person {firstName: 'Budi', lastName: 'Balawan'})\nRETURN p.birthday AS birthDate",
+      "gold": "MATCH (p:Person {firstName: 'Budi', lastName: 'Balawan'}) RETURN p.birthday",
+      "seconds": 24.7,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 3,
+        "first_cypher": "Could you please provide the specific question you’d like the Cypher query to answer?",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: What is the number of people living in France?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What is the number of posts that have the tag \"William IV of the United Kingdom\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'William_IV_of_the_United_Kingdom'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What is the number of people who signed up in May 2010?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)",
+        "examples_c": [
+          "AG-01-02",
+          "AG-03-08",
+          "TM-02-03"
+        ],
+        "problems": [
+          "error",
+          "empty"
+        ],
+        "decisions": [
+          "changed",
+          "same_result"
+        ],
+        "chosen": 1,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "AG-03-Z02",
+      "type": "aggregation",
+      "template_id": "AG-03",
+      "question": "What is the number of posts that have the tag \"There Is No Beginning to the Story\"?",
+      "cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: 'There_Is_No_Beginning_to_the_Story'})\nRETURN count(DISTINCT p) AS total",
+      "gold": "MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'There_Is_No_Beginning_to_the_Story'}) RETURN count(DISTINCT p) AS total",
+      "seconds": 11.4,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (p:Post)-[:HAS_TAG]->(t:Tag {name: 'There_Is_No_Beginning_to_the_Story'})\nRETURN count(DISTINCT p) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: What is the minimum number of friendship links needed to connect Victor Antonescu and Wei Chen?\nCypher: MATCH (a:Person {firstName: 'Victor', lastName: 'Antonescu'}), (b:Person {firstName: 'Wei', lastName: 'Chen'}) MATCH p = shortestPath((a)-[:KNOWS*]-(b)) RETURN length(p)\n\nQuestion: What is the number of people living in France?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'France'}) RETURN count(DISTINCT p) AS total\n\nQuestion: What is the number of people who signed up in May 2010?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2010 AND p.creationDate.month = 5 RETURN count(p)\n\nRelevant entities in the graph:\n- Tag: name='There_Is_No_Beginning_to_the_Story'",
+        "examples_c": [
+          "PA-01-03",
+          "AG-01-02",
+          "TM-02-03"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "MH-03-Z02",
+      "type": "multi_hop",
+      "template_id": "MH-03",
+      "question": "Who among Cesar Gonzales's friends lives in the same city as them?",
+      "cypher": "MATCH (c:Person {firstName:'Cesar', lastName:'Gonzales'})-[:IS_LOCATED_IN]->(city:City)\nMATCH (c)-[:KNOWS]-(f:Person)-[:IS_LOCATED_IN]->(city)\nRETURN DISTINCT f.firstName, f.lastName",
+      "gold": "MATCH (p:Person {firstName: 'Cesar', lastName: 'Gonzales'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName",
+      "seconds": 22.1,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (c:Person {firstName:'Cesar', lastName:'Gonzales'})-[:IS_LOCATED_IN]->(city:City)\nMATCH (c)-[:KNOWS]-(f:Person)-[:IS_LOCATED_IN]->(city)\nRETURN DISTINCT f.firstName, f.lastName",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: Andrei Kahnovich lives in which country?\nCypher: MATCH (:Person {firstName: 'Andrei', lastName: 'Kahnovich'})-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(k:Country) RETURN k.name\n\nQuestion: Who are the mutual friends of A. Budjana and Max Bauer?\nCypher: MATCH (:Person {firstName: 'A.', lastName: 'Budjana'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Max', lastName: 'Bauer'}) RETURN DISTINCT m.firstName, m.lastName\n\nQuestion: What is Antonio Fuema's birthday?\nCypher: MATCH (p:Person {firstName: 'Antonio', lastName: 'Fuema'}) RETURN p.birthday\n\nRelevant entities in the graph:\n- Person: firstName='Cesar', lastName='Gonzales'",
+        "examples_c": [
+          "MH-01-06",
+          "PA-03-01",
+          "LK-04-03"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "same_result"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "PA-03-Z02",
+      "type": "path",
+      "template_id": "PA-03",
+      "question": "Which people are friends with both Zdenek Balcar and Pablo Sanchez?",
+      "cypher": "MATCH (z:Person {firstName: 'Zdenek', lastName: 'Balcar'}), (p:Person {firstName: 'Pablo', lastName: 'Sanchez'}), (f:Person)-[:KNOWS]-(z), (f)-[:KNOWS]-(p)\nRETURN DISTINCT f.firstName, f.lastName",
+      "gold": "MATCH (:Person {firstName: 'Zdenek', lastName: 'Balcar'})-[:KNOWS]-(m:Person)-[:KNOWS]-(:Person {firstName: 'Pablo', lastName: 'Sanchez'}) RETURN DISTINCT m.firstName, m.lastName",
+      "seconds": 23.4,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (z:Person {firstName: 'Zdenek', lastName: 'Balcar'}), (p:Person {firstName: 'Pablo', lastName: 'Sanchez'}), (f:Person)-[:KNOWS]-(z), (f)-[:KNOWS]-(p)\nRETURN DISTINCT f.firstName, f.lastName",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many posts are tagged with \"Apollo 100\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Apollo_100'}) RETURN count(DISTINCT p) AS total\n\nQuestion: Which friends of Marco Agreda live in the same city as Marco Agreda?\nCypher: MATCH (p:Person {firstName: 'Marco', lastName: 'Agreda'})-[:IS_LOCATED_IN]->(c:City)<-[:IS_LOCATED_IN]-(f:Person)-[:KNOWS]-(p) RETURN DISTINCT f.firstName, f.lastName\n\nQuestion: How many people live in Cuba?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Cuba'}) RETURN count(DISTINCT p) AS total\n\nRelevant entities in the graph:\n- Person: firstName='Zdenek', lastName='Balcar'\n- Person: firstName='Pablo', lastName='Sanchez'",
+        "examples_c": [
+          "AG-03-04",
+          "MH-03-10",
+          "AG-01-04"
+        ],
+        "problems": [
+          "empty"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "empty"
+      },
+      "gold_answer": [],
+      "verdict": "correct",
+      "pred_rows": 0,
+      "pred_preview": [],
+      "exec_seconds": 0.0
+    },
+    {
+      "id": "TM-04-Z02",
+      "type": "temporal",
+      "template_id": "TM-04",
+      "question": "In the first quarter of 2012, how many comments did Mehmet Tekin make?",
+      "cypher": "MATCH (c:Comment)-[:HAS_CREATOR]->(p:Person {firstName:'Mehmet', lastName:'Tekin'})\nWHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1\nRETURN count(DISTINCT c) AS total",
+      "gold": "MATCH (:Person {firstName: 'Mehmet', lastName: 'Tekin'})<-[:HAS_CREATOR]-(c:Comment) WHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1 RETURN count(DISTINCT c)",
+      "seconds": 12.3,
+      "subset": "zero",
+      "info": {
+        "llm_calls": 2,
+        "first_cypher": "MATCH (c:Comment)-[:HAS_CREATOR]->(p:Person {firstName:'Mehmet', lastName:'Tekin'})\nWHERE c.creationDate.year = 2012 AND c.creationDate.quarter = 1\nRETURN count(DISTINCT c) AS total",
+        "prompt_extra": "\n\nExamples:\n\nQuestion: How many people joined the network in June 2012?\nCypher: MATCH (p:Person) WHERE p.creationDate.year = 2012 AND p.creationDate.month = 6 RETURN count(p)\n\nQuestion: How many residents of Bolivia are there in the network?\nCypher: MATCH (p:Person)-[:IS_LOCATED_IN]->(:City)-[:IS_PART_OF]->(:Country {name: 'Bolivia'}) RETURN count(DISTINCT p) AS total\n\nQuestion: How many posts carry the tag \"Federation of Malaya\"?\nCypher: MATCH (p:Post)-[:HAS_TAG]->(:Tag {name: 'Federation_of_Malaya'}) RETURN count(DISTINCT p) AS total\n\nRelevant entities in the graph:\n- Person: firstName='Mehmet', lastName='Tekin'",
+        "examples_c": [
+          "TM-02-04",
+          "AG-01-03",
+          "AG-03-06"
+        ],
+        "problems": [
+          "zero"
+        ],
+        "decisions": [
+          "kept"
+        ],
+        "chosen": 0,
+        "final_problem": "zero"
+      },
+      "gold_answer": [
+        [
+          0
+        ]
+      ],
+      "verdict": "correct",
+      "pred_rows": 1,
+      "pred_preview": [
+        [
+          0
+        ]
+      ],
+      "exec_seconds": 0.0
+    }
+  ]
+}
