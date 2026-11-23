@@ -36,7 +36,7 @@ Ký hiệu: ✅ xong · ⚠️ xong nhưng còn vấn đề · 🔄 đang làm �
    |---|---|---|
    | Bằng | `proposed` (dev và dev_zero), `proposed_no_a` (dev và dev_zero) | gpt-oss-20b |
    | Khôi | `proposed_ab` | gpt-oss-20b |
-   | Vũ | `b1_zeroshot` (B3), `proposed` | gpt-oss-120b |
+   | Vũ | ✅ `b1_zeroshot` (B3: 75/92), `proposed` (92/92) | gpt-oss-120b |
 
    `proposed_a` và `proposed_abc` dùng cùng prompt sinh Cypher với `proposed_ad` và `proposed`, nên có thể lấy
    `first_cypher` của hai lượt đó thay vì chạy riêng (chờ Bảo đồng ý).
@@ -98,7 +98,8 @@ Cài lại cả `requirements.txt` sẽ đổi phiên bản `groq` (đang ghim 0
 | T33 (C) few-shot | 15/11 | ✅ | PR #13: `eval/proposed/fewshot_c.py`, kho ví dụ chỉ từ `dev.json`, tự bỏ ví dụ cùng template (cả câu `dev_zero`, `dev_para`), test đạt |
 | T24 sửa B2 | 15/11 | ✅ | dev: không ra Cypher 12/92 → 0/92, đúng 48 → 51; giữ cấu hình mặc định của chain; ghim phiên bản thư viện |
 | T62b sửa báo cáo T55 | 15/11 | ✅ | `results/audit/do_kho.md`: bỏ "40–54%", "68–72%", Spider, "chứng minh"; Google-BLEU/Exact Match; CypherBench GPT-4o 60,18%, Claude 3.5 Sonnet 61,58% |
-| T63 đọc mù test2 | 23–25/11 | ⏳ | |
+| Chạy B3 và `proposed` (`gpt-oss-120b`) trên dev | 25/11 | ✅ | `b1_zeroshot__openai-gpt-oss-120b__run1.json` (75/92); `proposed__openai-gpt-oss-120b__run1.json` (92/92, trước sửa 89/92, cứu 3, sửa nhầm 0/89 = 0,0%, 1,03 LLM/câu; commit `ad93bc6`) |
+| T63 đọc mù test2 | 23–25/11 (27–28/11) | ⏳ | |
 | E3 (`proposed` trên 120b) | 26/11–6/12 | ⏳ | |
 
 ### Bằng
@@ -131,3 +132,5 @@ Cài lại cả `requirements.txt` sẽ đổi phiên bản `groq` (đang ghim 0
 | Chỉ (A) (`first_cypher` của `proposed_ad`) | 84/92 | – | PR #16 |
 | A + D (`proposed_ad`) | 87/92, sửa nhầm 0/84 | 19/20, sửa nhầm 0/19 | PR #16; `dev_zero` ở `results/audit/repair_d/` |
 | A + B + C + D (`proposed`) | chưa chạy | 20/20, sửa nhầm 0/18 | PR #16; chạy trước khi sửa lỗi (B), cần chạy lại |
+| B3 zero-shot (`gpt-oss-120b`, lượt 1) | 75/92 | – | `b1_zeroshot__openai-gpt-oss-120b__run1.json` (lookup 17/17, aggr 9/20, multi 18/20, path 13/16, temp 18/19) |
+| A + B + C + D (`proposed`, `gpt-oss-120b`, lượt 1) | 92/92, sửa nhầm 0/89 | – | `proposed__openai-gpt-oss-120b__run1.json` (trước sửa 89/92, cứu 3, 1,03 LLM/câu; chạy sau khi sửa B, `ad93bc6`) |
