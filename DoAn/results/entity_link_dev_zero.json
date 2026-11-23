@@ -1,0 +1,484 @@
+{
+  "split": "dev_zero",
+  "evaluated_at": "2026-11-23T18:39:25.128727",
+  "num_questions": 20,
+  "tp": 18,
+  "fp": 2,
+  "fn": 0,
+  "precision": 0.9,
+  "recall": 1.0,
+  "f1": 0.9474,
+  "question_coverage": 1.0,
+  "fully_covered_questions": 20,
+  "ambiguous_cases_count": 2,
+  "ambiguous_cases": [
+    {
+      "id": "AG-01-Z01",
+      "question": "How many people live in Uruguay?",
+      "mention": "Uruguay",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-Z02",
+      "question": "What is the number of people living in Slovakia?",
+      "mention": "Slovakia",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    }
+  ],
+  "details": [
+    {
+      "id": "LK-03-Z01",
+      "question": "Which university did Frank Jones study at?",
+      "gold": [
+        [
+          "Person",
+          "Frank",
+          "Jones"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Frank",
+            "lastName": "Jones"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-Z02",
+      "question": "What university does Ashley Coetzee attend?",
+      "gold": [
+        [
+          "Person",
+          "Ashley",
+          "Coetzee"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ashley",
+            "lastName": "Coetzee"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-Z01",
+      "question": "When was Boris Sheik born?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-Z02",
+      "question": "What is the date of birth of Budi Balawan?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-Z01",
+      "question": "How many people live in Uruguay?",
+      "gold": [
+        [
+          "Country",
+          "Uruguay"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Uruguay"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Uruguay"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-Z02",
+      "question": "What is the number of people living in Slovakia?",
+      "gold": [
+        [
+          "Country",
+          "Slovakia"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Slovakia"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Slovakia"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-Z01",
+      "question": "How many posts are tagged with \"Tilda Swinton\"?",
+      "gold": [
+        [
+          "Tag",
+          "Tilda_Swinton"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Tilda_Swinton"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-Z02",
+      "question": "What is the number of posts that have the tag \"There Is No Beginning to the Story\"?",
+      "gold": [
+        [
+          "Tag",
+          "There_Is_No_Beginning_to_the_Story"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "There_Is_No_Beginning_to_the_Story"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-Z01",
+      "question": "Which country does Aisso Caveda live in?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-Z02",
+      "question": "In what country is Abdullah Arikan based?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-Z01",
+      "question": "Which friends of Wojciech Kowalski live in the same city as Wojciech Kowalski?",
+      "gold": [
+        [
+          "Person",
+          "Wojciech",
+          "Kowalski"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Wojciech",
+            "lastName": "Kowalski"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-Z02",
+      "question": "Who among Cesar Gonzales's friends lives in the same city as them?",
+      "gold": [
+        [
+          "Person",
+          "Cesar",
+          "Gonzales"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Cesar",
+            "lastName": "Gonzales"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-Z01",
+      "question": "What is the length of the shortest friendship path between Hsin Chiang and Ganesh Bombo?",
+      "gold": [
+        [
+          "Person",
+          "Ganesh",
+          "Bombo"
+        ],
+        [
+          "Person",
+          "Hsin",
+          "Chiang"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ganesh",
+            "lastName": "Bombo"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Hsin",
+            "lastName": "Chiang"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-Z02",
+      "question": "How many friendship steps separate Ferenc Nagy from Jae-Jin Park?",
+      "gold": [
+        [
+          "Person",
+          "Ferenc",
+          "Nagy"
+        ],
+        [
+          "Person",
+          "Jae-Jin",
+          "Park"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Jae-Jin",
+            "lastName": "Park"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ferenc",
+            "lastName": "Nagy"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-Z01",
+      "question": "Who are the mutual friends of Fernando Alarcón and Donald Munro?",
+      "gold": [
+        [
+          "Person",
+          "Donald",
+          "Munro"
+        ],
+        [
+          "Person",
+          "Fernando",
+          "Alarcón"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Fernando",
+            "lastName": "Alarcón"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Donald",
+            "lastName": "Munro"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-Z02",
+      "question": "Which people are friends with both Zdenek Balcar and Pablo Sanchez?",
+      "gold": [
+        [
+          "Person",
+          "Pablo",
+          "Sanchez"
+        ],
+        [
+          "Person",
+          "Zdenek",
+          "Balcar"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Zdenek",
+            "lastName": "Balcar"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Pablo",
+            "lastName": "Sanchez"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-Z01",
+      "question": "How many people joined the network in December 2009?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-Z02",
+      "question": "How many accounts were created in November 2012?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-Z01",
+      "question": "How many comments did Ahmad Shah Aman write in the fourth quarter of 2011?",
+      "gold": [
+        [
+          "Person",
+          "Ahmad Shah",
+          "Aman"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ahmad Shah",
+            "lastName": "Aman"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-Z02",
+      "question": "In the first quarter of 2012, how many comments did Mehmet Tekin make?",
+      "gold": [
+        [
+          "Person",
+          "Mehmet",
+          "Tekin"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Mehmet",
+            "lastName": "Tekin"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    }
+  ]
+}
