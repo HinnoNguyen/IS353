@@ -2,8 +2,9 @@
 data/
 *.tar.zst
 
-# Bí mật
+# Bí mật & thư mục riêng tư (test2 trước khi công bố, báo cáo rò rỉ gửi riêng Bảo & Hương)
 .env
+private/
 
 # Cache và kết quả chạy tạm của LLM
 results/pilot_cache_*.json

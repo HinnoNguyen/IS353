@@ -79,7 +79,7 @@ Cài lại cả `requirements.txt` sẽ đổi phiên bản `groq` (đang ghim 0
 | T25 kiểm thử `judge` | 15/11 | ✅ | PR #10 và #15, `tests/test_judge.py` (có 2 ca xfail ghi nhận hành vi `judge`) |
 | T60 gold rỗng và split mới | 15/11 | ✅ | PR #10; oracle `dev_zero` 20/20 |
 | T61 bảng kết quả cuối (`summarize.py --split test2`) | 13/12 | ⏳ | |
-| Kiểm tra rò rỉ test2 | 23–25/11 | ⏳ | |
+| Kiểm tra rò rỉ test2 | 27–28/11 | 🔄 | Đã chuẩn bị sẵn `eval/audit/leak_values.py --splits test2` (quét đủ 13 đoạn prompt đã khóa + kiểm tra trùng thực thể với `dev`/`dev_para`/`dev_zero`/`test` cũ, tự lưu báo cáo riêng vào `DoAn/private/leak_test2.{json,md}`); chờ nhận `test2` |
 
 ### Ân
 
