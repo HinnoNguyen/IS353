@@ -1,0 +1,2388 @@
+{
+  "split": "dev",
+  "evaluated_at": "2026-11-23T18:39:22.891163",
+  "num_questions": 92,
+  "tp": 98,
+  "fp": 10,
+  "fn": 0,
+  "precision": 0.9074,
+  "recall": 1.0,
+  "f1": 0.9515,
+  "question_coverage": 1.0,
+  "fully_covered_questions": 92,
+  "ambiguous_cases_count": 10,
+  "ambiguous_cases": [
+    {
+      "id": "AG-01-01",
+      "question": "How many people live in Hong Kong?",
+      "mention": "Hong_Kong",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-02",
+      "question": "What is the number of people living in France?",
+      "mention": "France",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-03",
+      "question": "How many residents of Bolivia are there in the network?",
+      "mention": "Bolivia",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-04",
+      "question": "How many people live in Cuba?",
+      "mention": "Cuba",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-05",
+      "question": "What is the number of people living in New Zealand?",
+      "mention": "New_Zealand",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-06",
+      "question": "How many residents of Cameroon are there in the network?",
+      "mention": "Cameroon",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-07",
+      "question": "How many people live in Niger?",
+      "mention": "Niger",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-08",
+      "question": "What is the number of people living in Ethiopia?",
+      "mention": "Ethiopia",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-09",
+      "question": "How many residents of Ukraine are there in the network?",
+      "mention": "Ukraine",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    },
+    {
+      "id": "AG-01-10",
+      "question": "How many people live in Cambodia?",
+      "mention": "Cambodia",
+      "types": [
+        "Country",
+        "Tag"
+      ]
+    }
+  ],
+  "details": [
+    {
+      "id": "LK-03-02",
+      "question": "What university does John Ahmad attend?",
+      "gold": [
+        [
+          "Person",
+          "John",
+          "Ahmad"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "John",
+            "lastName": "Ahmad"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-03",
+      "question": "At which university is John Tembo a student?",
+      "gold": [
+        [
+          "Person",
+          "John",
+          "Tembo"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "John",
+            "lastName": "Tembo"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-04",
+      "question": "Which university did Fernanda Souza study at?",
+      "gold": [
+        [
+          "Person",
+          "Fernanda",
+          "Souza"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Fernanda",
+            "lastName": "Souza"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-06",
+      "question": "At which university is Zsolt Kiss a student?",
+      "gold": [
+        [
+          "Person",
+          "Zsolt",
+          "Kiss"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Zsolt",
+            "lastName": "Kiss"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-07",
+      "question": "Which university did Karim Ambane study at?",
+      "gold": [
+        [
+          "Person",
+          "Karim",
+          "Ambane"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Karim",
+            "lastName": "Ambane"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-08",
+      "question": "What university does Alim Guliyev attend?",
+      "gold": [
+        [
+          "Person",
+          "Alim",
+          "Guliyev"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Alim",
+            "lastName": "Guliyev"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-09",
+      "question": "At which university is Lata Singh a student?",
+      "gold": [
+        [
+          "Person",
+          "Lata",
+          "Singh"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Lata",
+            "lastName": "Singh"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-03-10",
+      "question": "Which university did Hossein Kamkar study at?",
+      "gold": [
+        [
+          "Person",
+          "Hossein",
+          "Kamkar"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Hossein",
+            "lastName": "Kamkar"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-01",
+      "question": "When was Luis Alonso born?",
+      "gold": [
+        [
+          "Person",
+          "Luis",
+          "Alonso"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Luis",
+            "lastName": "Alonso"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-02",
+      "question": "What is the date of birth of Augusto Rodriguez?",
+      "gold": [
+        [
+          "Person",
+          "Augusto",
+          "Rodriguez"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Augusto",
+            "lastName": "Rodriguez"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-03",
+      "question": "What is Antonio Fuema's birthday?",
+      "gold": [
+        [
+          "Person",
+          "Antonio",
+          "Fuema"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Antonio",
+            "lastName": "Fuema"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-04",
+      "question": "When was Michael Li born?",
+      "gold": [
+        [
+          "Person",
+          "Michael",
+          "Li"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Michael",
+            "lastName": "Li"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-05",
+      "question": "What is the date of birth of Gregorio Manalo?",
+      "gold": [
+        [
+          "Person",
+          "Gregorio",
+          "Manalo"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Gregorio",
+            "lastName": "Manalo"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-07",
+      "question": "When was Akashambatwa Kalaba born?",
+      "gold": [
+        [
+          "Person",
+          "Akashambatwa",
+          "Kalaba"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Akashambatwa",
+            "lastName": "Kalaba"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-08",
+      "question": "What is the date of birth of Aleksandr Dobrunov?",
+      "gold": [
+        [
+          "Person",
+          "Aleksandr",
+          "Dobrunov"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Aleksandr",
+            "lastName": "Dobrunov"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-09",
+      "question": "What is Paul Smith's birthday?",
+      "gold": [
+        [
+          "Person",
+          "Paul",
+          "Smith"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Paul",
+            "lastName": "Smith"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "LK-04-10",
+      "question": "When was Zhang Chen born?",
+      "gold": [
+        [
+          "Person",
+          "Zhang",
+          "Chen"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Zhang",
+            "lastName": "Chen"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-01",
+      "question": "How many people live in Hong Kong?",
+      "gold": [
+        [
+          "Country",
+          "Hong_Kong"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Hong_Kong"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Hong_Kong"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-02",
+      "question": "What is the number of people living in France?",
+      "gold": [
+        [
+          "Country",
+          "France"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "France"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "France"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-03",
+      "question": "How many residents of Bolivia are there in the network?",
+      "gold": [
+        [
+          "Country",
+          "Bolivia"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Bolivia"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Bolivia"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-04",
+      "question": "How many people live in Cuba?",
+      "gold": [
+        [
+          "Country",
+          "Cuba"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Cuba"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Cuba"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-05",
+      "question": "What is the number of people living in New Zealand?",
+      "gold": [
+        [
+          "Country",
+          "New_Zealand"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "New_Zealand"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "New_Zealand"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-06",
+      "question": "How many residents of Cameroon are there in the network?",
+      "gold": [
+        [
+          "Country",
+          "Cameroon"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Cameroon"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Cameroon"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-07",
+      "question": "How many people live in Niger?",
+      "gold": [
+        [
+          "Country",
+          "Niger"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Niger"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Niger"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-08",
+      "question": "What is the number of people living in Ethiopia?",
+      "gold": [
+        [
+          "Country",
+          "Ethiopia"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Ethiopia"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Ethiopia"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-09",
+      "question": "How many residents of Ukraine are there in the network?",
+      "gold": [
+        [
+          "Country",
+          "Ukraine"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Ukraine"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Ukraine"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-01-10",
+      "question": "How many people live in Cambodia?",
+      "gold": [
+        [
+          "Country",
+          "Cambodia"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Country",
+          "properties": {
+            "name": "Cambodia"
+          }
+        },
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Cambodia"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-01",
+      "question": "How many posts are tagged with \"Aung San Suu Kyi\"?",
+      "gold": [
+        [
+          "Tag",
+          "Aung_San_Suu_Kyi"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Aung_San_Suu_Kyi"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-02",
+      "question": "What is the number of posts that have the tag \"Islamic Courts Union\"?",
+      "gold": [
+        [
+          "Tag",
+          "Islamic_Courts_Union"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Islamic_Courts_Union"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-03",
+      "question": "How many posts carry the tag \"Video Killed the Radio Star\"?",
+      "gold": [
+        [
+          "Tag",
+          "Video_Killed_the_Radio_Star"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Video_Killed_the_Radio_Star"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-04",
+      "question": "How many posts are tagged with \"Apollo 100\"?",
+      "gold": [
+        [
+          "Tag",
+          "Apollo_100"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Apollo_100"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-05",
+      "question": "What is the number of posts that have the tag \"Carry That Weight\"?",
+      "gold": [
+        [
+          "Tag",
+          "Carry_That_Weight"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Carry_That_Weight"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-06",
+      "question": "How many posts carry the tag \"Federation of Malaya\"?",
+      "gold": [
+        [
+          "Tag",
+          "Federation_of_Malaya"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Federation_of_Malaya"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-07",
+      "question": "How many posts are tagged with \"Big Ones\"?",
+      "gold": [
+        [
+          "Tag",
+          "Big_Ones"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Big_Ones"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-08",
+      "question": "What is the number of posts that have the tag \"William IV of the United Kingdom\"?",
+      "gold": [
+        [
+          "Tag",
+          "William_IV_of_the_United_Kingdom"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "William_IV_of_the_United_Kingdom"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-09",
+      "question": "How many posts carry the tag \"Samoa\"?",
+      "gold": [
+        [
+          "Tag",
+          "Samoa"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "Samoa"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "AG-03-10",
+      "question": "How many posts are tagged with \"The Hurdy Gurdy Man\"?",
+      "gold": [
+        [
+          "Tag",
+          "The_Hurdy_Gurdy_Man"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Tag",
+          "properties": {
+            "name": "The_Hurdy_Gurdy_Man"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-01",
+      "question": "Which country does Wilson Agudelo live in?",
+      "gold": [
+        [
+          "Person",
+          "Wilson",
+          "Agudelo"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Wilson",
+            "lastName": "Agudelo"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-02",
+      "question": "In what country is Lin Yang based?",
+      "gold": [
+        [
+          "Person",
+          "Lin",
+          "Yang"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Lin",
+            "lastName": "Yang"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-03",
+      "question": "Jean-Pierre David lives in which country?",
+      "gold": [
+        [
+          "Person",
+          "Jean-Pierre",
+          "David"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Jean-Pierre",
+            "lastName": "David"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-04",
+      "question": "Which country does S. N. Hall live in?",
+      "gold": [
+        [
+          "Person",
+          "S. N.",
+          "Hall"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "S. N.",
+            "lastName": "Hall"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-05",
+      "question": "In what country is R. Joshi based?",
+      "gold": [
+        [
+          "Person",
+          "R.",
+          "Joshi"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "R.",
+            "lastName": "Joshi"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-06",
+      "question": "Andrei Kahnovich lives in which country?",
+      "gold": [
+        [
+          "Person",
+          "Andrei",
+          "Kahnovich"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Andrei",
+            "lastName": "Kahnovich"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-07",
+      "question": "Which country does Yang Lei live in?",
+      "gold": [
+        [
+          "Person",
+          "Yang",
+          "Lei"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Yang",
+            "lastName": "Lei"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-08",
+      "question": "In what country is Anand Rao based?",
+      "gold": [
+        [
+          "Person",
+          "Anand",
+          "Rao"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Anand",
+            "lastName": "Rao"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-09",
+      "question": "Eduardo Gutierrez lives in which country?",
+      "gold": [
+        [
+          "Person",
+          "Eduardo",
+          "Gutierrez"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Eduardo",
+            "lastName": "Gutierrez"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-01-10",
+      "question": "Which country does Pavel Kerndlova live in?",
+      "gold": [
+        [
+          "Person",
+          "Pavel",
+          "Kerndlova"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Pavel",
+            "lastName": "Kerndlova"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-01",
+      "question": "Which friends of Alfred Sorongo Leakey live in the same city as Alfred Sorongo Leakey?",
+      "gold": [
+        [
+          "Person",
+          "Alfred Sorongo",
+          "Leakey"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Alfred Sorongo",
+            "lastName": "Leakey"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-02",
+      "question": "Who among Claude Radafison's friends lives in the same city as them?",
+      "gold": [
+        [
+          "Person",
+          "Claude",
+          "Radafison"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Claude",
+            "lastName": "Radafison"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-03",
+      "question": "List the friends of Alec Cheng who share their city of residence.",
+      "gold": [
+        [
+          "Person",
+          "Alec",
+          "Cheng"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Alec",
+            "lastName": "Cheng"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-04",
+      "question": "Which friends of Ibrahim Bare Ousmane live in the same city as Ibrahim Bare Ousmane?",
+      "gold": [
+        [
+          "Person",
+          "Ibrahim Bare",
+          "Ousmane"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ibrahim Bare",
+            "lastName": "Ousmane"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-05",
+      "question": "Who among Michel Breton's friends lives in the same city as them?",
+      "gold": [
+        [
+          "Person",
+          "Michel",
+          "Breton"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Michel",
+            "lastName": "Breton"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-06",
+      "question": "List the friends of Ernest B Karat who share their city of residence.",
+      "gold": [
+        [
+          "Person",
+          "Ernest B",
+          "Karat"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ernest B",
+            "lastName": "Karat"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-07",
+      "question": "Which friends of Juan Carlos Alvarez live in the same city as Juan Carlos Alvarez?",
+      "gold": [
+        [
+          "Person",
+          "Juan Carlos",
+          "Alvarez"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Juan Carlos",
+            "lastName": "Alvarez"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-08",
+      "question": "Who among Leandro Silva's friends lives in the same city as them?",
+      "gold": [
+        [
+          "Person",
+          "Leandro",
+          "Silva"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Leandro",
+            "lastName": "Silva"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-09",
+      "question": "List the friends of Volodymyr Kofler who share their city of residence.",
+      "gold": [
+        [
+          "Person",
+          "Volodymyr",
+          "Kofler"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Volodymyr",
+            "lastName": "Kofler"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "MH-03-10",
+      "question": "Which friends of Marco Agreda live in the same city as Marco Agreda?",
+      "gold": [
+        [
+          "Person",
+          "Marco",
+          "Agreda"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Marco",
+            "lastName": "Agreda"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-01",
+      "question": "What is the length of the shortest friendship path between Ayesha Butt and Hồ Chí Loan?",
+      "gold": [
+        [
+          "Person",
+          "Ayesha",
+          "Butt"
+        ],
+        [
+          "Person",
+          "Hồ Chí",
+          "Loan"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ayesha",
+            "lastName": "Butt"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Hồ Chí",
+            "lastName": "Loan"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-02",
+      "question": "How many friendship steps separate Masao Yamada from Lin Zhu?",
+      "gold": [
+        [
+          "Person",
+          "Lin",
+          "Zhu"
+        ],
+        [
+          "Person",
+          "Masao",
+          "Yamada"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Masao",
+            "lastName": "Yamada"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Lin",
+            "lastName": "Zhu"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-03",
+      "question": "What is the minimum number of friendship links needed to connect Victor Antonescu and Wei Chen?",
+      "gold": [
+        [
+          "Person",
+          "Victor",
+          "Antonescu"
+        ],
+        [
+          "Person",
+          "Wei",
+          "Chen"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Victor",
+            "lastName": "Antonescu"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Wei",
+            "lastName": "Chen"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-05",
+      "question": "How many friendship steps separate Anura Abeywardena from Nedeljko Bajić Mikulic?",
+      "gold": [
+        [
+          "Person",
+          "Anura",
+          "Abeywardena"
+        ],
+        [
+          "Person",
+          "Nedeljko Bajić",
+          "Mikulic"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Nedeljko Bajić",
+            "lastName": "Mikulic"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Anura",
+            "lastName": "Abeywardena"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-06",
+      "question": "What is the minimum number of friendship links needed to connect Nikki Reyes and Nitin Khan?",
+      "gold": [
+        [
+          "Person",
+          "Nikki",
+          "Reyes"
+        ],
+        [
+          "Person",
+          "Nitin",
+          "Khan"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Nikki",
+            "lastName": "Reyes"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Nitin",
+            "lastName": "Khan"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-07",
+      "question": "What is the length of the shortest friendship path between Karim Ambane and Abdul Jamil Qureshi?",
+      "gold": [
+        [
+          "Person",
+          "Abdul Jamil",
+          "Qureshi"
+        ],
+        [
+          "Person",
+          "Karim",
+          "Ambane"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Abdul Jamil",
+            "lastName": "Qureshi"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Karim",
+            "lastName": "Ambane"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-08",
+      "question": "How many friendship steps separate Ajuma Nasenyana Brar from Andrey Aab?",
+      "gold": [
+        [
+          "Person",
+          "Ajuma Nasenyana",
+          "Brar"
+        ],
+        [
+          "Person",
+          "Andrey",
+          "Aab"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ajuma Nasenyana",
+            "lastName": "Brar"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Andrey",
+            "lastName": "Aab"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-09",
+      "question": "What is the minimum number of friendship links needed to connect Pierre Arnaud and Keith Habshush?",
+      "gold": [
+        [
+          "Person",
+          "Keith",
+          "Habshush"
+        ],
+        [
+          "Person",
+          "Pierre",
+          "Arnaud"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Keith",
+            "lastName": "Habshush"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Pierre",
+            "lastName": "Arnaud"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-01-10",
+      "question": "What is the length of the shortest friendship path between Hans Schmidt and Andrius Dukauskaite?",
+      "gold": [
+        [
+          "Person",
+          "Andrius",
+          "Dukauskaite"
+        ],
+        [
+          "Person",
+          "Hans",
+          "Schmidt"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Andrius",
+            "lastName": "Dukauskaite"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Hans",
+            "lastName": "Schmidt"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-01",
+      "question": "Who are the mutual friends of A. Budjana and Max Bauer?",
+      "gold": [
+        [
+          "Person",
+          "A.",
+          "Budjana"
+        ],
+        [
+          "Person",
+          "Max",
+          "Bauer"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "A.",
+            "lastName": "Budjana"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Max",
+            "lastName": "Bauer"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-02",
+      "question": "Which people are friends with both Batong Do and Cam Nguyen?",
+      "gold": [
+        [
+          "Person",
+          "Batong",
+          "Do"
+        ],
+        [
+          "Person",
+          "Cam",
+          "Nguyen"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Cam",
+            "lastName": "Nguyen"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Batong",
+            "lastName": "Do"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-03",
+      "question": "List the common friends of Aburizal Tobing and Aafia Khan.",
+      "gold": [
+        [
+          "Person",
+          "Aafia",
+          "Khan"
+        ],
+        [
+          "Person",
+          "Aburizal",
+          "Tobing"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Aburizal",
+            "lastName": "Tobing"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Aafia",
+            "lastName": "Khan"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-06",
+      "question": "List the common friends of Bobby Sotto and Jie Zhu.",
+      "gold": [
+        [
+          "Person",
+          "Bobby",
+          "Sotto"
+        ],
+        [
+          "Person",
+          "Jie",
+          "Zhu"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Bobby",
+            "lastName": "Sotto"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Jie",
+            "lastName": "Zhu"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-07",
+      "question": "Who are the mutual friends of Vinod Sharma and A. Kapoor?",
+      "gold": [
+        [
+          "Person",
+          "A.",
+          "Kapoor"
+        ],
+        [
+          "Person",
+          "Vinod",
+          "Sharma"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Vinod",
+            "lastName": "Sharma"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "A.",
+            "lastName": "Kapoor"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-09",
+      "question": "List the common friends of Asher Mamo and Jose Costa.",
+      "gold": [
+        [
+          "Person",
+          "Asher",
+          "Mamo"
+        ],
+        [
+          "Person",
+          "Jose",
+          "Costa"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Asher",
+            "lastName": "Mamo"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Jose",
+            "lastName": "Costa"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "PA-03-10",
+      "question": "Who are the mutual friends of Priyanka Khan and Constantin Popescu?",
+      "gold": [
+        [
+          "Person",
+          "Constantin",
+          "Popescu"
+        ],
+        [
+          "Person",
+          "Priyanka",
+          "Khan"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Constantin",
+            "lastName": "Popescu"
+          }
+        },
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Priyanka",
+            "lastName": "Khan"
+          }
+        }
+      ],
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-01",
+      "question": "How many people joined the network in March 2011?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-02",
+      "question": "How many accounts were created in February 2012?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-03",
+      "question": "What is the number of people who signed up in May 2010?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-04",
+      "question": "How many people joined the network in June 2012?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-05",
+      "question": "How many accounts were created in December 2010?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-06",
+      "question": "What is the number of people who signed up in June 2011?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-07",
+      "question": "How many people joined the network in April 2010?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-08",
+      "question": "How many accounts were created in February 2011?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-09",
+      "question": "What is the number of people who signed up in August 2010?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-02-10",
+      "question": "How many people joined the network in September 2010?",
+      "gold": [],
+      "predicted": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-01",
+      "question": "How many comments did Paul Breton write in the fourth quarter of 2011?",
+      "gold": [
+        [
+          "Person",
+          "Paul",
+          "Breton"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Paul",
+            "lastName": "Breton"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-02",
+      "question": "In the second quarter of 2010, how many comments did Alexandre Pinzaru make?",
+      "gold": [
+        [
+          "Person",
+          "Alexandre",
+          "Pinzaru"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Alexandre",
+            "lastName": "Pinzaru"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-03",
+      "question": "What is the number of comments Karim Akhmadiyeva wrote during Q4 2011?",
+      "gold": [
+        [
+          "Person",
+          "Karim",
+          "Akhmadiyeva"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Karim",
+            "lastName": "Akhmadiyeva"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-04",
+      "question": "How many comments did Abdul Hameed Sheikh write in the fourth quarter of 2011?",
+      "gold": [
+        [
+          "Person",
+          "Abdul Hameed",
+          "Sheikh"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Abdul Hameed",
+            "lastName": "Sheikh"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-06",
+      "question": "What is the number of comments Ana Alves wrote during Q2 2012?",
+      "gold": [
+        [
+          "Person",
+          "Ana",
+          "Alves"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Ana",
+            "lastName": "Alves"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-07",
+      "question": "How many comments did Victor Lim write in the third quarter of 2012?",
+      "gold": [
+        [
+          "Person",
+          "Victor",
+          "Lim"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Victor",
+            "lastName": "Lim"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-08",
+      "question": "In the first quarter of 2011, how many comments did Wei Yang make?",
+      "gold": [
+        [
+          "Person",
+          "Wei",
+          "Yang"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Wei",
+            "lastName": "Yang"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-09",
+      "question": "What is the number of comments Antonio Garcia wrote during Q1 2011?",
+      "gold": [
+        [
+          "Person",
+          "Antonio",
+          "Garcia"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Antonio",
+            "lastName": "Garcia"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    },
+    {
+      "id": "TM-04-10",
+      "question": "How many comments did Abhishek Rao write in the first quarter of 2012?",
+      "gold": [
+        [
+          "Person",
+          "Abhishek",
+          "Rao"
+        ]
+      ],
+      "predicted": [
+        {
+          "type": "Person",
+          "properties": {
+            "firstName": "Abhishek",
+            "lastName": "Rao"
+          }
+        }
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "fully_covered": true
+    }
+  ]
+}

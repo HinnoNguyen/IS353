@@ -1,0 +1,28 @@
+{
+  "dev": {
+    "evaluated_at": "2026-11-23T18:39:22.891163",
+    "num_questions": 92,
+    "tp": 98,
+    "fp": 10,
+    "fn": 0,
+    "precision": 0.9074,
+    "recall": 1.0,
+    "f1": 0.9515,
+    "question_coverage": 1.0,
+    "fully_covered_questions": 92,
+    "ambiguous_cases_count": 10
+  },
+  "dev_zero": {
+    "evaluated_at": "2026-11-23T18:39:25.128727",
+    "num_questions": 20,
+    "tp": 18,
+    "fp": 2,
+    "fn": 0,
+    "precision": 0.9,
+    "recall": 1.0,
+    "f1": 0.9474,
+    "question_coverage": 1.0,
+    "fully_covered_questions": 20,
+    "ambiguous_cases_count": 2
+  }
+}

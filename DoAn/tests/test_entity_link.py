@@ -206,6 +206,61 @@ class TestEntityLinking(unittest.TestCase):
         self.assertTrue(len(places) >= 1)
         self.assertEqual(places[0]["properties"]["name"], "Hong_Kong")
 
+    def test_country_and_tag_ambiguity_returns_both_candidate_types(self):
+        """Khi một tên (như France) vừa là Country vừa là Tag, liệt kê đầy đủ cả 2 để model chọn."""
+        self.session.tags.append("France")
+        q = "What is the number of people living in France?"
+        results = entity_link.link_entities_in_session(self.session, q)
+        types = [r["type"] for r in results]
+        self.assertIn("Country", types)
+        self.assertIn("Tag", types)
+
+        hints = entity_link.format_hints(self.session, q)
+        self.assertIn("- Country: name='France'", hints)
+        self.assertIn("- Tag: name='France'", hints)
+
+    def test_hong_kong_ambiguity_in_ag01(self):
+        """AG-01-01: 'Hong Kong' vừa là Country vừa là Tag -> sinh cả hai loại ứng viên."""
+        self.session.tags.append("Hong_Kong")
+        q = "How many people live in Hong Kong?"
+        results = entity_link.link_entities_in_session(self.session, q)
+        types = [r["type"] for r in results]
+        self.assertIn("Country", types)
+        self.assertIn("Tag", types)
+
+    def test_generic_multi_country_and_tag_ambiguity(self):
+        """Kiểm thử tổng quát với nhiều quốc gia khác (Brazil, Uruguay) chứ không riêng France."""
+        self.session.places.append((["Place", "Country"], "Brazil"))
+        self.session.tags.append("Brazil")
+        self.session.tags.append("Uruguay")  # Uruguay đã có trong db_places
+
+        for cname in ["Brazil", "Uruguay"]:
+            q = f"How many residents of {cname} are there in the network?"
+            res = entity_link.link_entities_in_session(self.session, q)
+            types = [r["type"] for r in res]
+            self.assertIn("Country", types, f"Country must be present for {cname}")
+            self.assertIn("Tag", types, f"Tag must be present for {cname}")
+
+    def test_city_and_tag_ambiguity(self):
+        """Thành phố trùng tên Tag (như Armenia, Macau): sinh cả City lẫn Tag."""
+        self.session.places.append((["Place", "City"], "Macau"))
+        self.session.tags.append("Macau")
+        q = "Which friends live in the city of Macau?"
+        res = entity_link.link_entities_in_session(self.session, q)
+        types = [r["type"] for r in res]
+        self.assertIn("City", types)
+        self.assertIn("Tag", types)
+
+    def test_person_and_tag_ambiguity(self):
+        """Người trùng họ tên với Tag (như John Williams): sinh cả Person lẫn Tag."""
+        self.session.people.append(("John", "Williams"))
+        self.session.tags.append("John_Williams")
+        q = "When was John Williams born?"
+        res = entity_link.link_entities_in_session(self.session, q)
+        types = [r["type"] for r in res]
+        self.assertIn("Person", types)
+        self.assertIn("Tag", types)
+
     def test_format_hints_produces_prompt_ready_string(self):
         q = "How many friendship steps separate Anura Abeywardena from Nedeljko Bajić Mikulic?"
         hints = entity_link.format_hints(self.session, q)

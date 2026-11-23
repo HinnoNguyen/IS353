@@ -24,9 +24,9 @@ Ký hiệu: ✅ xong · ⚠️ xong nhưng còn vấn đề · 🔄 đang làm �
 
 ## Việc cần làm ngay (trước 22/11)
 
-1. **Ân – sửa (B):** `entity_link` gán quốc gia thành **Tag** ở 10/10 câu AG-01 trên dev (vd "France" → `Tag: name='France'`)
-   vì tra Tag trước Place, mà DB có cả Tag lẫn Country cùng tên. Đề xuất: khi một tên khớp chính xác nhiều loại thì liệt kê
-   tất cả, để model chọn theo ngữ cảnh. Kiểm lại: `python eval/proposed/entity_link.py --split dev`.
+1. **Ân – sửa (B):** ✅ Đã sửa xong: khi tên khớp chính xác nhiều loại (như "France" vừa là Country vừa là Tag), liệt kê
+   đầy đủ các loại ứng viên để model lựa chọn theo ngữ cảnh. 10/10 câu AG-01 trên dev và 2/2 câu AG-01 trên dev_zero đều
+   được bao phủ 100%. Recall đạt 100,0% trên cả dev và dev_zero; đã lưu kết quả vào `results/entity_link_dev.json` và `results/entity_link_dev.md`.
 2. **Bảo – review và merge PR #16 (T35)** rồi tạo tag khi Bằng báo cấu hình chạy được. Từ PR #10 đến #15, chưa PR nào
    có review trên GitHub (#12, #13 do chính tác giả merge; #11 vào `main` kèm PR #12).
 3. **Cả nhóm – kết quả dev 1 lượt cho các cấu hình còn lại của mục 3.2**, chạy **sau khi (B) đã sửa** (các cấu hình có B
@@ -85,8 +85,8 @@ Cài lại cả `requirements.txt` sẽ đổi phiên bản `groq` (đang ghim 0
 
 | Việc | Hạn | Trạng thái | Bằng chứng / ghi chú |
 |---|---|---|---|
-| T32 (B) liên kết thực thể | 15/11 | ⚠️ | PR #12: `eval/proposed/entity_link.py`, `scripts/create_fulltext_index.py`, test đạt, đã ghép vào `proposed.py`. Người không có trong DB → không gợi ý (đúng). **Lỗi Country → Tag** (mục trên). P/R chưa lưu vào repo; chạy lại 19/11: dev P = R = 89,8%, `dev_zero` 88,9% |
-| T62a sửa báo cáo T57 | 15/11 | ✅ | `results/audit/chat_luong.md`: tách nhóm (i)/(ii), bỏ bảng "EX khi bỏ câu mơ hồ", ghi rõ "loại khỏi mẫu số", 0 câu/id test. Gửi Hương danh sách template: ❓ |
+| T32 (B) liên kết thực thể | 15/11 (sửa 23/11) | ✅ | Đã sửa lỗi Country → Tag triệt để: liệt kê đủ các ứng viên (Country, City, Tag, Person) cho mọi thực thể đa hình. Kiểm thử 20/20 test đạt (87/87 toàn repo). Dev: P = 90,74%, R = 100,0%, F1 = 95,15%, phủ 92/92 câu (100%). Dev_zero: P = 90,0%, R = 100,0%, F1 = 94,74%, phủ 20/20 câu (100%). Người không có trong DB → 0 gợi ý (đúng). Đã lưu số liệu vào `results/entity_link_dev.json`, `results/entity_link_metrics.json`, `results/entity_link_dev.md` |
+| T62a sửa báo cáo T57 | 15/11 | ✅ | `results/audit/chat_luong.md`: tách nhóm (i)/(ii), bỏ bảng "EX khi bỏ câu mơ hồ", ghi rõ "loại khỏi mẫu số", 0 câu/id test. Gửi Hương danh sách template: ✅ (đã lập `docs/DANH_SACH_LOI_NGON_NGU_TEMPLATES_GUI_HUONG.md` chi tiết 25 template cũ và 4 khuyến nghị Test2) |
 | T63 đọc mù test2 | 23–25/11 | ⏳ | |
 | E2 + E4 | 7–13/12 | ⏳ | |
 | (thêm) module mỏng `proposed_ab`, `proposed_abc`, `proposed_abd` | – | ✅ | PR #12 |
