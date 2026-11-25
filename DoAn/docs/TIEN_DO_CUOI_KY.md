@@ -35,7 +35,7 @@ Ký hiệu: ✅ xong · ⚠️ xong nhưng còn vấn đề · 🔄 đang làm �
    | Người | Chạy trên dev | Model |
    |---|---|---|
    | Bằng | `proposed` (dev và dev_zero), `proposed_no_a` (dev và dev_zero) | gpt-oss-20b |
-   | Khôi | `proposed_ab` | gpt-oss-20b |
+   | Khôi | ✅ `proposed_ab` (90/92) | gpt-oss-20b |
    | Vũ | ✅ `b1_zeroshot` (B3: 75/92), `proposed` (92/92) | gpt-oss-120b |
 
    `proposed_a` và `proposed_abc` dùng cùng prompt sinh Cypher với `proposed_ad` và `proposed`, nên có thể lấy
@@ -78,8 +78,9 @@ Cài lại cả `requirements.txt` sẽ đổi phiên bản `groq` (đang ghim 0
 | T31 (A) schema sạch | 15/11 | ✅ | PR #10, `eval/proposed/schema_a.py` (~1.033 token, 7 quy ước có nguồn) |
 | T25 kiểm thử `judge` | 15/11 | ✅ | PR #10 và #15, `tests/test_judge.py` (có 2 ca xfail ghi nhận hành vi `judge`) |
 | T60 gold rỗng và split mới | 15/11 | ✅ | PR #10; oracle `dev_zero` 20/20 |
+| Chạy `proposed_ab` (`gpt-oss-20b`) trên dev | 25/11 | ✅ | `results/runs/dev/proposed_ab__openai-gpt-oss-20b__run1.json` (90/92 = 97,8%; lookup 17/17, aggr 20/20, multi 20/20, path 15/16, temp 18/19; 0 llm_error) |
 | T61 bảng kết quả cuối (`summarize.py --split test2`) | 13/12 | ⏳ | |
-| Kiểm tra rò rỉ test2 | 23–25/11 | ⏳ | |
+| Kiểm tra rò rỉ test2 | 27–28/11 | 🔄 | Đã chuẩn bị sẵn `eval/audit/leak_values.py --splits test2` (quét đủ 13 đoạn prompt đã khóa + kiểm tra trùng thực thể với `dev`/`dev_para`/`dev_zero`/`test` cũ, tự lưu báo cáo riêng vào `DoAn/private/leak_test2.{json,md}`); chờ nhận `test2` |
 
 ### Ân
 
@@ -130,6 +131,7 @@ Cài lại cả `requirements.txt` sẽ đổi phiên bản `groq` (đang ghim 0
 | B1 zero-shot | 53/92 | – | |
 | B2 GraphCypherQAChain | 51/92 | – | sau T24 |
 | Chỉ (A) (`first_cypher` của `proposed_ad`) | 84/92 | – | PR #16 |
+| A + B (`proposed_ab`) | 90/92 (97,8%) | – | `proposed_ab__openai-gpt-oss-20b__run1.json` (lookup 17/17, aggr 20/20, multi 20/20, path 15/16, temp 18/19; chạy sau khi sửa B, `40740a0`) |
 | A + D (`proposed_ad`) | 87/92, sửa nhầm 0/84 | 19/20, sửa nhầm 0/19 | PR #16; `dev_zero` ở `results/audit/repair_d/` |
 | A + B + C + D (`proposed`) | chưa chạy | 20/20, sửa nhầm 0/18 | PR #16; chạy trước khi sửa lỗi (B), cần chạy lại |
 | B3 zero-shot (`gpt-oss-120b`, lượt 1) | 75/92 | – | `b1_zeroshot__openai-gpt-oss-120b__run1.json` (lookup 17/17, aggr 9/20, multi 18/20, path 13/16, temp 18/19) |
